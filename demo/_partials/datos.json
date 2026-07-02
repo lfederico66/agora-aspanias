@@ -1,0 +1,14 @@
+{
+  "_descripcion": "Cifras institucionales del Grupo Social Aspanias usadas en la demo. Al cambiar aquí, ejecutar `python scripts/utilidades/build_demo.py` para inyectar en los 38 HTMLs.",
+  "_fuente": "Datos a 2026-06-15 — actualizar antes de cada Patronato.",
+  "centros": 18,
+  "centros_residenciales": 4,
+  "personas_atendidas": 417,
+  "profesionales": 187,
+  "incidencias_fis_pendientes": 3,
+  "avisos_direccion_pendientes": 3,
+  "_meta": {
+    "ultima_actualizacion": "2026-06-15",
+    "responsable": "Federico Martínez — Gerencia"
+  }
+}

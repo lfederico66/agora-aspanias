@@ -1,0 +1,1407 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>González Pérez, Marta · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script>
+        // Helpers globales para el modo edición de la ficha — independientes de Alpine.
+        window.fichaEntrarEdicion = function(scope){ scope.fichaBackup = JSON.parse(JSON.stringify(scope.ficha)); scope.editMode = true; };
+        window.fichaCancelarEdicion = function(scope){ if (scope.fichaBackup) { scope.ficha = scope.fichaBackup; } scope.editMode = false; };
+        window.fichaGuardarEdicion = function(scope){ scope.editMode = false; scope.fichaBackup = null; scope.toast = '✓ Cambios guardados · registrados en bitácora'; setTimeout(function(){ scope.toast = ''; }, 3500); };
+        // Fallback DOM-puro: si Alpine no procesa @click, este onclick siempre funciona.
+        window.fichaToggleSinAlpine = function(modo){
+            var raiz = document.querySelector('[x-data][class*="min-h-screen"]');
+            if (!raiz) return;
+            var alpineData = raiz._x_dataStack ? raiz._x_dataStack[0] : null;
+            if (alpineData) {
+                if (modo === 'entrar') window.fichaEntrarEdicion(alpineData);
+                else if (modo === 'cancelar') window.fichaCancelarEdicion(alpineData);
+                else if (modo === 'guardar') window.fichaGuardarEdicion(alpineData);
+            } else {
+                console.warn('[ficha] Alpine no inicializado todavía — reintenta en 300 ms.');
+                setTimeout(function(){ window.fichaToggleSinAlpine(modo); }, 300);
+            }
+        };
+    </script>
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Prototipo nueva interfaz</span> · datos ficticios · sólo para validación</div>
+
+<div class="flex min-h-screen" x-data="{ userMenu: false, tab: 'resumen', expandido: false, editMode: false, toast: '', ficha: { nombre: 'González Pérez, Marta', fecha_nacimiento: '1992-03-14', dni: '', diagnostico: 'Discapacidad intelectual moderada', grado_discapacidad: '65', grado_dependencia: 'II', apoyo_legal: 'Curatela representativa', gestora: 'Lucía Martínez', persona_referencia: 'Pilar Renedo (TO)', familia_contacto: 'Madre (Carmen Pérez)', telefono_familia: '6── ── ── ──', medicacion: '3 pautas', alergias: 'Penicilina' }, fichaBackup: null }">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100 relative">
+            <button @click="userMenu = !userMenu" class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">Federico Martínez</p>
+                    <p class="text-[10px] text-slate-500 truncate">Gerencia</p>
+                </div>
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div x-show="userMenu" x-cloak @click.outside="userMenu = false" class="absolute bottom-full left-3 right-3 mb-1 rounded-lg border border-slate-200 bg-white shadow-lg py-1 z-20">
+                <a href="#" class="block px-3 py-1.5 text-sm text-emerald-700 hover:bg-emerald-50 font-medium">⭐ Mis personas</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Mi perfil</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Preferencias</a>
+                <div class="border-t border-slate-100 my-1"></div>
+                <a href="#" class="block px-3 py-1.5 text-sm text-rose-700 hover:bg-rose-50">Cerrar sesión</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
+    <main class="flex-1 min-w-0">
+
+        <!-- Breadcrumb + acciones -->
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a>
+                <span class="mx-1">›</span>
+                <a href="centro-detalle.html" class="hover:text-emerald-700">Residencia Fuentecillas</a>
+                <span class="mx-1">›</span>
+                <span class="text-slate-700">González Pérez, Marta</span>
+            </nav>
+            <div class="flex items-center gap-2 shrink-0">
+                <button @click="expandido = !expandido" :class="expandido ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-700 border-slate-300 hover:border-emerald-400'" class="rounded-lg border px-3 py-1.5 text-xs font-medium">
+                    <span x-show="!expandido">📑 Ver todo</span>
+                    <span x-show="expandido" x-cloak>🔼 Volver a pestañas</span>
+                </button>
+                <button x-show="!editMode" @click="window.fichaEntrarEdicion($data)" onclick="window.fichaToggleSinAlpine('entrar')" class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-emerald-400">✎ Editar ficha</button>
+                <button x-show="editMode" x-cloak @click="window.fichaCancelarEdicion($data)" onclick="window.fichaToggleSinAlpine('cancelar')" class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-rose-400 hover:text-rose-700">✕ Cancelar</button>
+                <button x-show="editMode" x-cloak @click="window.fichaGuardarEdicion($data)" onclick="window.fichaToggleSinAlpine('guardar')" class="rounded-lg bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">💾 Guardar cambios</button>
+                <button x-show="!editMode" class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-emerald-400">+ Cita</button>
+                <button x-show="!editMode" class="rounded-lg bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">+ Intervención</button>
+            </div>
+        </div>
+
+        <!-- Banner RGPD edición -->
+        <div x-show="editMode" x-cloak class="bg-amber-50 border-b border-amber-200 px-8 py-2.5 flex items-start gap-3 text-xs text-amber-900">
+            <span class="text-base leading-none">🔒</span>
+            <div class="flex-1">
+                <p class="font-semibold">Modo edición · datos de categoría especial (RGPD art. 9)</p>
+                <p class="mt-0.5">Toda modificación queda registrada en la bitácora (usuario, IP, fecha-hora y campo). Cambios sobre la medida de apoyo o el grado de dependencia requieren documento justificativo. Pulse <strong>Guardar</strong> para confirmar o <strong>Cancelar</strong> para deshacer.</p>
+            </div>
+        </div>
+
+        <!-- Toast confirmación -->
+        <div x-show="toast" x-cloak x-transition class="fixed bottom-6 right-6 z-50 rounded-lg bg-emerald-700 text-white px-4 py-2.5 text-sm shadow-lg" x-text="toast"></div>
+
+        <div class="px-8 py-6 max-w-6xl space-y-6">
+
+            <!-- Cabecera de persona -->
+            <header class="rounded-xl border border-slate-200 bg-white p-5 flex items-start gap-5 flex-wrap">
+                <div class="w-20 h-20 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-2xl font-semibold shrink-0">MG</div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <h1 x-show="!editMode" class="text-2xl font-semibold tracking-tight" x-text="ficha.nombre"></h1>
+                        <input x-show="editMode" x-cloak x-model="ficha.nombre" type="text" class="text-2xl font-semibold tracking-tight border-b-2 border-emerald-300 bg-emerald-50/40 focus:outline-none focus:border-emerald-600 px-1 w-full max-w-md" placeholder="Apellidos, Nombre">
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Persona atendida</span>
+                    </div>
+                    <p x-show="!editMode" class="text-sm text-slate-500 mt-0.5">FUE-2026-00001 · 34 años · <span x-text="ficha.diagnostico"></span> · DNI ‒‒‒</p>
+                    <div x-show="editMode" x-cloak class="mt-2 grid gap-2 sm:grid-cols-3 text-xs">
+                        <label class="block">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Fecha de nacimiento</span>
+                            <input x-model="ficha.fecha_nacimiento" type="date" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500">
+                        </label>
+                        <label class="block">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">DNI / NIE</span>
+                            <input x-model="ficha.dni" type="text" maxlength="9" pattern="[0-9]{8}[A-Za-z]" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500 font-mono" placeholder="12345678X">
+                            <span class="text-[10px] text-slate-400">Cifrado AES-256 en reposo</span>
+                        </label>
+                        <label class="block">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Diagnóstico principal</span>
+                            <input x-model="ficha.diagnostico" type="text" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500" placeholder="Diagnóstico CIE-11">
+                        </label>
+                    </div>
+
+                    <!-- Servicios asignados (multiples) -->
+                    <div class="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
+                        <p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold mb-2">Servicios asignados · 2 activos</p>
+                        <div class="space-y-1.5">
+                            <a href="centro-detalle.html" class="flex items-center gap-3 p-2 rounded-md bg-white border border-indigo-200 hover:border-indigo-400 transition group">
+                                <span class="text-lg shrink-0">🛏</span>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-slate-800 group-hover:text-indigo-700 truncate">Residencia Fuentecillas</p>
+                                    <p class="text-[11px] text-slate-500">Residencial · estancia 24h · módulo A · habitación 12 · cama 1</p>
+                                </div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 shrink-0">Principal · desde 12/09/2018</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 p-2 rounded-md bg-white border border-amber-200 hover:border-amber-400 transition group">
+                                <span class="text-lg shrink-0">🌞</span>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-slate-800 group-hover:text-amber-700 truncate">Centro de Día Puentesaúco</p>
+                                    <p class="text-[11px] text-slate-500">Centro de día · lunes a viernes · 09:00 – 17:00 · taller ocupacional</p>
+                                </div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 shrink-0">Complementario · desde 01/02/2024</span>
+                            </a>
+                        </div>
+                        <button class="mt-2 text-[11px] text-emerald-700 hover:underline">+ Añadir servicio</button>
+                    </div>
+
+                    <!-- VISTA solo lectura -->
+                    <div x-show="!editMode" class="mt-3 grid gap-x-6 gap-y-1 grid-cols-2 md:grid-cols-4 text-xs">
+                        <div><span class="text-slate-500">Gestora:</span> <span x-text="ficha.gestora"></span></div>
+                        <div><span class="text-slate-500">P. referencia:</span> <span x-text="ficha.persona_referencia"></span></div>
+                        <div><span class="text-slate-500">Apoyo legal:</span> <span x-text="ficha.apoyo_legal"></span></div>
+                        <div><span class="text-slate-500">Familia:</span> <span x-text="ficha.familia_contacto"></span></div>
+                        <div><span class="text-slate-500">Teléfono:</span> <span x-text="ficha.telefono_familia"></span></div>
+                    </div>
+                    <!-- VISTA edición -->
+                    <div x-show="editMode" x-cloak class="mt-3 grid gap-3 grid-cols-2 md:grid-cols-3 text-xs">
+                        <label class="block">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Gestora de caso</span>
+                            <select x-model="ficha.gestora" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500">
+                                <option>Lucía Martínez</option>
+                                <option>Pilar Renedo</option>
+                                <option>Daniel Alonso</option>
+                                <option>Carmen Sancho</option>
+                            </select>
+                        </label>
+                        <label class="block">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Persona de referencia</span>
+                            <input x-model="ficha.persona_referencia" type="text" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500" placeholder="Nombre (perfil)">
+                        </label>
+                        <label class="block">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Medida de apoyo (Ley 8/2021)</span>
+                            <select x-model="ficha.apoyo_legal" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500">
+                                <option>Sin medida</option>
+                                <option>Guarda de hecho</option>
+                                <option>Curatela asistencial</option>
+                                <option>Curatela representativa</option>
+                                <option>Defensor judicial</option>
+                            </select>
+                        </label>
+                        <label class="block">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Familiar de contacto</span>
+                            <input x-model="ficha.familia_contacto" type="text" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500" placeholder="Parentesco (Nombre)">
+                        </label>
+                        <label class="block">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Teléfono familia</span>
+                            <input x-model="ficha.telefono_familia" type="tel" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500 font-mono" placeholder="6XX XX XX XX">
+                        </label>
+                    </div>
+                </div>
+                <div class="flex flex-col items-end gap-2 shrink-0">
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">⚠ PV vence 15/06</span>
+                    <span class="text-xs text-slate-500">Próx. cita: <strong>Hoy 10:00</strong></span>
+                </div>
+            </header>
+
+            <!-- Tabs -->
+            <div x-show="!expandido" class="border-b border-slate-200 flex items-center gap-1 -mb-2 overflow-x-auto">
+                <button @click="tab = 'resumen'" :class="tab === 'resumen' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Resumen</button>
+                <button @click="tab = 'pv'" :class="tab === 'pv' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Plan de Vida</button>
+                <button @click="tab = 'inter'" :class="tab === 'inter' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Intervenciones y valoraciones</button>
+                <button @click="tab = 'familia'" :class="tab === 'familia' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Familia y entorno</button>
+                <button @click="tab = 'medico'" :class="tab === 'medico' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Médico y medicación</button>
+                <button @click="tab = 'bolsillo'" :class="tab === 'bolsillo' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">💰 Dinero de bolsillo</button>
+                <button @click="tab = 'docs'" :class="tab === 'docs' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Documentos</button>
+            </div>
+
+            
+            <!-- Aviso modo expandido -->
+            <div x-show="expandido" x-cloak class="rounded-lg bg-emerald-50 border border-emerald-200 p-3 text-xs text-emerald-800">
+                📑 <strong>Vista completa</strong>: todas las pestañas de la ficha están desplegadas. Útil para imprimir, exportar a PDF o revisar la ficha íntegra de un vistazo. <button @click="expandido = false" class="ml-2 underline">Volver al modo pestañas</button>
+            </div>
+
+            <!-- Tab Resumen (default) -->
+            <div x-show="expandido || tab === 'resumen'" class="grid gap-6 lg:grid-cols-3">
+
+                <!-- COL IZQ — Plan de Vida y próximos pasos -->
+                <div class="lg:col-span-2 space-y-6">
+
+                    <!-- Plan de vida activo -->
+                    <section class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                        <div class="px-5 py-3 border-b border-slate-100 flex items-center justify-between">
+                            <h2 class="text-sm font-semibold flex items-center gap-2">📋 Plan de Vida 2026</h2>
+                            <a href="#" class="text-xs text-emerald-700 hover:underline">Ver completo →</a>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-xs text-slate-500">Última revisión: 12/01/2026 · próxima: <strong class="text-amber-700">15/06/2026</strong></p>
+                            <div class="mt-3 flex items-center gap-3">
+                                <div class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden">
+                                    <div class="h-full bg-emerald-500" style="width: 75%"></div>
+                                </div>
+                                <span class="text-sm font-semibold text-emerald-700">75 % objetivos</span>
+                            </div>
+                            <ul class="mt-4 space-y-1.5 text-sm">
+                                <li class="flex items-start gap-2"><span class="text-emerald-600 mt-0.5">✓</span><span>Autonomía en aseo personal — <span class="text-slate-500">Pilar Renedo</span></span></li>
+                                <li class="flex items-start gap-2"><span class="text-emerald-600 mt-0.5">✓</span><span>Reconocer y gestionar emociones básicas — <span class="text-slate-500">Daniel Alonso</span></span></li>
+                                <li class="flex items-start gap-2"><span class="text-amber-600 mt-0.5">●</span><span>Participar en taller de cocina — <span class="text-slate-500">en curso</span></span></li>
+                                <li class="flex items-start gap-2"><span class="text-slate-400 mt-0.5">○</span><span>Salida grupal semestral autónoma — <span class="text-slate-500">pendiente</span></span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Últimas intervenciones -->
+                    <section class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                        <div class="px-5 py-3 border-b border-slate-100 flex items-center justify-between">
+                            <h2 class="text-sm font-semibold flex items-center gap-2">📝 Últimas intervenciones</h2>
+                            <a href="#" class="text-xs text-emerald-700 hover:underline">Timeline completo →</a>
+                        </div>
+                        <ul class="divide-y divide-slate-100 text-sm">
+                            <li class="px-5 py-3">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center text-xs font-semibold shrink-0">DA</div>
+                                    <div class="flex-1">
+                                        <p class="text-xs text-slate-500">29/05/2026 · Daniel Alonso (Psicólogo)</p>
+                                        <p class="mt-0.5">Sesión semanal de gestión emocional. Avance significativo identificando emociones en sí misma.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="px-5 py-3">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-semibold shrink-0">PR</div>
+                                    <div class="flex-1">
+                                        <p class="text-xs text-slate-500">27/05/2026 · Pilar Renedo (TO)</p>
+                                        <p class="mt-0.5">Taller de cocina: ha completado receta básica de tortilla con apoyo verbal.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="px-5 py-3">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-semibold shrink-0">LM</div>
+                                    <div class="flex-1">
+                                        <p class="text-xs text-slate-500">21/05/2026 · Lucía Martínez (TS)</p>
+                                        <p class="mt-0.5">Reunión con la madre. Revisamos avances del trimestre. Solicita más sesiones de cocina.</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- COL DER — Próximas citas + alertas -->
+                <aside class="space-y-4">
+                    <section class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                        <div class="px-5 py-3 border-b border-slate-100"><h2 class="text-sm font-semibold">📅 Próximas citas</h2></div>
+                        <ul class="divide-y divide-slate-100 text-sm">
+                            <li class="px-5 py-3">
+                                <p class="text-xs text-slate-500">Hoy · 10:00</p>
+                                <p class="font-medium mt-0.5">Revisión PV</p>
+                                <p class="text-xs text-slate-500">Lucía Martínez · Sala 2</p>
+                            </li>
+                            <li class="px-5 py-3">
+                                <p class="text-xs text-slate-500">Jueves · 17:00</p>
+                                <p class="font-medium mt-0.5">Sesión psicología</p>
+                                <p class="text-xs text-slate-500">Daniel Alonso</p>
+                            </li>
+                            <li class="px-5 py-3">
+                                <p class="text-xs text-slate-500">15/06 · 11:00</p>
+                                <p class="font-medium mt-0.5">Comité PV anual</p>
+                                <p class="text-xs text-slate-500">Equipo completo</p>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="rounded-xl border border-amber-200 bg-amber-50 p-5">
+                        <h2 class="text-sm font-semibold text-amber-900 flex items-center gap-2">⚠ Alertas</h2>
+                        <ul class="mt-2 space-y-1.5 text-sm text-amber-900">
+                            <li>• PV próximo a vencer (15/06)</li>
+                            <li>• <a href="valoraciones-listado.html" class="underline decoration-dotted hover:text-amber-700">Sin valoración ICAP en los últimos 12 meses →</a></li>
+                        </ul>
+                    </section>
+
+                    <section class="rounded-xl border border-slate-200 bg-white p-5">
+                        <h2 class="text-sm font-semibold mb-2">🔑 Datos clínicos</h2>
+                        <!-- Vista solo lectura -->
+                        <dl x-show="!editMode" class="space-y-1.5 text-sm">
+                            <div class="flex justify-between"><dt class="text-slate-500">Grado discap.</dt><dd><span x-text="ficha.grado_discapacidad"></span> %</dd></div>
+                            <div class="flex justify-between"><dt class="text-slate-500">Grado depend.</dt><dd x-text="ficha.grado_dependencia"></dd></div>
+                            <div class="flex justify-between"><dt class="text-slate-500">Medicación</dt><dd x-text="ficha.medicacion"></dd></div>
+                            <div class="flex justify-between"><dt class="text-slate-500">Alergias</dt><dd x-text="ficha.alergias"></dd></div>
+                        </dl>
+                        <!-- Edición -->
+                        <div x-show="editMode" x-cloak class="space-y-3 text-xs">
+                            <label class="block">
+                                <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Grado discapacidad (%)</span>
+                                <input x-model="ficha.grado_discapacidad" type="number" min="0" max="100" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500">
+                            </label>
+                            <label class="block">
+                                <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Grado dependencia</span>
+                                <select x-model="ficha.grado_dependencia" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500">
+                                    <option value="">Sin valorar</option>
+                                    <option value="I">Grado I — moderada</option>
+                                    <option value="II">Grado II — severa</option>
+                                    <option value="III">Grado III — gran dependencia</option>
+                                </select>
+                            </label>
+                            <label class="block">
+                                <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Alergias conocidas</span>
+                                <input x-model="ficha.alergias" type="text" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500" placeholder="Ninguna conocida">
+                            </label>
+                            <p class="text-[10px] text-slate-500 leading-snug border-t border-slate-100 pt-2">Las pautas de medicación se editan en la pestaña <strong>Médico y medicación</strong>.</p>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+
+            <!-- Tab Plan de Vida -->
+            <div x-show="expandido || tab === 'pv'" x-cloak class="space-y-4">
+                <div x-show="editMode" x-cloak class="rounded-lg bg-blue-50 border border-blue-200 p-3 text-xs text-blue-900">
+                    📘 <strong>Edición del Plan de Vida</strong>: cada uno de los 5 documentos se edita en su propia ventana (pincha la tarjeta). Aquí solo se ven los enlaces. Las revisiones de objetivos se registran como <strong>intervenciones</strong> con vínculo al documento correspondiente — no se sobrescribe el original.
+                </div>
+                <p class="text-sm text-slate-500">Los 5 documentos del Protocolo Aspanias de Planes de Vida.</p>
+                <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+                    <a href="documento-algo-sobre-mi.html" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-emerald-300 hover:shadow-sm transition">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3">📘</div>
+                        <p class="font-semibold text-sm">Algo sobre mí</p>
+                        <p class="text-xs text-slate-500 mt-1">Pasaporte personal — quién soy</p>
+                    </a>
+                    <a href="documento-historia-vida.html" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-emerald-300 hover:shadow-sm transition">
+                        <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center mb-3">📗</div>
+                        <p class="font-semibold text-sm">Historia de vida</p>
+                        <p class="text-xs text-slate-500 mt-1">De dónde vengo, qué he vivido</p>
+                    </a>
+                    <a href="documento-proyecto-vida.html" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-emerald-300 hover:shadow-sm transition">
+                        <div class="w-10 h-10 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center mb-3">📙</div>
+                        <p class="font-semibold text-sm">Proyecto de vida</p>
+                        <p class="text-xs text-slate-500 mt-1">Qué quiero conseguir este año</p>
+                    </a>
+                    <a href="documento-plan-apoyo.html" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-emerald-300 hover:shadow-sm transition">
+                        <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center mb-3">📕</div>
+                        <p class="font-semibold text-sm">Plan de apoyo</p>
+                        <p class="text-xs text-slate-500 mt-1">Cómo me ayuda el equipo</p>
+                    </a>
+                    <a href="documento-revision-objetivos.html" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-emerald-300 hover:shadow-sm transition">
+                        <div class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center mb-3">📔</div>
+                        <p class="font-semibold text-sm">Revisión de objetivos</p>
+                        <p class="text-xs text-slate-500 mt-1">Cómo voy avanzando</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tabs restantes (placeholder) -->
+            <div x-show="expandido || tab === 'inter'" x-cloak class="space-y-5" :class="expandido ? 'mt-6' : ''">
+                <h2 x-show="expandido" x-cloak class="text-lg font-semibold tracking-tight pt-4 mt-2 border-t-2 border-emerald-200"><span class="text-xl">📝</span> Intervenciones y valoraciones</h2>
+
+                <div x-show="editMode" x-cloak class="rounded-lg bg-amber-50 border border-amber-200 p-3 text-xs text-amber-900">
+                    🔒 <strong>El histórico de intervenciones es inmutable</strong> (RGPD + bitácora append-only). Para corregir una entrada errónea, usa <strong>+ Intervención</strong> y crea una entrada de tipo «rectificación» vinculada a la original. Las valoraciones (Schalock, ICAP, BVD…) se editan dentro de su propio formulario hasta firma — después solo lectura.
+                </div>
+
+                <!-- KPIs -->
+                <section class="grid gap-3 grid-cols-2 md:grid-cols-4">
+                    <div class="rounded-xl border border-slate-200 bg-white p-4">
+                        <p class="text-xs text-slate-500">Intervenciones (año)</p>
+                        <p class="mt-0.5 text-3xl font-light">142</p>
+                        <p class="text-[10px] text-slate-400">12 esta semana</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-4">
+                        <p class="text-xs text-slate-500">Última valoración</p>
+                        <p class="mt-0.5 text-lg font-semibold leading-tight">12/01/2026</p>
+                        <p class="text-[10px] text-slate-400">Schalock — anual</p>
+                    </div>
+                    <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                        <p class="text-xs text-amber-700">Pendiente</p>
+                        <p class="mt-0.5 text-lg font-semibold leading-tight text-amber-800">BVD 2026</p>
+                        <p class="text-[10px] text-amber-700">vence 30/06</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-4">
+                        <p class="text-xs text-slate-500">Profesionales activos</p>
+                        <p class="mt-0.5 text-3xl font-light">5</p>
+                        <p class="text-[10px] text-slate-400">TS, TO, Psi, DUE, Méd.</p>
+                    </div>
+                </section>
+
+                <!-- Acciones -->
+                <div class="flex items-center justify-between gap-3 flex-wrap">
+                    <div class="flex items-center gap-2 flex-wrap text-xs">
+                        <span class="text-slate-500">Filtrar:</span>
+                        <a href="#" class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">Todo (142)</a>
+                        <a href="#" class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Intervenciones (128)</a>
+                        <a href="valoraciones-listado.html" class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Valoraciones (14)</a>
+                        <a href="#" class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Psicología (32)</a>
+                        <a href="#" class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">TO (45)</a>
+                        <a href="#" class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">DUE (28)</a>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <a href="documentos-persona.html" class="rounded-lg border border-slate-300 bg-white text-slate-700 px-3 py-1.5 text-xs hover:border-emerald-400">📁 Documentos</a>
+                        <a href="informe-social.html" class="rounded-lg border border-slate-300 bg-white text-slate-700 px-3 py-1.5 text-xs hover:border-emerald-400">📄 Informe social</a>
+                        <a href="ficha-derivacion.html" class="rounded-lg border border-slate-300 bg-white text-slate-700 px-3 py-1.5 text-xs hover:border-emerald-400">📨 Ficha derivación</a>
+                        <a href="valoraciones-listado.html" class="rounded-lg border border-emerald-300 bg-emerald-50 text-emerald-800 px-3 py-1.5 text-xs font-medium hover:bg-emerald-100">📋 Valoración</a>
+                        <a href="nueva-intervencion.html" class="rounded-lg bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">+ Intervención</a>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <section class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                    <div class="px-5 py-3 border-b border-slate-200">
+                        <h2 class="text-sm font-semibold">Timeline cronológico</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Últimos 30 días · 12 movimientos</p>
+                    </div>
+                    <ol class="divide-y divide-slate-100">
+                        <li class="px-5 py-3 hover:bg-slate-50">
+                            <div class="flex items-start gap-3">
+                                <div class="w-9 h-9 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center text-xs font-semibold shrink-0">DA</div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs text-slate-500">29/05/2026 · 17:00 · 45 min</p>
+                                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-purple-100 text-purple-800">Psicología</span>
+                                    </div>
+                                    <p class="mt-0.5 font-medium">Sesión semanal de gestión emocional · Daniel Alonso</p>
+                                    <p class="text-sm text-slate-600 mt-1">Avance significativo identificando emociones en sí misma. Trabajado con tarjetas de emociones. Estable en estado de ánimo. Próxima sesión: continuar con regulación.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="px-5 py-3 hover:bg-slate-50">
+                            <div class="flex items-start gap-3">
+                                <div class="w-9 h-9 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-semibold shrink-0">PR</div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs text-slate-500">27/05/2026 · 11:00 · 60 min</p>
+                                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-100 text-blue-800">Terapia Ocupacional</span>
+                                    </div>
+                                    <p class="mt-0.5 font-medium">Taller de cocina · Pilar Renedo</p>
+                                    <p class="text-sm text-slate-600 mt-1">Ha completado receta básica de tortilla con apoyo verbal. Demuestra autonomía en preparación de ingredientes. Manejo de utensilios eléctricos: requiere supervisión.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="px-5 py-3 hover:bg-slate-50">
+                            <div class="flex items-start gap-3">
+                                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-semibold shrink-0">LM</div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs text-slate-500">21/05/2026 · 10:30 · 30 min</p>
+                                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Trabajo Social</span>
+                                    </div>
+                                    <p class="mt-0.5 font-medium">Reunión con la madre · Lucía Martínez</p>
+                                    <p class="text-sm text-slate-600 mt-1">Revisamos avances del trimestre. La madre solicita más sesiones de cocina (lo hablado en última visita). Acordamos refuerzo en taller los viernes. Estado emocional familiar estable.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="px-5 py-3 hover:bg-slate-50 bg-amber-50/30">
+                            <div class="flex items-start gap-3">
+                                <div class="w-9 h-9 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-semibold shrink-0">⚕</div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs text-slate-500">18/05/2026 · 09:00</p>
+                                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-800">VALORACIÓN · Schalock</span>
+                                    </div>
+                                    <p class="mt-0.5 font-medium">Escala Schalock & Verdugo · 8 dimensiones de calidad de vida</p>
+                                    <p class="text-sm text-slate-600 mt-1">Puntuación global: 84/120. Dimensiones fuertes: relaciones interpersonales (97), bienestar emocional (94). Dimensión a mejorar: autodeterminación (62). Equipo: Lucía Martínez + Daniel Alonso.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="px-5 py-3 hover:bg-slate-50">
+                            <div class="flex items-start gap-3">
+                                <div class="w-9 h-9 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs font-semibold shrink-0">MJ</div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <p class="text-xs text-slate-500">12/05/2026 · 09:30 · 15 min</p>
+                                        <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-rose-100 text-rose-800">Enfermería</span>
+                                    </div>
+                                    <p class="mt-0.5 font-medium">Toma de constantes mensual · M. José Castro (DUE)</p>
+                                    <p class="text-sm text-slate-600 mt-1">TA 118/72 mmHg · FC 76 lpm · Peso 64,5 kg · SpO₂ 98%. Sin incidencias. Próxima toma: 12/06.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                    <div class="px-5 py-3 border-t border-slate-200 text-center text-xs">
+                        <a href="intervenciones.html" class="text-emerald-700 hover:underline">Ver las 142 intervenciones del año →</a>
+                    </div>
+                </section>
+
+            </div>
+            <!-- Tab Dinero de bolsillo -->
+            <div x-show="expandido || tab === 'familia'" x-cloak class="space-y-5" :class="expandido ? 'mt-6' : ''">
+                <h2 x-show="expandido" x-cloak class="text-lg font-semibold tracking-tight pt-4 mt-2 border-t-2 border-emerald-200"><span class="text-xl">👨‍👩‍👦</span> Familia y entorno</h2>
+
+                <section class="grid gap-5 lg:grid-cols-3" x-data="{
+                    familiares: [
+                        {iniciales:'CP', nombre:'Carmen Pérez Llamas', parentesco:'Madre', referente:true, fallecido:false, edad:68, residencia:'Burgos', observ:'jubilada · curadora representativa', telefono:'6── ── ── ──', email:'c.perez@────.es', ultimaVisita:'25/05/2026'},
+                        {iniciales:'AG', nombre:'Antonio González Sáez', parentesco:'Hermano', referente:false, fallecido:false, edad:42, residencia:'Madrid', observ:'contacto secundario', telefono:'', email:'', ultimaVisita:'25/12/2025'},
+                        {iniciales:'MG', nombre:'Manuel González Sáez', parentesco:'Padre', referente:false, fallecido:true, anoFallecimiento:2019, edad:null, residencia:'', observ:'', telefono:'', email:'', ultimaVisita:''}
+                    ],
+                    nuevoFamiliar(){ this.familiares.push({iniciales:'??', nombre:'', parentesco:'', referente:false, fallecido:false, edad:null, residencia:'', observ:'', telefono:'', email:'', ultimaVisita:''}); }
+                }">
+                    <div class="lg:col-span-2 rounded-xl border border-slate-200 bg-white overflow-hidden">
+                        <div class="px-5 py-3 border-b border-slate-100 flex items-center justify-between">
+                            <h2 class="text-sm font-semibold">👨‍👩‍👦 Familia y referentes</h2>
+                            <button @click="nuevoFamiliar()" :disabled="!editMode" :class="editMode ? 'text-emerald-700 hover:underline' : 'text-slate-300 cursor-not-allowed'" class="text-xs">+ Añadir contacto</button>
+                        </div>
+                        <ul class="divide-y divide-slate-100">
+                            <template x-for="(f, idx) in familiares" :key="idx">
+                                <li class="px-5 py-3 flex items-start gap-3" :class="f.fallecido && !editMode ? 'opacity-70' : ''">
+                                    <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold shrink-0" :class="f.referente ? 'bg-emerald-100 text-emerald-800' : f.fallecido ? 'bg-slate-100 text-slate-500' : 'bg-slate-100 text-slate-700'" x-text="f.iniciales"></div>
+                                    <div class="flex-1 min-w-0">
+                                        <!-- LECTURA -->
+                                        <template x-if="!editMode">
+                                            <div>
+                                                <div class="flex items-center gap-2 flex-wrap">
+                                                    <p class="font-medium" :class="f.fallecido ? 'line-through' : ''" x-text="f.nombre"></p>
+                                                    <span class="text-[10px] px-1.5 py-0.5 rounded-full"
+                                                          :class="f.referente ? 'bg-emerald-100 text-emerald-800' : f.fallecido ? 'bg-slate-100 text-slate-600' : 'bg-slate-100 text-slate-700'"
+                                                          x-text="f.referente ? '★ ' + f.parentesco + ' · referente principal' : f.fallecido ? '✝ ' + f.parentesco + ' · fallecido ' + f.anoFallecimiento : f.parentesco"></span>
+                                                </div>
+                                                <p x-show="!f.fallecido" class="text-xs text-slate-500 mt-0.5" x-text="(f.edad ? f.edad + ' años · ' : '') + (f.residencia ? 'vive en ' + f.residencia : '') + (f.observ ? ' · ' + f.observ : '')"></p>
+                                                <div x-show="!f.fallecido && (f.telefono || f.email)" class="mt-1 flex items-center gap-3 text-xs">
+                                                    <span x-show="f.telefono">📞 <span x-text="f.telefono"></span></span>
+                                                    <span x-show="f.email">✉ <span x-text="f.email"></span></span>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        <!-- EDICIÓN -->
+                                        <template x-if="editMode">
+                                            <div class="space-y-2">
+                                                <div class="grid gap-2 sm:grid-cols-3 text-xs">
+                                                    <label class="block sm:col-span-2"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Nombre completo</span><input x-model="f.nombre" type="text" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500"></label>
+                                                    <label class="block"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Parentesco</span>
+                                                        <select x-model="f.parentesco" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500">
+                                                            <option>Madre</option><option>Padre</option><option>Hermano</option><option>Hermana</option><option>Tía</option><option>Tío</option><option>Pareja</option><option>Tutor/a legal</option><option>Otro familiar</option><option>Amistad</option>
+                                                        </select>
+                                                    </label>
+                                                    <label class="block"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Edad</span><input x-model.number="f.edad" type="number" min="0" max="120" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500" :disabled="f.fallecido"></label>
+                                                    <label class="block"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Residencia</span><input x-model="f.residencia" type="text" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500"></label>
+                                                    <label class="block"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Teléfono</span><input x-model="f.telefono" type="tel" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500 font-mono"></label>
+                                                </div>
+                                                <div class="grid gap-2 sm:grid-cols-2 text-xs">
+                                                    <label class="block"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Email</span><input x-model="f.email" type="email" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500"></label>
+                                                    <label class="block"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Observaciones</span><input x-model="f.observ" type="text" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500" placeholder="jubilada, contacto secundario..."></label>
+                                                </div>
+                                                <div class="flex items-center gap-4 text-xs pt-1">
+                                                    <label class="inline-flex items-center gap-1.5"><input type="checkbox" x-model="f.referente" class="rounded text-emerald-600 focus:ring-emerald-500"><span>Referente principal</span></label>
+                                                    <label class="inline-flex items-center gap-1.5"><input type="checkbox" x-model="f.fallecido" class="rounded text-slate-600 focus:ring-slate-500"><span>Fallecido/a</span></label>
+                                                    <button @click="familiares.splice(idx, 1)" type="button" class="ml-auto text-rose-600 hover:underline">✕ Quitar</button>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <div x-show="!editMode && !f.fallecido && f.ultimaVisita" class="text-xs text-slate-500 text-right shrink-0">Última visita<br><strong class="text-slate-700" x-text="f.ultimaVisita"></strong></div>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+
+                    <aside class="rounded-xl border border-slate-200 bg-white p-5" x-data="{
+                        medida: {
+                            tipo: 'Curatela representativa',
+                            vigenteDesde: '2023-03-14',
+                            figura: 'Carmen Pérez (madre)',
+                            ambito: 'Patrimonial + decisiones sanitarias mayores',
+                            resolucion: 'Juzgado 1ª Inst. nº 4 Burgos · auto 412/2023',
+                            proximaRevision: '2026-03-14'
+                        }
+                    }">
+                        <h2 class="text-sm font-semibold mb-2">⚖ Medidas de apoyo · Ley 8/2021</h2>
+
+                        <!-- LECTURA -->
+                        <template x-if="!editMode">
+                            <div>
+                                <div class="rounded-lg bg-emerald-50 border border-emerald-200 p-3 text-sm">
+                                    <p class="font-semibold text-emerald-900" x-text="medida.tipo"></p>
+                                    <p class="text-xs text-emerald-800 mt-1">Vigente desde <span x-text="new Date(medida.vigenteDesde).toLocaleDateString('es-ES')"></span></p>
+                                </div>
+                                <dl class="mt-3 space-y-2 text-xs">
+                                    <div><dt class="text-slate-500">Figura de apoyo</dt><dd class="font-medium" x-text="medida.figura"></dd></div>
+                                    <div><dt class="text-slate-500">Ámbito</dt><dd x-text="medida.ambito"></dd></div>
+                                    <div><dt class="text-slate-500">Resolución judicial</dt><dd class="font-mono text-[11px]" x-text="medida.resolucion"></dd></div>
+                                    <div><dt class="text-slate-500">Próxima revisión</dt><dd class="text-amber-700 font-medium" x-text="new Date(medida.proximaRevision).toLocaleDateString('es-ES') + ' (vencida)'"></dd></div>
+                                </dl>
+                            </div>
+                        </template>
+
+                        <!-- EDICIÓN -->
+                        <template x-if="editMode">
+                            <div class="space-y-3 text-xs">
+                                <label class="block"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Tipo de medida</span>
+                                    <select x-model="medida.tipo" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500">
+                                        <option>Sin medida</option><option>Guarda de hecho</option><option>Curatela asistencial</option><option>Curatela representativa</option><option>Defensor judicial</option>
+                                    </select>
+                                </label>
+                                <label class="block"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Vigente desde</span><input x-model="medida.vigenteDesde" type="date" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500"></label>
+                                <label class="block"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Figura de apoyo</span><input x-model="medida.figura" type="text" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500"></label>
+                                <label class="block"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Ámbito de apoyo</span><textarea x-model="medida.ambito" rows="2" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500"></textarea></label>
+                                <label class="block"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Resolución judicial</span><input x-model="medida.resolucion" type="text" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500 font-mono"></label>
+                                <label class="block"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Próxima revisión</span><input x-model="medida.proximaRevision" type="date" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500"></label>
+                                <p class="text-[10px] text-amber-800 bg-amber-50 border border-amber-200 rounded p-2">⚠ Cualquier cambio en el ámbito de la medida exige <strong>copia del nuevo auto</strong> adjunto en la pestaña Documentos.</p>
+                            </div>
+                        </template>
+                    </aside>
+                </section>
+
+                <section class="rounded-xl border border-slate-200 bg-white p-5" x-data="{ referencia: 'Pilar Renedo Llanos' }">
+                    <h2 class="text-sm font-semibold mb-3">🤝 Persona de referencia en el centro</h2>
+                    <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50 border border-slate-200">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-sm font-semibold shrink-0">PR</div>
+                        <div class="flex-1">
+                            <template x-if="!editMode">
+                                <div>
+                                    <p class="font-medium" x-text="referencia"></p>
+                                    <p class="text-xs text-slate-500">Terapeuta Ocupacional · designada por Marta el 02/02/2024</p>
+                                </div>
+                            </template>
+                            <template x-if="editMode">
+                                <div class="grid gap-2 sm:grid-cols-2 text-xs">
+                                    <label class="block"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Profesional de referencia</span>
+                                        <select x-model="referencia" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500">
+                                            <option>Pilar Renedo Llanos (TO)</option>
+                                            <option>Daniel Alonso (Psicólogo)</option>
+                                            <option>Lucía Martínez (TS)</option>
+                                            <option>Carmen Sancho (Educadora)</option>
+                                            <option>Luis Barquín (Educador)</option>
+                                        </select>
+                                    </label>
+                                    <label class="block"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Fecha designación</span><input type="date" value="2024-02-02" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500"></label>
+                                    <p class="sm:col-span-2 text-[10px] text-slate-500">Designación realizada por la propia persona atendida — preferencia explícita.</p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div x-show="expandido || tab === 'medico'" x-cloak class="space-y-5" :class="expandido ? 'mt-6' : ''">
+                <div class="flex items-center justify-between gap-3 flex-wrap">
+                    <h2 x-show="expandido" x-cloak class="text-lg font-semibold tracking-tight pt-4 mt-2 border-t-2 border-emerald-200"><span class="text-xl">⚕️</span> Médico y medicación</h2>
+                    <a href="ficha-salud-pdf.html" target="_blank" class="ml-auto rounded-lg border-2 border-rose-300 bg-rose-50 text-rose-800 px-3 py-1.5 text-xs font-semibold hover:border-rose-500 hover:bg-rose-100 transition flex items-center gap-2">🖨 Ficha básica de salud (PDF)</a>
+                </div>
+
+                <section class="grid gap-5 lg:grid-cols-3" x-data="{
+                    critica: {
+                        alergias: 'Penicilina · AINE',
+                        grupoSanguineo: 'A Rh+',
+                        restricciones: 'Sin lactosa · evitar frutos secos'
+                    },
+                    diagnosticos: [
+                        {cie:'F71.9', nombre:'Discapacidad intelectual moderada', nota:'Confirmado en informe 2009 · INSS'},
+                        {cie:'G40.9', nombre:'Epilepsia focal', nota:'Controlada · última crisis 2022'},
+                        {cie:'F41.1', nombre:'Trastorno de ansiedad generalizada', nota:'En seguimiento por psicología'}
+                    ],
+                    nuevoDiagnostico(){ this.diagnosticos.push({cie:'', nombre:'', nota:''}); }
+                }">
+                    <div class="rounded-xl border-2 border-rose-200 bg-rose-50 p-4 space-y-2">
+                        <h3 class="text-sm font-semibold text-rose-900">⚠ Información crítica</h3>
+                        <!-- LECTURA -->
+                        <dl x-show="!editMode" class="space-y-1.5 text-sm">
+                            <div><dt class="text-xs text-rose-700 font-medium">Alergias</dt><dd class="text-rose-900 font-semibold" x-text="critica.alergias"></dd></div>
+                            <div><dt class="text-xs text-rose-700 font-medium">Grupo sanguíneo</dt><dd x-text="critica.grupoSanguineo"></dd></div>
+                            <div><dt class="text-xs text-rose-700 font-medium">Restricciones</dt><dd x-text="critica.restricciones"></dd></div>
+                        </dl>
+                        <!-- EDICIÓN -->
+                        <div x-show="editMode" x-cloak class="space-y-2 text-xs">
+                            <label class="block"><span class="text-[10px] uppercase tracking-widest text-rose-700 font-semibold">Alergias</span><input x-model="critica.alergias" type="text" class="mt-0.5 w-full rounded-md border border-rose-300 px-2 py-1 text-sm focus:outline-none focus:border-rose-500 bg-white"></label>
+                            <label class="block"><span class="text-[10px] uppercase tracking-widest text-rose-700 font-semibold">Grupo sanguíneo</span>
+                                <select x-model="critica.grupoSanguineo" class="mt-0.5 w-full rounded-md border border-rose-300 px-2 py-1 text-sm focus:outline-none focus:border-rose-500 bg-white">
+                                    <option>Desconocido</option><option>0 Rh+</option><option>0 Rh−</option><option>A Rh+</option><option>A Rh−</option><option>B Rh+</option><option>B Rh−</option><option>AB Rh+</option><option>AB Rh−</option>
+                                </select>
+                            </label>
+                            <label class="block"><span class="text-[10px] uppercase tracking-widest text-rose-700 font-semibold">Restricciones alimentarias</span><textarea x-model="critica.restricciones" rows="2" class="mt-0.5 w-full rounded-md border border-rose-300 px-2 py-1 text-sm focus:outline-none focus:border-rose-500 bg-white"></textarea></label>
+                            <p class="text-[10px] text-rose-800 leading-snug pt-1">⚠ Estos campos son críticos para urgencias y se imprimen en la pulsera de identificación.</p>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2 rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-sm font-semibold">🩺 Diagnósticos activos</h3>
+                            <button x-show="editMode" x-cloak @click="nuevoDiagnostico()" class="text-xs text-emerald-700 hover:underline">+ Añadir diagnóstico</button>
+                        </div>
+                        <ul class="space-y-2 text-sm">
+                            <template x-for="(d, idx) in diagnosticos" :key="idx">
+                                <li class="flex items-start gap-3 p-2 rounded-lg bg-slate-50">
+                                    <template x-if="!editMode">
+                                        <div class="flex items-start gap-3 flex-1">
+                                            <span class="font-mono text-xs text-slate-500 mt-0.5" x-text="d.cie"></span>
+                                            <div class="flex-1">
+                                                <p class="font-medium" x-text="d.nombre"></p>
+                                                <p class="text-xs text-slate-500" x-text="d.nota"></p>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template x-if="editMode">
+                                        <div class="flex-1 grid gap-2 sm:grid-cols-12 text-xs items-start">
+                                            <label class="block sm:col-span-2"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">CIE-11</span><input x-model="d.cie" type="text" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm font-mono focus:outline-none focus:border-emerald-500" placeholder="F71.9"></label>
+                                            <label class="block sm:col-span-4"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Diagnóstico</span><input x-model="d.nombre" type="text" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500"></label>
+                                            <label class="block sm:col-span-5"><span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Notas / origen</span><input x-model="d.nota" type="text" class="mt-0.5 w-full rounded-md border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500"></label>
+                                            <button @click="diagnosticos.splice(idx, 1)" type="button" class="sm:col-span-1 mt-4 text-rose-600 hover:bg-rose-50 rounded px-1 py-1 text-base">✕</button>
+                                        </div>
+                                    </template>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="rounded-xl border border-slate-200 bg-white overflow-hidden" x-data="{
+                    pautas: [
+                        {medicamento:'Levetiracetam 500 mg', pauta:'1-0-1 (oral)', indicacion:'Epilepsia', prescriptor:'Dra. Pérez (HUBU)', inicio:'2018-02-14'},
+                        {medicamento:'Escitalopram 10 mg', pauta:'1-0-0 (oral, mañana)', indicacion:'Ansiedad', prescriptor:'Dr. Ruiz (centro)', inicio:'2023-09-22'},
+                        {medicamento:'Vitamina D₃ 1000 UI', pauta:'0-1-0 (oral, comida)', indicacion:'Suplemento', prescriptor:'Dr. Ruiz', inicio:'2025-01-10'}
+                    ],
+                    nuevaPauta(){ this.pautas.push({medicamento:'', pauta:'', indicacion:'', prescriptor:'', inicio:new Date().toISOString().slice(0,10)}); }
+                }">
+                    <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+                        <h3 class="text-sm font-semibold">💊 Medicación activa · <span x-text="pautas.length"></span> pautas</h3>
+                        <button @click="nuevaPauta()" :disabled="!editMode" :class="editMode ? 'bg-emerald-700 text-white hover:bg-emerald-800' : 'bg-slate-200 text-slate-400 cursor-not-allowed'" class="rounded-lg px-3 py-1 text-xs font-medium">+ Nueva pauta</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                                <tr>
+                                    <th class="px-5 py-2 text-left font-medium">Medicamento</th>
+                                    <th class="px-5 py-2 text-left font-medium">Pauta</th>
+                                    <th class="px-5 py-2 text-left font-medium">Indicación</th>
+                                    <th class="px-5 py-2 text-left font-medium">Prescriptor</th>
+                                    <th class="px-5 py-2 text-left font-medium">Inicio</th>
+                                    <th x-show="editMode" class="px-2 py-2"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <template x-for="(p, idx) in pautas" :key="idx">
+                                    <tr>
+                                        <td class="px-5 py-2.5">
+                                            <span x-show="!editMode" class="font-medium" x-text="p.medicamento"></span>
+                                            <input x-show="editMode" x-cloak x-model="p.medicamento" type="text" class="w-full rounded border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500" placeholder="Principio activo + dosis">
+                                        </td>
+                                        <td class="px-5 py-2.5">
+                                            <span x-show="!editMode" x-text="p.pauta"></span>
+                                            <input x-show="editMode" x-cloak x-model="p.pauta" type="text" class="w-full rounded border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500 font-mono" placeholder="M-T-N (vía)">
+                                        </td>
+                                        <td class="px-5 py-2.5 text-slate-600">
+                                            <span x-show="!editMode" x-text="p.indicacion"></span>
+                                            <input x-show="editMode" x-cloak x-model="p.indicacion" type="text" class="w-full rounded border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500">
+                                        </td>
+                                        <td class="px-5 py-2.5 text-xs">
+                                            <span x-show="!editMode" class="text-slate-500" x-text="p.prescriptor"></span>
+                                            <input x-show="editMode" x-cloak x-model="p.prescriptor" type="text" class="w-full rounded border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500">
+                                        </td>
+                                        <td class="px-5 py-2.5 text-xs">
+                                            <span x-show="!editMode" x-text="new Date(p.inicio).toLocaleDateString('es-ES')"></span>
+                                            <input x-show="editMode" x-cloak x-model="p.inicio" type="date" class="rounded border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500">
+                                        </td>
+                                        <td x-show="editMode" x-cloak class="px-2 py-2.5 text-center">
+                                            <button @click="pautas.splice(idx, 1)" type="button" class="text-rose-600 hover:bg-rose-50 rounded px-1 py-1">✕</button>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div x-show="editMode" x-cloak class="px-5 py-2 border-t border-slate-100 text-[10px] text-amber-800 bg-amber-50">⚠ Alta o retirada de medicación requiere validación del facultativo prescriptor. La acción quedará registrada en la bitácora con motivo obligatorio.</div>
+                </section>
+
+                <section class="grid gap-5 md:grid-cols-2">
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <h3 class="text-sm font-semibold mb-3">📅 Consultas externas próximas</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-center justify-between p-2 rounded bg-slate-50"><div><p class="font-medium">Neurología · revisión anual</p><p class="text-xs text-slate-500">HUBU · Dra. Pérez</p></div><div class="text-right"><p class="text-sm font-medium">18/06/2026</p><p class="text-xs text-slate-500">11:30</p></div></li>
+                            <li class="flex items-center justify-between p-2 rounded bg-slate-50"><div><p class="font-medium">Ginecología · seguimiento</p><p class="text-xs text-slate-500">CS Burgos Norte</p></div><div class="text-right"><p class="text-sm font-medium">02/07/2026</p><p class="text-xs text-slate-500">09:00</p></div></li>
+                        </ul>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <h3 class="text-sm font-semibold mb-3">🏥 Últimas hospitalizaciones</h3>
+                        <ul class="space-y-2 text-sm text-slate-600">
+                            <li class="border-l-2 border-slate-300 pl-3 py-1"><p class="font-medium text-slate-900">Crisis epiléptica · observación 24h</p><p class="text-xs">HUBU · 18-19/03/2022</p></li>
+                            <li class="border-l-2 border-slate-300 pl-3 py-1"><p class="font-medium text-slate-900">Apendicectomía</p><p class="text-xs text-slate-500">HUBU · 07-09/11/2019</p></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ANTECEDENTES E INTERVENCIONES QUIRÚRGICAS -->
+                <section class="rounded-xl border border-slate-200 bg-white overflow-hidden" x-data="{
+                    antecedentes: [
+                        {tipo:'antecedente', titulo:'Eventración supra e infraumbilical', detalle:'Grande, con clínica de dolor abdominal recurrente'},
+                        {tipo:'antecedente', titulo:'Estreñimiento crónico', detalle:'Requiere pauta laxante y dieta rica en fibra'},
+                        {tipo:'antecedente', titulo:'Hemorroides grado I', detalle:'Sin sangrado activo'},
+                        {tipo:'quirurgico', titulo:'Apendicectomía', detalle:'HUBU · 07/11/2019'},
+                        {tipo:'quirurgico', titulo:'Fistulectomía perianal', detalle:'HUBU · 14/06/2011'}
+                    ],
+                    nuevoAntec(){ this.antecedentes.push({tipo:'antecedente', titulo:'', detalle:''}); }
+                }">
+                    <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+                        <h3 class="text-sm font-semibold">📋 Antecedentes e intervenciones quirúrgicas</h3>
+                        <button @click="nuevoAntec()" :disabled="!editMode" :class="editMode ? 'text-emerald-700 hover:underline' : 'text-slate-300 cursor-not-allowed'" class="text-xs">+ Añadir</button>
+                    </div>
+                    <ul class="divide-y divide-slate-100 text-sm">
+                        <template x-for="(a, idx) in antecedentes" :key="idx">
+                            <li class="px-5 py-2.5 flex items-start gap-3">
+                                <span class="text-[10px] px-2 py-0.5 rounded-full shrink-0 mt-0.5" :class="a.tipo === 'quirurgico' ? 'bg-rose-100 text-rose-800' : 'bg-amber-100 text-amber-800'" x-text="a.tipo === 'quirurgico' ? 'Quirúrgico' : 'Antecedente'"></span>
+                                <div class="flex-1">
+                                    <template x-if="!editMode">
+                                        <div>
+                                            <p class="font-medium" x-text="a.titulo"></p>
+                                            <p class="text-xs text-slate-500" x-text="a.detalle"></p>
+                                        </div>
+                                    </template>
+                                    <template x-if="editMode">
+                                        <div class="grid gap-2 sm:grid-cols-12 text-xs">
+                                            <select x-model="a.tipo" class="sm:col-span-2 rounded border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500">
+                                                <option value="antecedente">Antecedente</option>
+                                                <option value="quirurgico">Quirúrgico</option>
+                                            </select>
+                                            <input x-model="a.titulo" type="text" class="sm:col-span-4 rounded border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500" placeholder="Diagnóstico / intervención">
+                                            <input x-model="a.detalle" type="text" class="sm:col-span-5 rounded border border-slate-300 px-2 py-1 text-sm focus:outline-none focus:border-emerald-500" placeholder="Detalle, fecha, hospital">
+                                            <button @click="antecedentes.splice(idx, 1)" type="button" class="sm:col-span-1 text-rose-600 hover:bg-rose-50 rounded">✕</button>
+                                        </div>
+                                    </template>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </section>
+
+                <!-- CUIDADOS DE ENFERMERÍA -->
+                <section class="rounded-xl border border-emerald-200 bg-emerald-50/30 overflow-hidden" x-data="{
+                    cuidados: {
+                        movilidad: 'Autónoma para deambulación. Usa bastón en exteriores. Precaución en escaleras (apoyo verbal).',
+                        alimentacion: 'Dieta blanda baja en lactosa. Sin frutos secos (alergia). Triturar carnes duras. Hidratación 1,5 L/día.',
+                        aseo: 'Autonomía parcial. Necesita apoyo verbal en el orden de pasos. Supervisión en ducha (riesgo de resbalón).',
+                        eliminacion: 'Continente diurno. Pauta laxante por estreñimiento crónico. Control de deposición cada 2 días.',
+                        sueno: 'Conciliación normal. Despertares ocasionales. No requiere medicación para dormir.',
+                        comunicacion: 'Verbal funcional. Comprende instrucciones sencillas. Apoyo de pictogramas en situaciones nuevas.',
+                        conducta: 'Tranquila. Episodios puntuales de ansiedad en cambios de rutina — se gestionan con anticipación verbal.',
+                        observaciones: 'En urgencias acude siempre acompañada de la madre (curadora) o, en su ausencia, gestora de caso.'
+                    }
+                }">
+                    <div class="px-5 py-3 border-b border-emerald-200 bg-emerald-100/50 flex items-center justify-between">
+                        <h3 class="text-sm font-semibold text-emerald-900">🩺 Cuidados de enfermería · Plan de salud-cuidados</h3>
+                        <span class="text-[10px] text-emerald-700">Actualizada 18/06/2026 · Lucía Martínez (DUE)</span>
+                    </div>
+                    <div class="p-5 grid gap-4 md:grid-cols-2">
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-emerald-700 font-semibold mb-1">🚶 Movilidad</p>
+                            <p x-show="!editMode" class="text-sm text-slate-700" x-text="cuidados.movilidad"></p>
+                            <textarea x-show="editMode" x-cloak x-model="cuidados.movilidad" rows="2" class="w-full rounded-md border border-emerald-300 px-2 py-1 text-sm bg-white focus:outline-none focus:border-emerald-600"></textarea>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-emerald-700 font-semibold mb-1">🍽 Alimentación</p>
+                            <p x-show="!editMode" class="text-sm text-slate-700" x-text="cuidados.alimentacion"></p>
+                            <textarea x-show="editMode" x-cloak x-model="cuidados.alimentacion" rows="2" class="w-full rounded-md border border-emerald-300 px-2 py-1 text-sm bg-white focus:outline-none focus:border-emerald-600"></textarea>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-emerald-700 font-semibold mb-1">🧼 Aseo personal</p>
+                            <p x-show="!editMode" class="text-sm text-slate-700" x-text="cuidados.aseo"></p>
+                            <textarea x-show="editMode" x-cloak x-model="cuidados.aseo" rows="2" class="w-full rounded-md border border-emerald-300 px-2 py-1 text-sm bg-white focus:outline-none focus:border-emerald-600"></textarea>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-emerald-700 font-semibold mb-1">💩 Eliminación</p>
+                            <p x-show="!editMode" class="text-sm text-slate-700" x-text="cuidados.eliminacion"></p>
+                            <textarea x-show="editMode" x-cloak x-model="cuidados.eliminacion" rows="2" class="w-full rounded-md border border-emerald-300 px-2 py-1 text-sm bg-white focus:outline-none focus:border-emerald-600"></textarea>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-emerald-700 font-semibold mb-1">🌙 Sueño y descanso</p>
+                            <p x-show="!editMode" class="text-sm text-slate-700" x-text="cuidados.sueno"></p>
+                            <textarea x-show="editMode" x-cloak x-model="cuidados.sueno" rows="2" class="w-full rounded-md border border-emerald-300 px-2 py-1 text-sm bg-white focus:outline-none focus:border-emerald-600"></textarea>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-emerald-700 font-semibold mb-1">💬 Comunicación</p>
+                            <p x-show="!editMode" class="text-sm text-slate-700" x-text="cuidados.comunicacion"></p>
+                            <textarea x-show="editMode" x-cloak x-model="cuidados.comunicacion" rows="2" class="w-full rounded-md border border-emerald-300 px-2 py-1 text-sm bg-white focus:outline-none focus:border-emerald-600"></textarea>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-emerald-700 font-semibold mb-1">🧠 Conducta y emocional</p>
+                            <p x-show="!editMode" class="text-sm text-slate-700" x-text="cuidados.conducta"></p>
+                            <textarea x-show="editMode" x-cloak x-model="cuidados.conducta" rows="2" class="w-full rounded-md border border-emerald-300 px-2 py-1 text-sm bg-white focus:outline-none focus:border-emerald-600"></textarea>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-emerald-700 font-semibold mb-1">📝 Observaciones para urgencias</p>
+                            <p x-show="!editMode" class="text-sm text-slate-700" x-text="cuidados.observaciones"></p>
+                            <textarea x-show="editMode" x-cloak x-model="cuidados.observaciones" rows="2" class="w-full rounded-md border border-emerald-300 px-2 py-1 text-sm bg-white focus:outline-none focus:border-emerald-600"></textarea>
+                        </div>
+                    </div>
+                    <div class="px-5 py-2 bg-white border-t border-emerald-200 text-[10px] text-emerald-800">💡 Estos campos se imprimen tal cual en la <strong>Ficha básica de salud</strong> que se entrega al hospital o servicio de urgencias.</div>
+                </section>
+            </div>
+
+            <div x-show="expandido || tab === 'bolsillo'" x-cloak class="space-y-5">
+
+                <div x-show="editMode" x-cloak class="rounded-lg bg-emerald-50 border border-emerald-200 p-3 text-xs text-emerald-900">
+                    💰 <strong>Edición de bolsillo</strong>: los movimientos de arqueos cerrados son inmutables (auditoría económica). Para el período abierto, edita importe / categoría con doble clic en la fila o usa <strong>+ Movimiento</strong>. Cualquier ajuste deja huella en la bitácora con motivo obligatorio.
+                </div>
+
+                <!-- KPIs -->
+                <section class="grid gap-3 grid-cols-2 md:grid-cols-4">
+                    <div class="rounded-xl border-2 border-emerald-300 bg-emerald-50 p-4">
+                        <p class="text-xs text-emerald-700 font-medium">Saldo actual</p>
+                        <p class="mt-0.5 text-3xl font-light text-emerald-800">86,40 €</p>
+                        <p class="text-[10px] text-emerald-700">a 1 de junio · 13:30</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-4">
+                        <p class="text-xs text-slate-500">Ingresos del mes</p>
+                        <p class="mt-0.5 text-2xl font-light text-emerald-700">+ 90,00 €</p>
+                        <p class="text-[10px] text-slate-500">2 movimientos</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-4">
+                        <p class="text-xs text-slate-500">Gastos del mes</p>
+                        <p class="mt-0.5 text-2xl font-light text-rose-700">− 47,80 €</p>
+                        <p class="text-[10px] text-slate-500">5 movimientos</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-4">
+                        <p class="text-xs text-slate-500">Último arqueo</p>
+                        <p class="mt-0.5 text-lg font-semibold leading-tight">31/05/2026</p>
+                        <p class="text-[10px] text-slate-500">✓ Conciliado</p>
+                    </div>
+                </section>
+
+                <!-- Sección principal -->
+                <section class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                    <div class="px-5 py-4 border-b border-slate-200 flex items-end justify-between flex-wrap gap-3">
+                        <div>
+                            <h2 class="text-lg font-semibold">Movimientos de la cuenta</h2>
+                            <p class="text-xs text-slate-500 mt-0.5">Cuenta abierta 12/09/2018 · 213 movimientos totales · saldo inicial 0,00 €</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs text-slate-700 hover:border-emerald-400">⤓ Excel</button>
+                            <button class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs text-slate-700 hover:border-emerald-400">🖨 Imprimir</button>
+                            <button class="rounded-lg bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">+ Nuevo movimiento</button>
+                        </div>
+                    </div>
+
+                    <!-- Filtros -->
+                    <div class="px-5 py-3 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2 flex-wrap">
+                        <select class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                            <option>Todas las categorías</option>
+                            <option>Aseo personal</option><option>Ocio y salidas</option>
+                            <option>Ropa y calzado</option><option>Tabaco</option>
+                            <option>Familia (transferencia)</option><option>Pensión / paga</option>
+                            <option>Farmacia / sanidad</option><option>Otros</option>
+                        </select>
+                        <select class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                            <option>Tipo: todos</option>
+                            <option>Solo ingresos</option>
+                            <option>Solo gastos</option>
+                        </select>
+                        <select class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                            <option>Este mes</option>
+                            <option>Mes anterior</option>
+                            <option>Últimos 3 meses</option>
+                            <option>Año 2026</option>
+                            <option>Desde el inicio</option>
+                            <option>Personalizado…</option>
+                        </select>
+                        <div class="relative flex-1 min-w-[200px]">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">🔎</span>
+                            <input type="search" placeholder="Buscar en concepto u observaciones…" class="w-full pl-10 pr-3 py-1.5 rounded-lg border border-slate-300 bg-white outline-none text-sm focus:border-emerald-500">
+                        </div>
+                    </div>
+
+                    <!-- Tabla movimientos -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                                <tr>
+                                    <th class="px-5 py-2 text-left font-medium">Fecha</th>
+                                    <th class="px-5 py-2 text-left font-medium">Concepto</th>
+                                    <th class="px-5 py-2 text-left font-medium">Categoría</th>
+                                    <th class="px-5 py-2 text-right font-medium">Ingreso</th>
+                                    <th class="px-5 py-2 text-right font-medium">Gasto</th>
+                                    <th class="px-5 py-2 text-right font-medium">Saldo</th>
+                                    <th class="px-5 py-2 text-left font-medium">Registró</th>
+                                    <th class="px-5 py-2 text-center font-medium">Just.</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-5 py-2.5 text-slate-700">29/05/2026</td>
+                                    <td class="px-5 py-2.5 font-medium">Cafetería con compañeros</td>
+                                    <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Ocio</span></td>
+                                    <td class="px-5 py-2.5 text-right text-slate-400">—</td>
+                                    <td class="px-5 py-2.5 text-right text-rose-700">− 4,50 €</td>
+                                    <td class="px-5 py-2.5 text-right font-semibold">86,40 €</td>
+                                    <td class="px-5 py-2.5 text-xs text-slate-500">Pilar Renedo (TO)</td>
+                                    <td class="px-5 py-2.5 text-center text-slate-400">📎</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-5 py-2.5 text-slate-700">27/05/2026</td>
+                                    <td class="px-5 py-2.5 font-medium">Champú y desodorante</td>
+                                    <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800">Aseo</span></td>
+                                    <td class="px-5 py-2.5 text-right text-slate-400">—</td>
+                                    <td class="px-5 py-2.5 text-right text-rose-700">− 6,80 €</td>
+                                    <td class="px-5 py-2.5 text-right font-semibold">90,90 €</td>
+                                    <td class="px-5 py-2.5 text-xs text-slate-500">M. José Castro (DUE)</td>
+                                    <td class="px-5 py-2.5 text-center text-emerald-600">✓</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 bg-emerald-50/30">
+                                    <td class="px-5 py-2.5 text-slate-700">25/05/2026</td>
+                                    <td class="px-5 py-2.5 font-medium">Paga mensual de la madre</td>
+                                    <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Familia</span></td>
+                                    <td class="px-5 py-2.5 text-right text-emerald-700 font-semibold">+ 50,00 €</td>
+                                    <td class="px-5 py-2.5 text-right text-slate-400">—</td>
+                                    <td class="px-5 py-2.5 text-right font-semibold">97,70 €</td>
+                                    <td class="px-5 py-2.5 text-xs text-slate-500">Lucía Martínez (TS)</td>
+                                    <td class="px-5 py-2.5 text-center text-emerald-600">✓</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-5 py-2.5 text-slate-700">22/05/2026</td>
+                                    <td class="px-5 py-2.5 font-medium">Excursión Las Huelgas</td>
+                                    <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Ocio</span></td>
+                                    <td class="px-5 py-2.5 text-right text-slate-400">—</td>
+                                    <td class="px-5 py-2.5 text-right text-rose-700">− 12,00 €</td>
+                                    <td class="px-5 py-2.5 text-right font-semibold">47,70 €</td>
+                                    <td class="px-5 py-2.5 text-xs text-slate-500">Pilar Renedo (TO)</td>
+                                    <td class="px-5 py-2.5 text-center text-emerald-600">✓</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-5 py-2.5 text-slate-700">18/05/2026</td>
+                                    <td class="px-5 py-2.5 font-medium">Camiseta de manga corta</td>
+                                    <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Ropa</span></td>
+                                    <td class="px-5 py-2.5 text-right text-slate-400">—</td>
+                                    <td class="px-5 py-2.5 text-right text-rose-700">− 14,90 €</td>
+                                    <td class="px-5 py-2.5 text-right font-semibold">59,70 €</td>
+                                    <td class="px-5 py-2.5 text-xs text-slate-500">Lucía Martínez (TS)</td>
+                                    <td class="px-5 py-2.5 text-center text-emerald-600">✓</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 bg-emerald-50/30">
+                                    <td class="px-5 py-2.5 text-slate-700">15/05/2026</td>
+                                    <td class="px-5 py-2.5 font-medium">Reposición mensual del centro</td>
+                                    <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Pensión</span></td>
+                                    <td class="px-5 py-2.5 text-right text-emerald-700 font-semibold">+ 40,00 €</td>
+                                    <td class="px-5 py-2.5 text-right text-slate-400">—</td>
+                                    <td class="px-5 py-2.5 text-right font-semibold">74,60 €</td>
+                                    <td class="px-5 py-2.5 text-xs text-slate-500">Administración</td>
+                                    <td class="px-5 py-2.5 text-center text-emerald-600">✓</td>
+                                </tr>
+                                <!-- Indicador arqueo cerrado -->
+                                <tr class="bg-slate-100">
+                                    <td colspan="8" class="px-5 py-2 text-xs text-slate-500 text-center">
+                                        🔒 <strong>Arqueo cerrado a 30/04/2026</strong> · los movimientos anteriores son inmutables · saldo a fecha: 34,60 €
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 opacity-70">
+                                    <td class="px-5 py-2.5 text-slate-700">28/04/2026</td>
+                                    <td class="px-5 py-2.5 font-medium">Tabaco (paquete)</td>
+                                    <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700">Tabaco</span></td>
+                                    <td class="px-5 py-2.5 text-right text-slate-400">—</td>
+                                    <td class="px-5 py-2.5 text-right text-rose-700">− 5,40 €</td>
+                                    <td class="px-5 py-2.5 text-right font-semibold">34,60 €</td>
+                                    <td class="px-5 py-2.5 text-xs text-slate-500">M. José Castro</td>
+                                    <td class="px-5 py-2.5 text-center text-emerald-600">✓</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 opacity-70">
+                                    <td class="px-5 py-2.5 text-slate-700">26/04/2026</td>
+                                    <td class="px-5 py-2.5 font-medium">Farmacia · paracetamol genérico</td>
+                                    <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-800">Sanidad</span></td>
+                                    <td class="px-5 py-2.5 text-right text-slate-400">—</td>
+                                    <td class="px-5 py-2.5 text-right text-rose-700">− 3,20 €</td>
+                                    <td class="px-5 py-2.5 text-right font-semibold">40,00 €</td>
+                                    <td class="px-5 py-2.5 text-xs text-slate-500">M. José Castro (DUE)</td>
+                                    <td class="px-5 py-2.5 text-center text-emerald-600">✓</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Paginación + total -->
+                    <div class="px-5 py-3 border-t border-slate-200 flex items-center justify-between flex-wrap gap-2 text-xs">
+                        <p class="text-slate-600"><strong>Mostrando 1 – 8</strong> de <strong>213 movimientos</strong> · período: este mes y arqueos cerrados anteriores</p>
+                        <div class="flex items-center gap-1">
+                            <button class="px-2 py-1 rounded border border-slate-300 text-slate-400" disabled>‹</button>
+                            <button class="px-2 py-1 rounded bg-emerald-700 text-white w-7">1</button>
+                            <button class="px-2 py-1 rounded border border-slate-300 hover:border-emerald-400 w-7">2</button>
+                            <button class="px-2 py-1 rounded border border-slate-300 hover:border-emerald-400 w-7">3</button>
+                            <button class="px-2 py-1 rounded border border-slate-300">…</button>
+                            <button class="px-2 py-1 rounded border border-slate-300 hover:border-emerald-400">27</button>
+                            <button class="px-2 py-1 rounded border border-slate-300 hover:border-emerald-400">›</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Resumen gasto por categoría (mes) -->
+                <section class="rounded-xl border border-slate-200 bg-white p-5">
+                    <h2 class="text-sm font-semibold mb-3">Gasto del mes por categoría</h2>
+                    <div class="space-y-2 text-sm">
+                        <div>
+                            <div class="flex items-center justify-between mb-0.5">
+                                <span><span class="inline-block w-3 h-3 rounded bg-blue-500 align-middle mr-1.5"></span>Ocio y salidas</span>
+                                <span class="font-semibold">16,50 €</span>
+                            </div>
+                            <div class="h-2 rounded bg-slate-100 overflow-hidden"><div class="h-full bg-blue-500" style="width: 34.5%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-0.5">
+                                <span><span class="inline-block w-3 h-3 rounded bg-purple-500 align-middle mr-1.5"></span>Ropa y calzado</span>
+                                <span class="font-semibold">14,90 €</span>
+                            </div>
+                            <div class="h-2 rounded bg-slate-100 overflow-hidden"><div class="h-full bg-purple-500" style="width: 31.2%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-0.5">
+                                <span><span class="inline-block w-3 h-3 rounded bg-cyan-500 align-middle mr-1.5"></span>Aseo personal</span>
+                                <span class="font-semibold">6,80 €</span>
+                            </div>
+                            <div class="h-2 rounded bg-slate-100 overflow-hidden"><div class="h-full bg-cyan-500" style="width: 14.2%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-0.5">
+                                <span><span class="inline-block w-3 h-3 rounded bg-rose-500 align-middle mr-1.5"></span>Farmacia / sanidad</span>
+                                <span class="font-semibold">5,40 €</span>
+                            </div>
+                            <div class="h-2 rounded bg-slate-100 overflow-hidden"><div class="h-full bg-rose-500" style="width: 11.3%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-0.5">
+                                <span><span class="inline-block w-3 h-3 rounded bg-slate-500 align-middle mr-1.5"></span>Tabaco</span>
+                                <span class="font-semibold">4,20 €</span>
+                            </div>
+                            <div class="h-2 rounded bg-slate-100 overflow-hidden"><div class="h-full bg-slate-500" style="width: 8.8%"></div></div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                        <p class="text-slate-600">Total gasto mes: <strong class="text-rose-700">47,80 €</strong></p>
+                        <a href="caja-centro.html" class="text-emerald-700 hover:underline">Ver caja del centro →</a>
+                    </div>
+                </section>
+
+                <!-- Aviso RGPD -->
+                <section class="rounded-xl bg-slate-50 border border-slate-200 p-3 text-xs text-slate-600">
+                    <p>🔐 <strong>Acceso registrado en bitácora</strong>. Los datos económicos del peculio son información personal sensible y requieren rol autorizado (coordinador, administración o profesional de referencia). Familia / tutor accede solo a la cuenta del familiar.</p>
+                </section>
+            </div>
+
+            <div x-show="expandido || tab === 'docs'" x-cloak class="space-y-5" :class="expandido ? 'mt-6' : ''">
+                <h2 x-show="expandido" x-cloak class="text-lg font-semibold tracking-tight pt-4 mt-2 border-t-2 border-emerald-200"><span class="text-xl">📎</span> Documentos</h2>
+
+                <div x-show="editMode" x-cloak class="rounded-lg bg-slate-50 border border-slate-300 p-3 text-xs text-slate-700">
+                    📎 <strong>Edición de documentos</strong>: en modo edición puedes <strong>re-categorizar</strong>, <strong>renombrar</strong> o <strong>archivar</strong> un documento. La <strong>eliminación física</strong> no está disponible — los documentos pasan a archivo histórico siguiendo la política de retención (consentimientos 5 años · médicos 15 años · resoluciones judiciales permanente).
+                </div>
+                
+                <section class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                    <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between flex-wrap gap-2">
+                        <div>
+                            <h2 class="text-sm font-semibold">📎 Documentos del expediente</h2>
+                            <p class="text-xs text-slate-500 mt-0.5">23 documentos · ordenados por fecha de subida</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <select class="rounded border border-slate-300 bg-white px-2 py-1 text-xs">
+                                <option>Todas las categorías</option>
+                                <option>Consentimientos</option>
+                                <option>Documentación legal</option>
+                                <option>Informes médicos</option>
+                                <option>Informes externos</option>
+                                <option>Imágenes / fotografías</option>
+                                <option>Familia</option>
+                            </select>
+                            <button class="rounded-lg bg-emerald-700 text-white px-3 py-1 text-xs font-medium hover:bg-emerald-800">⤒ Subir documento</button>
+                        </div>
+                    </div>
+                    <ul class="divide-y divide-slate-100 text-sm">
+                        <li class="px-5 py-3 flex items-center gap-3 hover:bg-slate-50">
+                            <span class="text-2xl shrink-0">📄</span>
+                            <div class="flex-1">
+                                <p class="font-medium">Consentimiento RGPD · tratamiento de datos sociosanitarios</p>
+                                <p class="text-xs text-slate-500">Firmado por Carmen Pérez (curadora) · 12/01/2026 · vigente</p>
+                            </div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Vigente</span>
+                            <span class="text-xs text-slate-500">PDF · 0,8 MB</span>
+                            <div x-show="editMode" x-cloak class="flex items-center gap-1 ml-2">
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-emerald-400 text-slate-700">✏️ Renombrar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-amber-400 text-slate-700">📂 Re-categorizar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-rose-400 text-rose-600">🗄 Archivar</button>
+                            </div>
+                        </li>
+                        <li class="px-5 py-3 flex items-center gap-3 hover:bg-slate-50">
+                            <span class="text-2xl shrink-0">📄</span>
+                            <div class="flex-1">
+                                <p class="font-medium">Consentimiento fotografías y comunicación</p>
+                                <p class="text-xs text-slate-500">Firmado por Carmen Pérez · 12/01/2026 · renovación anual</p>
+                            </div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Vigente</span>
+                            <span class="text-xs text-slate-500">PDF · 0,4 MB</span>
+                            <div x-show="editMode" x-cloak class="flex items-center gap-1 ml-2">
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-emerald-400 text-slate-700">✏️ Renombrar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-amber-400 text-slate-700">📂 Re-categorizar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-rose-400 text-rose-600">🗄 Archivar</button>
+                            </div>
+                        </li>
+                        <li class="px-5 py-3 flex items-center gap-3 hover:bg-slate-50">
+                            <span class="text-2xl shrink-0">⚖</span>
+                            <div class="flex-1">
+                                <p class="font-medium">Auto judicial · medida de apoyo (curatela representativa)</p>
+                                <p class="text-xs text-slate-500">Juzgado 1ª Inst. nº 4 Burgos · 14/03/2023</p>
+                            </div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Legal</span>
+                            <span class="text-xs text-slate-500">PDF · 1,2 MB</span>
+                            <div x-show="editMode" x-cloak class="flex items-center gap-1 ml-2">
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-emerald-400 text-slate-700">✏️ Renombrar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-amber-400 text-slate-700">📂 Re-categorizar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-rose-400 text-rose-600">🗄 Archivar</button>
+                            </div>
+                        </li>
+                        <li class="px-5 py-3 flex items-center gap-3 hover:bg-slate-50">
+                            <span class="text-2xl shrink-0">📋</span>
+                            <div class="flex-1">
+                                <p class="font-medium">Reconocimiento grado de discapacidad 65 %</p>
+                                <p class="text-xs text-slate-500">Junta de Castilla y León · revisión 2024</p>
+                            </div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Administrativo</span>
+                            <span class="text-xs text-slate-500">PDF · 0,6 MB</span>
+                            <div x-show="editMode" x-cloak class="flex items-center gap-1 ml-2">
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-emerald-400 text-slate-700">✏️ Renombrar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-amber-400 text-slate-700">📂 Re-categorizar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-rose-400 text-rose-600">🗄 Archivar</button>
+                            </div>
+                        </li>
+                        <li class="px-5 py-3 flex items-center gap-3 hover:bg-slate-50">
+                            <span class="text-2xl shrink-0">📋</span>
+                            <div class="flex-1">
+                                <p class="font-medium">Dependencia · Grado II</p>
+                                <p class="text-xs text-slate-500">Resolución BVD · Junta CyL · 2022</p>
+                            </div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Administrativo</span>
+                            <span class="text-xs text-slate-500">PDF · 0,5 MB</span>
+                            <div x-show="editMode" x-cloak class="flex items-center gap-1 ml-2">
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-emerald-400 text-slate-700">✏️ Renombrar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-amber-400 text-slate-700">📂 Re-categorizar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-rose-400 text-rose-600">🗄 Archivar</button>
+                            </div>
+                        </li>
+                        <li class="px-5 py-3 flex items-center gap-3 hover:bg-slate-50">
+                            <span class="text-2xl shrink-0">🏥</span>
+                            <div class="flex-1">
+                                <p class="font-medium">Informe neurología · revisión anual epilepsia</p>
+                                <p class="text-xs text-slate-500">HUBU · Dra. Pérez · 14/06/2025</p>
+                            </div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-rose-100 text-rose-800">Médico</span>
+                            <span class="text-xs text-slate-500">PDF · 2,1 MB</span>
+                            <div x-show="editMode" x-cloak class="flex items-center gap-1 ml-2">
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-emerald-400 text-slate-700">✏️ Renombrar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-amber-400 text-slate-700">📂 Re-categorizar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-rose-400 text-rose-600">🗄 Archivar</button>
+                            </div>
+                        </li>
+                        <li class="px-5 py-3 flex items-center gap-3 hover:bg-slate-50">
+                            <span class="text-2xl shrink-0">🎓</span>
+                            <div class="flex-1">
+                                <p class="font-medium">Informe escolar histórico · Colegio EE Puentesaúco</p>
+                                <p class="text-xs text-slate-500">Cierre escolaridad 18 años · 2010</p>
+                            </div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Histórico</span>
+                            <span class="text-xs text-slate-500">PDF · 3,4 MB</span>
+                            <div x-show="editMode" x-cloak class="flex items-center gap-1 ml-2">
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-emerald-400 text-slate-700">✏️ Renombrar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-amber-400 text-slate-700">📂 Re-categorizar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-rose-400 text-rose-600">🗄 Archivar</button>
+                            </div>
+                        </li>
+                        <li class="px-5 py-3 flex items-center gap-3 hover:bg-slate-50">
+                            <span class="text-2xl shrink-0">📸</span>
+                            <div class="flex-1">
+                                <p class="font-medium">Carpeta de fotografías autorizadas · 2026</p>
+                                <p class="text-xs text-slate-500">14 fotos · uso interno y memoria anual</p>
+                            </div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Imágenes</span>
+                            <span class="text-xs text-slate-500">14 archivos</span>
+                            <div x-show="editMode" x-cloak class="flex items-center gap-1 ml-2">
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-emerald-400 text-slate-700">✏️ Renombrar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-amber-400 text-slate-700">📂 Re-categorizar</button>
+                                <button type="button" class="text-[11px] px-2 py-1 rounded border border-slate-300 hover:border-rose-400 text-rose-600">🗄 Archivar</button>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="px-5 py-3 border-t border-slate-200 flex items-center justify-between text-xs">
+                        <p class="text-slate-600"><strong>Mostrando 1 – 8</strong> de <strong>23 documentos</strong></p>
+                        <a href="#" class="text-emerald-700 hover:underline">Ver todos →</a>
+                    </div>
+                </section>
+
+                <!-- Aviso retención -->
+                <section class="rounded-xl bg-slate-50 border border-slate-200 p-3 text-xs text-slate-600">
+                    <p>🗄 <strong>Política de retención RGPD</strong>: los documentos del expediente se conservan según el plazo legal específico de cada tipo (consentimientos: 5 años tras finalización del servicio; documentación médica: 15 años; resoluciones judiciales: permanente). Cada subida queda registrada en la bitácora.</p>
+                </section>
+
+            </div>
+
+            <!-- Comparativa -->
+            <div class="mt-4 p-4 rounded-xl bg-slate-100 text-xs text-slate-600">
+                <p class="font-semibold text-slate-800 mb-1">📐 Cambios respecto a persona-detalle.html (versión anterior)</p>
+                <ul class="space-y-0.5 list-disc list-inside">
+                    <li>Antes: cabecera + 5 pestañas + bloques sueltos repartidos.</li>
+                    <li>Ahora: cabecera con todos los datos esenciales + <strong>6 tabs claras</strong>. La pestaña <em>Resumen</em> muestra lo importante sin obligar a cambiar.</li>
+                    <li>Acciones contextuales arriba a la derecha: <strong>Editar · Cita · Intervención</strong>. Ya no hace falta navegar a páginas separadas para crear.</li>
+                    <li>Alertas en panel lateral, siempre visibles mientras estés en la ficha.</li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<!-- Búsqueda Ctrl+K -->
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, cita..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

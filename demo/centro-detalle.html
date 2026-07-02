@@ -1,0 +1,1438 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residencia Fuentecillas · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Prototipo nueva interfaz</span> · datos ficticios · sólo para validación</div>
+
+<div class="flex min-h-screen" x-data="{ userMenu: false, tab: location.hash === '#equipo' ? 'equipo' : 'mapa' }">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100 relative">
+            <button @click="userMenu = !userMenu" class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">Federico Martínez</p>
+                    <p class="text-[10px] text-slate-500 truncate">Gerencia</p>
+                </div>
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div x-show="userMenu" x-cloak @click.outside="userMenu = false" class="absolute bottom-full left-3 right-3 mb-1 rounded-lg border border-slate-200 bg-white shadow-lg py-1 z-20">
+                <a href="#" class="block px-3 py-1.5 text-sm text-emerald-700 hover:bg-emerald-50 font-medium">⭐ Mis personas</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Mi perfil</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Preferencias</a>
+                <div class="border-t border-slate-100 my-1"></div>
+                <a href="#" class="block px-3 py-1.5 text-sm text-rose-700 hover:bg-rose-50">Cerrar sesión</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
+    <main class="flex-1 min-w-0">
+
+        <!-- Breadcrumb + acciones contextuales -->
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a>
+                <span class="mx-1">›</span>
+                <a href="centros.html" class="hover:text-emerald-700">Centros</a>
+                <span class="mx-1">›</span>
+                <span class="text-slate-700">Residencia Fuentecillas</span>
+            </nav>
+            <div class="flex items-center gap-2 shrink-0">
+                <button class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-emerald-400">⤓ Informe del centro</button>
+            </div>
+        </div>
+
+        <div class="px-8 py-6 max-w-6xl space-y-6">
+
+            <!-- Cabecera del centro -->
+            <header class="flex items-start justify-between gap-4 flex-wrap">
+                <div>
+                    <p class="text-xs uppercase tracking-widest text-emerald-700 font-semibold">★ Centro piloto ÁGORA</p>
+                    <h1 class="mt-1 text-2xl font-semibold tracking-tight">Residencia Fuentecillas</h1>
+                    <div class="mt-1 flex items-center gap-2 flex-wrap text-sm text-slate-500">
+                        <span>📍 C/ Fuentecillas s/n, 09001 Burgos</span>
+                        <span class="text-slate-300">·</span>
+                        <span>Discapacidad intelectual</span>
+                        <span class="text-slate-300">·</span>
+                        <span class="inline-flex items-center gap-1"><span class="inline-block w-2 h-2 rounded-full bg-indigo-500"></span>Residencia</span>
+                        <span class="text-slate-300">+</span>
+                        <span class="inline-flex items-center gap-1"><span class="inline-block w-2 h-2 rounded-full bg-amber-500"></span>Centro de día</span>
+                        <span class="text-slate-300">·</span>
+                        <span>Fundación Aspanias Burgos</span>
+                    </div>
+                    <!-- Botones de acceso rápido al equipo -->
+                    <div class="mt-3 flex items-center gap-2 flex-wrap">
+                        <button @click="tab = 'equipo'" class="px-3 py-1.5 text-xs rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">🧑‍💼 Equipo del centro (14)</button>
+                        <a href="vacaciones.html" class="px-3 py-1.5 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-medium">🏖 Vacaciones</a>
+                        <a href="turnos.html" class="px-3 py-1.5 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-medium">🕒 Turnos</a>
+                        <a href="ratio-centro.html" class="px-3 py-1.5 text-xs rounded-lg border border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 font-medium">⚖ Ratio del centro</a>
+                        <a href="cuadrante-motor.html" class="px-3 py-1.5 text-xs rounded-lg border border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 font-medium">🚀 Motor cuadrantes</a>
+                        <a href="calendario-laboral.html" class="px-3 py-1.5 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-medium">📆 Calendario laboral</a>
+                        <a href="profesionales.html" class="px-3 py-1.5 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-medium">Ver plantilla completa →</a>
+                    </div>
+                </div>
+            </header>
+
+            <!-- KPIs del centro desglosados por modalidad -->
+            <section class="grid gap-3 grid-cols-2 md:grid-cols-4">
+                <div class="rounded-xl border-l-4 border-indigo-500 border border-slate-200 bg-white p-4">
+                    <p class="text-xs text-indigo-700 font-medium">🛏 Plazas residenciales</p>
+                    <p class="mt-0.5 text-2xl font-light"><span class="font-semibold">29</span> <span class="text-sm text-slate-400">/ 30</span></p>
+                    <p class="text-[10px] text-indigo-700">1 libre · residentes 24h</p>
+                </div>
+                <div class="rounded-xl border-l-4 border-amber-500 border border-slate-200 bg-white p-4">
+                    <p class="text-xs text-amber-700 font-medium">🌞 Plazas centro de día</p>
+                    <p class="mt-0.5 text-2xl font-light"><span class="font-semibold">19</span> <span class="text-sm text-slate-400">/ 20</span></p>
+                    <p class="text-[10px] text-amber-700">1 libre · L-V 8:00-18:00</p>
+                </div>
+                <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                    <p class="text-xs text-emerald-700">% PV realizado</p>
+                    <p class="mt-0.5 text-2xl font-light text-emerald-800">97 %</p>
+                    <p class="text-[10px] text-emerald-700">46 de 48 al día</p>
+                </div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4">
+                    <p class="text-xs text-slate-500">Citas próx. (7 días)</p>
+                    <p class="mt-0.5 text-2xl font-light">23</p>
+                    <p class="text-[10px] text-slate-400">próxima: hoy 10:00</p>
+                </div>
+            </section>
+
+            <!-- Bloque destacado · FIS — Incidencias del centro (informe FIS v1.0) -->
+            <section class="rounded-xl border-2 border-emerald-600 overflow-hidden shadow-sm">
+                <div class="bg-emerald-600 px-5 py-3 text-white flex items-center justify-between flex-wrap gap-3">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">🚨</span>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-widest text-emerald-100 font-semibold">Incidencias del centro · FIS</p>
+                            <p class="text-sm font-bold">Fichas de Intervención y Seguimiento</p>
+                        </div>
+                        <span class="ml-2 px-2.5 py-0.5 rounded-full bg-white text-emerald-700 font-bold text-sm" title="Incidencias abiertas">3 abiertas</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <a href="nueva-ficha-fis.html" class="rounded-lg bg-white text-emerald-700 px-4 py-1.5 text-sm font-semibold hover:bg-emerald-50">+ Nueva ficha FIS</a>
+                        <a href="incidencias-fis.html" class="rounded-lg border border-white text-white px-3 py-1.5 text-sm hover:bg-emerald-700/40">Ver bandeja (3)</a>
+                    </div>
+                </div>
+                <ul class="divide-y divide-slate-100 bg-white">
+                    <li class="px-5 py-2.5 flex items-center gap-3 hover:bg-slate-50">
+                        <span class="text-[10px] text-slate-500 w-20 shrink-0">Hoy · 09:32</span>
+                        <span class="flex-1 text-sm">Salud · Detección, Incidente — Caída leve en zona de comedor (Marta González)</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 font-medium">Abierta</span>
+                    </li>
+                    <li class="px-5 py-2.5 flex items-center gap-3 hover:bg-slate-50">
+                        <span class="text-[10px] text-slate-500 w-20 shrink-0">Ayer · 18:10</span>
+                        <span class="flex-1 text-sm">Caída en comedor — seguimiento (José Luis Sanz)</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-medium">En curso</span>
+                    </li>
+                    <li class="px-5 py-2.5 flex items-center gap-3 hover:bg-slate-50">
+                        <span class="text-[10px] text-slate-500 w-20 shrink-0">01/06</span>
+                        <span class="flex-1 text-sm">Incidencia catering — devolución bandeja</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">Cerrada</span>
+                    </li>
+                </ul>
+                <div class="bg-slate-50 px-5 py-2 text-[11px] text-slate-500 flex items-center justify-between">
+                    <span>🟩 Variante <strong>residencia</strong> · turno + usuario obligatorios</span>
+                    <a href="incidencias-fis.html" class="text-emerald-700 hover:underline">Ver las 47 del mes →</a>
+                </div>
+            </section>
+
+
+            <!-- ⭐ NÚCLEO: Personas del centro (lo que más se usa) -->
+            <section class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                <div class="px-5 py-4 border-b border-slate-200 flex items-end justify-between flex-wrap gap-3">
+                    <div>
+                        <h2 class="text-lg font-semibold">Personas atendidas en este centro</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">48 personas · ordenadas alfabéticamente por apellidos</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs text-slate-600 hover:border-emerald-400">⤓ Excel</button>
+                        <a href="#" class="rounded-lg bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">+ Nueva persona</a>
+                    </div>
+                </div>
+
+                <!-- Pestañas por modalidad -->
+                <div class="px-5 pt-3 border-b border-slate-100 flex items-center gap-1" x-data="{ mod: 'todas' }">
+                    <button @click="mod = 'todas'" :class="mod === 'todas' ? 'bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-100'" class="px-3 py-1.5 rounded-t-lg text-sm font-medium">Todas <span class="ml-1 text-[10px] opacity-70">48</span></button>
+                    <button @click="mod = 'res'" :class="mod === 'res' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-100'" class="px-3 py-1.5 rounded-t-lg text-sm font-medium">🛏 Residencia <span class="ml-1 text-[10px] opacity-70">29</span></button>
+                    <button @click="mod = 'cd'" :class="mod === 'cd' ? 'bg-amber-600 text-white' : 'text-slate-600 hover:bg-slate-100'" class="px-3 py-1.5 rounded-t-lg text-sm font-medium">🌞 Centro de día <span class="ml-1 text-[10px] opacity-70">19</span></button>
+                </div>
+
+                <div class="px-5 py-3 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2 flex-wrap">
+                    <div class="relative flex-1 min-w-[240px]">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">🔎</span>
+                        <input type="text" placeholder="Buscar por nombre, código o NIF..." class="w-full pl-10 pr-3 py-2 rounded-lg border border-slate-300 bg-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none text-sm">
+                    </div>
+                    <select class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm">
+                        <option>Todos los estados PV</option><option>Al día</option><option>Próx. a vencer</option><option>Atrasado</option>
+                    </select>
+                    <select class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm">
+                        <option>Todas las gestoras</option><option>Lucía Martínez (27)</option><option>Pilar Renedo (12)</option><option>Daniel Alonso (9)</option>
+                    </select>
+                </div>
+
+                <div class="px-5 py-2 border-b border-slate-100 flex items-center gap-2 flex-wrap text-xs">
+                    <span class="text-slate-500">Filtros rápidos:</span>
+                    <a href="#" class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">⭐ Mi cartera (27)</a>
+                    <a href="#" class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200">Con cita esta semana (11)</a>
+                    <a href="#" class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">PV por vencer (2)</a>
+                    <a href="#" class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Con 2+ servicios (8)</a>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                            <tr>
+                                <th class="px-5 py-2 text-left font-medium">Persona</th>
+                                <th class="px-5 py-2 text-left font-medium">Código</th>
+                                <th class="px-5 py-2 text-left font-medium">Modalidad aquí</th>
+                                <th class="px-5 py-2 text-left font-medium">Edad</th>
+                                <th class="px-5 py-2 text-left font-medium">Gestor/a</th>
+                                <th class="px-5 py-2 text-left font-medium">Estado PV</th>
+                                <th class="px-5 py-2 text-right font-medium">Próx. cita</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer" onclick="location.href='persona-detalle.html'">
+                                <td class="px-5 py-2.5 font-medium"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-[10px] font-semibold">MG</div>González Pérez, Marta <span title="También en CD Puentesaúco" class="text-[10px] text-blue-700 ml-1">+1 servicio</span></div></td>
+                                <td class="px-5 py-2.5 text-xs text-slate-500 font-mono">FUE-2026-00001</td>
+                                <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">🛏 Residencia</span></td>
+                                <td class="px-5 py-2.5 text-slate-600">34</td>
+                                <td class="px-5 py-2.5 text-slate-600">Lucía Martínez</td>
+                                <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Vence 15/06</span></td>
+                                <td class="px-5 py-2.5 text-right text-xs text-slate-500">Hoy 10:00</td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer" onclick="location.href='persona-detalle.html'">
+                                <td class="px-5 py-2.5 font-medium"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-[10px] font-semibold">AM</div>Moreno Pascual, Ana</div></td>
+                                <td class="px-5 py-2.5 text-xs text-slate-500 font-mono">FUE-2026-00003</td>
+                                <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">🌞 Centro de día</span></td>
+                                <td class="px-5 py-2.5 text-slate-600">28</td>
+                                <td class="px-5 py-2.5 text-slate-600">Pilar Renedo</td>
+                                <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-5 py-2.5 text-right text-xs text-slate-500">—</td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer" onclick="location.href='persona-detalle.html'">
+                                <td class="px-5 py-2.5 font-medium"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-[10px] font-semibold">CR</div>Rodríguez García, Carlos <span title="También en Áreas de Vivienda" class="text-[10px] text-blue-700 ml-1">+1 servicio</span></div></td>
+                                <td class="px-5 py-2.5 text-xs text-slate-500 font-mono">FUE-2026-00004</td>
+                                <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">🌞 Centro de día</span></td>
+                                <td class="px-5 py-2.5 text-slate-600">41</td>
+                                <td class="px-5 py-2.5 text-slate-600">Daniel Alonso</td>
+                                <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-5 py-2.5 text-right text-xs text-slate-500">Vie 09:15</td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer" onclick="location.href='persona-detalle.html'">
+                                <td class="px-5 py-2.5 font-medium"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-[10px] font-semibold">IS</div>Sáez de Antón, Inés</div></td>
+                                <td class="px-5 py-2.5 text-xs text-slate-500 font-mono">FUE-2026-00005</td>
+                                <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">🛏 Residencia</span></td>
+                                <td class="px-5 py-2.5 text-slate-600">37</td>
+                                <td class="px-5 py-2.5 text-slate-600">Lucía Martínez</td>
+                                <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-5 py-2.5 text-right text-xs text-slate-500">Hoy 16:00</td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer" onclick="location.href='persona-detalle.html'">
+                                <td class="px-5 py-2.5 font-medium"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-[10px] font-semibold">JL</div>Sanz Ibáñez, José Luis</div></td>
+                                <td class="px-5 py-2.5 text-xs text-slate-500 font-mono">FUE-2026-00002</td>
+                                <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">🛏 Residencia</span></td>
+                                <td class="px-5 py-2.5 text-slate-600">52</td>
+                                <td class="px-5 py-2.5 text-slate-600">Lucía Martínez</td>
+                                <td class="px-5 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-5 py-2.5 text-right text-xs text-slate-500">Jue 12:30</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="px-5 py-3 border-t border-slate-200 flex items-center justify-between flex-wrap gap-3 text-xs">
+                    <p class="text-slate-600">
+                        <strong class="text-slate-900">Mostrando 1 – 5</strong> de <strong class="text-slate-900">48 personas</strong> · ordenadas A → Z
+                    </p>
+                    <div class="flex items-center gap-1" x-data="{ paginaCentro: 1 }">
+                        <button @click="paginaCentro = 1" :disabled="paginaCentro === 1" :class="paginaCentro === 1 ? 'text-slate-300' : 'text-slate-600 hover:border-emerald-400'" class="px-2 py-1 rounded border border-slate-300" title="Primera">«</button>
+                        <button @click="if (paginaCentro > 1) paginaCentro--" :class="paginaCentro === 1 ? 'text-slate-300' : 'text-slate-600 hover:border-emerald-400'" class="px-2 py-1 rounded border border-slate-300">‹</button>
+                        <button @click="paginaCentro = 1" :class="paginaCentro === 1 ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300'" class="w-7 h-7 rounded font-medium">1</button>
+                        <button @click="paginaCentro = 2" :class="paginaCentro === 2 ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 hover:border-emerald-400'" class="w-7 h-7 rounded font-medium">2</button>
+                        <button @click="paginaCentro = 3" :class="paginaCentro === 3 ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 hover:border-emerald-400'" class="w-7 h-7 rounded font-medium">3</button>
+                        <button @click="paginaCentro = 4" :class="paginaCentro === 4 ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 hover:border-emerald-400'" class="w-7 h-7 rounded font-medium">4</button>
+                        <span class="px-1 text-slate-400">…</span>
+                        <button @click="paginaCentro = 10" :class="paginaCentro === 10 ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 hover:border-emerald-400'" class="w-7 h-7 rounded font-medium">10</button>
+                        <button @click="paginaCentro++" class="px-2 py-1 rounded border border-slate-300 text-slate-600 hover:border-emerald-400">›</button>
+                        <button @click="paginaCentro = 10" class="px-2 py-1 rounded border border-slate-300 text-slate-600 hover:border-emerald-400" title="Última">»</button>
+                    </div>
+                </div>
+            </section>
+
+                        <!-- Salto alfabético dentro del centro -->
+            <section class="rounded-xl border border-slate-200 bg-white p-3">
+                <div class="flex items-center gap-3 flex-wrap">
+                    <p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold shrink-0">Saltar a apellido:</p>
+                    <div class="flex flex-wrap gap-1">
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">A</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">B</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">C</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">D</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">E</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">F</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-emerald-700 text-white">G</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-slate-50 border border-slate-100 text-slate-300 cursor-not-allowed">H</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">I</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-slate-50 border border-slate-100 text-slate-300 cursor-not-allowed">J</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-slate-50 border border-slate-100 text-slate-300 cursor-not-allowed">K</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-slate-50 border border-slate-100 text-slate-300 cursor-not-allowed">L</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">M</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">N</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-slate-50 border border-slate-100 text-slate-300 cursor-not-allowed">Ñ</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">O</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">P</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-slate-50 border border-slate-100 text-slate-300 cursor-not-allowed">Q</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">R</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">S</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">T</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-slate-50 border border-slate-100 text-slate-300 cursor-not-allowed">U</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">V</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-slate-50 border border-slate-100 text-slate-300 cursor-not-allowed">W</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">X</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-slate-50 border border-slate-100 text-slate-300 cursor-not-allowed">Y</button>
+                        <button class="w-7 h-7 rounded font-medium text-[11px] bg-slate-50 border border-slate-100 text-slate-300 cursor-not-allowed">Z</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección secundaria: tabs (Mapa / Equipo / Información / Avisos / Documentos) -->
+            <section class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                <div class="border-b border-slate-200 flex items-center gap-1 px-2 overflow-x-auto">
+                    <button @click="tab = 'mapa'" :class="tab === 'mapa' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">🛏 Mapa de ocupación</button>
+                    <button @click="tab = 'equipo'" :class="tab === 'equipo' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Equipo (14)</button>
+                    <button @click="tab = 'info'" :class="tab === 'info' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Información del centro</button>
+                    <button @click="tab = 'avisos'" :class="tab === 'avisos' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Avisos (2)</button>
+                    <button @click="tab = 'docs'" :class="tab === 'docs' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Documentos</button>
+                </div>
+
+                <!-- Tab Mapa de ocupación (default para residencias) -->
+                <div x-show="tab === 'mapa'" class="p-5" x-data="mapaOcupacion()">
+                    <div class="flex items-start justify-between flex-wrap gap-3 mb-4">
+                        <div>
+                            <h3 class="font-semibold">Mapa de ocupación · Residencia</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">30 plazas residenciales · 29 ocupadas · 1 libre · pulsa cualquier plaza para ver detalle</p>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded bg-emerald-500"></span>Ocupada</span>
+                            <span class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded bg-blue-300"></span>Libre</span>
+                            <span class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded bg-amber-400"></span>Reserva</span>
+                            <span class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded bg-slate-200"></span>Fuera de servicio</span>
+                        </div>
+                    </div>
+
+                    <!-- Modulos -->
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex items-baseline justify-between mb-2">
+                                <h4 class="text-xs font-semibold uppercase tracking-widest text-slate-700">Módulo A · Planta baja</h4>
+                                <p class="text-xs text-slate-500">10 plazas · 10 ocupadas</p>
+                            </div>
+                            <div class="grid gap-2 grid-cols-5">
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('A-11-1')"><p class="text-[10px] text-slate-500">Hab. 11 · 1</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">José Luis Sanz</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('A-11-2')"><p class="text-[10px] text-slate-500">Hab. 11 · 2</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Fernando Arnaiz</p></div>
+                                <div class="rounded-md border-2 border-emerald-500 bg-emerald-100 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('A-12-1')"><p class="text-[10px] text-emerald-700">Hab. 12 · 1</p>
+                        <p class="text-[11px] font-semibold text-emerald-900 mt-0.5 leading-tight">Marta González</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('A-12-2')"><p class="text-[10px] text-slate-500">Hab. 12 · 2</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Inés Sáez</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('A-13')"><p class="text-[10px] text-slate-500">Hab. 13 · indiv.</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Esther Manzanedo</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('A-14-1')"><p class="text-[10px] text-slate-500">Hab. 14 · 1</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Roberto Martín</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('A-14-2')"><p class="text-[10px] text-slate-500">Hab. 14 · 2</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">David Domínguez</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('A-15-1')"><p class="text-[10px] text-slate-500">Hab. 15 · 1</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Ana Moreno</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('A-15-2')"><p class="text-[10px] text-slate-500">Hab. 15 · 2</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Teresa Cuadrado</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('A-16')"><p class="text-[10px] text-slate-500">Hab. 16 · indiv.</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Pablo Vergara</p></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-baseline justify-between mb-2">
+                                <h4 class="text-xs font-semibold uppercase tracking-widest text-slate-700">Módulo B · Primera planta</h4>
+                                <p class="text-xs text-slate-500">10 plazas · 10 ocupadas</p>
+                            </div>
+                            <div class="grid gap-2 grid-cols-5">
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('B-21-1')"><p class="text-[10px] text-slate-500">Hab. 21 · 1</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Carlos Rodríguez</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('B-21-2')"><p class="text-[10px] text-slate-500">Hab. 21 · 2</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Víctor López</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('B-22-1')"><p class="text-[10px] text-slate-500">Hab. 22 · 1</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Natalia Bermejo</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('B-22-2')"><p class="text-[10px] text-slate-500">Hab. 22 · 2</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Sonia Olmedo</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('B-23')"><p class="text-[10px] text-slate-500">Hab. 23 · indiv.</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Javier Ruiz</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('B-24-1')"><p class="text-[10px] text-slate-500">Hab. 24 · 1</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Luis Aguado</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('B-24-2')"><p class="text-[10px] text-slate-500">Hab. 24 · 2</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Claudia Manzano</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('B-25-1')"><p class="text-[10px] text-slate-500">Hab. 25 · 1</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Eduardo Gil</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('B-25-2')"><p class="text-[10px] text-slate-500">Hab. 25 · 2</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Raquel Torres</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('B-26')"><p class="text-[10px] text-slate-500">Hab. 26 · indiv.</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Pedro García</p></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-baseline justify-between mb-2">
+                                <h4 class="text-xs font-semibold uppercase tracking-widest text-slate-700">Módulo C · Segunda planta</h4>
+                                <p class="text-xs text-slate-500">10 plazas · 9 ocupadas · 1 libre</p>
+                            </div>
+                            <div class="grid gap-2 grid-cols-5">
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('C-31-1')"><p class="text-[10px] text-slate-500">Hab. 31 · 1</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Fátima Tudela</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('C-31-2')"><p class="text-[10px] text-slate-500">Hab. 31 · 2</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Roberto Cárcamo</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('C-32-1')"><p class="text-[10px] text-slate-500">Hab. 32 · 1</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">María Iglesias</p></div>
+                                <div class="rounded-md border-2 border-dashed border-blue-300 bg-blue-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('C-32-2')"><p class="text-[10px] text-blue-700">Hab. 32 · 2</p>
+                        <p class="text-xs font-bold text-blue-700 mt-0.5">libre</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('C-33')"><p class="text-[10px] text-slate-500">Hab. 33 · indiv.</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Andrea Bañuelos</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('C-34-1')"><p class="text-[10px] text-slate-500">Hab. 34 · 1</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Javier Velasco</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('C-34-2')"><p class="text-[10px] text-slate-500">Hab. 34 · 2</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Beatriz Reyes</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('C-35-1')"><p class="text-[10px] text-slate-500">Hab. 35 · 1</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Noelia Prieto</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('C-35-2')"><p class="text-[10px] text-slate-500">Hab. 35 · 2</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Gabriel Ortega</p></div>
+                                <div class="rounded-md border border-emerald-300 bg-emerald-50 p-2 text-center cursor-pointer hover:shadow min-h-[64px] flex flex-col justify-center" @click="abrirPlaza('C-36')"><p class="text-[10px] text-slate-500">Hab. 36 · indiv.</p>
+                        <p class="text-[11px] font-medium text-emerald-900 mt-0.5 leading-tight">Xavi Vázquez</p></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <p>Pulsa cualquier plaza para ver datos de la persona y movimientos</p>
+                        <a href="mapa-ocupacion.html" class="text-emerald-700 hover:underline">Ver mapa completo →</a>
+                    </div>
+
+                    <!-- Panel lateral (drawer) con datos de la cama seleccionada -->
+                    <div x-show="plazaSeleccionada !== null"
+                         x-cloak
+                         @keydown.escape.window="cerrarPanel()"
+                         class="fixed inset-0 z-40 flex justify-end"
+                         @click.self="cerrarPanel()">
+                        <!-- Backdrop -->
+                        <div class="absolute inset-0 bg-slate-900/30" @click="cerrarPanel()"></div>
+                        <!-- Drawer -->
+                        <div class="relative w-full max-w-md bg-white shadow-2xl overflow-y-auto"
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="translate-x-full"
+                             x-transition:enter-end="translate-x-0">
+
+                            <!-- Cabecera del drawer -->
+                            <div class="sticky top-0 bg-white border-b border-slate-200 px-5 py-3 flex items-center justify-between">
+                                <div>
+                                    <p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Plaza</p>
+                                    <h3 class="font-semibold text-base">Módulo <span x-text="plazaSeleccionada?.modulo"></span> · Hab. <span x-text="plazaSeleccionada?.habitacion"></span> · Cama <span x-text="plazaSeleccionada?.cama"></span></h3>
+                                </div>
+                                <button @click="cerrarPanel()" class="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-500">✕</button>
+                            </div>
+
+                            <!-- Plaza ocupada -->
+                            <div x-show="!plazaSeleccionada?.libre" class="p-5 space-y-5">
+                                <!-- Datos persona -->
+                                <div>
+                                    <p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold mb-2">Persona ocupante</p>
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg font-semibold shrink-0" x-text="plazaSeleccionada?.iniciales"></div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-semibold text-slate-900" x-text="plazaSeleccionada?.nombre"></p>
+                                            <p class="text-xs text-slate-500"><span x-text="plazaSeleccionada?.codigo"></span> · <span x-text="plazaSeleccionada?.edad"></span> años</p>
+                                            <a href="persona-detalle.html" class="text-xs text-emerald-700 hover:underline mt-1 inline-block">Ver ficha completa →</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-3 grid grid-cols-2 gap-x-4 gap-y-1.5 text-xs">
+                                        <div><span class="text-slate-500">Gestor/a:</span> <span x-text="plazaSeleccionada?.gestora"></span></div>
+                                        <div><span class="text-slate-500">Ingreso:</span> <span x-text="plazaSeleccionada?.ingreso"></span></div>
+                                    </div>
+
+                                    <template x-if="plazaSeleccionada?.alertas?.length">
+                                        <div class="mt-3 p-2 rounded-md bg-amber-50 border border-amber-200">
+                                            <template x-for="a in plazaSeleccionada.alertas">
+                                                <p class="text-xs text-amber-800" x-text="a"></p>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </div>
+
+                                <!-- Timeline movimientos -->
+                                <div>
+                                    <p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold mb-2">Movimientos en esta plaza</p>
+                                    <ol class="space-y-3 relative before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200">
+                                        <template x-for="m in plazaSeleccionada?.movimientos || []" :key="m.fecha + m.texto">
+                                            <li class="flex items-start gap-3 relative pl-1">
+                                                <span class="w-4 h-4 rounded-full border-2 border-white shrink-0 mt-0.5 z-10"
+                                                      :class="{
+                                                          'bg-emerald-500': m.tipo === 'alta',
+                                                          'bg-rose-500': m.tipo === 'baja',
+                                                          'bg-blue-500': m.tipo === 'cambio',
+                                                          'bg-amber-400': m.tipo === 'obs',
+                                                          'bg-purple-500': m.tipo === 'valoracion',
+                                                          'bg-slate-400': m.tipo === 'intervencion'
+                                                      }"></span>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-[11px] text-slate-500" x-text="m.fecha"></p>
+                                                    <p class="text-sm text-slate-800" x-text="m.texto"></p>
+                                                </div>
+                                            </li>
+                                        </template>
+                                    </ol>
+                                </div>
+
+                                <!-- Acciones -->
+                                <div class="pt-4 border-t border-slate-100 space-y-2">
+                                    <button class="w-full rounded-lg bg-emerald-700 text-white px-3 py-2 text-sm font-medium hover:bg-emerald-800">+ Registrar movimiento</button>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <button class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-700 hover:border-emerald-400">Reasignar plaza</button>
+                                        <button class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-700 hover:border-emerald-400">Fuera de servicio</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Plaza libre -->
+                            <div x-show="plazaSeleccionada?.libre" x-cloak class="p-5 space-y-5">
+                                <div class="rounded-lg bg-blue-50 border border-blue-200 p-4">
+                                    <p class="text-sm font-semibold text-blue-900">Plaza disponible</p>
+                                    <p class="text-xs text-blue-700 mt-1">Esta cama está libre y puede asignarse a una nueva persona.</p>
+                                </div>
+
+                                <div>
+                                    <p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold mb-2">Últimos movimientos</p>
+                                    <ol class="space-y-3 relative before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200">
+                                        <template x-for="m in plazaSeleccionada?.movimientos || []" :key="m.fecha + m.texto">
+                                            <li class="flex items-start gap-3 relative pl-1">
+                                                <span class="w-4 h-4 rounded-full border-2 border-white shrink-0 mt-0.5 z-10"
+                                                      :class="{
+                                                          'bg-rose-500': m.tipo === 'baja',
+                                                          'bg-amber-400': m.tipo === 'obs'
+                                                      }"></span>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-[11px] text-slate-500" x-text="m.fecha"></p>
+                                                    <p class="text-sm text-slate-800" x-text="m.texto"></p>
+                                                </div>
+                                            </li>
+                                        </template>
+                                    </ol>
+                                </div>
+
+                                <div class="pt-4 border-t border-slate-100">
+                                    <button class="w-full rounded-lg bg-emerald-700 text-white px-3 py-2 text-sm font-medium hover:bg-emerald-800">+ Asignar persona</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                    function mapaOcupacion() {
+                        return {
+                            plazaSeleccionada: null,
+                            datos: {
+        "A-11-1": {
+                "iniciales": "JL",
+                "nombre": "Sanz Ibáñez, José Luis",
+                "edad": 52,
+                "codigo": "FUE-2026-00002",
+                "gestora": "Lucía Martínez",
+                "ingreso": "12/03/2019",
+                "modulo": "A",
+                "habitacion": "11",
+                "cama": "1",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "12/03/2019",
+                                "tipo": "alta",
+                                "texto": "Alta inicial · procedente de domicilio familiar"
+                        },
+                        {
+                                "fecha": "08/06/2021",
+                                "tipo": "cambio",
+                                "texto": "Cambio temporal a hab. 13 (mantenimiento sanitario hab. 11)"
+                        },
+                        {
+                                "fecha": "22/06/2021",
+                                "tipo": "cambio",
+                                "texto": "Retorno a hab. 11 · cama 1"
+                        },
+                        {
+                                "fecha": "15/12/2024",
+                                "tipo": "obs",
+                                "texto": "Renovación de mobiliario"
+                        },
+                        {
+                                "fecha": "12/01/2026",
+                                "tipo": "valoracion",
+                                "texto": "Revisión PV anual realizada"
+                        }
+                ]
+        },
+        "A-11-2": {
+                "iniciales": "FA",
+                "nombre": "Arnaiz Tudanca, Fernando",
+                "edad": 38,
+                "codigo": "FUE-2026-00008",
+                "gestora": "Lucía Martínez",
+                "ingreso": "04/09/2020",
+                "modulo": "A",
+                "habitacion": "11",
+                "cama": "2",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "04/09/2020",
+                                "tipo": "alta",
+                                "texto": "Alta inicial · procedente de domicilio familiar"
+                        },
+                        {
+                                "fecha": "10/04/2024",
+                                "tipo": "obs",
+                                "texto": "Compañero de cuarto cambiado · convive con José Luis"
+                        }
+                ]
+        },
+        "A-12-1": {
+                "iniciales": "MG",
+                "nombre": "González Pérez, Marta",
+                "edad": 34,
+                "codigo": "FUE-2026-00001",
+                "gestora": "Lucía Martínez",
+                "ingreso": "12/09/2018",
+                "modulo": "A",
+                "habitacion": "12",
+                "cama": "1",
+                "alertas": [
+                        "⚠ PV vence 15/06"
+                ],
+                "principal": true,
+                "movimientos": [
+                        {
+                                "fecha": "12/09/2018",
+                                "tipo": "alta",
+                                "texto": "Alta inicial · procedente de domicilio familiar"
+                        },
+                        {
+                                "fecha": "04/03/2019",
+                                "tipo": "cambio",
+                                "texto": "Cambio interno cama 1 → cama 2 dentro de hab. 12"
+                        },
+                        {
+                                "fecha": "10/10/2020",
+                                "tipo": "cambio",
+                                "texto": "Retorno a cama 1 (preferencia personal)"
+                        },
+                        {
+                                "fecha": "01/02/2024",
+                                "tipo": "obs",
+                                "texto": "Alta complementaria CD Puentesaúco"
+                        },
+                        {
+                                "fecha": "12/01/2026",
+                                "tipo": "valoracion",
+                                "texto": "Revisión PV anual realizada"
+                        },
+                        {
+                                "fecha": "28/05/2026",
+                                "tipo": "intervencion",
+                                "texto": "Última intervención psicología (Daniel Alonso)"
+                        }
+                ]
+        },
+        "A-12-2": {
+                "iniciales": "IS",
+                "nombre": "Sáez de Antón, Inés",
+                "edad": 37,
+                "codigo": "FUE-2026-00005",
+                "gestora": "Lucía Martínez",
+                "ingreso": "20/05/2019",
+                "modulo": "A",
+                "habitacion": "12",
+                "cama": "2",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "20/05/2019",
+                                "tipo": "alta",
+                                "texto": "Alta inicial · traslado desde Residencia Quintanadueñas"
+                        },
+                        {
+                                "fecha": "10/06/2025",
+                                "tipo": "obs",
+                                "texto": "Visita familiar reanudada tras periodo de pausa"
+                        }
+                ]
+        },
+        "A-13": {
+                "iniciales": "EM",
+                "nombre": "Manzanedo Olalla, Esther",
+                "edad": 45,
+                "codigo": "FUE-2026-00007",
+                "gestora": "Daniel Alonso",
+                "ingreso": "01/06/2017",
+                "modulo": "A",
+                "habitacion": "13",
+                "cama": "indiv.",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "01/06/2017",
+                                "tipo": "alta",
+                                "texto": "Alta inicial · habitación individual por necesidad de tranquilidad"
+                        },
+                        {
+                                "fecha": "14/03/2023",
+                                "tipo": "obs",
+                                "texto": "Petición renovada de habitación individual confirmada"
+                        }
+                ]
+        },
+        "A-14-1": {
+                "iniciales": "RM",
+                "nombre": "Martín Cardeñoso, Roberto",
+                "edad": 29,
+                "codigo": "FUE-2026-00006",
+                "gestora": "Pilar Renedo",
+                "ingreso": "14/01/2022",
+                "modulo": "A",
+                "habitacion": "14",
+                "cama": "1",
+                "alertas": [
+                        "⚠ PV vence 22/06"
+                ],
+                "movimientos": [
+                        {
+                                "fecha": "14/01/2022",
+                                "tipo": "alta",
+                                "texto": "Alta inicial · joven con familia colaboradora"
+                        }
+                ]
+        },
+        "A-14-2": {
+                "iniciales": "DC",
+                "nombre": "Domínguez Cuesta, David",
+                "edad": 31,
+                "codigo": "FUE-2026-00009",
+                "gestora": "Pilar Renedo",
+                "ingreso": "23/08/2021",
+                "modulo": "A",
+                "habitacion": "14",
+                "cama": "2",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "23/08/2021",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "A-15-1": {
+                "iniciales": "AM",
+                "nombre": "Moreno Pascual, Ana",
+                "edad": 28,
+                "codigo": "FUE-2026-00003",
+                "gestora": "Pilar Renedo",
+                "ingreso": "12/07/2020",
+                "modulo": "A",
+                "habitacion": "15",
+                "cama": "1",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "12/07/2020",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        },
+                        {
+                                "fecha": "20/04/2025",
+                                "tipo": "obs",
+                                "texto": "Modificación dieta por indicación médica"
+                        }
+                ]
+        },
+        "A-15-2": {
+                "iniciales": "TC",
+                "nombre": "Cuadrado Tobar, Teresa",
+                "edad": 56,
+                "codigo": "FUE-2026-00010",
+                "gestora": "Lucía Martínez",
+                "ingreso": "08/05/2015",
+                "modulo": "A",
+                "habitacion": "15",
+                "cama": "2",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "08/05/2015",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "A-16": {
+                "iniciales": "PV",
+                "nombre": "Vergara Pino, Pablo",
+                "edad": 42,
+                "codigo": "FUE-2026-00011",
+                "gestora": "Daniel Alonso",
+                "ingreso": "02/11/2018",
+                "modulo": "A",
+                "habitacion": "16",
+                "cama": "indiv.",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "02/11/2018",
+                                "tipo": "alta",
+                                "texto": "Alta inicial · habitación individual"
+                        }
+                ]
+        },
+        "B-21-1": {
+                "iniciales": "CR",
+                "nombre": "Rodríguez García, Carlos",
+                "edad": 41,
+                "codigo": "FUE-2026-00004",
+                "gestora": "Daniel Alonso",
+                "ingreso": "30/01/2020",
+                "modulo": "B",
+                "habitacion": "21",
+                "cama": "1",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "30/01/2020",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "B-21-2": {
+                "iniciales": "VL",
+                "nombre": "López Vela, Víctor",
+                "edad": 33,
+                "codigo": "FUE-2026-00012",
+                "gestora": "Pilar Renedo",
+                "ingreso": "17/04/2021",
+                "modulo": "B",
+                "habitacion": "21",
+                "cama": "2",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "17/04/2021",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "B-22-1": {
+                "iniciales": "NB",
+                "nombre": "Bermejo Núñez, Natalia",
+                "edad": 39,
+                "codigo": "FUE-2026-00013",
+                "gestora": "Lucía Martínez",
+                "ingreso": "05/08/2019",
+                "modulo": "B",
+                "habitacion": "22",
+                "cama": "1",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "05/08/2019",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "B-22-2": {
+                "iniciales": "SO",
+                "nombre": "Olmedo Sastre, Sonia",
+                "edad": 27,
+                "codigo": "FUE-2026-00014",
+                "gestora": "Pilar Renedo",
+                "ingreso": "11/02/2023",
+                "modulo": "B",
+                "habitacion": "22",
+                "cama": "2",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "11/02/2023",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "B-23": {
+                "iniciales": "JR",
+                "nombre": "Ruiz Jaen, Javier",
+                "edad": 48,
+                "codigo": "FUE-2026-00015",
+                "gestora": "Daniel Alonso",
+                "ingreso": "20/09/2016",
+                "modulo": "B",
+                "habitacion": "23",
+                "cama": "indiv.",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "20/09/2016",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "B-24-1": {
+                "iniciales": "LA",
+                "nombre": "Aguado Lara, Luis",
+                "edad": 35,
+                "codigo": "FUE-2026-00016",
+                "gestora": "Lucía Martínez",
+                "ingreso": "13/10/2020",
+                "modulo": "B",
+                "habitacion": "24",
+                "cama": "1",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "13/10/2020",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "B-24-2": {
+                "iniciales": "CM",
+                "nombre": "Manzano Castaño, Claudia",
+                "edad": 30,
+                "codigo": "FUE-2026-00017",
+                "gestora": "Pilar Renedo",
+                "ingreso": "06/03/2022",
+                "modulo": "B",
+                "habitacion": "24",
+                "cama": "2",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "06/03/2022",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "B-25-1": {
+                "iniciales": "EG",
+                "nombre": "Gil Estévez, Eduardo",
+                "edad": 43,
+                "codigo": "FUE-2026-00018",
+                "gestora": "Daniel Alonso",
+                "ingreso": "29/06/2018",
+                "modulo": "B",
+                "habitacion": "25",
+                "cama": "1",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "29/06/2018",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "B-25-2": {
+                "iniciales": "RT",
+                "nombre": "Torres Renedo, Raquel",
+                "edad": 36,
+                "codigo": "FUE-2026-00019",
+                "gestora": "Lucía Martínez",
+                "ingreso": "18/11/2019",
+                "modulo": "B",
+                "habitacion": "25",
+                "cama": "2",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "18/11/2019",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "B-26": {
+                "iniciales": "PG",
+                "nombre": "García Plaza, Pedro",
+                "edad": 51,
+                "codigo": "FUE-2026-00020",
+                "gestora": "Daniel Alonso",
+                "ingreso": "10/04/2014",
+                "modulo": "B",
+                "habitacion": "26",
+                "cama": "indiv.",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "10/04/2014",
+                                "tipo": "alta",
+                                "texto": "Alta inicial · residente más antiguo del módulo"
+                        }
+                ]
+        },
+        "C-31-1": {
+                "iniciales": "FT",
+                "nombre": "Tudela Fernández, Fátima",
+                "edad": 26,
+                "codigo": "FUE-2026-00021",
+                "gestora": "Pilar Renedo",
+                "ingreso": "01/02/2024",
+                "modulo": "C",
+                "habitacion": "31",
+                "cama": "1",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "01/02/2024",
+                                "tipo": "alta",
+                                "texto": "Alta inicial · joven incorporación"
+                        }
+                ]
+        },
+        "C-31-2": {
+                "iniciales": "RC",
+                "nombre": "Cárcamo Rojo, Roberto",
+                "edad": 44,
+                "codigo": "FUE-2026-00022",
+                "gestora": "Lucía Martínez",
+                "ingreso": "23/07/2017",
+                "modulo": "C",
+                "habitacion": "31",
+                "cama": "2",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "23/07/2017",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "C-32-1": {
+                "iniciales": "MI",
+                "nombre": "Iglesias Marín, María",
+                "edad": 32,
+                "codigo": "FUE-2026-00023",
+                "gestora": "Pilar Renedo",
+                "ingreso": "14/10/2021",
+                "modulo": "C",
+                "habitacion": "32",
+                "cama": "1",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "14/10/2021",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "C-32-2": {
+                "libre": true,
+                "modulo": "C",
+                "habitacion": "32",
+                "cama": "2",
+                "movimientos": [
+                        {
+                                "fecha": "05/05/2026",
+                                "tipo": "baja",
+                                "texto": "Baja de Andrés Pérez (traslado a Residencia Quintanadueñas a petición familiar)"
+                        },
+                        {
+                                "fecha": "06/05/2026",
+                                "tipo": "obs",
+                                "texto": "Limpieza profunda y revisión de mobiliario"
+                        },
+                        {
+                                "fecha": "10/05/2026",
+                                "tipo": "obs",
+                                "texto": "Plaza disponible · candidata pendiente (lista de espera)"
+                        }
+                ]
+        },
+        "C-33": {
+                "iniciales": "AB",
+                "nombre": "Bañuelos Antón, Andrea",
+                "edad": 47,
+                "codigo": "FUE-2026-00024",
+                "gestora": "Daniel Alonso",
+                "ingreso": "11/12/2015",
+                "modulo": "C",
+                "habitacion": "33",
+                "cama": "indiv.",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "11/12/2015",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "C-34-1": {
+                "iniciales": "JV",
+                "nombre": "Velasco Jiménez, Javier",
+                "edad": 38,
+                "codigo": "FUE-2026-00025",
+                "gestora": "Lucía Martínez",
+                "ingreso": "07/06/2018",
+                "modulo": "C",
+                "habitacion": "34",
+                "cama": "1",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "07/06/2018",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "C-34-2": {
+                "iniciales": "BR",
+                "nombre": "Reyes Bermúdez, Beatriz",
+                "edad": 40,
+                "codigo": "FUE-2026-00026",
+                "gestora": "Pilar Renedo",
+                "ingreso": "19/03/2020",
+                "modulo": "C",
+                "habitacion": "34",
+                "cama": "2",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "19/03/2020",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "C-35-1": {
+                "iniciales": "NP",
+                "nombre": "Prieto Núñez, Noelia",
+                "edad": 33,
+                "codigo": "FUE-2026-00027",
+                "gestora": "Lucía Martínez",
+                "ingreso": "25/09/2019",
+                "modulo": "C",
+                "habitacion": "35",
+                "cama": "1",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "25/09/2019",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "C-35-2": {
+                "iniciales": "GO",
+                "nombre": "Ortega Galán, Gabriel",
+                "edad": 29,
+                "codigo": "FUE-2026-00028",
+                "gestora": "Daniel Alonso",
+                "ingreso": "12/05/2022",
+                "modulo": "C",
+                "habitacion": "35",
+                "cama": "2",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "12/05/2022",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        },
+        "C-36": {
+                "iniciales": "XV",
+                "nombre": "Vázquez Xavier, Xavi",
+                "edad": 50,
+                "codigo": "FUE-2026-00029",
+                "gestora": "Daniel Alonso",
+                "ingreso": "08/01/2013",
+                "modulo": "C",
+                "habitacion": "36",
+                "cama": "indiv.",
+                "alertas": [],
+                "movimientos": [
+                        {
+                                "fecha": "08/01/2013",
+                                "tipo": "alta",
+                                "texto": "Alta inicial"
+                        }
+                ]
+        }
+},
+                            abrirPlaza(codigo) {
+                                this.plazaSeleccionada = this.datos[codigo];
+                            },
+                            cerrarPanel() {
+                                this.plazaSeleccionada = null;
+                            }
+                        }
+                    }
+                    </script>
+                </div>
+
+                <!-- Tab Equipo -->
+                <div x-show="tab === 'equipo'" x-cloak class="p-5">
+                    <!-- Barra de acceso al módulo Equipo -->
+                    <div class="mb-4 flex items-center justify-between p-3 rounded-lg border border-emerald-200 bg-emerald-50/60">
+                        <div>
+                            <p class="text-sm font-semibold text-emerald-900">🧑‍💼 Plantilla del centro</p>
+                            <p class="text-xs text-emerald-800">14 profesionales · 11 en activo · 1 vacaciones · 1 IT · 1 refuerzo</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="vacaciones.html" class="px-3 py-1.5 text-xs rounded border border-emerald-300 bg-white text-emerald-800 hover:bg-emerald-100 font-medium">🏖 Vacaciones</a>
+                            <a href="turnos.html" class="px-3 py-1.5 text-xs rounded border border-emerald-300 bg-white text-emerald-800 hover:bg-emerald-100 font-medium">🕒 Turnos</a>
+                            <a href="profesionales.html" class="px-3 py-1.5 text-xs rounded bg-emerald-700 text-white hover:bg-emerald-800 font-medium">Ver todos →</a>
+                        </div>
+                    </div>
+                    <div class="grid gap-3 md:grid-cols-2">
+                        <a href="profesional-detalle.html" class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-emerald-50/40 hover:border-emerald-200 transition"><div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-semibold shrink-0">LM</div><div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">Lucía Martínez Andrés</p><p class="text-xs text-slate-500 truncate">Coordinadora · Trabajadora Social</p></div><span class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">★ Coord.</span></a>
+                        <a href="profesional-detalle.html" class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-emerald-50/40 hover:border-emerald-200 transition"><div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-semibold shrink-0">AR</div><div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">Dr. Antonio Ruiz</p><p class="text-xs text-slate-500 truncate">Médico</p></div><span class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">En activo</span></a>
+                        <a href="profesional-detalle.html" class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-emerald-50/40 hover:border-emerald-200 transition"><div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-semibold shrink-0">MJ</div><div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">M. José Castro</p><p class="text-xs text-slate-500 truncate">DUE · Enfermería</p></div><span class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">En activo</span></a>
+                        <a href="profesional-detalle.html" class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-emerald-50/40 hover:border-emerald-200 transition"><div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-semibold shrink-0">DA</div><div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">Daniel Alonso</p><p class="text-xs text-slate-500 truncate">Psicólogo</p></div><span class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">En activo</span></a>
+                        <a href="profesional-detalle.html" class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-emerald-50/40 hover:border-emerald-200 transition"><div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-semibold shrink-0">PR</div><div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">Pilar Renedo</p><p class="text-xs text-slate-500 truncate">Terapeuta Ocupacional</p></div><span class="text-[10px] px-1.5 py-0.5 rounded-full bg-sky-100 text-sky-800 shrink-0">🏖 Vac.</span></a>
+                        <a href="profesional-detalle.html" class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-emerald-50/40 hover:border-emerald-200 transition"><div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-semibold shrink-0">SN</div><div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">Sergio Núñez</p><p class="text-xs text-slate-500 truncate">Fisioterapeuta</p></div><span class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">En activo</span></a>
+                        <a href="profesional-detalle.html" class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-emerald-50/40 hover:border-emerald-200 transition"><div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-semibold shrink-0">LP</div><div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">López Pérez, Marta</p><p class="text-xs text-slate-500 truncate">Gerocultora · Gestora caso</p></div><span class="text-[10px] px-1.5 py-0.5 rounded-full bg-rose-100 text-rose-800 shrink-0">⚕ IT</span></a>
+                        <a href="profesional-detalle.html" class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-emerald-50/40 hover:border-emerald-200 transition"><div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-semibold shrink-0">RS</div><div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">Ruiz Sánchez, Ana</p><p class="text-xs text-slate-500 truncate">Gerocultora</p></div><span class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">En activo</span></a>
+                        <a href="profesional-detalle.html" class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-emerald-50/40 hover:border-emerald-200 transition"><div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-semibold shrink-0">CM</div><div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">Cano Martín, Rosa</p><p class="text-xs text-slate-500 truncate">Gerocultora</p></div><span class="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-800 shrink-0">+4 h extra</span></a>
+                        <a href="profesional-detalle.html" class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-emerald-50/40 hover:border-emerald-200 transition"><div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-semibold shrink-0">GL</div><div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">García López, Inés</p><p class="text-xs text-slate-500 truncate">Gerocultora</p></div><span class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">En activo</span></a>
+                        <a href="profesional-detalle.html" class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-emerald-50/40 hover:border-emerald-200 transition"><div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-semibold shrink-0">PC</div><div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">Pérez Calderón, A.</p><p class="text-xs text-slate-500 truncate">Gerocultora · turno tarde</p></div><span class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">En activo</span></a>
+                        <a href="profesional-detalle.html" class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-emerald-50/40 hover:border-emerald-200 transition"><div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-semibold shrink-0">BS</div><div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">Bárcena Sanz, R.</p><p class="text-xs text-slate-500 truncate">Dirección de centro</p></div><span class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">★ Dir.</span></a>
+                        <a href="profesional-detalle.html" class="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:bg-emerald-50/40 hover:border-emerald-200 transition"><div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-semibold shrink-0">+1</div><div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">+ 1 profesional más</p><p class="text-xs text-slate-500 truncate">Personal apoyo (sustitución)</p></div><span class="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-700 shrink-0">Refuerzo</span></a>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                        <p class="text-slate-500">14 profesionales en total · ratio 1:3,4</p>
+                        <a href="profesionales.html" class="text-emerald-700 hover:underline font-medium">Ver organigrama y toda la plantilla →</a>
+                    </div>
+
+                    <!-- === BLOQUE COBERTURA DE HOY === -->
+                    <div class="mt-5 grid md:grid-cols-3 gap-3">
+                        <div class="rounded-lg border border-emerald-200 bg-emerald-50/60 p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-xs font-semibold text-emerald-900">📍 Cobertura hoy</p>
+                                <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-200 text-emerald-800 font-semibold">94 %</span>
+                            </div>
+                            <div class="text-xs text-emerald-900 space-y-1">
+                                <p>🌅 Mañana · <strong>7 / 7</strong> personas</p>
+                                <p>🌇 Tarde · <strong>6 / 6</strong> personas</p>
+                                <p>🌙 Noche · <strong>3 / 4</strong> personas <span class="text-rose-700">(falta 1)</span></p>
+                            </div>
+                            <a href="turnos.html" class="block mt-2 text-[11px] text-emerald-700 hover:underline">Ir al planificador de turnos →</a>
+                        </div>
+
+                        <div class="rounded-lg border border-sky-200 bg-sky-50/60 p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-xs font-semibold text-sky-900">🏖 Vacaciones / ausencias del mes</p>
+                            </div>
+                            <ul class="text-xs text-sky-900 space-y-1">
+                                <li>· Domínguez Vélez, S. (02-15 jun)</li>
+                                <li>· Cano Martín, R. (07-13 jun)</li>
+                                <li class="text-rose-700">· López Pérez, M. (⚕ IT desde 28 may)</li>
+                                <li class="text-amber-700">· Ureta, S. (pendiente aprobación)</li>
+                            </ul>
+                            <a href="vacaciones.html" class="block mt-2 text-[11px] text-sky-700 hover:underline">Ver calendario completo →</a>
+                        </div>
+
+                        <div class="rounded-lg border border-amber-200 bg-amber-50/60 p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-xs font-semibold text-amber-900">⚠ Avisos del equipo</p>
+                            </div>
+                            <ul class="text-xs text-amber-900 space-y-1.5">
+                                <li>· 1 hueco turno noche viernes</li>
+                                <li>· Bolsa de refuerzo: 3 disponibles</li>
+                                <li>· Ratio enf/residente mañana: <strong>1:13</strong> (límite 1:12)</li>
+                                <li>· López Pérez · IT día 9 — preparar sustitución</li>
+                            </ul>
+                            <a href="profesionales.html" class="block mt-2 text-[11px] text-amber-700 hover:underline">Gestionar plantilla →</a>
+                        </div>
+                    </div>
+
+                    <!-- Enlace global al módulo -->
+                    <div class="mt-4 rounded-lg border border-sky-200 bg-sky-50 p-3 text-xs text-sky-900 flex items-center justify-between">
+                        <div>
+                            <p class="font-semibold">🧑‍💼 Módulo Equipo</p>
+                            <p>Plantilla, vacaciones y turnos de los 187 profesionales del grupo en una sola vista.</p>
+                        </div>
+                        <a href="profesionales.html" class="px-3 py-1.5 text-xs bg-sky-700 text-white rounded hover:bg-sky-800 font-medium">Abrir módulo</a>
+                    </div>
+                </div>
+
+                <!-- Tab Info -->
+                <div x-show="tab === 'info'" x-cloak class="p-5">
+                    <dl class="grid gap-x-6 gap-y-3 md:grid-cols-2 text-sm">
+                        <div><dt class="text-xs text-slate-500">Teléfono</dt><dd>947 28 19 50</dd></div>
+                        <div><dt class="text-xs text-slate-500">Email coordinación</dt><dd class="text-emerald-700">coord.fuentecillas@aspanias.org</dd></div>
+                        <div><dt class="text-xs text-slate-500">Capacidad autorizada</dt><dd>50 plazas</dd></div>
+                        <div><dt class="text-xs text-slate-500">En funcionamiento</dt><dd>Desde septiembre de 1998</dd></div>
+                        <div><dt class="text-xs text-slate-500">Acreditación</dt><dd>Concierto Junta CyL · vigente hasta 31/12/2028</dd></div>
+                        <div><dt class="text-xs text-slate-500">Horario de atención</dt><dd>L-V 8:00-20:00 · S 9:00-14:00</dd></div>
+                    </dl>
+                </div>
+
+                <!-- Tab Avisos -->
+                <div x-show="tab === 'avisos'" x-cloak class="p-5">
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start gap-3 p-3 rounded-lg bg-amber-50 border border-amber-200">
+                            <span class="text-amber-700 text-lg shrink-0">⚠</span>
+                            <div class="flex-1">
+                                <p class="font-medium">PV próximo a vencer</p>
+                                <p class="text-xs text-slate-600">Marta González · revisión antes del 15/06</p>
+                            </div>
+                            <button class="text-xs text-emerald-700 hover:underline whitespace-nowrap">Resolver →</button>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 rounded-lg bg-amber-50 border border-amber-200">
+                            <span class="text-amber-700 text-lg shrink-0">⚠</span>
+                            <div class="flex-1">
+                                <p class="font-medium">Sobrecarga de gestor de caso</p>
+                                <p class="text-xs text-slate-600">Lucía Martínez · 27 personas (ratio 1:25)</p>
+                            </div>
+                            <button class="text-xs text-emerald-700 hover:underline whitespace-nowrap">Reasignar →</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Tab Documentos -->
+                <div x-show="tab === 'docs'" x-cloak class="p-5">
+                    <ul class="divide-y divide-slate-100 text-sm">
+                        <li class="py-2.5 flex items-center gap-3"><span class="text-lg">📄</span><span class="flex-1">Plan General de Centro 2026</span><span class="text-xs text-slate-500">PDF · 2,3 MB</span></li>
+                        <li class="py-2.5 flex items-center gap-3"><span class="text-lg">📄</span><span class="flex-1">Reglamento de Régimen Interior</span><span class="text-xs text-slate-500">PDF · 1,1 MB</span></li>
+                        <li class="py-2.5 flex items-center gap-3"><span class="text-lg">📄</span><span class="flex-1">Carta de Servicios 2026</span><span class="text-xs text-slate-500">PDF · 0,7 MB</span></li>
+                        <li class="py-2.5 flex items-center gap-3"><span class="text-lg">📄</span><span class="flex-1">Acreditación Junta CyL</span><span class="text-xs text-slate-500">PDF · 0,4 MB</span></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Comparativa -->
+            <div class="mt-4 p-4 rounded-xl bg-slate-100 text-xs text-slate-600">
+                <p class="font-semibold text-slate-800 mb-1">📐 Cambios respecto a centro-detalle.html (versión anterior)</p>
+                <ul class="space-y-0.5 list-disc list-inside">
+                    <li>Antes: <strong>3 columnas dispersas</strong> (datos · KPIs · personas) con info repetida.</li>
+                    <li>Ahora: <strong>1 columna jerárquica</strong>: hero → KPIs → personas (lo importante) → tabs (lo secundario).</li>
+                    <li>Equipo, info, avisos y documentos viven <strong>en tabs</strong> dentro del centro, no en cards sueltas.</li>
+                    <li>Las acciones rápidas (Agenda · Mapa · Indicadores) <strong>desaparecen como cards</strong>: están en el sidebar y se filtran por contexto automáticamente.</li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<!-- Búsqueda Ctrl+K -->
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, cita..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

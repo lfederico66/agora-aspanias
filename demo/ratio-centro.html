@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<!-- @rol: gerencia, direccion_centro, rrhh -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ratio del centro · ÁGORA</title>
+<link rel="stylesheet" href="_assets/tailwind.css">
+<script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · datos sintéticos · cálculo basado en normativa oficial CyL</div>
+
+<div class="flex min-h-screen" x-data="ratio()">
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100"><a href="index.html" class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm"><svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg></div><div class="leading-tight"><p class="text-base font-semibold tracking-tight">ÁGORA</p><p class="text-[10px] text-slate-500">Grupo Social Aspanias</p></div></a></div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+    </aside>
+
+<main class="flex-1 min-w-0 p-6" x-cloak>
+    <nav class="text-xs text-slate-500 mb-3"><a href="centros.html" class="hover:underline">Centros</a> · <a href="centro-detalle.html" class="hover:underline">Residencia Fuentecillas</a> · <span class="text-slate-700">Ratio del centro</span></nav>
+
+    <div class="mb-6 flex items-start justify-between flex-wrap gap-3">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-800">⚖ Ratio del centro · cálculo según normativa CyL</h1>
+            <p class="text-sm text-slate-600 mt-1">Resolución 21/09/2023 GSS · Ley 1/2024 proyecto de vida · obligatorio cumplimiento centros concertados</p>
+        </div>
+        <div class="flex gap-2 items-center">
+            <select x-model="centroId" @change="cambiar()" class="px-3 py-2 text-sm border border-slate-300 rounded-lg bg-white">
+                <template x-for="c in centros" :key="c.id"><option :value="c.id" x-text="c.nombre"></option></template>
+            </select>
+            <button class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50">📊 Exportar Excel</button>
+            <button class="px-3 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800">🖨️ PDF justificación Junta CyL</button>
+        </div>
+    </div>
+
+    <!-- Cita normativa -->
+    <div class="mb-6 rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900">
+        <p class="font-semibold mb-2">📋 Marco normativo aplicado en el cálculo</p>
+        <ul class="space-y-1 text-xs">
+            <li><strong>Resolución 21/09/2023 GSS CyL</strong> (BOCYL 29/09/2023) — Ratios mínimas obligatorias centros concertados (vigencia 01/10/2023)</li>
+            <li><strong>Ley 1/2024 CyL</strong> (BOE 05/03/2024) — Apoyo al proyecto de vida · prestaciones esenciales: apoyo al proyecto de vida, asistencia personal, apoyo a la capacidad jurídica</li>
+            <li><strong>Ley 2/2013 CyL</strong> — Igualdad de Oportunidades para Personas con Discapacidad</li>
+            <li><strong>Convención ONU 2006</strong> (art. 19) — Derecho a vivir de forma independiente y a ser incluido en la comunidad</li>
+        </ul>
+    </div>
+
+    <!-- ============ KPIs principales ============ -->
+    <section class="grid gap-4 md:grid-cols-4 mb-8">
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <p class="text-xs uppercase tracking-wide text-slate-500">Plazas del centro</p>
+            <p class="mt-2 text-3xl font-light" x-text="centro.plazas"></p>
+            <p class="text-xs text-slate-500 mt-1" x-text="centro.tipo"></p>
+        </article>
+        <article class="rounded-xl border border-emerald-200 bg-emerald-50 p-5">
+            <p class="text-xs uppercase tracking-wide text-emerald-700">Mínimo legal · B.3.4</p>
+            <p class="mt-2 text-3xl font-light text-emerald-800" x-text="minimoLegalDiurno().toFixed(1)"></p>
+            <p class="text-xs text-emerald-700 mt-1">atención directa diurna</p>
+        </article>
+        <article class="rounded-xl border border-amber-200 bg-amber-50 p-5">
+            <p class="text-xs uppercase tracking-wide text-amber-700">Ratio conjunta · B.2</p>
+            <p class="mt-2 text-3xl font-light text-amber-800" x-text="aplicaB2() ? ratioConjuntaB2().toFixed(1) : '—'"></p>
+            <p class="text-xs text-amber-700 mt-1" x-text="aplicaB2() ? 'atención directa + técnicos · ' + pctGrados23() + '% G2/G3' : 'No aplica (<60% G2/G3)'"></p>
+        </article>
+        <article :class="gap() > 0 ? 'border-rose-200 bg-rose-50' : 'border-slate-200 bg-white'" class="rounded-xl border p-5">
+            <p class="text-xs uppercase tracking-wide" :class="gap() > 0 ? 'text-rose-700' : 'text-slate-500'">Plantilla actual</p>
+            <p class="mt-2 text-3xl font-light" :class="gap() > 0 ? 'text-rose-800' : 'text-slate-800'" x-text="centro.plantilla_actual + ' / ' + minimoExigible()"></p>
+            <p class="text-xs mt-1" :class="gap() > 0 ? 'text-rose-700 font-medium' : 'text-slate-500'" x-text="gap() > 0 ? `⚠ Déficit de ${gap()} profesionales` : (gap() < 0 ? `✓ Sobredotación de ${-gap()}` : '✓ Ajustada al mínimo legal')"></p>
+        </article>
+    </section>
+
+    <!-- ============ CAPA 1: PERFIL POR GRADO DE DEPENDENCIA ============ -->
+    <section class="bg-white rounded-xl border border-slate-200 p-6 mb-6">
+        <div class="flex items-baseline justify-between mb-4">
+            <div>
+                <h2 class="text-lg font-semibold text-emerald-800">CAPA 1 · Perfil por grado de dependencia</h2>
+                <p class="text-xs text-slate-500 mt-0.5">Distribución oficial usada por la Resolución 21/09/2023 para el cálculo de ratio mínima</p>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Datos del expediente</span>
+        </div>
+
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="bg-slate-50 text-xs text-slate-600">
+                    <th class="text-left p-2">Grado de dependencia · modalidad usuario</th>
+                    <th class="text-center p-2">Nº personas</th>
+                    <th class="text-center p-2">% sobre plazas</th>
+                    <th class="text-center p-2">Factor oficial</th>
+                    <th class="text-right p-2">Aporta a ratio mín.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="hover:bg-slate-50">
+                    <td class="p-2 border-b border-slate-100">
+                        <div class="flex items-center gap-2">
+                            <input type="number" min="0" :max="centro.plazas" x-model.number="perfil.g01" class="w-16 px-2 py-1 text-center border border-slate-300 rounded">
+                            <span>Grado 0 o 1 · moderado/ligero</span>
+                        </div>
+                    </td>
+                    <td class="p-2 border-b border-slate-100 text-center font-mono" x-text="perfil.g01"></td>
+                    <td class="p-2 border-b border-slate-100 text-center font-mono" x-text="pct(perfil.g01) + '%'"></td>
+                    <td class="p-2 border-b border-slate-100 text-center"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-mono text-xs">× 0,066</span></td>
+                    <td class="p-2 border-b border-slate-100 text-right font-mono font-semibold" x-text="(perfil.g01 * 0.066).toFixed(3)"></td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                    <td class="p-2 border-b border-slate-100">
+                        <div class="flex items-center gap-2">
+                            <input type="number" min="0" :max="centro.plazas" x-model.number="perfil.g2" class="w-16 px-2 py-1 text-center border border-slate-300 rounded">
+                            <span>Grado 2 · dependiente severo</span>
+                        </div>
+                    </td>
+                    <td class="p-2 border-b border-slate-100 text-center font-mono" x-text="perfil.g2"></td>
+                    <td class="p-2 border-b border-slate-100 text-center font-mono" x-text="pct(perfil.g2) + '%'"></td>
+                    <td class="p-2 border-b border-slate-100 text-center"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-mono text-xs">× 0,125</span></td>
+                    <td class="p-2 border-b border-slate-100 text-right font-mono font-semibold" x-text="(perfil.g2 * 0.125).toFixed(3)"></td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                    <td class="p-2 border-b border-slate-100">
+                        <div class="flex items-center gap-2">
+                            <input type="number" min="0" :max="centro.plazas" x-model.number="perfil.g3" class="w-16 px-2 py-1 text-center border border-slate-300 rounded">
+                            <span>Grado 3 · gran dependiente</span>
+                        </div>
+                    </td>
+                    <td class="p-2 border-b border-slate-100 text-center font-mono" x-text="perfil.g3"></td>
+                    <td class="p-2 border-b border-slate-100 text-center font-mono" x-text="pct(perfil.g3) + '%'"></td>
+                    <td class="p-2 border-b border-slate-100 text-center"><span class="px-2 py-0.5 rounded bg-rose-100 text-rose-800 font-mono text-xs">× 0,200</span></td>
+                    <td class="p-2 border-b border-slate-100 text-right font-mono font-semibold" x-text="(perfil.g3 * 0.200).toFixed(3)"></td>
+                </tr>
+                <tr class="bg-emerald-50 font-semibold">
+                    <td class="p-2" colspan="4">RATIO MÍNIMA DIURNA · suma jornadas completas (Art. B.3.4)</td>
+                    <td class="p-2 text-right font-mono text-2xl text-emerald-800" x-text="minimoLegalDiurno().toFixed(1)"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="text-[10px] text-slate-500 italic mt-2">El primer decimal del resultado se tiene en cuenta · jornadas completas contratadas</p>
+    </section>
+
+    <!-- ============ CAPA 2: B.2 RATIO CONJUNTA ============ -->
+    <section :class="aplicaB2() ? 'border-amber-300 bg-amber-50/40' : 'border-slate-200 bg-white'" class="rounded-xl border-2 p-6 mb-6">
+        <div class="flex items-baseline justify-between mb-3">
+            <h2 class="text-lg font-semibold" :class="aplicaB2() ? 'text-amber-800' : 'text-slate-500'">CAPA 2 · Ratio conjunta B.2 (atención directa + técnicos)</h2>
+            <span class="text-[10px] px-2 py-0.5 rounded-full font-medium" :class="aplicaB2() ? 'bg-amber-200 text-amber-900' : 'bg-slate-200 text-slate-600'" x-text="aplicaB2() ? '⚠ Aplica · centro 24h con ≥60% G2/G3' : 'No aplica'"></span>
+        </div>
+        <div class="grid grid-cols-3 gap-4 text-sm">
+            <div class="bg-white rounded-lg border p-4">
+                <p class="text-xs text-slate-600 uppercase">Atención 24h</p>
+                <p class="text-lg font-semibold mt-1" x-text="centro.atencion_24h ? '✓ Sí' : 'No'"></p>
+                <p class="text-[10px] text-slate-500">Residencia o conjunto con CD que garanticen 24h</p>
+            </div>
+            <div class="bg-white rounded-lg border p-4">
+                <p class="text-xs text-slate-600 uppercase">% usuarios G2 o G3</p>
+                <p class="text-lg font-semibold mt-1" x-text="pctGrados23() + '%'"></p>
+                <p class="text-[10px] text-slate-500">Umbral: ≥ 60%</p>
+            </div>
+            <div class="bg-white rounded-lg border p-4">
+                <p class="text-xs text-slate-600 uppercase">Cálculo</p>
+                <p class="text-lg font-semibold mt-1" x-text="centro.plazas + ' × 0,50 = ' + ratioConjuntaB2().toFixed(1)"></p>
+                <p class="text-[10px] text-slate-500">Jornadas completas contratadas</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CAPA 3: GESTORES DE CASO ============ -->
+    <section class="bg-white rounded-xl border border-slate-200 p-6 mb-6">
+        <h2 class="text-lg font-semibold text-emerald-800 mb-3">CAPA 3 · Gestor de caso (Art. B.3.1)</h2>
+        <p class="text-sm text-slate-600 mb-3">Profesional técnico con formación universitaria · 1 gestor por cada 30 personas usuarias de residencia o centro de día</p>
+        <div class="flex gap-4">
+            <div class="flex-1 rounded-lg bg-emerald-50 border border-emerald-200 p-4 text-center">
+                <p class="text-xs text-emerald-700 uppercase">Gestores necesarios</p>
+                <p class="text-3xl font-light text-emerald-800 mt-1" x-text="gestoresCaso()"></p>
+                <p class="text-[10px] text-emerald-700 mt-1" x-text="`${centro.plazas} usuarios ÷ 30 (redondeo al alza)`"></p>
+            </div>
+            <div class="flex-1 rounded-lg bg-blue-50 border border-blue-200 p-4 text-center">
+                <p class="text-xs text-blue-700 uppercase">Modelo apoyos · Ley 1/2024</p>
+                <p class="text-sm font-semibold text-blue-800 mt-2">Proyecto de vida</p>
+                <p class="text-[10px] text-blue-700 mt-1">El gestor de caso es el profesional de referencia que articula el plan de apoyos (Art. 22)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ COEFICIENTE DE COMPLEJIDAD (ÁGORA) ============ -->
+    <section class="bg-white rounded-xl border border-slate-200 p-6 mb-6">
+        <div class="flex items-baseline justify-between mb-3">
+            <div>
+                <h2 class="text-lg font-semibold text-emerald-800">Coeficiente de complejidad asistencial</h2>
+                <p class="text-xs text-slate-500 mt-0.5">Propio de ÁGORA · ajuste técnico sobre el mínimo legal para necesidades específicas no recogidas en el factor de dependencia</p>
+            </div>
+            <button @click="modalFormula = true" class="text-xs text-emerald-700 hover:underline">⚙ Ajustar ponderaciones</button>
+        </div>
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="bg-slate-50 text-xs text-slate-600">
+                    <th class="text-left p-2">Variable</th>
+                    <th class="text-center p-2">Valor</th>
+                    <th class="text-center p-2">% sobre plazas</th>
+                    <th class="text-center p-2">Ponderación</th>
+                    <th class="text-right p-2">Aporta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="p-2 border-b border-slate-100">🧠 Problemas de conducta graves</td>
+                    <td class="p-2 border-b border-slate-100 text-center"><input type="number" min="0" :max="centro.plazas" x-model.number="perfil.conducta" class="w-16 px-2 py-1 text-center border border-slate-300 rounded"></td>
+                    <td class="p-2 border-b border-slate-100 text-center font-mono" x-text="pct(perfil.conducta) + '%'"></td>
+                    <td class="p-2 border-b border-slate-100 text-center"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-mono text-xs">× 30</span></td>
+                    <td class="p-2 border-b border-slate-100 text-right font-mono font-semibold" x-text="aporte('conducta').toFixed(1)"></td>
+                </tr>
+                <tr>
+                    <td class="p-2 border-b border-slate-100">💊 Cuidados sanitarios complejos (≥5 pautas · DUE)</td>
+                    <td class="p-2 border-b border-slate-100 text-center"><input type="number" min="0" :max="centro.plazas" x-model.number="perfil.salud" class="w-16 px-2 py-1 text-center border border-slate-300 rounded"></td>
+                    <td class="p-2 border-b border-slate-100 text-center font-mono" x-text="pct(perfil.salud) + '%'"></td>
+                    <td class="p-2 border-b border-slate-100 text-center"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-mono text-xs">× 25</span></td>
+                    <td class="p-2 border-b border-slate-100 text-right font-mono font-semibold" x-text="aporte('salud').toFixed(1)"></td>
+                </tr>
+                <tr>
+                    <td class="p-2 border-b border-slate-100">♿ Movilidad reducida / silla ruedas</td>
+                    <td class="p-2 border-b border-slate-100 text-center"><input type="number" min="0" :max="centro.plazas" x-model.number="perfil.movilidad" class="w-16 px-2 py-1 text-center border border-slate-300 rounded"></td>
+                    <td class="p-2 border-b border-slate-100 text-center font-mono" x-text="pct(perfil.movilidad) + '%'"></td>
+                    <td class="p-2 border-b border-slate-100 text-center"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-mono text-xs">× 20</span></td>
+                    <td class="p-2 border-b border-slate-100 text-right font-mono font-semibold" x-text="aporte('movilidad').toFixed(1)"></td>
+                </tr>
+                <tr>
+                    <td class="p-2 border-b border-slate-100">🚨 Conductas autolesivas / heteroagresivas (1:1)</td>
+                    <td class="p-2 border-b border-slate-100 text-center"><input type="number" min="0" :max="centro.plazas" x-model.number="perfil.autolesion" class="w-16 px-2 py-1 text-center border border-slate-300 rounded"></td>
+                    <td class="p-2 border-b border-slate-100 text-center font-mono" x-text="pct(perfil.autolesion) + '%'"></td>
+                    <td class="p-2 border-b border-slate-100 text-center"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-mono text-xs">× 25</span></td>
+                    <td class="p-2 border-b border-slate-100 text-right font-mono font-semibold" x-text="aporte('autolesion').toFixed(1)"></td>
+                </tr>
+                <tr class="bg-emerald-50 font-semibold">
+                    <td class="p-2" colspan="4">Coeficiente de complejidad (0-100)</td>
+                    <td class="p-2 text-right font-mono text-xl text-emerald-800" x-text="coefComplejidad() + ' / 100'"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="text-[10px] text-slate-500 italic mt-2">Este coeficiente NO es normativo · es una ampliación técnica de ÁGORA que la dirección del centro puede usar para defender plantilla por encima del mínimo legal frente a Junta CyL</p>
+    </section>
+
+    <!-- ============ PROPUESTA DOTACIÓN M/T/N ============ -->
+    <section class="bg-white rounded-xl border-2 border-emerald-300 p-6 mb-6">
+        <h2 class="text-lg font-semibold text-emerald-800 mb-4">Propuesta de dotación M/T/N</h2>
+
+        <div class="grid grid-cols-3 gap-3 mb-6">
+            <div class="rounded-lg border-2 border-emerald-300 bg-emerald-50 p-4 text-center">
+                <p class="text-xs text-emerald-700 uppercase font-semibold">Mínimo legal exigible</p>
+                <p class="text-2xl font-light text-emerald-800 mt-1" x-text="minimoExigible()"></p>
+                <p class="text-xs text-emerald-700 font-medium">profesionales (jornadas completas)</p>
+                <p class="text-[10px] text-emerald-600 mt-1" x-text="aplicaB2() ? 'Máx(B.2 conjunta, B.3.4 atención directa)' : 'B.3.4 atención directa diurna'"></p>
+            </div>
+            <div class="rounded-lg border border-amber-300 bg-amber-50 p-4 text-center">
+                <p class="text-xs text-amber-700 uppercase font-semibold">Recomendada ÁGORA</p>
+                <p class="text-2xl font-light text-amber-800 mt-1" x-text="recomendadaAgora()"></p>
+                <p class="text-xs text-amber-700 font-medium">según coeficiente complejidad</p>
+                <p class="text-[10px] text-amber-600 mt-1" x-text="`Mínimo × (1 + ${coefComplejidad()}/100)`"></p>
+            </div>
+            <div class="rounded-lg border border-slate-300 bg-white p-4 text-center">
+                <p class="text-xs text-slate-600 uppercase">Plantilla actual</p>
+                <p class="text-2xl font-light mt-1" x-text="centro.plantilla_actual"></p>
+                <p class="text-xs text-slate-500">profesionales</p>
+                <p class="text-[10px]" :class="gap() > 0 ? 'text-rose-600 font-medium' : 'text-emerald-600'" x-text="gap() > 0 ? '⚠ Bajo mínimo legal: ' + gap() : '✓ Cumple mínimo'"></p>
+            </div>
+        </div>
+
+        <!-- Distribución por turno -->
+        <h3 class="text-sm font-semibold text-slate-700 mb-3">Distribución por turno (sobre dotación recomendada)</h3>
+        <div class="grid grid-cols-3 gap-3">
+            <div class="rounded-lg border border-amber-200 bg-amber-50 p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="font-semibold text-amber-900">☀ Mañana</p>
+                    <span class="text-xs text-amber-700">55%</span>
+                </div>
+                <p class="text-3xl font-light text-amber-900" x-text="dotacionMTN().M"></p>
+                <p class="text-xs text-amber-700 mt-1">profesionales · 07:00-15:00</p>
+                <p class="text-[10px] text-amber-600 mt-2">Pico AVD: aseo, comida, terapias</p>
+            </div>
+            <div class="rounded-lg border border-blue-200 bg-blue-50 p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="font-semibold text-blue-900">🌅 Tarde</p>
+                    <span class="text-xs text-blue-700">30%</span>
+                </div>
+                <p class="text-3xl font-light text-blue-900" x-text="dotacionMTN().T"></p>
+                <p class="text-xs text-blue-700 mt-1">profesionales · 15:00-23:00</p>
+                <p class="text-[10px] text-blue-600 mt-2">Actividades, merienda, ocio</p>
+            </div>
+            <div class="rounded-lg border border-indigo-200 bg-indigo-50 p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="font-semibold text-indigo-900">🌙 Noche</p>
+                    <span class="text-xs text-indigo-700">15%</span>
+                </div>
+                <p class="text-3xl font-light text-indigo-900" x-text="dotacionMTN().N"></p>
+                <p class="text-xs text-indigo-700 mt-1">profesionales · 23:00-07:00</p>
+                <p class="text-[10px] text-indigo-600 mt-2">Supervisión nocturna</p>
+            </div>
+        </div>
+        <p class="text-xs text-slate-500 italic mt-4">Las ratios mínimas legales se calculan sobre el horario diurno. La distribución por turno es estándar del sector sociosanitario · ajustable a política Aspanias.</p>
+    </section>
+
+    <!-- ============ SIGUIENTE PASO ============ -->
+    <section class="bg-gradient-to-br from-emerald-50 to-blue-50 border border-emerald-200 rounded-xl p-6 mb-6">
+        <h2 class="text-lg font-semibold text-emerald-800 mb-3">🔮 Siguiente paso · generar cuadrante anual</h2>
+        <p class="text-sm text-slate-700 mb-4">Con la dotación de <strong x-text="dotacionMTN().M + 'M / ' + dotacionMTN().T + 'T / ' + dotacionMTN().N + 'N'"></strong> ya determinada, el motor OR-Tools generará el cuadrante anual respetando: convenio Dependencia CyL, vacaciones, reducciones de jornada (Ley 1/2024 conciliación), descansos y equidad en fines de semana/festivos.</p>
+        <div class="flex gap-2">
+            <a href="calendario-laboral.html" class="px-4 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">📅 Calendario laboral actual</a>
+            <button class="px-4 py-2 text-sm rounded-lg border border-emerald-300 bg-white text-emerald-800 hover:bg-emerald-50 font-medium">🚀 Generar cuadrante con OR-Tools (próximamente)</button>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div x-show="modalFormula" x-cloak class="fixed inset-0 bg-slate-900/50 flex items-center justify-center p-4 z-50" @click.self="modalFormula = false">
+        <div class="bg-white rounded-xl max-w-lg w-full p-6">
+            <h3 class="text-lg font-semibold mb-3">⚙ Ajustar ponderaciones</h3>
+            <p class="text-xs text-slate-600 mb-4">Suma = 100. Coeficiente ÁGORA, no normativo.</p>
+            <div class="space-y-3 text-sm">
+                <template x-for="key in Object.keys(pesos)" :key="key">
+                    <div class="flex items-center justify-between">
+                        <label class="text-slate-700" x-text="etiquetaPeso(key)"></label>
+                        <input type="number" min="0" max="100" x-model.number="pesos[key]" class="w-20 px-2 py-1 text-right border border-slate-300 rounded">
+                    </div>
+                </template>
+                <div class="pt-3 border-t flex justify-between font-semibold">
+                    <span>Suma</span>
+                    <span :class="totalPesos() === 100 ? 'text-emerald-700' : 'text-rose-700'" x-text="totalPesos()"></span>
+                </div>
+            </div>
+            <div class="flex gap-2 mt-4 justify-end">
+                <button @click="modalFormula = false" class="px-3 py-2 text-sm text-slate-600">Cancelar</button>
+                <button @click="modalFormula = false" :disabled="totalPesos() !== 100" :class="totalPesos() === 100 ? 'bg-emerald-700 text-white' : 'bg-slate-200 text-slate-500'" class="px-3 py-2 text-sm rounded-lg font-medium">Aplicar</button>
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+
+<script>
+function ratio() {
+    return {
+        modalFormula: false,
+        centroId: 'fuentecillas',
+        centros: [
+            { id:'fuentecillas', nombre:'Residencia Fuentecillas', tipo:'Residencia DI 24h · apoyos extensos/generalizados', plazas:25, atencion_24h:true, plantilla_actual:12, perfil:{ g01:2, g2:7, g3:16, conducta:6, movilidad:8, salud:10, autolesion:3 } },
+            { id:'cisneros',     nombre:'Centro Cardenal Cisneros · CD', tipo:'Centro de día DI',                          plazas:35, atencion_24h:false, plantilla_actual:7, perfil:{ g01:8, g2:18, g3:9, conducta:4, movilidad:4, salud:3, autolesion:1 } },
+            { id:'lapaloma',     nombre:'Vivienda con apoyos · La Paloma', tipo:'Vivienda DI · apoyos extensos',            plazas:6,  atencion_24h:true,  plantilla_actual:2, perfil:{ g01:1, g2:2, g3:3, conducta:1, movilidad:1, salud:2, autolesion:0 } },
+            { id:'olmeda',       nombre:'Centro Federico Olmeda',         tipo:'Centro ocupacional DI',                     plazas:30, atencion_24h:false, plantilla_actual:5, perfil:{ g01:20, g2:8, g3:2, conducta:2, movilidad:2, salud:2, autolesion:0 } },
+        ],
+        get centro() { return this.centros.find(c => c.id === this.centroId); },
+        perfil: {},
+        pesos: { conducta:30, salud:25, movilidad:20, autolesion:25 },
+
+        cambiar() { this.perfil = JSON.parse(JSON.stringify(this.centro.perfil)); },
+
+        pct(v) { return Math.round(v * 100 / this.centro.plazas); },
+        pctGrados23() { return Math.round((this.perfil.g2 + this.perfil.g3) * 100 / this.centro.plazas); },
+        aplicaB2() { return this.centro.atencion_24h && this.pctGrados23() >= 60; },
+
+        // CAPA 1 — Art. B.3.4: ratios mínimas diurnas por grado
+        minimoLegalDiurno() {
+            return this.perfil.g01 * 0.066 + this.perfil.g2 * 0.125 + this.perfil.g3 * 0.200;
+        },
+
+        // CAPA 2 — Art. B.2: ratio conjunta para residencias 24h con ≥60% G2/G3
+        ratioConjuntaB2() { return this.centro.plazas * 0.50; },
+
+        // CAPA 3 — Art. B.3.1: gestor de caso 1 cada 30 usuarios
+        gestoresCaso() { return Math.ceil(this.centro.plazas / 30); },
+
+        // Mínimo exigible = máximo entre B.2 (si aplica) y B.3.4
+        minimoExigible() {
+            const b34 = Math.ceil(this.minimoLegalDiurno());
+            const b2 = this.aplicaB2() ? Math.ceil(this.ratioConjuntaB2()) : 0;
+            return Math.max(b34, b2);
+        },
+
+        // Coeficiente de complejidad ÁGORA
+        aporte(key) { return this.pct(this.perfil[key]) * this.pesos[key] / 100; },
+        coefComplejidad() {
+            const t = this.aporte('conducta') + this.aporte('salud') + this.aporte('movilidad') + this.aporte('autolesion');
+            return Math.min(100, Math.round(t));
+        },
+
+        recomendadaAgora() {
+            return Math.ceil(this.minimoExigible() * (1 + this.coefComplejidad() / 100));
+        },
+
+        gap() { return this.minimoExigible() - this.centro.plantilla_actual; },
+
+        dotacionMTN() {
+            const total = this.recomendadaAgora();
+            return {
+                M: Math.round(total * 0.55),
+                T: Math.round(total * 0.30),
+                N: Math.max(1, Math.round(total * 0.15)),
+            };
+        },
+
+        totalPesos() { return Object.values(this.pesos).reduce((s,v) => s+v, 0); },
+        etiquetaPeso(key) { return {conducta:'Problemas de conducta', salud:'Cuidados sanitarios', movilidad:'Movilidad reducida', autolesion:'Conductas autolesivas/heteroagresivas'}[key]; },
+
+        init() { this.cambiar(); },
+    };
+}
+</script>
+</body>
+</html>

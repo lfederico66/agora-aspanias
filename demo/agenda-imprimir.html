@@ -1,0 +1,513 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda · Imprimir · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · todos los datos son ficticios</div>
+
+<div class="flex min-h-screen" x-data="{ userMenu: false }">
+
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100 relative">
+            <button @click="userMenu = !userMenu" class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">Federico Martínez</p>
+                    <p class="text-[10px] text-slate-500 truncate">Gerencia</p>
+                </div>
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div x-show="userMenu" x-cloak @click.outside="userMenu = false" class="absolute bottom-full left-3 right-3 mb-1 rounded-lg border border-slate-200 bg-white shadow-lg py-1 z-20">
+                <a href="personas-lista.html?mio=1" class="block px-3 py-1.5 text-sm text-emerald-700 hover:bg-emerald-50 font-medium">⭐ Mis personas</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Mi perfil</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Preferencias</a>
+                <div class="border-t border-slate-100 my-1"></div>
+                <a href="#" class="block px-3 py-1.5 text-sm text-rose-700 hover:bg-rose-50">Cerrar sesión</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate"><a href="index.html" class="hover:text-emerald-700">Inicio</a> <span class="mx-1">›</span> <a href="agenda-hoy.html" class="hover:text-emerald-700">Agenda</a> <span class="mx-1">›</span> <span class="text-slate-700">Imprimir</span></nav>
+            <div class="flex items-center gap-2 shrink-0"></div>
+        </div>
+        <div class="px-8 py-6 max-w-7xl">
+
+
+            <div class="flex items-end justify-between flex-wrap gap-3 no-print">
+                <div>
+                    <a href="agenda-hoy.html" class="text-sm text-slate-500 hover:text-emerald-700">← Volver a la agenda</a>
+                    <h1 class="mt-2 text-2xl font-semibold tracking-tight">Imprimir agenda</h1>
+                    <p class="text-sm text-slate-500">Selecciona un preset y los filtros. El documento se genera al pulsar «Imprimir».</p>
+                </div>
+                <button onclick="window.print()" class="rounded bg-emerald-700 text-white px-4 py-2 text-sm font-medium hover:bg-emerald-800">🖨 Imprimir documento</button>
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-4 no-print">
+
+                <!-- Selector de presets -->
+                <aside class="md:col-span-1 space-y-3">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Preset de impresión</h2>
+
+                    <button @click="preset = 'cuadrante'"
+                        :class="preset === 'cuadrante' ? 'border-emerald-500 bg-emerald-50' : 'border-slate-200 bg-white hover:border-slate-300'"
+                        class="w-full text-left rounded-xl border-2 p-4 transition">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl">📋</div>
+                            <div>
+                                <h3 class="font-semibold text-sm">Cuadrante semanal</h3>
+                                <p class="text-xs text-slate-500 mt-0.5">Una tabla por profesional · uso interno del coordinador</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <button @click="preset = 'dia'"
+                        :class="preset === 'dia' ? 'border-emerald-500 bg-emerald-50' : 'border-slate-200 bg-white hover:border-slate-300'"
+                        class="w-full text-left rounded-xl border-2 p-4 transition">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-xl">📅</div>
+                            <div>
+                                <h3 class="font-semibold text-sm">Lista del día</h3>
+                                <p class="text-xs text-slate-500 mt-0.5">Reparto en mostrador y office del centro</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <button @click="preset = 'persona'"
+                        :class="preset === 'persona' ? 'border-emerald-500 bg-emerald-50' : 'border-slate-200 bg-white hover:border-slate-300'"
+                        class="w-full text-left rounded-xl border-2 p-4 transition">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-xl">👤</div>
+                            <div>
+                                <h3 class="font-semibold text-sm">Citas de una persona</h3>
+                                <p class="text-xs text-slate-500 mt-0.5">Resumen mensual entregable a la familia</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <button @click="preset = 'externa'"
+                        :class="preset === 'externa' ? 'border-emerald-500 bg-emerald-50' : 'border-slate-200 bg-white hover:border-slate-300'"
+                        class="w-full text-left rounded-xl border-2 p-4 transition">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center text-xl">🏥</div>
+                            <div>
+                                <h3 class="font-semibold text-sm">Convocatoria externa</h3>
+                                <p class="text-xs text-slate-500 mt-0.5">Una hoja por cita · acompaña a la persona al hospital</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <!-- Opciones de filtro -->
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 mt-4">
+                        <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">Filtros</h3>
+                        <div class="space-y-2 text-sm">
+                            <div>
+                                <label class="block text-xs text-slate-500 mb-0.5">Período</label>
+                                <select class="w-full rounded border border-slate-300 px-2 py-1 text-xs">
+                                    <option x-show="preset === 'dia'">Hoy · 19/05/2026</option>
+                                    <option x-show="preset === 'dia'">Mañana · 20/05/2026</option>
+                                    <option x-show="preset === 'cuadrante'">Semana 18-22 mayo</option>
+                                    <option x-show="preset === 'cuadrante'">Semana 25-29 mayo</option>
+                                    <option x-show="preset === 'persona'">Mayo 2026</option>
+                                    <option x-show="preset === 'persona'">Q2 2026</option>
+                                    <option x-show="preset === 'externa'">Próxima cita externa</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-500 mb-0.5">Centro</label>
+                                <select class="w-full rounded border border-slate-300 px-2 py-1 text-xs">
+                                    <option>Residencia Fuentecillas</option>
+                                    <option>Áreas de Vivienda</option>
+                                    <option>Todos</option>
+                                </select>
+                            </div>
+                            <div x-show="preset === 'persona' || preset === 'externa'">
+                                <label class="block text-xs text-slate-500 mb-0.5">Persona</label>
+                                <select class="w-full rounded border border-slate-300 px-2 py-1 text-xs">
+                                    <option>González Pérez, Marta</option>
+                                    <option>Romero Sanz, Antonio</option>
+                                    <option>Martín Olalla, Carmen</option>
+                                </select>
+                            </div>
+                            <div x-show="preset === 'cuadrante'">
+                                <label class="block text-xs text-slate-500 mb-0.5">Profesionales</label>
+                                <div class="space-y-1 text-xs">
+                                    <label class="flex items-center gap-1.5"><input type="checkbox" checked> Lucía Martínez (TO)</label>
+                                    <label class="flex items-center gap-1.5"><input type="checkbox" checked> Beatriz Hernando (DUE)</label>
+                                    <label class="flex items-center gap-1.5"><input type="checkbox" checked> María Ruiz (TS)</label>
+                                    <label class="flex items-center gap-1.5"><input type="checkbox"> Carlos García López (Psi)</label>
+                                </div>
+                            </div>
+                            <div class="pt-2 border-t border-slate-100 text-xs">
+                                <label class="flex items-center gap-1.5"><input type="checkbox" checked> Incluir contactos de profesionales</label>
+                                <label class="flex items-center gap-1.5 mt-1" x-show="preset !== 'externa'"><input type="checkbox"> Anonimizar nombres (RGPD)</label>
+                                <label class="flex items-center gap-1.5 mt-1"><input type="checkbox" checked> Pie con sello Aspanias</label>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Preview del documento -->
+                <section class="md:col-span-3 preview-area rounded-xl border border-slate-200 bg-white shadow-sm p-8">
+
+                    <!-- Cabecera común al imprimir -->
+                    <div class="border-b-2 border-emerald-700 pb-3 mb-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h1 class="text-lg font-bold text-emerald-800">ÁGORA · Grupo Social Aspanias</h1>
+                                <p class="text-xs text-slate-600" x-show="preset === 'cuadrante'">Cuadrante semanal de citas · Residencia Fuentecillas</p>
+                                <p class="text-xs text-slate-600" x-show="preset === 'dia'">Agenda del día · Residencia Fuentecillas</p>
+                                <p class="text-xs text-slate-600" x-show="preset === 'persona'">Citas programadas · González Pérez, Marta</p>
+                                <p class="text-xs text-slate-600" x-show="preset === 'externa'">Convocatoria de cita externa · Hospital Universitario de Burgos</p>
+                            </div>
+                            <div class="text-right text-xs text-slate-500">
+                                <p>Generado: 19/05/2026 09:14</p>
+                                <p>Por: F. Martínez M.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PRESET: CUADRANTE SEMANAL -->
+                    <div x-show="preset === 'cuadrante'">
+                        <p class="text-xs text-slate-600 mb-3">Semana del lunes 18 al viernes 22 de mayo de 2026</p>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs border-collapse">
+                                <thead>
+                                    <tr class="bg-emerald-50">
+                                        <th class="border border-slate-300 px-2 py-1.5 text-left">Profesional</th>
+                                        <th class="border border-slate-300 px-2 py-1.5">Lun 18</th>
+                                        <th class="border border-slate-300 px-2 py-1.5">Mar 19</th>
+                                        <th class="border border-slate-300 px-2 py-1.5">Mié 20</th>
+                                        <th class="border border-slate-300 px-2 py-1.5">Jue 21</th>
+                                        <th class="border border-slate-300 px-2 py-1.5">Vie 22</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-slate-300 px-2 py-2 font-medium align-top">Lucía Martínez<br><span class="text-[10px] text-slate-500">TO</span></td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top">
+                                            <p><strong>09:00</strong> G. Pérez (Indiv)</p>
+                                            <p class="text-slate-500 mt-0.5">Sala terapia</p>
+                                        </td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top">
+                                            <p><strong>12:30</strong> G. Pérez (Indiv)</p>
+                                            <p class="text-slate-500 mt-0.5">Sala terapia</p>
+                                        </td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top text-slate-400">—</td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top text-slate-400">—</td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top">
+                                            <p><strong>09:00</strong> G. Pérez (Indiv)</p>
+                                            <p class="text-slate-500 mt-0.5">Sala terapia · ✓ CERCA</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-slate-300 px-2 py-2 font-medium align-top">Beatriz Hernando<br><span class="text-[10px] text-slate-500">DUE</span></td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top text-slate-400">—</td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top">
+                                            <p><strong>10:00</strong> M. Olalla (Indiv)</p>
+                                            <p class="text-slate-500 mt-0.5">Sala enfermería</p>
+                                        </td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top">
+                                            <p><strong>15:00</strong> L. Hidalgo (Indiv)</p>
+                                            <p class="text-slate-500 mt-0.5">Habitación</p>
+                                        </td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top text-slate-400">—</td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top text-slate-400">—</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-slate-300 px-2 py-2 font-medium align-top">María Ruiz<br><span class="text-[10px] text-slate-500">TS</span></td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top">
+                                            <p><strong>11:00</strong> Multipro (Romero)</p>
+                                            <p><strong>17:00</strong> Familia García</p>
+                                            <p class="text-slate-500 mt-0.5">✓ CERCA</p>
+                                        </td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top">
+                                            <p><strong>16:00</strong> Acomp. HUBU</p>
+                                            <p class="text-slate-500 mt-0.5">Ortega Vela</p>
+                                        </td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top">
+                                            <p><strong>09:30</strong> Revisión PIA</p>
+                                        </td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top">
+                                            <p><strong>10:00</strong> Fam. Sáez Domínguez</p>
+                                            <p class="text-slate-500 mt-0.5">✓ CERCA</p>
+                                        </td>
+                                        <td class="border border-slate-300 px-2 py-2 align-top">
+                                            <p><strong>12:00</strong> Comité</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p class="mt-4 text-[10px] text-slate-500 italic">Cuadrante interno. Datos identificativos de personas atendidas — uso restringido al equipo profesional. RGPD art. 32 (bitácora de acceso registrada).</p>
+                    </div>
+
+                    <!-- PRESET: LISTA DEL DÍA -->
+                    <div x-show="preset === 'dia'" x-cloak>
+                        <p class="text-xs text-slate-600 mb-3">Martes 19 de mayo de 2026 · Todos los profesionales</p>
+
+                        <table class="w-full text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-emerald-50">
+                                    <th class="border border-slate-300 px-2 py-1.5 text-left">Hora</th>
+                                    <th class="border border-slate-300 px-2 py-1.5 text-left">Persona</th>
+                                    <th class="border border-slate-300 px-2 py-1.5 text-left">Tipo</th>
+                                    <th class="border border-slate-300 px-2 py-1.5 text-left">Profesional</th>
+                                    <th class="border border-slate-300 px-2 py-1.5 text-left">Lugar</th>
+                                    <th class="border border-slate-300 px-2 py-1.5 text-left">Observaciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-slate-300 px-2 py-2 font-mono text-xs">10:00 – 10:30</td>
+                                    <td class="border border-slate-300 px-2 py-2">Martín Olalla, Carmen</td>
+                                    <td class="border border-slate-300 px-2 py-2 text-xs">Individual</td>
+                                    <td class="border border-slate-300 px-2 py-2">B. Hernando (DUE)</td>
+                                    <td class="border border-slate-300 px-2 py-2 text-xs">Sala enfermería</td>
+                                    <td class="border border-slate-300 px-2 py-2 text-xs">Control glucemia + revisión pauta</td>
+                                </tr>
+                                <tr class="bg-slate-50">
+                                    <td class="border border-slate-300 px-2 py-2 font-mono text-xs">12:30 – 13:00</td>
+                                    <td class="border border-slate-300 px-2 py-2">González Pérez, Marta</td>
+                                    <td class="border border-slate-300 px-2 py-2 text-xs">Individual</td>
+                                    <td class="border border-slate-300 px-2 py-2">L. Martínez (TO)</td>
+                                    <td class="border border-slate-300 px-2 py-2 text-xs">Sala terapia</td>
+                                    <td class="border border-slate-300 px-2 py-2 text-xs">Objetivo PIA · autonomía desayuno</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-slate-300 px-2 py-2 font-mono text-xs">16:00 – 17:00</td>
+                                    <td class="border border-slate-300 px-2 py-2">Ortega Vela, Daniel</td>
+                                    <td class="border border-slate-300 px-2 py-2 text-xs">Externa</td>
+                                    <td class="border border-slate-300 px-2 py-2">M. Ruiz (TS) · acomp.</td>
+                                    <td class="border border-slate-300 px-2 py-2 text-xs">HUBU · Neurología</td>
+                                    <td class="border border-slate-300 px-2 py-2 text-xs">Ambulancia 15:30 · ✓ Familia notif.</td>
+                                </tr>
+                                <tr class="bg-slate-50">
+                                    <td class="border border-slate-300 px-2 py-2 font-mono text-xs">18:00 – 19:00</td>
+                                    <td class="border border-slate-300 px-2 py-2 italic text-slate-600">— (Coord. equipo)</td>
+                                    <td class="border border-slate-300 px-2 py-2 text-xs">Multipro</td>
+                                    <td class="border border-slate-300 px-2 py-2">L. Martínez · B. Hernando · M. Ruiz · D. Alonso</td>
+                                    <td class="border border-slate-300 px-2 py-2 text-xs">Sala reuniones</td>
+                                    <td class="border border-slate-300 px-2 py-2 text-xs">Revisión semanal · 4 casos</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="mt-6 grid grid-cols-3 gap-4 text-xs">
+                            <div class="rounded border border-slate-300 p-2">
+                                <p class="font-semibold">Total citas</p>
+                                <p class="text-2xl font-light">4</p>
+                            </div>
+                            <div class="rounded border border-slate-300 p-2">
+                                <p class="font-semibold">Personas atendidas</p>
+                                <p class="text-2xl font-light">3</p>
+                            </div>
+                            <div class="rounded border border-slate-300 p-2">
+                                <p class="font-semibold">Profesionales</p>
+                                <p class="text-2xl font-light">4</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PRESET: CITAS DE UNA PERSONA -->
+                    <div x-show="preset === 'persona'" x-cloak>
+                        <div class="bg-slate-50 border border-slate-200 rounded p-3 mb-4 text-sm">
+                            <p class="font-semibold">González Pérez, Marta</p>
+                            <p class="text-xs text-slate-600">FUE-2026-00001 · Residencia Fuentecillas · Módulo Norte · Hab. 24 · Cama B</p>
+                            <p class="text-xs text-slate-600 mt-1">Persona de referencia familiar: Carmen González López (madre)</p>
+                        </div>
+
+                        <p class="text-xs font-semibold uppercase text-slate-500 mb-2">Citas previstas — mayo 2026</p>
+                        <table class="w-full text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-emerald-50">
+                                    <th class="border border-slate-300 px-2 py-1.5 text-left">Fecha</th>
+                                    <th class="border border-slate-300 px-2 py-1.5 text-left">Hora</th>
+                                    <th class="border border-slate-300 px-2 py-1.5 text-left">Tipo de cita</th>
+                                    <th class="border border-slate-300 px-2 py-1.5 text-left">Con</th>
+                                    <th class="border border-slate-300 px-2 py-1.5 text-left">Objetivo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="border border-slate-300 px-2 py-2">Lun 18/05</td><td class="border border-slate-300 px-2 py-2 font-mono text-xs">09:00–09:30</td><td class="border border-slate-300 px-2 py-2 text-xs">Individual TO</td><td class="border border-slate-300 px-2 py-2 text-xs">Lucía Martínez</td><td class="border border-slate-300 px-2 py-2 text-xs">Autonomía desayuno</td></tr>
+                                <tr class="bg-slate-50"><td class="border border-slate-300 px-2 py-2">Mar 19/05</td><td class="border border-slate-300 px-2 py-2 font-mono text-xs">12:30–13:00</td><td class="border border-slate-300 px-2 py-2 text-xs">Individual TO</td><td class="border border-slate-300 px-2 py-2 text-xs">Lucía Martínez</td><td class="border border-slate-300 px-2 py-2 text-xs">Autonomía desayuno</td></tr>
+                                <tr><td class="border border-slate-300 px-2 py-2">Vie 22/05</td><td class="border border-slate-300 px-2 py-2 font-mono text-xs">09:00–10:00</td><td class="border border-slate-300 px-2 py-2 text-xs">Individual TO</td><td class="border border-slate-300 px-2 py-2 text-xs">Lucía Martínez</td><td class="border border-slate-300 px-2 py-2 text-xs">Revisión semanal</td></tr>
+                                <tr class="bg-slate-50"><td class="border border-slate-300 px-2 py-2">Lun 25/05</td><td class="border border-slate-300 px-2 py-2 font-mono text-xs">11:00–12:00</td><td class="border border-slate-300 px-2 py-2 text-xs">Multiprofesional</td><td class="border border-slate-300 px-2 py-2 text-xs">Equipo Fuentecillas</td><td class="border border-slate-300 px-2 py-2 text-xs">Revisión PIA semestral</td></tr>
+                                <tr><td class="border border-slate-300 px-2 py-2">Mié 27/05</td><td class="border border-slate-300 px-2 py-2 font-mono text-xs">10:30–11:00</td><td class="border border-slate-300 px-2 py-2 text-xs">Externa</td><td class="border border-slate-300 px-2 py-2 text-xs">C. Salud Los Cubos · Dra. Rad</td><td class="border border-slate-300 px-2 py-2 text-xs">Control hipotiroidismo</td></tr>
+                            </tbody>
+                        </table>
+
+                        <div class="mt-4 rounded border border-slate-300 p-3 text-xs">
+                            <p class="font-semibold mb-1">Información para la familia</p>
+                            <p class="text-slate-700">Para cambiar o anular cualquier cita, contactar con la gestora del caso, María Ruiz Pérez, en el 947 23 85 62 o vía CERCA. Las citas externas se confirman 48 h antes.</p>
+                        </div>
+                    </div>
+
+                    <!-- PRESET: CONVOCATORIA EXTERNA -->
+                    <div x-show="preset === 'externa'" x-cloak>
+                        <p class="text-xs text-slate-600 mb-4">Documento de acompañamiento — entregar en recepción del hospital</p>
+
+                        <div class="border-2 border-slate-300 rounded p-4 space-y-4">
+                            <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <p class="text-xs text-slate-500 uppercase">Persona atendida</p>
+                                    <p class="font-semibold">Ortega Vela, Daniel</p>
+                                    <p class="text-xs text-slate-600">FUE-2026-00012 · 67 años</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-500 uppercase">Cita</p>
+                                    <p class="font-semibold">Martes 19/05/2026 · 16:00 h</p>
+                                    <p class="text-xs text-slate-600">HUBU · Servicio de Neurología</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-500 uppercase">Centro de procedencia</p>
+                                    <p class="text-sm">Residencia Fuentecillas (Aspanias)</p>
+                                    <p class="text-xs text-slate-600">C/ Europa 12, 09001 Burgos · 947 23 85 62</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-500 uppercase">Acompañante de Aspanias</p>
+                                    <p class="text-sm">María Ruiz Pérez (TS)</p>
+                                    <p class="text-xs text-slate-600">Móvil: 696 ** ** 23</p>
+                                </div>
+                            </div>
+
+                            <div class="border-t border-slate-300 pt-3">
+                                <p class="text-xs text-slate-500 uppercase">Medida de apoyo Ley 8/2021</p>
+                                <p class="text-sm">Apoyo de hecho — guardadora: Pilar Vela (hermana)</p>
+                                <p class="text-xs text-slate-600 mt-1">Decisiones sanitarias rutinarias: la propia persona. Consentimientos quirúrgicos: contactar con la guardadora.</p>
+                            </div>
+
+                            <div class="border-t border-slate-300 pt-3">
+                                <p class="text-xs text-slate-500 uppercase mb-1">Información clínica relevante</p>
+                                <ul class="text-xs list-disc list-inside space-y-0.5">
+                                    <li><strong>Alergia:</strong> AINEs grupo OXICAMS</li>
+                                    <li><strong>Anticoagulante en curso:</strong> Pradaxa 110 mg</li>
+                                    <li><strong>Comunicación:</strong> autónoma, requiere refuerzo verbal sencillo</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-t border-slate-300 pt-3">
+                                <p class="text-xs text-slate-500 uppercase mb-1">Transporte</p>
+                                <p class="text-xs">Ambulancia concertada · recogida 15:30 h · ref. expediente AMBU-2026-0457</p>
+                            </div>
+
+                            <div class="border-t border-slate-300 pt-3 grid grid-cols-2 gap-3 text-xs">
+                                <div>
+                                    <p class="text-slate-500 uppercase mb-2">Firma del acompañante</p>
+                                    <div class="border-b border-slate-400 mt-6"></div>
+                                </div>
+                                <div>
+                                    <p class="text-slate-500 uppercase mb-2">Firma del facultativo HUBU</p>
+                                    <div class="border-b border-slate-400 mt-6"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="mt-3 text-[10px] text-slate-500 italic">Convocatoria generada automáticamente por ÁGORA. Conservar copia firmada en el expediente. Datos de salud protegidos por datos especialmente sensibles (RGPD art. 9).</p>
+                    </div>
+
+                    <!-- Pie común -->
+                    <div class="mt-6 pt-3 border-t border-slate-300 text-[10px] text-slate-500 flex justify-between">
+                        <div>Grupo Social Aspanias · Fundación Aspanias Burgos + Aspaniasmerc 2016 S.L.U.</div>
+                        <div>Página 1 de 1</div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, cita..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

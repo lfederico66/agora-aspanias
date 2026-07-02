@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+{% block title %}Plan de Vida · {{ persona }} · ÁGORA{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+    <div>
+        <a href="{% url 'personas:detalle' persona.id %}" class="text-sm text-slate-500 hover:text-slate-700">← Volver a la ficha de {{ persona.nombre }}</a>
+        <div class="mt-2 flex items-center gap-3 flex-wrap">
+            <h1 class="text-2xl font-semibold tracking-tight">Plan de Vida · {{ persona.apellido_1 }}, {{ persona.nombre }}</h1>
+            {% if plan %}
+                {% if plan.estado == 'vigente' %}
+                    <span class="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800">Vigente</span>
+                {% elif plan.estado == 'revision' %}
+                    <span class="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">En revisión anual</span>
+                {% elif plan.estado == 'elaboracion' %}
+                    <span class="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800">En elaboración</span>
+                {% else %}
+                    <span class="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-700">{{ plan.get_estado_display }}</span>
+                {% endif %}
+                <span class="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-700">Anualidad {{ plan.anualidad }}</span>
+            {% endif %}
+        </div>
+        {% if plan %}
+            <p class="text-sm text-slate-500">Atención Centrada en la Persona · Última revisión: {{ plan.fecha_revision|date:"d/m/Y"|default:"—" }} · Próxima revisión: {{ plan.fecha_proxima_revision|date:"d/m/Y"|default:"—" }}</p>
+        {% endif %}
+    </div>
+
+    {% if not plan %}
+        <div class="rounded-lg border border-dashed border-slate-300 bg-white p-12 text-center">
+            <p class="text-slate-500">Esta persona aún no tiene Plan de Vida. <a href="/admin/pia/plandevida/add/" class="underline text-amber-700">Crear el primero</a>.</p>
+        </div>
+    {% else %}
+        <div class="grid gap-6 md:grid-cols-3">
+            <div class="md:col-span-2 space-y-4">
+
+                <article class="rounded-lg border border-slate-200 bg-white p-5">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-3">Documentación del Plan de Vida</h2>
+                    <p class="text-xs text-slate-500 mb-3">Los cinco documentos del protocolo. El documento real vive en Teams / OneDrive.</p>
+                    <div class="space-y-2">
+                        {% for tipo, doc in documentos_por_tipo.items %}
+                            <div class="rounded border border-slate-100 bg-slate-50 p-3 flex items-center justify-between flex-wrap gap-2">
+                                <div>
+                                    <p class="font-medium text-sm">{{ tipo }}</p>
+                                    {% if doc %}
+                                        <p class="text-xs text-slate-500">
+                                            {% if doc.fecha_completado %}Completado {{ doc.fecha_completado|date:"d/m/Y" }}{% endif %}
+                                            {% if doc.publicado_en_repriss %} · ✓ Publicado en REPRISS{% endif %}
+                                        </p>
+                                    {% else %}
+                                        <p class="text-xs text-slate-400">Sin registrar todavía</p>
+                                    {% endif %}
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    {% if doc %}
+                                        {% if doc.estado == 'completado' or doc.estado == 'revisado' %}
+                                            <span class="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800">{{ doc.get_estado_display }}</span>
+                                        {% elif doc.estado == 'elaboracion' %}
+                                            <span class="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800">En elaboración</span>
+                                        {% else %}
+                                            <span class="inline-flex items-center rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-700">Pendiente</span>
+                                        {% endif %}
+                                        {% if doc.url_almacenamiento %}
+                                            <a href="{{ doc.url_almacenamiento }}" target="_blank" class="text-xs text-amber-700 hover:underline">Abrir documento →</a>
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="inline-flex items-center rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-700">Pendiente</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </article>
+
+                <article class="rounded-lg border border-slate-200 bg-white p-5">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-3">Objetivos del Plan</h2>
+                    {% for ambito, objetivos in objetivos_por_ambito.items %}
+                        <details {% if forloop.counter < 3 %}open{% endif %} class="border-b border-slate-100 py-3">
+                            <summary class="cursor-pointer flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="inline-flex items-center rounded bg-slate-50 px-2 py-0.5 text-xs font-medium text-slate-700">{{ ambito }}</span>
+                                    <span class="font-medium text-sm">{{ objetivos|length }} objetivo{{ objetivos|length|pluralize:"s" }}</span>
+                                </div>
+                                <span class="text-xs text-slate-400">▼</span>
+                            </summary>
+                            <div class="mt-3 space-y-3">
+                                {% for obj in objetivos %}
+                                <div class="rounded border border-slate-100 bg-slate-50 p-3">
+                                    <div class="flex items-center justify-between gap-2 flex-wrap">
+                                        <p class="font-medium text-sm">{{ obj.descripcion }}</p>
+                                        <div class="flex items-center gap-2">
+                                            {% if obj.visible_en_panel %}<span class="inline-flex items-center rounded-full bg-purple-100 px-2 py-0.5 text-xs font-medium text-purple-800" title="Visible en panel/corcho del centro con consentimiento de la persona">👁 En panel</span>{% endif %}
+                                            {% if obj.estado == 'logrado' %}
+                                                <span class="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800">Logrado</span>
+                                            {% elif obj.estado == 'activo' %}
+                                                <span class="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800">En curso</span>
+                                            {% elif obj.estado == 'mantenimiento' %}
+                                                <span class="inline-flex items-center rounded-full bg-teal-100 px-2 py-0.5 text-xs font-medium text-teal-800">Mantenimiento</span>
+                                            {% elif obj.estado == 'abandonado' %}
+                                                <span class="inline-flex items-center rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-700">Abandonado</span>
+                                            {% else %}
+                                                <span class="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">Propuesto</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <dl class="mt-2 grid grid-cols-2 gap-2 text-xs text-slate-600">
+                                        <div><dt class="font-medium text-slate-500">Indicador</dt><dd>{{ obj.indicador_logro }}</dd></div>
+                                        <div><dt class="font-medium text-slate-500">Apoyos</dt><dd>{{ obj.apoyos_necesarios|default:"—" }}</dd></div>
+                                        <div><dt class="font-medium text-slate-500">Responsable</dt><dd>{{ obj.responsable_seguimiento|default:"—" }}</dd></div>
+                                        <div><dt class="font-medium text-slate-500">Prioridad</dt><dd>{{ obj.get_prioridad_display }}</dd></div>
+                                    </dl>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </details>
+                    {% empty %}
+                        <p class="text-sm text-slate-500">Sin objetivos definidos todavía.</p>
+                    {% endfor %}
+                </article>
+
+                <article class="rounded-lg border border-slate-200 bg-white p-5">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-3">Cambios significativos detectados</h2>
+                    <p class="text-xs text-slate-500 mb-3">Ámbitos del protocolo: salud, empleo, centro/vivienda, rutinas, relaciones, participación social.</p>
+                    {% if cambios_recientes %}
+                        <ul class="space-y-2 text-sm">
+                            {% for c in cambios_recientes %}
+                                <li class="rounded border border-slate-100 bg-slate-50 p-3">
+                                    <div class="flex items-center justify-between flex-wrap gap-2">
+                                        <span class="inline-flex items-center rounded bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">{{ c.get_ambito_display }}</span>
+                                        <span class="text-xs text-slate-500">{{ c.fecha_deteccion|date:"d/m/Y" }} · detectado por {{ c.detectado_por|default:"—" }}</span>
+                                    </div>
+                                    <p class="mt-1 text-slate-700">{{ c.descripcion }}</p>
+                                    {% if c.procesado %}
+                                        <p class="mt-1 text-xs text-emerald-700">✓ Procesado en Plan de Vida</p>
+                                    {% elif c.requiere_actualizacion_plan %}
+                                        <p class="mt-1 text-xs text-amber-700">⚠ Pendiente de actualizar el Plan</p>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-sm text-slate-500">Sin cambios significativos registrados.</p>
+                    {% endif %}
+                </article>
+            </div>
+
+            <aside class="space-y-4">
+                <article class="rounded-lg border border-slate-200 bg-white p-5">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Figuras profesionales</h2>
+                    <dl class="mt-3 space-y-3 text-sm">
+                        <div>
+                            <dt class="text-xs uppercase tracking-wide text-slate-500">Gestor/a de caso</dt>
+                            <dd class="font-medium">{{ plan.gestor_caso|default:"— Sin asignar" }}</dd>
+                            {% if plan.gestor_caso %}
+                                <dd class="text-xs text-slate-500">{{ plan.gestor_caso.casos_actuales_gestor }} / {{ plan.gestor_caso.max_casos_asignados }} casos asignados{% if plan.gestor_caso.sobrepasa_ratio %} <span class="text-rose-700">· sobre ratio</span>{% endif %}</dd>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <dt class="text-xs uppercase tracking-wide text-slate-500">Persona de referencia</dt>
+                            <dd class="font-medium">{{ plan.persona_referencia|default:"— Sin asignar" }}</dd>
+                        </div>
+                    </dl>
+                </article>
+
+                <article class="rounded-lg border border-slate-200 bg-white p-5">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Resumen</h2>
+                    <dl class="mt-3 space-y-2 text-sm">
+                        <div class="flex justify-between"><dt class="text-slate-500">Documentos completos</dt><dd class="font-medium">{{ plan.documentos_completos }} / 5</dd></div>
+                        <div class="flex justify-between"><dt class="text-slate-500">Total objetivos</dt><dd class="font-medium">{{ plan.total_objetivos }}</dd></div>
+                        <div class="flex justify-between"><dt class="text-slate-500">Logrados</dt><dd class="font-medium text-emerald-700">{{ plan.objetivos_logrados }}</dd></div>
+                        <div class="flex justify-between"><dt class="text-slate-500">Visible en paneles</dt><dd class="font-medium">{% if plan.visible_en_paneles %}Sí{% else %}No{% endif %}</dd></div>
+                    </dl>
+                </article>
+
+                {% if plan.firmado_persona_at %}
+                <article class="rounded-lg border border-emerald-200 bg-emerald-50 p-5">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-emerald-800">Firmas</h2>
+                    <ul class="mt-2 space-y-1 text-sm text-emerald-900">
+                        <li>✓ Persona — {{ plan.firmado_persona_at|date:"d/m/Y" }}</li>
+                        {% if plan.firmado_apoyo_at %}
+                            <li>✓ Figura de apoyo — {{ plan.firmado_apoyo_at|date:"d/m/Y" }}</li>
+                        {% endif %}
+                    </ul>
+                </article>
+                {% endif %}
+
+                {% if plan.fecha_proxima_revision %}
+                <article class="rounded-lg border border-amber-200 bg-amber-50 p-5">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-amber-800">Próxima revisión anual</h2>
+                    <p class="mt-2 font-medium text-amber-900">{{ plan.fecha_proxima_revision|date:"d \d\e F \d\e Y" }}</p>
+                    <p class="mt-1 text-xs text-amber-700">El protocolo prevé revisión anual de los cinco documentos.</p>
+                </article>
+                {% endif %}
+
+                <article class="rounded-lg border border-slate-200 bg-white p-5">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Documentos imprimibles</h2>
+                    <p class="mt-1 text-xs text-slate-500">Anualidad {{ plan.anualidad }} · Reemplazan al Word/Excel actual.</p>
+                    <div class="mt-3 space-y-1.5">
+                        <a href="{% url 'planes_vida:historia_vida' persona.id plan.anualidad %}" target="_blank" class="block rounded border border-slate-300 px-3 py-1.5 text-sm hover:border-amber-400 hover:text-amber-700">📄 1 · Historia de Vida →</a>
+                        <a href="{% url 'planes_vida:algo_sobre_mi' persona.id plan.anualidad %}" target="_blank" class="block rounded border border-slate-300 px-3 py-1.5 text-sm hover:border-amber-400 hover:text-amber-700">📄 2 · Algo sobre mí →</a>
+                        <a href="{% url 'planes_vida:revision_objetivos' persona.id plan.anualidad %}" target="_blank" class="block rounded border border-slate-300 px-3 py-1.5 text-sm hover:border-amber-400 hover:text-amber-700">📄 3 · Revisión de objetivos →</a>
+                        <a href="{% url 'planes_vida:plan_apoyo' persona.id plan.anualidad %}" target="_blank" class="block rounded border border-slate-300 px-3 py-1.5 text-sm hover:border-amber-400 hover:text-amber-700">📄 4 · Plan de apoyo →</a>
+                        <a href="{% url 'planes_vida:proyecto_vida' persona.id plan.anualidad %}" target="_blank" class="block rounded border border-slate-300 px-3 py-1.5 text-sm hover:border-amber-400 hover:text-amber-700">📄 5 · Proyecto de Vida →</a>
+                    </div>
+                </article>
+
+                {% if plan.visible_en_paneles %}
+                <article class="rounded-lg border border-purple-200 bg-purple-50 p-5">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-purple-800">Panel imprimible</h2>
+                    <p class="mt-1 text-xs text-purple-700">Protocolo §6 · Con consentimiento de la persona.</p>
+                    <a href="{% url 'planes_vida:panel' persona.id %}" target="_blank" class="mt-3 inline-block rounded bg-purple-700 px-4 py-2 text-sm font-medium text-white hover:bg-purple-800">🖨 Abrir panel para corcho →</a>
+                </article>
+                {% endif %}
+
+                {% if planes_historicos %}
+                <article class="rounded-lg border border-slate-200 bg-white p-5">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Histórico</h2>
+                    <ul class="mt-2 space-y-1 text-sm">
+                        {% for ph in planes_historicos %}
+                            <li class="text-slate-600">Plan {{ ph.anualidad }} · {{ ph.get_estado_display }}</li>
+                        {% endfor %}
+                    </ul>
+                </article>
+                {% endif %}
+            </aside>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

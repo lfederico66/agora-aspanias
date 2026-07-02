@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Factura F-2026/06/0042 · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4 portrait; margin: 1.5cm; }
+        @media print { .no-print { display: none !important; } body { background: white !important; } }
+        body { font-family: 'Inter', -apple-system, system-ui, sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div class="no-print bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-xs py-1.5">
+        🎯 <span class="font-medium">Demo de presentación</span> · todos los datos son ficticios
+    </div>
+
+    <!-- Barra superior con acciones -->
+    <div class="no-print bg-slate-900 text-white text-sm">
+        <div class="mx-auto max-w-4xl px-4 py-3 flex items-center justify-between flex-wrap gap-2">
+            <a href="facturacion.html" class="hover:text-amber-300">← Volver a Facturación</a>
+            <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-400 mr-2">Estado: <span class="px-2 py-0.5 rounded-full bg-amber-400 text-slate-900 font-medium">Borrador</span></span>
+                <button class="rounded border border-slate-600 px-3 py-1 hover:bg-slate-700">✎ Editar</button>
+                <button class="rounded border border-slate-600 px-3 py-1 hover:bg-slate-700">✉ Enviar por email</button>
+                <button onclick="window.print()" class="rounded bg-amber-400 text-slate-900 px-4 py-1 font-semibold hover:bg-amber-300">🖨 Imprimir / PDF</button>
+                <button class="rounded bg-emerald-600 text-white px-4 py-1 font-semibold hover:bg-emerald-500">✓ Marcar emitida</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hoja A4 -->
+    <main class="mx-auto max-w-4xl bg-white shadow-lg my-8 p-10" style="min-height: 27cm;">
+
+        <!-- Cabecera: emisor y datos factura -->
+        <header class="flex items-start justify-between border-b-2 border-slate-900 pb-6 mb-6">
+            <div class="flex items-start gap-4">
+                <div class="w-14 h-14 rounded-xl bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div>
+                    <p class="text-lg font-bold text-slate-900">Fundación Aspanias Burgos</p>
+                    <p class="text-xs text-slate-600">G-09000000 (NIF ficticio)</p>
+                    <p class="text-xs text-slate-600 mt-1">C/ Federico Olmeda 12 · 09005 Burgos</p>
+                    <p class="text-xs text-slate-600">Tel. 947 27 01 27 · administracion@aspanias.org</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <p class="text-xs uppercase tracking-widest text-emerald-700 font-semibold">Factura</p>
+                <p class="text-2xl font-bold text-slate-900 mt-1">F-2026/06/0042</p>
+                <p class="text-xs text-slate-500 mt-2">Fecha emisión: <strong>05/06/2026</strong></p>
+                <p class="text-xs text-slate-500">Periodo: <strong>Junio 2026</strong></p>
+                <p class="text-xs text-slate-500">Vencimiento: <strong>05/07/2026</strong></p>
+            </div>
+        </header>
+
+        <!-- Datos del destinatario -->
+        <section class="grid grid-cols-2 gap-6 mb-6">
+            <div class="rounded-lg border border-slate-200 p-4">
+                <p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Persona atendida</p>
+                <p class="font-semibold text-slate-900 mt-1">González Pérez, Marta</p>
+                <p class="text-xs text-slate-600">FUE-2026-00001 · DNI ‒‒‒‒‒‒‒‒‒</p>
+                <p class="text-xs text-slate-600 mt-1">Residencia Fuentecillas · C/ Fuentecillas s/n, 09001 Burgos</p>
+            </div>
+            <div class="rounded-lg border border-slate-200 p-4">
+                <p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Titular del pago</p>
+                <p class="font-semibold text-slate-900 mt-1">Carmen Pérez Llamas</p>
+                <p class="text-xs text-slate-600">DNI ‒‒‒‒‒‒‒‒‒ · curadora representativa</p>
+                <p class="text-xs text-slate-600 mt-1">Dirección: ─────, Burgos</p>
+                <p class="text-xs text-slate-600 mt-1">IBAN: ES‒‒ ‒‒‒‒ ‒‒‒‒ ‒‒‒‒ ‒‒‒‒</p>
+            </div>
+        </section>
+
+        <!-- Líneas de facturación -->
+        <section class="mb-6">
+            <h2 class="text-xs uppercase tracking-widest text-slate-500 font-semibold mb-2">Detalle del servicio · Junio 2026</h2>
+            <table class="w-full text-sm border border-slate-200">
+                <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-600">
+                    <tr>
+                        <th class="px-3 py-2 text-left font-medium">Concepto</th>
+                        <th class="px-3 py-2 text-right font-medium">Cantidad</th>
+                        <th class="px-3 py-2 text-right font-medium">Tarifa</th>
+                        <th class="px-3 py-2 text-right font-medium">Importe</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <!-- Facturación habitual -->
+                    <tr class="bg-emerald-50/50">
+                        <td colspan="4" class="px-3 py-1.5 text-xs font-semibold text-emerald-800 uppercase tracking-wide">Facturación habitual</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2">
+                            <p class="font-medium">Plaza concertada Centro Integral · DI · modalidad residencial</p>
+                            <p class="text-xs text-slate-500">Tipo de servicio: RE · grupo A · 30 días</p>
+                        </td>
+                        <td class="px-3 py-2 text-right">30 días</td>
+                        <td class="px-3 py-2 text-right">29,28 €/día</td>
+                        <td class="px-3 py-2 text-right font-medium">878,50 €</td>
+                    </tr>
+
+                    <!-- Servicios extraordinarios -->
+                    <tr class="bg-amber-50/50">
+                        <td colspan="4" class="px-3 py-1.5 text-xs font-semibold text-amber-800 uppercase tracking-wide">Servicios extraordinarios</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2">
+                            <p class="font-medium">Acompañamiento médico</p>
+                            <p class="text-xs text-slate-500">03/06/2026 · CS Burgos Norte · análisis</p>
+                        </td>
+                        <td class="px-3 py-2 text-right">2,5 h</td>
+                        <td class="px-3 py-2 text-right">14,20 €/h</td>
+                        <td class="px-3 py-2 text-right">35,50 €</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2">
+                            <p class="font-medium">Podología</p>
+                            <p class="text-xs text-slate-500">02/06/2026 · sesión mensual</p>
+                        </td>
+                        <td class="px-3 py-2 text-right">1</td>
+                        <td class="px-3 py-2 text-right">15,00 €</td>
+                        <td class="px-3 py-2 text-right">15,00 €</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2">
+                            <p class="font-medium">Kilometraje desplazamiento médico</p>
+                            <p class="text-xs text-slate-500">03/06/2026 · CS Burgos Norte · 24 km</p>
+                        </td>
+                        <td class="px-3 py-2 text-right">24 km</td>
+                        <td class="px-3 py-2 text-right">0,25 €/km</td>
+                        <td class="px-3 py-2 text-right">6,00 €</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="bg-slate-50 font-semibold">
+                        <td colspan="3" class="px-3 py-2 text-right">Subtotal facturación habitual</td>
+                        <td class="px-3 py-2 text-right">878,50 €</td>
+                    </tr>
+                    <tr class="bg-slate-50 font-semibold">
+                        <td colspan="3" class="px-3 py-2 text-right">Subtotal servicios extraordinarios</td>
+                        <td class="px-3 py-2 text-right">56,50 €</td>
+                    </tr>
+                    <tr class="bg-slate-50">
+                        <td colspan="3" class="px-3 py-2 text-right text-xs text-slate-600">IVA (exento · art. 20 LIVA · servicios sociales)</td>
+                        <td class="px-3 py-2 text-right text-xs text-slate-600">— €</td>
+                    </tr>
+                    <tr class="bg-emerald-700 text-white font-bold">
+                        <td colspan="3" class="px-3 py-3 text-right">TOTAL FACTURA</td>
+                        <td class="px-3 py-3 text-right text-lg">935,00 €</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <!-- Forma de pago + observaciones -->
+        <section class="grid grid-cols-2 gap-6 mb-6">
+            <div class="rounded-lg border border-slate-200 p-4">
+                <p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Forma de pago</p>
+                <p class="font-medium text-slate-900 mt-1">Domiciliación bancaria · SEPA</p>
+                <p class="text-xs text-slate-600 mt-1">Cargo automático en cuenta ES‒‒ ‒‒‒‒ ‒‒‒‒ ‒‒‒‒ ‒‒‒‒</p>
+                <p class="text-xs text-slate-600">Fecha cargo prevista: <strong>10/07/2026</strong></p>
+                <p class="text-xs text-slate-500 mt-2 italic">Mandato: ASP-2018-0042 · firmado 12/09/2018</p>
+            </div>
+            <div class="rounded-lg border border-slate-200 p-4">
+                <p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Observaciones</p>
+                <p class="text-xs text-slate-700 mt-1">Plaza concertada con la Gerencia de Servicios Sociales de Castilla y León. Importe deducido de las aportaciones públicas vigentes (concierto Decreto 2/2024 CyL).</p>
+                <p class="text-xs text-slate-500 mt-2">Si tiene cualquier duda, contacte con Administración: <strong>administracion@aspanias.org</strong> · 947 27 01 27 (lunes a viernes 9:00-14:00).</p>
+            </div>
+        </section>
+
+        <!-- Pie legal -->
+        <footer class="pt-4 border-t border-slate-300 text-[10px] text-slate-500 leading-relaxed">
+            <p><strong>Fundación Aspanias Burgos</strong> · G-09000000 · Inscrita en el Registro de Fundaciones de Castilla y León con el nº ‒‒‒ · C/ Federico Olmeda 12, 09005 Burgos.</p>
+            <p class="mt-1">Esta factura cumple los requisitos del Real Decreto 1619/2012, de 30 de noviembre, por el que se regulan las obligaciones de facturación. Conserve este documento durante el plazo legalmente establecido.</p>
+            <p class="mt-1"><strong>Protección de datos:</strong> sus datos se tratan conforme a la política de privacidad disponible en aspanias.org/privacidad. Puede ejercer sus derechos en dpo@aspanias.org.</p>
+        </footer>
+    </main>
+
+    <!-- Pie de página acciones (no se imprime) -->
+    <div class="no-print mx-auto max-w-4xl px-4 pb-12 text-center text-xs text-slate-500">
+        <p>📄 Factura generada por ÁGORA · usuario emisor: Sonia Ureta (Administración) · 05/06/2026 · 13:45</p>
+        <p class="mt-1">Acción registrada en bitácora · ID transacción: bit-2026-06-05-13-45-0042</p>
+    </div>
+
+</body>
+</html>

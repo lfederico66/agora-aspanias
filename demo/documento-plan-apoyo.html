@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Plan de Apoyo 2026 · González Pérez, Marta · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4 landscape; margin: 1cm; }
+        @media print { .no-print { display: none !important; } body { background: white !important; } }
+        body { font-family: 'Inter', -apple-system, system-ui, Segoe UI, sans-serif; }
+        .col-encabezado { background: #1e6b4b; color: white; }
+    </style>
+</head>
+<body class="bg-slate-100">
+    <div class="no-print bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-xs py-1.5">
+        🎯 <span class="font-medium">Demo estática</span> — datos ficticios; no es la aplicación real
+    </div>
+
+    <div class="no-print bg-slate-900 text-white text-sm">
+        <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+            <a href="pia-detalle.html" class="hover:text-amber-300">← Volver al Plan de Vida</a>
+            <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-300">ANEXO 4</span>
+                <a href="editar-plan-apoyo.html" class="rounded border border-slate-600 px-3 py-1 hover:bg-slate-700">✎ Editar</a>
+                <button onclick="window.print()" class="rounded bg-amber-400 text-slate-900 px-4 py-1 font-semibold hover:bg-amber-300">🖨 Imprimir</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="mx-auto max-w-[1280px] bg-white shadow my-6 p-8 print:my-0 print:shadow-none">
+        <header class="mb-6">
+            <p class="text-xs uppercase tracking-widest text-slate-500">ANEXO 4</p>
+            <h1 class="text-xl font-bold text-slate-900 uppercase">Plan de Apoyo al Proyecto de Vida</h1>
+            <div class="mt-4 grid grid-cols-3 gap-3 text-sm">
+                <div><strong>Nombre:</strong> Marta</div>
+                <div><strong>Apellidos:</strong> González Pérez</div>
+                <div><strong>Edad:</strong> 40 años</div>
+                <div><strong>Profesional de referencia:</strong> Lucía Martínez (TO)</div>
+                <div><strong>Gestor/a de caso:</strong> María Ruiz Pérez (TS)</div>
+                <div><strong>Fecha de realización:</strong> 24/03/2026</div>
+            </div>
+            <div class="mt-4 rounded bg-emerald-50 border border-emerald-200 p-3">
+                <p class="text-xs font-semibold text-emerald-900 uppercase mb-1">Dimensiones de Calidad de Vida (modelo Schalock)</p>
+                <p class="text-xs text-emerald-800">Autodeterminación · Bienestar Emocional · Bienestar Físico · Bienestar Material · Relaciones Interpersonales · Inclusión Social · Desarrollo Personal · Derechos</p>
+            </div>
+        </header>
+
+        <table class="w-full border-collapse text-xs">
+            <thead>
+                <tr>
+                    <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">OBJETIVOS</th>
+                    <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">ACTIVIDADES</th>
+                    <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">DIMENSIONES CdV</th>
+                    <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">QUÉ (Apoyo)</th>
+                    <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">QUIÉN (Me apoya)</th>
+                    <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">CUÁNDO (Me apoyan)</th>
+                    <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">OBSERVACIONES</th>
+                    <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">SEG. CUANTITATIVO</th>
+                    <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">SEG. DESCRIPTIVO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="align-top">
+                    <td class="border border-slate-300 px-2 py-2 font-medium">Tomar la medicación de la mañana sin recordatorio</td>
+                    <td class="border border-slate-300 px-2 py-2">Uso autónomo del pastillero con dibujos. Alarma móvil de refuerzo.</td>
+                    <td class="border border-slate-300 px-2 py-2">
+                        <span class="inline-block rounded bg-emerald-50 px-1.5 py-0.5 text-emerald-800 mb-1">Bienestar Físico</span>
+                        <span class="inline-block rounded bg-emerald-50 px-1.5 py-0.5 text-emerald-800 mb-1">Autodeterminación</span>
+                    </td>
+                    <td class="border border-slate-300 px-2 py-2">Supervisión a distancia · refuerzo positivo</td>
+                    <td class="border border-slate-300 px-2 py-2">Equipo de enfermería + monitor/a de planta</td>
+                    <td class="border border-slate-300 px-2 py-2">Mañanas, 8:30 – 9:00</td>
+                    <td class="border border-slate-300 px-2 py-2">Objetivo cumplido. Mantenimiento mensual.</td>
+                    <td class="border border-slate-300 px-2 py-2">Diariamente</td>
+                    <td class="border border-slate-300 px-2 py-2">Nivel de satisfacción. Registro de incidencias.</td>
+                </tr>
+                <tr class="align-top">
+                    <td class="border border-slate-300 px-2 py-2 font-medium">Preparar el desayuno los días de diario</td>
+                    <td class="border border-slate-300 px-2 py-2">Plantilla visual de pasos. Manejo de tostadora y leche caliente.</td>
+                    <td class="border border-slate-300 px-2 py-2">
+                        <span class="inline-block rounded bg-emerald-50 px-1.5 py-0.5 text-emerald-800 mb-1">Autodeterminación</span>
+                        <span class="inline-block rounded bg-emerald-50 px-1.5 py-0.5 text-emerald-800 mb-1">Desarrollo Personal</span>
+                    </td>
+                    <td class="border border-slate-300 px-2 py-2">Acompañamiento durante el proceso</td>
+                    <td class="border border-slate-300 px-2 py-2">Monitor/a de planta</td>
+                    <td class="border border-slate-300 px-2 py-2">Lunes a viernes, 8:00 – 8:30</td>
+                    <td class="border border-slate-300 px-2 py-2">Apoyo total al inicio, retirada progresiva.</td>
+                    <td class="border border-slate-300 px-2 py-2">5 días/semana</td>
+                    <td class="border border-slate-300 px-2 py-2">Evaluación semanal en reunión de equipo.</td>
+                </tr>
+                <tr class="align-top">
+                    <td class="border border-slate-300 px-2 py-2 font-medium">Participar en el taller de pintura semanal</td>
+                    <td class="border border-slate-300 px-2 py-2">Recordatorio en su agenda visual.</td>
+                    <td class="border border-slate-300 px-2 py-2">
+                        <span class="inline-block rounded bg-emerald-50 px-1.5 py-0.5 text-emerald-800 mb-1">Bienestar Emocional</span>
+                        <span class="inline-block rounded bg-emerald-50 px-1.5 py-0.5 text-emerald-800 mb-1">Desarrollo Personal</span>
+                    </td>
+                    <td class="border border-slate-300 px-2 py-2">Recordatorio · transporte interno</td>
+                    <td class="border border-slate-300 px-2 py-2">Terapeuta ocupacional + voluntariado</td>
+                    <td class="border border-slate-300 px-2 py-2">Miércoles, 16:30 – 18:00</td>
+                    <td class="border border-slate-300 px-2 py-2">Próximamente proponer exposición conjunta.</td>
+                    <td class="border border-slate-300 px-2 py-2">≥ 80% asistencia</td>
+                    <td class="border border-slate-300 px-2 py-2">Producción artística trimestral.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <footer class="mt-6 text-xs text-slate-400 flex items-center justify-between">
+            <span>ANEXO 4 · 8 Dimensiones de Calidad de Vida (Schalock & Verdugo)</span>
+            <span>ÁGORA · Centro Fuentecillas</span>
+        </footer>
+    </main>
+</body>
+</html>

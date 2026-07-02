@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Revisión de objetivos {{ anualidad }} · {{ persona }} · ÁGORA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @page { size: A4 landscape; margin: 1cm; }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; }
+            .pagina { box-shadow: none !important; margin: 0 !important; padding: 0 !important; }
+        }
+        body { font-family: -apple-system, system-ui, Segoe UI, sans-serif; }
+        .col-encabezado { background: #1e6b4b; color: white; }
+    </style>
+</head>
+<body class="bg-slate-100">
+    <div class="no-print bg-slate-900 text-white text-sm">
+        <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+            <a href="{% url 'planes_vida:detalle' persona.id %}" class="hover:text-amber-300">← Volver al Plan de Vida</a>
+            <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-300">Documento 3 · Anualidad {{ anualidad }}</span>
+                <a href="{% url 'planes_vida:editar_revision_objetivos' persona.id anualidad %}" class="rounded border border-slate-600 px-3 py-1 hover:bg-slate-700">✎ Editar</a>
+                <button onclick="window.print()" class="rounded bg-amber-400 text-slate-900 px-4 py-1 font-semibold hover:bg-amber-300">🖨 Imprimir</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="pagina mx-auto max-w-7xl bg-white shadow my-6 p-8 print:my-0 print:shadow-none">
+
+        <header class="mb-6">
+            <h1 class="text-xl font-bold text-slate-900 uppercase">PROYECTO DE VIDA. Seguimiento de los deseos logrados</h1>
+            <div class="mt-4 grid grid-cols-2 gap-4 text-sm">
+                <div><span class="font-semibold">Nombre y apellidos:</span> {{ persona.apellido_1 }} {{ persona.apellido_2 }}, {{ persona.nombre }}</div>
+                <div><span class="font-semibold">Fecha:</span> {{ plan.fecha_revision|date:"d/m/Y"|default:"—" }}</div>
+                <div><span class="font-semibold">Persona de referencia:</span> {{ plan.persona_referencia|default:"—" }}</div>
+                <div><span class="font-semibold">Gestor/a de Caso:</span> {{ plan.gestor_caso|default:"—" }}</div>
+            </div>
+        </header>
+
+        <table class="w-full border-collapse text-sm">
+            <thead>
+                <tr>
+                    <th class="col-encabezado border border-slate-300 px-3 py-2 w-1/4 text-left font-semibold uppercase">Objetivos</th>
+                    <th class="col-encabezado border border-slate-300 px-3 py-2 w-1/4 text-left font-semibold">¿Qué ha logrado hasta la fecha?</th>
+                    <th class="col-encabezado border border-slate-300 px-3 py-2 w-1/4 text-left font-semibold">No lo ha conseguido ¿Cuál puede ser el motivo?</th>
+                    <th class="col-encabezado border border-slate-300 px-3 py-2 w-1/4 text-left font-semibold">¿Cómo podemos ayudarle a conseguirlo? Propuestas de apoyo. Qué se necesita</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fila in filas %}
+                <tr class="align-top">
+                    <td class="border border-slate-300 px-3 py-2">
+                        <p class="font-medium text-slate-900">{{ fila.objetivo.descripcion }}</p>
+                        <p class="mt-1 text-xs text-slate-500">{{ fila.objetivo.get_ambito_display }} · {{ fila.objetivo.get_estado_display }}</p>
+                    </td>
+                    <td class="border border-slate-300 px-3 py-2 whitespace-pre-line">{{ fila.revision.que_ha_logrado|default:"" }}</td>
+                    <td class="border border-slate-300 px-3 py-2 whitespace-pre-line">{{ fila.revision.motivo_no_consecucion|default:"" }}</td>
+                    <td class="border border-slate-300 px-3 py-2 whitespace-pre-line">{{ fila.revision.propuesta_apoyos|default:"" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="border border-slate-300 px-3 py-8 text-center text-sm text-slate-500">
+                        Este Plan de Vida no tiene objetivos registrados todavía.
+                    </td>
+                </tr>
+                {% endfor %}
+                {# Filas vacías para imprimir y rellenar a mano si hace falta — total 6 como el Excel original #}
+                {% with vacias=filas|length %}
+                    {% if vacias < 6 %}
+                        {% for _ in "xxxxxx"|make_list %}
+                            {% if forloop.counter <= 6|add:"-"|add:vacias|add:"" %}{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </tbody>
+        </table>
+
+        <footer class="mt-6 text-xs text-slate-400 flex items-center justify-between">
+            <span>Documento "Revisión de objetivos" · Protocolo Planes de Vida Fundación Aspanias</span>
+            <span>ÁGORA · {{ persona.centro_referencia.nombre }}</span>
+        </footer>
+    </main>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipo · Profesionales — ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="flex min-h-screen" x-data="{ userMenu: false, letra: 'A', filtroRol: 'todos', filtroCentro: 'todos', mostrarFiltros: false, toast: false }">
+
+    <!-- =========================================================== -->
+    <!-- SIDEBAR                                                     -->
+    <!-- =========================================================== -->
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100">
+            <div class="w-full flex items-center gap-2.5 p-2 rounded-lg">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0"><p class="text-sm font-medium truncate">Federico Martínez</p><p class="text-[10px] text-slate-500 truncate">Gerencia</p></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- =========================================================== -->
+    <!-- MAIN                                                        -->
+    <!-- =========================================================== -->
+    <main class="flex-1 min-w-0">
+
+        <!-- Breadcrumb sticky -->
+        <div class="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-slate-200 px-8 py-3">
+            <nav class="text-xs text-slate-500 flex items-center gap-1.5">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a>
+                <span>›</span>
+                <span class="text-slate-900 font-medium">Equipo</span>
+            </nav>
+        </div>
+
+        <!-- Cabecera + tabs principales -->
+        <header class="px-8 pt-6 pb-2 border-b border-slate-200 bg-white">
+            <div class="flex items-start justify-between mb-4">
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">Equipo</h1>
+                    <p class="text-sm text-slate-500 mt-1">187 profesionales · 18 centros y servicios · Grupo Social Aspanias</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button @click="toast = 'Exportar plantilla a Excel — F1 sprint 2'; setTimeout(()=>toast=false, 2400)" class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700">📥 Exportar</button>
+                    <button @click="toast = 'Nuevo profesional — pendiente backend'; setTimeout(()=>toast=false, 2400)" class="px-4 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">+ Nuevo profesional</button>
+                </div>
+            </div>
+
+            <!-- Tabs principales del módulo Equipo -->
+            <nav class="flex gap-1 -mb-px">
+                <a href="profesionales.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-emerald-700 text-emerald-700">👤 Profesionales</a>
+                <a href="vacaciones.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">🏖 Vacaciones y ausencias</a>
+                <a href="turnos.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">🕒 Turnos</a>
+                <a href="calendario-laboral.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">📆 Calendario laboral</a>
+                <a href="patrones-turno.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">🔁 Patrones de turno</a>
+            </nav>
+        </header>
+
+        <!-- KPIs del equipo -->
+        <section class="px-8 py-5 bg-white border-b border-slate-200">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">Plantilla total</p>
+                    <p class="mt-1 text-2xl font-light">187</p>
+                    <p class="text-[10px] text-slate-500">+4 último mes</p>
+                </div>
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">Hoy en activo</p>
+                    <p class="mt-1 text-2xl font-light text-emerald-700">158</p>
+                    <p class="text-[10px] text-slate-500">84,5 %</p>
+                </div>
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">De vacaciones</p>
+                    <p class="mt-1 text-2xl font-light text-sky-700">17</p>
+                    <p class="text-[10px] text-slate-500">9,1 %</p>
+                </div>
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">Baja / IT</p>
+                    <p class="mt-1 text-2xl font-light text-amber-700">8</p>
+                    <p class="text-[10px] text-slate-500">4,3 %</p>
+                </div>
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">Otros permisos</p>
+                    <p class="mt-1 text-2xl font-light text-slate-700">4</p>
+                    <p class="text-[10px] text-slate-500">formación / lactancia</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Buscador + filtros -->
+        <section class="px-8 py-4 bg-white border-b border-slate-200">
+            <div class="flex items-center gap-3 flex-wrap">
+                <div class="relative flex-1 min-w-[260px] max-w-md">
+                    <span class="absolute left-3 top-2.5 text-slate-400">🔎</span>
+                    <input type="search" placeholder="Buscar profesional por nombre, DNI, rol o centro…" class="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+                </div>
+                <select x-model="filtroRol" class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white">
+                    <option value="todos">Todos los roles</option>
+                    <option value="enfermeria">Enfermería</option>
+                    <option value="auxiliar">Auxiliares (gerocultor/a)</option>
+                    <option value="psicologia">Psicología</option>
+                    <option value="trabajosocial">Trabajo Social</option>
+                    <option value="terapia">Terapia ocupacional</option>
+                    <option value="fisio">Fisioterapia</option>
+                    <option value="medico">Médico/a</option>
+                    <option value="direccion">Dirección de centro</option>
+                    <option value="admin">Administración</option>
+                </select>
+                <select x-model="filtroCentro" class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white">
+                    <option value="todos">Todos los centros</option>
+                    <option>Residencia Fuentecillas</option>
+                    <option>Residencia Quintanadueñas</option>
+                    <option>Residencia Páramo</option>
+                    <option>CO Fuentecillas</option>
+                    <option>CO Plata</option>
+                    <option>Servicio Puentes</option>
+                    <option>Vida Independiente</option>
+                    <option>A Gusto en Casa</option>
+                    <option>Intecum</option>
+                </select>
+                <button class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50">⚙ Más filtros</button>
+                <span class="text-xs text-slate-500 ml-auto">Mostrando 1 – 8 de <strong>187 profesionales</strong></span>
+            </div>
+
+            <!-- Salto alfabético A→Z -->
+            <div class="mt-3 flex items-center gap-0.5 flex-wrap text-xs">
+                <span class="text-slate-500 mr-2">Saltar a:</span>
+                <template x-for="l in ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']" :key="l">
+                    <button @click="letra = l" :class="letra === l ? 'bg-emerald-700 text-white' : 'text-slate-600 hover:bg-slate-100'" class="w-6 h-6 rounded text-[11px] font-medium" x-text="l"></button>
+                </template>
+            </div>
+        </section>
+
+        <!-- Tabla de profesionales (8 muestra) -->
+        <section class="px-8 py-6">
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                <table class="w-full text-sm">
+                    <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                        <tr>
+                            <th class="px-4 py-3 text-left">Profesional</th>
+                            <th class="px-4 py-3 text-left">Rol</th>
+                            <th class="px-4 py-3 text-left">Centro principal</th>
+                            <th class="px-4 py-3 text-left">Jornada</th>
+                            <th class="px-4 py-3 text-center">Estado hoy</th>
+                            <th class="px-4 py-3 text-right">Días pendientes</th>
+                            <th class="px-4 py-3"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr class="hover:bg-emerald-50/40">
+                            <td class="px-4 py-3">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-semibold">AR</div>
+                                    <div>
+                                        <p class="font-medium text-slate-900">Antolín Robles, Mercedes</p>
+                                        <p class="text-[11px] text-slate-500">mercedes.antolin · ext. 142</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-4 py-3 text-slate-700">Coord. asistencial</td>
+                            <td class="px-4 py-3 text-slate-700">A Gusto en Casa</td>
+                            <td class="px-4 py-3 text-slate-500 text-xs">Completa · L-V</td>
+                            <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-medium">En activo</span></td>
+                            <td class="px-4 py-3 text-right">12 / 22</td>
+                            <td class="px-4 py-3"><a href="profesional-detalle.html" class="text-emerald-700 hover:text-emerald-900 text-xs font-medium">Ver ficha →</a></td>
+                        </tr>
+                        <tr class="hover:bg-emerald-50/40">
+                            <td class="px-4 py-3">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-full bg-sky-100 text-sky-800 flex items-center justify-center text-xs font-semibold">CD</div>
+                                    <div>
+                                        <p class="font-medium text-slate-900">Camarero Díaz, Diego</p>
+                                        <p class="text-[11px] text-slate-500">diego.camarero · ext. 217</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-4 py-3 text-slate-700">Dirección de centro</td>
+                            <td class="px-4 py-3 text-slate-700">Servicio Puentes</td>
+                            <td class="px-4 py-3 text-slate-500 text-xs">Completa · L-V</td>
+                            <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-medium">En activo</span></td>
+                            <td class="px-4 py-3 text-right">15 / 22</td>
+                            <td class="px-4 py-3"><a href="profesional-detalle.html" class="text-emerald-700 hover:text-emerald-900 text-xs font-medium">Ver ficha →</a></td>
+                        </tr>
+                        <tr class="hover:bg-emerald-50/40">
+                            <td class="px-4 py-3">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-800 flex items-center justify-center text-xs font-semibold">DV</div>
+                                    <div>
+                                        <p class="font-medium text-slate-900">Domínguez Vélez, Sara</p>
+                                        <p class="text-[11px] text-slate-500">sara.dominguez · ext. 304</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-4 py-3 text-slate-700">Trabajo Social</td>
+                            <td class="px-4 py-3 text-slate-700">Vida Independiente</td>
+                            <td class="px-4 py-3 text-slate-500 text-xs">Completa · L-V</td>
+                            <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 text-[11px] font-medium">🏖 Vacaciones</span></td>
+                            <td class="px-4 py-3 text-right">8 / 22</td>
+                            <td class="px-4 py-3"><a href="profesional-detalle.html" class="text-emerald-700 hover:text-emerald-900 text-xs font-medium">Ver ficha →</a></td>
+                        </tr>
+                        <tr class="hover:bg-emerald-50/40">
+                            <td class="px-4 py-3">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-full bg-rose-100 text-rose-800 flex items-center justify-center text-xs font-semibold">GT</div>
+                                    <div>
+                                        <p class="font-medium text-slate-900">Gil Tobar, Esther</p>
+                                        <p class="text-[11px] text-slate-500">esther.gil · ext. 412</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-4 py-3 text-slate-700">Enfermería</td>
+                            <td class="px-4 py-3 text-slate-700">Intecum</td>
+                            <td class="px-4 py-3 text-slate-500 text-xs">Completa · Turnos</td>
+                            <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-medium">En activo</span></td>
+                            <td class="px-4 py-3 text-right">18 / 22</td>
+                            <td class="px-4 py-3"><a href="profesional-detalle.html" class="text-emerald-700 hover:text-emerald-900 text-xs font-medium">Ver ficha →</a></td>
+                        </tr>
+                        <tr class="hover:bg-emerald-50/40">
+                            <td class="px-4 py-3">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-xs font-semibold">GR</div>
+                                    <div>
+                                        <p class="font-medium text-slate-900">González Ruiz, Dori</p>
+                                        <p class="text-[11px] text-slate-500">dori.gonzalez · ext. 156</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-4 py-3 text-slate-700">Administración</td>
+                            <td class="px-4 py-3 text-slate-700">Sede central</td>
+                            <td class="px-4 py-3 text-slate-500 text-xs">Completa · L-V</td>
+                            <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-medium">En activo</span></td>
+                            <td class="px-4 py-3 text-right">10 / 22</td>
+                            <td class="px-4 py-3"><a href="profesional-detalle.html" class="text-emerald-700 hover:text-emerald-900 text-xs font-medium">Ver ficha →</a></td>
+                        </tr>
+                        <tr class="hover:bg-emerald-50/40">
+                            <td class="px-4 py-3">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-semibold">LP</div>
+                                    <div>
+                                        <p class="font-medium text-slate-900">López Pérez, Marta</p>
+                                        <p class="text-[11px] text-slate-500">marta.lopez · ext. 521</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-4 py-3 text-slate-700">Gerocultora</td>
+                            <td class="px-4 py-3 text-slate-700">Residencia Fuentecillas</td>
+                            <td class="px-4 py-3 text-slate-500 text-xs">Completa · Turnos</td>
+                            <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-medium">⚕ IT</span></td>
+                            <td class="px-4 py-3 text-right">5 / 22</td>
+                            <td class="px-4 py-3"><a href="profesional-detalle.html" class="text-emerald-700 hover:text-emerald-900 text-xs font-medium">Ver ficha →</a></td>
+                        </tr>
+                        <tr class="hover:bg-emerald-50/40">
+                            <td class="px-4 py-3">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-full bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-semibold">MS</div>
+                                    <div>
+                                        <p class="font-medium text-slate-900">Martín Sancho, Laura</p>
+                                        <p class="text-[11px] text-slate-500">laura.martin · ext. 233</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-4 py-3 text-slate-700">Psicología</td>
+                            <td class="px-4 py-3 text-slate-700">Residencia Fuentecillas</td>
+                            <td class="px-4 py-3 text-slate-500 text-xs">Parcial · L-V mañana</td>
+                            <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-medium">En activo</span></td>
+                            <td class="px-4 py-3 text-right">11 / 11</td>
+                            <td class="px-4 py-3"><a href="profesional-detalle.html" class="text-emerald-700 hover:text-emerald-900 text-xs font-medium">Ver ficha →</a></td>
+                        </tr>
+                        <tr class="hover:bg-emerald-50/40">
+                            <td class="px-4 py-3">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-800 flex items-center justify-center text-xs font-semibold">UR</div>
+                                    <div>
+                                        <p class="font-medium text-slate-900">Ureta Ramos, Sonia</p>
+                                        <p class="text-[11px] text-slate-500">sonia.ureta · ext. 101</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-4 py-3 text-slate-700">Dirección Administración</td>
+                            <td class="px-4 py-3 text-slate-700">Sede central</td>
+                            <td class="px-4 py-3 text-slate-500 text-xs">Completa · L-V</td>
+                            <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-medium">En activo</span></td>
+                            <td class="px-4 py-3 text-right">9 / 22</td>
+                            <td class="px-4 py-3"><a href="profesional-detalle.html" class="text-emerald-700 hover:text-emerald-900 text-xs font-medium">Ver ficha →</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Paginación -->
+                <div class="flex items-center justify-between px-4 py-3 border-t border-slate-100 bg-slate-50/60 text-xs text-slate-600">
+                    <p>Página <strong>1</strong> de 24 · 8 por página</p>
+                    <div class="flex items-center gap-1">
+                        <button class="px-2 py-1 rounded border border-slate-200 bg-white text-slate-400" disabled>‹ Anterior</button>
+                        <button class="px-2 py-1 rounded border border-emerald-700 bg-emerald-700 text-white font-medium">1</button>
+                        <button class="px-2 py-1 rounded border border-slate-200 bg-white hover:bg-slate-50">2</button>
+                        <button class="px-2 py-1 rounded border border-slate-200 bg-white hover:bg-slate-50">3</button>
+                        <span class="px-2 text-slate-400">…</span>
+                        <button class="px-2 py-1 rounded border border-slate-200 bg-white hover:bg-slate-50">24</button>
+                        <button class="px-2 py-1 rounded border border-slate-200 bg-white hover:bg-slate-50">Siguiente ›</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aviso integración SIGPER/EQUIPO -->
+            <div class="mt-5 rounded-lg border border-sky-200 bg-sky-50 p-4 text-xs text-sky-900">
+                <p class="font-semibold mb-1">🔗 Integración futura</p>
+                <p>El módulo Equipo en ÁGORA cubre la <strong>capa asistencial</strong> (quién está hoy, cobertura del centro, ratios). La <strong>gestión laboral formal</strong> (alta/baja en plantilla, nómina, contrato) se sincronizará con <strong>EQUIPO</strong> (suite RRHH del grupo). Las <strong>solicitudes de vacaciones y permisos</strong> con <strong>SIGPER</strong> (Sistema de Gestión de Permisos y Licencias). Decisión documentada en <em>docs/modelo-datos/decision_modulo_equipo_solapamiento.md</em>.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast -->
+    <div x-show="toast" x-cloak x-transition.opacity class="fixed bottom-6 right-6 z-30 rounded-lg bg-slate-900 text-white px-4 py-3 shadow-xl text-sm" x-text="toast"></div>
+</div>
+
+</body>
+</html>

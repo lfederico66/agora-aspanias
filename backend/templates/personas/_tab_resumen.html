@@ -1,0 +1,130 @@
+{# Tab: Resumen — vista de un golpe de los datos esenciales. #}
+<div class="grid gap-6 md:grid-cols-3">
+    <div class="md:col-span-2 space-y-6">
+        <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Identificación rápida</h2>
+            <dl class="mt-3 grid grid-cols-2 gap-3 text-sm">
+                <div><dt class="text-slate-500">Sexo</dt><dd>{{ persona.get_sexo_display }}</dd></div>
+                <div>
+                    <dt class="text-slate-500">Edad</dt>
+                    <dd>{{ persona.fecha_nacimiento|timesince|cut:", "|truncatewords:1 }} ({{ persona.fecha_nacimiento|date:"d/m/Y" }})</dd>
+                </div>
+                <div><dt class="text-slate-500">DNI/NIE</dt><dd class="font-mono">{{ persona.dni_nie|default:"—" }}</dd></div>
+                {% for cert in persona.certificados_discapacidad.all|slice:":1" %}
+                    <div><dt class="text-slate-500">% Discapacidad</dt><dd>{{ cert.grado_pct }}% · {{ cert.get_tipo_reconocimiento_display }}</dd></div>
+                {% endfor %}
+                {% for rec in persona.reconocimientos_dependencia.all|slice:":1" %}
+                    <div><dt class="text-slate-500">Nivel Dependencia</dt><dd>{{ rec.get_grado_display }}</dd></div>
+                {% endfor %}
+                <div><dt class="text-slate-500">Antigüedad</dt><dd>{{ persona.fecha_alta|timesince }}</dd></div>
+                {% if ocupacion_actual %}
+                    <div class="col-span-2 pt-2 border-t border-slate-100">
+                        <dt class="text-slate-500">🛏 Alojamiento</dt>
+                        <dd class="font-medium">{{ persona.ubicacion_residencial }}</dd>
+                    </div>
+                {% endif %}
+            </dl>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-3">Atención y seguimiento</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <a href="{% url 'planes_vida:detalle' persona.id %}" class="rounded-lg border border-slate-200 p-3 text-sm hover:border-emerald-400 hover:shadow-sm transition">
+                    <strong class="block text-slate-900">📔 Plan de Vida →</strong>
+                    <span class="text-slate-500 text-xs">Documentos del protocolo, objetivos y revisiones</span>
+                </a>
+                <a href="{% url 'intervenciones:lista' %}?persona={{ persona.id }}" class="rounded-lg border border-slate-200 p-3 text-sm hover:border-emerald-400 hover:shadow-sm transition">
+                    <strong class="block text-slate-900">📝 Intervenciones →</strong>
+                    <span class="text-slate-500 text-xs">Historial cronológico</span>
+                </a>
+                <a href="{% url 'agenda:semana' %}?persona={{ persona.id }}" class="rounded-lg border border-slate-200 p-3 text-sm hover:border-emerald-400 hover:shadow-sm transition">
+                    <strong class="block text-slate-900">📅 Próximas citas →</strong>
+                    <span class="text-slate-500 text-xs">Agenda de la persona</span>
+                </a>
+                <button @click="tab='medicacion'" class="text-left rounded-lg border border-slate-200 p-3 text-sm hover:border-emerald-400 hover:shadow-sm transition">
+                    <strong class="block text-slate-900">💊 Medicación activa →</strong>
+                    <span class="text-slate-500 text-xs">{{ persona.pautas_medicacion.all|length }} pautas registradas</span>
+                </button>
+            </div>
+        </article>
+
+        {% if persona.notas_relevantes %}
+        <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Notas internas</h2>
+            <p class="mt-2 text-sm whitespace-pre-line">{{ persona.notas_relevantes }}</p>
+        </article>
+        {% endif %}
+    </div>
+
+    <aside class="space-y-4">
+        {% if medida_apoyo and medida_apoyo.tipo != "sin_medida" %}
+        <article class="rounded-xl border-2 border-amber-300 bg-amber-50 p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-amber-800">Medida de apoyo</h2>
+                <span class="text-xs text-amber-700">Ley 8/2021</span>
+            </div>
+            <p class="mt-2 font-medium text-amber-900">{{ medida_apoyo.get_tipo_display }}</p>
+            {% if medida_apoyo.subtipo_curatela != "no_procede" %}
+                <p class="text-sm text-amber-800">{{ medida_apoyo.get_subtipo_curatela_display }}</p>
+            {% endif %}
+            {% if medida_apoyo.fecha_resolucion %}
+                <p class="mt-1 text-xs text-amber-700">Resolución: {{ medida_apoyo.fecha_resolucion|date:"d/m/Y" }}</p>
+            {% endif %}
+            {% if medida_apoyo.persona_curadora %}
+                <div class="mt-3 border-t border-amber-200 pt-2 text-xs text-amber-800">
+                    <strong>Persona curadora:</strong> {{ medida_apoyo.persona_curadora }}
+                </div>
+            {% endif %}
+        </article>
+        {% endif %}
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Figuras profesionales</h2>
+            <p class="text-[11px] text-slate-400 mt-0.5">Protocolo Planes de Vida</p>
+            <dl class="mt-3 space-y-3 text-sm">
+                {% if persona.gestor_caso %}
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-semibold flex-shrink-0">
+                        {{ persona.gestor_caso.nombre_completo|slice:":2"|upper }}
+                    </div>
+                    <div>
+                        <dt class="text-[10px] uppercase tracking-wide text-slate-500">Gestor/a de caso</dt>
+                        <dd class="font-medium text-slate-900">{{ persona.gestor_caso.nombre_completo }}</dd>
+                        {% if persona.gestor_caso.rol_principal %}
+                            <dd class="text-xs text-slate-500">{{ persona.gestor_caso.rol_principal.nombre }}</dd>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                {% if persona.persona_referencia %}
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-xs font-semibold flex-shrink-0">
+                        {{ persona.persona_referencia.nombre_completo|slice:":2"|upper }}
+                    </div>
+                    <div>
+                        <dt class="text-[10px] uppercase tracking-wide text-slate-500">Persona de referencia</dt>
+                        <dd class="font-medium text-slate-900">{{ persona.persona_referencia.nombre_completo }}</dd>
+                        {% if persona.persona_referencia.rol_principal %}
+                            <dd class="text-xs text-slate-500">{{ persona.persona_referencia.rol_principal.nombre }}</dd>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </dl>
+        </article>
+
+        {% if valoraciones %}
+        <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Valoraciones recientes</h2>
+            <ul class="mt-3 space-y-2 text-sm">
+                {% for v in valoraciones %}
+                <li>
+                    <p class="font-medium">{{ v.tipo|default:"Valoración" }}</p>
+                    <p class="text-xs text-slate-500">{{ v.fecha|date:"d/m/Y" }} · {{ v.aplicado_por|default:"—" }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </article>
+        {% endif %}
+    </aside>
+</div>

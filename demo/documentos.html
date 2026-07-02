@@ -1,0 +1,253 @@
+<!-- @rol: gerencia, direccion_centro, gestor_caso, rrhh -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentos · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="flex min-h-screen" x-data="{ userMenu: false, categoria: 'todos' }">
+
+    <!-- SIDEBAR -->
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight"><p class="text-base font-semibold tracking-tight">ÁGORA</p><p class="text-[10px] text-slate-500">Grupo Social Aspanias</p></div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100">
+            <div class="w-full flex items-center gap-2.5 p-2 rounded-lg">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0"><p class="text-sm font-medium truncate">Federico Martínez</p><p class="text-[10px] text-slate-500 truncate">Gerencia</p></div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+        <div class="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-slate-200 px-8 py-3">
+            <nav class="text-xs text-slate-500 flex items-center gap-1.5">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a><span>›</span>
+                <span class="text-slate-900 font-medium">Documentos</span>
+            </nav>
+        </div>
+
+        <header class="px-8 pt-6 pb-4 border-b border-slate-200 bg-white">
+            <div>
+                <h1 class="text-2xl font-semibold tracking-tight">📁 Documentos</h1>
+                <p class="text-sm text-slate-500 mt-1">Centralización de todos los documentos imprimibles, firmables y exportables del sistema</p>
+            </div>
+
+            <!-- Filtros categoría -->
+            <div class="mt-4 flex gap-1 flex-wrap">
+                <button @click="categoria = 'todos'" :class="categoria === 'todos' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 text-xs rounded-lg font-medium">Todos</button>
+                <button @click="categoria = 'persona'" :class="categoria === 'persona' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 text-xs rounded-lg font-medium">👥 Plan de Vida</button>
+                <button @click="categoria = 'equipo'" :class="categoria === 'equipo' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 text-xs rounded-lg font-medium">🩺 Equipo</button>
+                <button @click="categoria = 'economico'" :class="categoria === 'economico' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 text-xs rounded-lg font-medium">💼 Económico</button>
+                <button @click="categoria = 'agenda'" :class="categoria === 'agenda' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 text-xs rounded-lg font-medium">📅 Agenda</button>
+                <button @click="categoria = 'valoraciones'" :class="categoria === 'valoraciones' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 text-xs rounded-lg font-medium">🧠 Valoraciones</button>
+            </div>
+        </header>
+
+        <section class="px-8 py-6 space-y-6">
+
+            <!-- Plan de Vida (5 documentos) -->
+            <div x-show="categoria === 'todos' || categoria === 'persona'">
+                <h2 class="text-sm font-semibold mb-3 text-emerald-800">👥 Plan de Vida · Protocolo Aspanias</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <a href="documento-historia-vida.html" class="group p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">📖</span>
+                            <div><p class="font-semibold text-sm group-hover:text-emerald-700">Historia de vida</p><p class="text-[11px] text-slate-500">A4 imprimible</p></div>
+                        </div>
+                        <p class="text-xs text-slate-600">Relato biográfico de la persona atendida. Documento 1/5 del Protocolo PV.</p>
+                    </a>
+                    <a href="documento-algo-sobre-mi.html" class="group p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">💬</span>
+                            <div><p class="font-semibold text-sm group-hover:text-emerald-700">Algo sobre mí</p><p class="text-[11px] text-slate-500">A4 imprimible</p></div>
+                        </div>
+                        <p class="text-xs text-slate-600">Documento personal: gustos, preferencias, miedos, sueños. Documento 2/5.</p>
+                    </a>
+                    <a href="documento-plan-apoyo.html" class="group p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">🤝</span>
+                            <div><p class="font-semibold text-sm group-hover:text-emerald-700">Plan de apoyo</p><p class="text-[11px] text-slate-500">A4 imprimible</p></div>
+                        </div>
+                        <p class="text-xs text-slate-600">Apoyos necesarios y profesionales referentes. Documento 3/5.</p>
+                    </a>
+                    <a href="documento-proyecto-vida.html" class="group p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">🎯</span>
+                            <div><p class="font-semibold text-sm group-hover:text-emerald-700">Proyecto de vida</p><p class="text-[11px] text-slate-500">A4 imprimible</p></div>
+                        </div>
+                        <p class="text-xs text-slate-600">Objetivos personales y plan de acción. Documento 4/5.</p>
+                    </a>
+                    <a href="documento-revision-objetivos.html" class="group p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">📅</span>
+                            <div><p class="font-semibold text-sm group-hover:text-emerald-700">Revisión de objetivos</p><p class="text-[11px] text-slate-500">A4 imprimible</p></div>
+                        </div>
+                        <p class="text-xs text-slate-600">Seguimiento anual y revisión del PV. Documento 5/5.</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Equipo (2 documentos) -->
+            <div x-show="categoria === 'todos' || categoria === 'equipo'">
+                <h2 class="text-sm font-semibold mb-3 text-emerald-800">🩺 Equipo · Calendarios y firmas</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <a href="calendario-individual-pdf.html" class="group p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">📆</span>
+                            <div><p class="font-semibold text-sm group-hover:text-emerald-700">Calendario laboral individual</p><p class="text-[11px] text-slate-500">A4 · 3 casillas firma</p></div>
+                        </div>
+                        <p class="text-xs text-slate-600">Calendario anual del profesional con turnos, vacaciones, festivos, pluses y validaciones legales. Firma trabajador + Dirección + RLT.</p>
+                        <p class="text-[10px] text-emerald-700 mt-2 font-medium">Obligatorio art. 34.6 ET · entregar antes 1 enero</p>
+                    </a>
+                    <a href="calendario-laboral.html" class="group p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">📋</span>
+                            <div><p class="font-semibold text-sm group-hover:text-emerald-700">Calendario laboral del centro</p><p class="text-[11px] text-slate-500">A3 tablón</p></div>
+                        </div>
+                        <p class="text-xs text-slate-600">Calendario aprobado por Comité de Dirección y firmado por RLT. Imprimible para tablón del centro.</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Económico (2 documentos) -->
+            <div x-show="categoria === 'todos' || categoria === 'economico'">
+                <h2 class="text-sm font-semibold mb-3 text-emerald-800">💼 Económico · Facturación y caja</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <a href="factura-detalle.html" class="group p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">🧾</span>
+                            <div><p class="font-semibold text-sm group-hover:text-emerald-700">Factura mensual familia</p><p class="text-[11px] text-slate-500">A4 imprimible · PDF</p></div>
+                        </div>
+                        <p class="text-xs text-slate-600">Factura desglosada con servicios recurrentes y extraordinarios. IVA exento art. 20 LIVA.</p>
+                    </a>
+                    <a href="caja-centro.html" class="group p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">💰</span>
+                            <div><p class="font-semibold text-sm group-hover:text-emerald-700">Arqueo mensual de caja</p><p class="text-[11px] text-slate-500">A4 imprimible · firmable</p></div>
+                        </div>
+                        <p class="text-xs text-slate-600">Cuadre de caja del centro con movimientos y firma de Dirección.</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Agenda (1 documento) -->
+            <div x-show="categoria === 'todos' || categoria === 'agenda'">
+                <h2 class="text-sm font-semibold mb-3 text-emerald-800">📅 Agenda · Citas multiprofesionales</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <a href="agenda-imprimir.html" class="group p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl">🗓</span>
+                            <div><p class="font-semibold text-sm group-hover:text-emerald-700">Agenda semanal del centro</p><p class="text-[11px] text-slate-500">A4 apaisado · imprimible</p></div>
+                        </div>
+                        <p class="text-xs text-slate-600">Calendario semanal con todas las citas del centro, agrupadas por profesional. Con presets de impresión.</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Valoraciones psicológicas (5 categorías + 13 escalas + 2 informes) -->
+            <div x-show="categoria === 'todos' || categoria === 'valoraciones'">
+                <h2 class="text-sm font-semibold mb-3 text-emerald-800">🧠 Valoraciones psicológicas · Categoría especial RGPD art. 9</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <a href="valoraciones-listado.html" class="group p-4 rounded-xl border-2 border-emerald-200 bg-white hover:border-emerald-300 hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-2"><span class="text-2xl">📚</span><div><p class="font-semibold text-sm group-hover:text-emerald-700">Catálogo completo</p><p class="text-[11px] text-slate-500">5 categorías · 13 escalas · 2 informes</p></div></div>
+                        <p class="text-xs text-slate-600">Listado categorizado de escalas, pruebas e informes según el documento aprobado por Gerencia (jun 2026).</p>
+                    </a>
+                    <a href="informe-psicologico-inicial.html" class="group p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-2"><span class="text-2xl">📝</span><div><p class="font-semibold text-sm group-hover:text-emerald-700">Informe Inicial</p><p class="text-[11px] text-slate-500">A4 · 11 secciones · firmable</p></div></div>
+                        <p class="text-xs text-slate-600">Protocolo clínico de admisión: antecedentes, autonomía, conducta, exploración psicopatológica.</p>
+                    </a>
+                    <a href="informe-psicologico-evolutivo.html" class="group p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-2"><span class="text-2xl">🔄</span><div><p class="font-semibold text-sm group-hover:text-emerald-700">Informe Evolutivo</p><p class="text-[11px] text-slate-500">A4 · 7 secciones · comparativa anual</p></div></div>
+                        <p class="text-xs text-slate-600">Seguimiento periódico con comparativa contra valoración anterior. Praxias, gnosias, dependencia, ICAP.</p>
+                    </a>
+                    <a href="valoracion-icap.html" class="group p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-2"><span class="text-2xl">🧠</span><div><p class="font-semibold text-sm group-hover:text-emerald-700">ICAP</p><p class="text-[11px] text-slate-500">Formulario · 77 ítems Likert 0-4</p></div></div>
+                        <p class="text-xs text-slate-600">Inventario para la Planificación. Cumplimentación con barra de progreso, autoguardado y cálculo automático.</p>
+                    </a>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-3">💡 Las demás escalas (FUMAT, INICO, San Martín, ABS-RC:2, BBTA, K-BIT, Raven, WISC-4, DSAH II, Camdex DS, MEC, Test Barcelona) están preparadas con esqueleto. Federico debe aportar el detalle de ítems para que se conviertan en formularios rellenables. Patrón ya demostrado con ICAP e informes.</p>
+            </div>
+
+            <!-- Aviso -->
+            <div class="rounded-lg border border-sky-200 bg-sky-50 p-4 text-xs text-sky-900">
+                <p class="font-semibold mb-1">📌 Sobre esta página</p>
+                <p>Esta es la <strong>vista unificada de documentos imprimibles</strong>. Cada documento se genera dinámicamente desde su origen (ficha persona, calendario, factura...) y se renderiza en formato A4 listo para imprimir, firmar o adjuntar por correo. Los documentos firmados quedan archivados con bitácora RGPD.</p>
+            </div>
+        </section>
+    </main>
+</div>
+
+</body>
+</html>

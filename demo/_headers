@@ -1,0 +1,6 @@
+# Cabeceras servidas por Netlify para todas las rutas de la demo.
+# Refuerzan el bloqueo de indexación.
+/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+  Referrer-Policy: no-referrer
+  X-Frame-Options: SAMEORIGIN

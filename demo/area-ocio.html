@@ -1,0 +1,599 @@
+<!-- @rol: gerencia, direccion_centro -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área de Ocio, Cultura y Deporte · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Prototipo nueva interfaz</span> · datos ficticios · sólo para validación</div>
+
+<div class="flex min-h-screen" x-data="{ userMenu: false, vista: 'deporte' }">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- ===== CONTENIDO ===== -->
+    <main class="flex-1 min-w-0">
+
+        <!-- Breadcrumb + acciones -->
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a>
+                <span class="mx-1">›</span>
+                <a href="areas.html" class="hover:text-emerald-700">Áreas transversales</a>
+                <span class="mx-1">›</span>
+                <span class="text-slate-700">Área de Ocio, Cultura y Deporte</span>
+            </nav>
+            <div class="flex items-center gap-2 shrink-0">
+                <button class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-emerald-400">📅 Calendario competiciones</button>
+                <button class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-emerald-400">+ Persona inscrita</button>
+                <button class="rounded-lg bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">+ Nueva práctica</button>
+            </div>
+        </div>
+
+        <div class="px-8 py-6 max-w-7xl space-y-6">
+
+            <!-- Cabecera -->
+            <header class="rounded-xl border border-slate-200 bg-white p-6">
+                <div class="flex items-start gap-5 flex-wrap">
+                    <div class="w-16 h-16 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-3xl shrink-0">🎭</div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <h1 class="text-2xl font-semibold tracking-tight">Área de Ocio, Cultura y Deporte</h1>
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Área transversal</span>
+                        </div>
+                        <p class="text-sm text-slate-600 mt-1">10 prácticas de deporte federado adaptado (incluida LaLiga Genuine y programa CSD), 7 actividades estables de ocio y programa de vacaciones y salidas · participación voluntaria, abierta a todas las personas del grupo.</p>
+                        <div class="mt-3 grid gap-x-6 gap-y-1 grid-cols-2 md:grid-cols-4 text-xs">
+                            <div><span class="text-slate-500">Responsable:</span> Esther Llorente</div>
+                            <div><span class="text-slate-500">Personas inscritas:</span> 198</div>
+                            <div><span class="text-slate-500">Actividades activas:</span> 17 (10 deporte + 7 ocio)</div>
+                            <div><span class="text-slate-500">Voluntariado:</span> 34 personas</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPIs -->
+                <div class="mt-5 grid gap-3 grid-cols-2 md:grid-cols-5 pt-5 border-t border-slate-100">
+                    <div>
+                        <p class="text-xs text-slate-500">Deporte adaptado</p>
+                        <p class="text-2xl font-light mt-0.5">126 <span class="text-sm text-slate-400 font-normal">deportistas</span></p>
+                        <p class="text-[10px] text-slate-400">10 prácticas · Liga Genuine · CSD</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500">Ocio</p>
+                        <p class="text-2xl font-light mt-0.5">146 <span class="text-sm text-slate-400 font-normal">personas</span></p>
+                        <p class="text-[10px] text-slate-400">7 grupos estables semanales</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500">Vacaciones y salidas</p>
+                        <p class="text-2xl font-light mt-0.5">147 <span class="text-sm text-slate-400 font-normal">participantes</span></p>
+                        <p class="text-[10px] text-slate-400">turnos, excursiones, quedadas</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500">Próximas competiciones</p>
+                        <p class="text-2xl font-light mt-0.5">7</p>
+                        <p class="text-[10px] text-slate-400">próximos 60 días</p>
+                    </div>
+                    <div class="rounded-lg bg-emerald-50 border border-emerald-200 px-3 py-2 -m-1">
+                        <p class="text-xs text-emerald-700">Medallas 2025</p>
+                        <p class="text-2xl font-light mt-0.5 text-emerald-900">42</p>
+                        <p class="text-[10px] text-emerald-700">12 oro · 18 plata · 12 bronce</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Tabs -->
+            <div class="border-b border-slate-200 flex items-center gap-1 overflow-x-auto">
+                <button @click="vista = 'deporte'" :class="vista === 'deporte' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">🏅 Deporte adaptado</button>
+                <button @click="vista = 'cultura'" :class="vista === 'cultura' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">🎉 Ocio</button>
+                <button @click="vista = 'ocio'" :class="vista === 'ocio' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">🌅 Vacaciones y salidas</button>
+                <button @click="vista = 'calendario'" :class="vista === 'calendario' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">📅 Calendario</button>
+                <button @click="vista = 'personas'" :class="vista === 'personas' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Personas inscritas</button>
+            </div>
+
+            <!-- Vista: Prácticas deportivas -->
+            <div x-show="vista === 'deporte'" class="space-y-5">
+                <div class="rounded-lg bg-blue-50 border border-blue-200 p-3 text-xs text-blue-900">
+                    🏅 <strong>Marco federativo</strong>: 10 prácticas de <strong>deporte federado adaptado</strong>. Cada deportista cuenta con licencia federativa anual. Liga Genuine se gestiona en colaboración con LaLiga.
+                </div>
+
+                <!-- Deporte federado adaptado -->
+                <section>
+                    <h2 class="text-sm font-semibold tracking-tight mb-3 flex items-center gap-2">🏅 Deporte federado adaptado <span class="text-xs text-slate-400 font-normal">· 10 prácticas · 126 deportistas</span></h2>
+                    <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-emerald-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center text-xl">🏓</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Deporte federado adaptado</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-emerald-700">Tenis de mesa</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Individual y dobles · campeonato autonómico</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Deportistas:</span> <strong>8</strong></div>
+                                <div><span class="text-slate-500">Entrenador:</span> R. Cuesta</div>
+                                <div><span class="text-slate-500">Día:</span> Mié 18 h</div>
+                                <div><span class="text-slate-500">Sede:</span> Sala Aspanias</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-emerald-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-xl">🏀</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Deporte federado adaptado</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-emerald-700">Baloncesto</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Equipo único · liga regional adaptada</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Deportistas:</span> <strong>10</strong></div>
+                                <div><span class="text-slate-500">Entrenador:</span> J. Castro</div>
+                                <div><span class="text-slate-500">Día:</span> Mar 19 h</div>
+                                <div><span class="text-slate-500">Sede:</span> Polideportivo San Amaro</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-emerald-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-cyan-100 text-cyan-700 flex items-center justify-center text-xl">🏊</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Deporte federado adaptado</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-emerald-700">Natación</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Estilos libre, espalda y braza · pruebas 25 m y 50 m</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Deportistas:</span> <strong>14</strong></div>
+                                <div><span class="text-slate-500">Entrenador:</span> P. Rivero</div>
+                                <div><span class="text-slate-500">Día:</span> Lun+Mié 17 h</div>
+                                <div><span class="text-slate-500">Sede:</span> San Amaro</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-emerald-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-orange-100 text-orange-700 flex items-center justify-center text-xl">🏃</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Deporte federado adaptado</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-emerald-700">Atletismo</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Pista cubierta + aire libre · pruebas individuales y relevos</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Deportistas:</span> <strong>18</strong></div>
+                                <div><span class="text-slate-500">Entrenador:</span> M. Olmedo</div>
+                                <div><span class="text-slate-500">Día:</span> Mar+Jue 18 h</div>
+                                <div><span class="text-slate-500">Sede:</span> El Plantío</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-emerald-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-red-100 text-red-700 flex items-center justify-center text-xl">🇪🇸</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-red-100 text-red-800">Programa CSD</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-emerald-700">CSD</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Programa Consejo Superior de Deportes · ayudas para deporte de élite adaptado</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Deportistas:</span> <strong>4</strong></div>
+                                <div><span class="text-slate-500">Coordina:</span> Federación</div>
+                                <div><span class="text-slate-500">Ámbito:</span> Estatal</div>
+                                <div><span class="text-slate-500">Plan:</span> ADO Adaptado</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-emerald-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-green-100 text-green-700 flex items-center justify-center text-xl">⚽</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Deporte federado adaptado</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-emerald-700">Fútbol sala</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Categoría FS-7 · 2 equipos · liga autonómica</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Deportistas:</span> <strong>16</strong></div>
+                                <div><span class="text-slate-500">Entrenador:</span> C. Bárcena</div>
+                                <div><span class="text-slate-500">Día:</span> Vie 19 h</div>
+                                <div><span class="text-slate-500">Sede:</span> Pol. Cellophane</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-emerald-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-xl">🏆</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">LaLiga Genuine</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-emerald-700">Liga Genuine</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Competición nacional de fútbol inclusivo organizada por LaLiga · 4 fases por temporada</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Deportistas:</span> <strong>14</strong></div>
+                                <div><span class="text-slate-500">Entrenador:</span> A. Pinilla</div>
+                                <div><span class="text-slate-500">Día:</span> Lun+Jue 18 h</div>
+                                <div><span class="text-slate-500">Patrocinio:</span> Burgos CF</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-emerald-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center text-xl">🎳</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Deporte federado adaptado</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-emerald-700">Bolos</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Modalidad bolo palma castellano · campeonato regional adaptado</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Deportistas:</span> <strong>10</strong></div>
+                                <div><span class="text-slate-500">Entrenador:</span> S. Renedo</div>
+                                <div><span class="text-slate-500">Día:</span> Jue 19 h</div>
+                                <div><span class="text-slate-500">Sede:</span> Bolera Fuentecillas</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-emerald-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-stone-100 text-stone-700 flex items-center justify-center text-xl">⚪</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Deporte federado adaptado</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-emerald-700">Petanca</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Tripletas y dupletas · campeonato regional adaptado</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Deportistas:</span> <strong>8</strong></div>
+                                <div><span class="text-slate-500">Entrenador:</span> Q. Saiz</div>
+                                <div><span class="text-slate-500">Día:</span> Sáb 10 h</div>
+                                <div><span class="text-slate-500">Sede:</span> Bolera Fuentecillas</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-emerald-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-lime-100 text-lime-700 flex items-center justify-center text-xl">🥾</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Salud · medio natural</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-emerald-700">Rutas medioambientales</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Senderismo guiado y educación ambiental · convenio con Junta CyL · 10 rutas/año</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Participantes:</span> <strong>24</strong></div>
+                                <div><span class="text-slate-500">Guía:</span> M. Quintana</div>
+                                <div><span class="text-slate-500">Día:</span> Sáb (mensual)</div>
+                                <div><span class="text-slate-500">Ámbito:</span> Sierra Demanda</div>
+                            </div>
+                        </a>
+
+                    </div>
+                </section>
+
+                <!-- Memoria deportiva -->
+                <section class="rounded-xl border border-slate-200 bg-white p-5">
+                    <h2 class="text-sm font-semibold mb-3 flex items-center gap-2">🏆 Memoria deportiva 2025</h2>
+                    <div class="grid gap-4 md:grid-cols-4 text-center">
+                        <div class="rounded-lg bg-amber-50 p-4">
+                            <p class="text-3xl font-light text-amber-700">12</p>
+                            <p class="text-xs text-amber-800 mt-1">🥇 Medallas de oro</p>
+                        </div>
+                        <div class="rounded-lg bg-slate-50 p-4">
+                            <p class="text-3xl font-light text-slate-600">18</p>
+                            <p class="text-xs text-slate-700 mt-1">🥈 Medallas de plata</p>
+                        </div>
+                        <div class="rounded-lg bg-orange-50 p-4">
+                            <p class="text-3xl font-light text-orange-700">12</p>
+                            <p class="text-xs text-orange-800 mt-1">🥉 Medallas de bronce</p>
+                        </div>
+                        <div class="rounded-lg bg-emerald-50 p-4">
+                            <p class="text-3xl font-light text-emerald-700">3</p>
+                            <p class="text-xs text-emerald-800 mt-1">Campeonatos de España</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Vista: Ocio -->
+            <div x-show="vista === 'cultura'" x-cloak class="space-y-5">
+                <p class="text-sm text-slate-500">7 actividades estables de ocio · participación voluntaria · ritmo semanal.</p>
+                <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center text-xl">🎭</div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Grupo estable</span>
+                        </div>
+                        <p class="mt-3 font-semibold text-sm">Teatro</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Una obra al año · representación en Teatro Principal de Burgos</p>
+                        <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="text-slate-500">Personas:</span> <strong>14</strong></div>
+                            <div><span class="text-slate-500">Directora:</span> L. Ortega</div>
+                            <div><span class="text-slate-500">Ensayo:</span> Mar 18 h</div>
+                            <div><span class="text-slate-500">Sede:</span> Sala Aspanias</div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-pink-100 text-pink-700 flex items-center justify-center text-xl">💃</div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Grupo estable</span>
+                        </div>
+                        <p class="mt-3 font-semibold text-sm">Baile</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Bailes en pareja, modernos y latinos · actuaciones en fiestas del centro</p>
+                        <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="text-slate-500">Personas:</span> <strong>20</strong></div>
+                            <div><span class="text-slate-500">Profesora:</span> P. Renedo</div>
+                            <div><span class="text-slate-500">Día:</span> Mié 18 h</div>
+                            <div><span class="text-slate-500">Sede:</span> Centro Cellophane</div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl">🤸</div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Bienestar físico</span>
+                        </div>
+                        <p class="mt-3 font-semibold text-sm">Ponte en Forma</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Gimnasia funcional, estiramientos y hábitos saludables · grupos por edades</p>
+                        <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="text-slate-500">Personas:</span> <strong>26</strong></div>
+                            <div><span class="text-slate-500">Monitor:</span> M. Olmedo</div>
+                            <div><span class="text-slate-500">Día:</span> Lun+Vie 17 h</div>
+                            <div><span class="text-slate-500">Sede:</span> Sala Aspanias</div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-xl">🧒</div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Convivencia</span>
+                        </div>
+                        <p class="mt-3 font-semibold text-sm">Pandillas</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Grupos pequeños de amigos · planes a la carta · refuerzo de redes sociales</p>
+                        <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="text-slate-500">Personas:</span> <strong>32</strong></div>
+                            <div><span class="text-slate-500">Coordina:</span> E. Llorente</div>
+                            <div><span class="text-slate-500">Día:</span> Vie 18 h</div>
+                            <div><span class="text-slate-500">Sede:</span> Itinerante</div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-red-100 text-red-700 flex items-center justify-center text-xl">🌹</div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Grupo estable</span>
+                        </div>
+                        <p class="mt-3 font-semibold text-sm">Sevillanas</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Aprendizaje y exhibición · actuación en Feria de Mayo y Sanjuanes</p>
+                        <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="text-slate-500">Personas:</span> <strong>16</strong></div>
+                            <div><span class="text-slate-500">Profesora:</span> N. Vicario</div>
+                            <div><span class="text-slate-500">Día:</span> Jue 18 h</div>
+                            <div><span class="text-slate-500">Sede:</span> Sala Aspanias</div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-xl">📖</div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Grupo estable</span>
+                        </div>
+                        <p class="mt-3 font-semibold text-sm">Club de Lectura</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Lectura colectiva de textos adaptados · convenio con Biblioteca Municipal</p>
+                        <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="text-slate-500">Personas:</span> <strong>16</strong></div>
+                            <div><span class="text-slate-500">Dinamizadora:</span> D. Pinto</div>
+                            <div><span class="text-slate-500">Encuentro:</span> Mié 17 h</div>
+                            <div><span class="text-slate-500">Sede:</span> Biblioteca municipal</div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-violet-100 text-violet-700 flex items-center justify-center text-xl">🎶</div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Grupo estable</span>
+                        </div>
+                        <p class="mt-3 font-semibold text-sm">Expresión Musical</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Coro, percusión corporal y musicoterapia · actuación en residencias del grupo</p>
+                        <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                            <div><span class="text-slate-500">Personas:</span> <strong>22</strong></div>
+                            <div><span class="text-slate-500">Director:</span> A. Vicario</div>
+                            <div><span class="text-slate-500">Ensayo:</span> Jue 18 h</div>
+                            <div><span class="text-slate-500">Sede:</span> Centro Cellophane</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Vista: Ocio inclusivo -->
+            <div x-show="vista === 'ocio'" x-cloak class="space-y-5">
+                <p class="text-sm text-slate-500">Programa de ocio fuera del centro · participación voluntaria y abierta a familias.</p>
+                <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl">🌅</div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Vacaciones</span>
+                        </div>
+                        <p class="mt-3 font-semibold text-sm">Vacaciones de verano</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Turnos en hoteles accesibles · costa y montaña · 2 semanas/persona</p>
+                        <div class="mt-3 text-xs"><strong>62</strong> participantes · 4 turnos · destinos: Cantabria · Asturias · Tenerife · Aragón</div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-xl">🎒</div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Fin de semana</span>
+                        </div>
+                        <p class="mt-3 font-semibold text-sm">Disfrutar el fin de semana</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Salida sábado o domingo · planes a la carta · transporte facilitado</p>
+                        <div class="mt-3 text-xs"><strong>48</strong> personas inscritas · 1-2 salidas/mes</div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-xl">🏛</div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Excursiones</span>
+                        </div>
+                        <p class="mt-3 font-semibold text-sm">Excursiones culturales</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Museos, monasterios y patrimonio · accesibilidad cognitiva</p>
+                        <div class="mt-3 text-xs"><strong>5</strong> excursiones/año · Museo Evolución · Catedral · Silos · Yacimientos</div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center text-xl">🍔</div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-rose-100 text-rose-800">Quedadas</span>
+                        </div>
+                        <p class="mt-3 font-semibold text-sm">Quedadas urbanas</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Cine, restaurantes, cafés · participación en pequeño grupo</p>
+                        <div class="mt-3 text-xs"><strong>37</strong> personas · semanales</div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-100 text-cyan-700 flex items-center justify-center text-xl">🎤</div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800">Festivales</span>
+                        </div>
+                        <p class="mt-3 font-semibold text-sm">Conciertos y festivales</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Sonorama, Música Antigua, FECLEDMI Cup · entradas + apoyo</p>
+                        <div class="mt-3 text-xs"><strong>24</strong> personas · 4-5 eventos/año</div>
+                    </div>
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center text-xl">🤝</div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">Voluntariado</span>
+                        </div>
+                        <p class="mt-3 font-semibold text-sm">Voluntariado de ocio</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Personas voluntarias acreditadas que acompañan salidas y planes</p>
+                        <div class="mt-3 text-xs"><strong>34</strong> voluntarios activos · convenio Voluntariado Burgos</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Vista: Calendario -->
+            <div x-show="vista === 'calendario'" x-cloak class="space-y-5">
+                <p class="text-sm text-slate-500">Próximas competiciones y eventos del área · 60 días siguientes.</p>
+                <div class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                            <tr>
+                                <th class="px-5 py-2 text-left font-medium">Fecha</th>
+                                <th class="px-5 py-2 text-left font-medium">Evento</th>
+                                <th class="px-5 py-2 text-left font-medium">Modalidad</th>
+                                <th class="px-5 py-2 text-left font-medium">Sede</th>
+                                <th class="px-5 py-2 text-center font-medium">Deportistas</th>
+                                <th class="px-5 py-2 text-left font-medium">Responsable</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium">22/06/2026</td><td>Campeonato Autonómico de Atletismo</td><td><span class="text-[10px] px-2 py-0.5 rounded-full bg-orange-100 text-orange-800">Atletismo</span></td><td class="text-xs">El Plantío · Burgos</td><td class="text-center">14</td><td class="text-xs">M. Olmedo</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium">29/06/2026</td><td>Liga FECLEDMI Fútbol Sala · jornada 14</td><td><span class="text-[10px] px-2 py-0.5 rounded-full bg-green-100 text-green-800">Fútbol Sala</span></td><td class="text-xs">Palencia</td><td class="text-center">16</td><td class="text-xs">C. Bárcena</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium">05/07/2026</td><td>Torneo Pádel Solidario</td><td><span class="text-[10px] px-2 py-0.5 rounded-full bg-teal-100 text-teal-800">Pádel</span></td><td class="text-xs">Pádel Indoor Burgos</td><td class="text-center">12</td><td class="text-xs">A. Bravo</td></tr>
+                            <tr class="hover:bg-slate-50 bg-amber-50/30"><td class="px-5 py-2.5 font-medium">12/07/2026</td><td><strong>Campeonato España Boccia</strong></td><td><span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">Boccia</span></td><td class="text-xs">Sevilla</td><td class="text-center">3</td><td class="text-xs">M. Quintana</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium">18/07/2026</td><td>Concierto Coro Aspanias · Catedral</td><td><span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Coro</span></td><td class="text-xs">Catedral de Burgos</td><td class="text-center">22</td><td class="text-xs">A. Vicario</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium">25/07/2026 — 06/08/2026</td><td>Vacaciones de verano · Turno 1 Cantabria</td><td><span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Vacaciones</span></td><td class="text-xs">Suances</td><td class="text-center">16</td><td class="text-xs">E. Llorente</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium">09/08/2026 — 21/08/2026</td><td>Vacaciones · Turno 2 Asturias</td><td><span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Vacaciones</span></td><td class="text-xs">Llanes</td><td class="text-center">14</td><td class="text-xs">E. Llorente</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Vista: Personas inscritas -->
+            <div x-show="vista === 'personas'" x-cloak class="space-y-3">
+                <p class="text-sm text-slate-500">Listado de personas inscritas en al menos una práctica · clic para abrir ficha y ver todas sus actividades.</p>
+                <div class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                            <tr>
+                                <th class="px-5 py-2 text-left font-medium">Persona</th>
+                                <th class="px-5 py-2 text-left font-medium">Centro principal</th>
+                                <th class="px-5 py-2 text-left font-medium">Prácticas activas</th>
+                                <th class="px-5 py-2 text-center font-medium">Licencias federativas</th>
+                                <th class="px-5 py-2 text-center font-medium">Vacaciones 2026</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium"><a href="persona-detalle.html" class="hover:text-emerald-700">González Pérez, Marta</a></td><td class="text-xs">Fuentecillas</td><td class="text-xs">Natación · Coro · Lectura fácil</td><td class="text-center">1</td><td class="text-center text-emerald-600">✓ T2 Asturias</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium"><a href="persona-detalle.html" class="hover:text-emerald-700">Castro Núñez, Elena</a></td><td class="text-xs">Cellophane</td><td class="text-xs">Atletismo · Pádel</td><td class="text-center">2</td><td class="text-center text-slate-400">—</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium"><a href="persona-detalle.html" class="hover:text-emerald-700">Sanz Herrero, Lucía</a></td><td class="text-xs">Fuentecillas</td><td class="text-xs">Coro · Teatro · Pintura</td><td class="text-center">—</td><td class="text-center text-emerald-600">✓ T1 Cantabria</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium"><a href="persona-detalle.html" class="hover:text-emerald-700">Vicario León, Pablo</a></td><td class="text-xs">Cisneros</td><td class="text-xs">Fútbol sala · Boccia</td><td class="text-center">2</td><td class="text-center text-slate-400">—</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium"><a href="persona-detalle.html" class="hover:text-emerald-700">Aguilar Bravo, Carlos</a></td><td class="text-xs">La Paloma</td><td class="text-xs">Baloncesto · Tenis de mesa</td><td class="text-center">2</td><td class="text-center text-emerald-600">✓ T3 Tenerife</td></tr>
+                            <tr class="bg-slate-50"><td colspan="5" class="px-5 py-2 text-xs text-slate-500 text-center">Mostrando 5 de 198 personas inscritas · <a href="#" class="text-emerald-700 hover:underline">ver listado completo →</a></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<!-- Búsqueda Ctrl+K -->
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, cita..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+ENV/
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+backend/staticfiles/
+backend/media/
+
+# Variables de entorno y secretos
+.env
+.env.local
+.env.*.local
+backend/.env
+*.pem
+*.key
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Datos reales — JAMÁS en repo
+datos/reales/
+datos/produccion/
+*.csv
+*.xlsx
+!datos/sinteticos/*.csv
+!datos/sinteticos/*.xlsx
+!datos/sinteticos/*.json
+
+# Backups
+*.sql
+*.dump
+*.bak
+
+# Node — Tailwind build (junio 2026)
+node_modules/
+# package-lock.json SÍ se versiona (reproducibilidad CI)
+yarn.lock
+
+# Tailwind CSS generado (se construye en CI desde tailwind.input.css)
+demo/_assets/tailwind.css
+
+# Empaquetado de demo (no se sube al repo, se regenera cuando hace falta)
+AGORA-demo-*.zip
+
+# Archivos temporales del asistente y de extracciones puntuales
+_tmp_*
+*.tmp
+
+# Cuarentena de reorganización (pendiente de borrado definitivo)
+_PARA_REVISAR/

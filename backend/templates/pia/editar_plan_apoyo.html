@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Editar Plan de Apoyo · {{ persona }} · ÁGORA{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+    <div>
+        <a href="{% url 'planes_vida:plan_apoyo' persona.id plan.anualidad %}" class="text-sm text-slate-500 hover:text-slate-700">← Volver al documento</a>
+        <h1 class="mt-2 text-2xl font-semibold tracking-tight">Editar Plan de Apoyo · {{ persona.apellido_1 }}, {{ persona.nombre }}</h1>
+        <p class="text-sm text-slate-500">ANEXO 4 · 9 columnas · 8 dimensiones Schalock</p>
+    </div>
+
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Cabecera</legend>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Fecha de realización</label>
+                    {{ form.fecha_realizacion|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium mb-1">Realizado por</label>
+                    {{ form.realizado_por|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                </div>
+            </div>
+        </fieldset>
+
+        {{ formset.management_form }}
+        <div class="space-y-3">
+            {% for f in formset %}
+                <fieldset class="rounded-lg border border-slate-200 bg-white p-4 space-y-3">
+                    {{ f.id }}
+                    {{ f.orden }}
+                    <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-amber-700">
+                        Entrada {{ forloop.counter }}
+                        {% if f.DELETE %}{{ f.DELETE }} <span class="text-xs text-rose-600">Marcar para eliminar</span>{% endif %}
+                    </legend>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Objetivo</label>
+                        {{ f.titulo_objetivo|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Actividades</label>
+                        {{ f.actividades|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Dimensiones de Calidad de Vida (Schalock)</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                            {{ f.dimensiones_cdv }}
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">QUÉ (Apoyo)</label>
+                            {{ f.apoyo_que|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">QUIÉN (Me apoya)</label>
+                            {{ f.apoyo_quien|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">CUÁNDO (Me apoyan)</label>
+                            {{ f.apoyo_cuando|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Observaciones</label>
+                        {{ f.observaciones|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Seguimiento cuantitativo</label>
+                            {{ f.seguimiento_cuantitativo|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Seguimiento descriptivo</label>
+                            {{ f.seguimiento_descriptivo|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                        </div>
+                    </div>
+                </fieldset>
+            {% endfor %}
+        </div>
+
+        <div class="flex items-center justify-end gap-2 sticky bottom-4 bg-slate-50/80 backdrop-blur p-3 rounded-lg border border-slate-200">
+            <a href="{% url 'planes_vida:plan_apoyo' persona.id plan.anualidad %}" class="rounded border border-slate-300 bg-white px-4 py-2 text-sm hover:border-slate-400">Cancelar</a>
+            <button type="submit" class="rounded bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700">Guardar Plan de Apoyo</button>
+        </div>
+    </form>
+</section>
+{% endblock %}

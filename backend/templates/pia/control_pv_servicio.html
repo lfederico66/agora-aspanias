@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Control PV · {{ centro.nombre }} · ÁGORA{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+
+    <div>
+        <a href="{% url 'planes_vida:control_pv_centros' %}" class="text-sm text-slate-500 hover:text-emerald-700">← Volver al tablero general</a>
+    </div>
+
+    <div class="flex items-end justify-between flex-wrap gap-3">
+        <div>
+            <h1 class="text-2xl font-semibold tracking-tight">{{ centro.nombre }}</h1>
+            <p class="text-sm text-slate-500">Corresponsable: {{ centro.get_corresponsable_display }} · {{ n_personas }} persona{{ n_personas|pluralize:"s" }} activa{{ n_personas|pluralize:"s" }}</p>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+            <a href="{% url 'personas:mapa_ocupacion_centro' centro.codigo %}" class="rounded border border-emerald-300 bg-emerald-50 text-emerald-800 px-3 py-1.5 text-sm hover:bg-emerald-100">🗺 Mapa de ocupación</a>
+            <a href="{% url 'planes_vida:control_pv_exportar' centro.codigo %}" class="rounded border border-slate-300 bg-white px-3 py-1.5 text-sm hover:border-slate-400">📥 Exportar XLSX</a>
+        </div>
+    </div>
+
+    <div class="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+        <div class="px-5 py-3 border-b border-slate-200">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Detalle por persona</h2>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-xs">
+                <thead class="bg-slate-50 text-slate-600 uppercase tracking-wide">
+                    <tr>
+                        <th class="text-left px-3 py-2">#</th>
+                        <th class="text-left px-3 py-2">Persona atendida</th>
+                        <th class="text-left px-3 py-2">Gestor/a caso</th>
+                        <th class="text-left px-3 py-2">P. referencia</th>
+                        <th class="text-center px-3 py-2">PV realiz.</th>
+                        <th class="text-left px-3 py-2">Fecha realiz.</th>
+                        <th class="text-center px-3 py-2">Revisado</th>
+                        <th class="text-left px-3 py-2">Estado rev.</th>
+                        <th class="text-left px-3 py-2">Prevista</th>
+                        <th class="text-center px-3 py-2">En Teams</th>
+                        <th class="text-center px-3 py-2">En REPRISS</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {% for f in filas %}
+                    <tr class="hover:bg-slate-50">
+                        <td class="px-3 py-2 text-slate-400 text-right">{{ f.n }}</td>
+                        <td class="px-3 py-2 font-medium">
+                            <a href="{% url 'personas:detalle' f.persona.id %}" class="hover:text-emerald-700">
+                                {{ f.persona.apellido_1 }} {{ f.persona.apellido_2 }}, {{ f.persona.nombre }}
+                            </a>
+                        </td>
+                        <td class="px-3 py-2 text-slate-500">{{ f.gestor.nombre_completo|default:"—" }}</td>
+                        <td class="px-3 py-2 text-slate-500">{{ f.referencia.nombre_completo|default:"—" }}</td>
+                        {% if f.plan %}
+                            <td class="px-3 py-2 text-center {% if f.plan.pv_realizado %}text-emerald-700{% else %}text-rose-600{% endif %}">{% if f.plan.pv_realizado %}✓{% else %}✗{% endif %}</td>
+                            <td class="px-3 py-2">{{ f.plan.fecha_pv_realizado|date:"d/m/Y"|default:"—" }}</td>
+                            <td class="px-3 py-2 text-center {% if f.plan.pv_revisado %}text-emerald-700{% else %}text-amber-600{% endif %}">{% if f.plan.pv_revisado %}✓{% else %}—{% endif %}</td>
+                            <td class="px-3 py-2">
+                                {% if f.plan.estado_revision == 'en_plazo' %}
+                                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">En plazo</span>
+                                {% elif f.plan.estado_revision == 'proximo_plazo' %}
+                                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">Próx. plazo</span>
+                                {% elif f.plan.estado_revision == 'fuera_plazo' %}
+                                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-rose-100 text-rose-800">Fuera plazo</span>
+                                {% elif f.plan.pv_realizado %}
+                                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">—</span>
+                                {% else %}
+                                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-rose-100 text-rose-800">No realizado</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-3 py-2">{{ f.plan.fecha_prevista_realizacion|date:"d/m/Y"|default:"—" }}</td>
+                            <td class="px-3 py-2 text-center">{% if f.en_teams %}✓{% else %}—{% endif %}</td>
+                            <td class="px-3 py-2 text-center">{% if f.en_repriss %}✓{% else %}—{% endif %}</td>
+                        {% else %}
+                            <td class="px-3 py-2 text-center text-rose-600" colspan="7">Sin Plan de Vida — pendiente de crear</td>
+                        {% endif %}
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="11" class="px-4 py-12 text-center text-sm text-slate-500">No hay personas activas en este centro.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="px-5 py-3 border-t border-slate-200 bg-slate-50 text-xs text-slate-500">
+            ✓ = sí · ✗ = no · — = no aplica
+        </div>
+    </div>
+</section>
+{% endblock %}

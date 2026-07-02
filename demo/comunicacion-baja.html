@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!-- @rol: gerencia, direccion_centro, gestor_caso -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunicación de baja · ÁGORA</title>
+<link rel="stylesheet" href="_assets/tailwind.css">
+<link rel="stylesheet" href="_assets/print-valoracion.css" media="print">
+<script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · datos sintéticos</div>
+
+<div class="flex min-h-screen" x-data="baja()">
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100"><a href="index.html" class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm"><svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg></div><div class="leading-tight"><p class="text-base font-semibold tracking-tight">ÁGORA</p><p class="text-[10px] text-slate-500">Grupo Social Aspanias</p></div></a></div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+    </aside>
+
+<main class="flex-1 min-w-0 p-6" x-cloak>
+    <nav class="text-xs text-slate-500 mb-3"><a href="personas-lista.html" class="hover:underline">Personas</a> · <a href="persona-detalle.html" class="hover:underline">Ficha persona</a> · <span class="text-slate-700">Comunicación de baja</span></nav>
+
+    <div class="mb-6 flex items-start justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-800">Comunicación oficial de baja</h1>
+            <p class="text-sm text-slate-600 mt-1">Trabajo Social · notificación de cese de plaza o servicio</p>
+        </div>
+        <div class="flex gap-2">
+            <button @click="window.print()" class="px-3 py-2 text-sm rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50">🖨️ Imprimir PDF</button>
+            <button @click="guardar()" class="px-3 py-2 text-sm rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">💾 Guardar</button>
+            <button @click="firmar()" class="px-3 py-2 text-sm rounded-lg bg-rose-700 text-white hover:bg-rose-800">⚠ Firmar baja</button>
+        </div>
+    </div>
+
+    <div class="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-900">
+        <strong>⚠️ Acción crítica</strong> — La firma de la baja desactiva la plaza, genera prorrateo en facturación y notifica al equipo. Toda lectura/edición queda registrada en bitácora.
+    </div>
+
+    <form class="bg-white rounded-xl border border-slate-200 p-6 space-y-6 max-w-5xl">
+
+        <!-- 1. Identificación -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">1 · Identificación del/la usuario/a</h2>
+            <div class="grid grid-cols-3 gap-4 text-sm">
+                <div class="col-span-2"><label class="block text-xs text-slate-600 mb-1">Nombre y apellidos</label><input type="text" x-model="d.nombre" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">DNI / NIE</label><input type="text" x-model="d.dni" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Fecha de nacimiento</label><input type="date" x-model="d.fecha_nacimiento" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div class="col-span-2"><label class="block text-xs text-slate-600 mb-1">Padres / Tutor / Curador</label><input type="text" x-model="d.tutor" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+            </div>
+        </section>
+
+        <!-- 2. Servicio causa baja -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">2 · Servicio del que causa baja</h2>
+            <div class="grid grid-cols-3 gap-4 text-sm">
+                <div class="col-span-2"><label class="block text-xs text-slate-600 mb-1">Centro / servicio</label><select x-model="d.centro" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Residencia Fuentecillas</option><option>Centro Cardenal Cisneros</option><option>Centro Federico Olmeda</option><option>Centro Salas de los Infantes</option><option>Centro Villadiego</option><option>Vivienda con apoyos · La Paloma</option><option>Vivienda con apoyos · Vela Zanetti</option><option>Vida Independiente</option><option>A Gusto en Casa</option></select></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Tipo de plaza</label><select x-model="d.tipo_plaza" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Concierto público</option><option>Plaza privada</option><option>Mixta</option></select></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Fecha de ingreso original</label><input type="date" x-model="d.fecha_ingreso" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Fecha efectiva de baja</label><input type="date" x-model="d.fecha_baja" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Tiempo en el servicio</label><input type="text" x-model="d.tiempo_servicio" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="ej. 4 años, 7 meses"></div>
+            </div>
+        </section>
+
+        <!-- 3. Motivo -->
+        <section>
+            <h2 class="text-lg font-semibold text-rose-800 border-b border-slate-200 pb-2 mb-3">3 · Motivo de la baja</h2>
+            <select x-model="d.motivo_categoria" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg mb-2">
+                <option value="">—</option>
+                <option value="VOLUNTARIA">Baja voluntaria (usuario/a o familia)</option>
+                <option value="TRASLADO">Traslado a otro recurso del grupo</option>
+                <option value="TRASLADO_EXTERNO">Traslado a otro recurso externo</option>
+                <option value="FALLECIMIENTO">Fallecimiento</option>
+                <option value="REVOCACION">Revocación administrativa de la plaza</option>
+                <option value="DISCIPLINARIA">Baja disciplinaria / inadecuación del recurso</option>
+                <option value="ALTA_HOSPITAL">Alta hospitalaria con cambio de necesidades</option>
+                <option value="OTRO">Otro motivo</option>
+            </select>
+            <textarea x-model="d.motivo_descripcion" rows="4" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Descripción detallada del motivo de baja, antecedentes, decisiones tomadas y personas/órganos implicados..."></textarea>
+        </section>
+
+        <!-- 4. Destino -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">4 · Destino tras la baja</h2>
+            <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                <div><label class="block text-xs text-slate-600 mb-1">Tipo de destino</label><select x-model="d.destino_tipo" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Domicilio familiar</option><option>Otro recurso residencial</option><option>Vivienda con apoyos</option><option>Centro de día sin pernocta</option><option>Servicios sanitarios</option><option>No procede (fallecimiento)</option><option>Desconocido</option></select></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Persona/entidad receptora</label><input type="text" x-model="d.destino_persona" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="Familiar receptor o entidad"></div>
+            </div>
+            <textarea x-model="d.destino_observaciones" rows="2" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Dirección de destino, contactos y coordinaciones efectuadas con el recurso receptor..."></textarea>
+        </section>
+
+        <!-- 5. Gestiones efectuadas -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">5 · Gestiones realizadas</h2>
+            <div class="grid grid-cols-2 gap-2 text-xs mb-3">
+                <template x-for="g in gestiones" :key="g">
+                    <label class="flex items-center gap-2"><input type="checkbox" :value="g" x-model="d.gestiones_realizadas"><span x-text="g"></span></label>
+                </template>
+            </div>
+            <textarea x-model="d.gestiones_obs" rows="2" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Observaciones adicionales sobre las gestiones realizadas..."></textarea>
+        </section>
+
+        <!-- 6. Facturación / liquidación -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">6 · Facturación y liquidación</h2>
+            <div class="grid grid-cols-3 gap-4 text-sm">
+                <div><label class="block text-xs text-slate-600 mb-1">Último mes facturado</label><input type="month" x-model="d.ultimo_facturado" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Prorrateo mes baja</label><select x-model="d.prorrateo" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Sí · días efectivos</option><option>No · mes completo</option><option>Pendiente cálculo</option></select></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Saldo dinero de bolsillo</label><input type="number" step="0.01" x-model.number="d.saldo_bolsillo" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="€"></div>
+                <div class="col-span-3"><label class="block text-xs text-slate-600 mb-1">Pertenencias entregadas a</label><input type="text" x-model="d.pertenencias" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="Persona que recibe inventario de pertenencias"></div>
+            </div>
+        </section>
+
+        <!-- 7. Notificaciones -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">7 · Notificación a organismos y agentes</h2>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+                <template x-for="org in organismos" :key="org">
+                    <label class="flex items-center gap-2"><input type="checkbox" :value="org" x-model="d.notificaciones"><span x-text="org"></span></label>
+                </template>
+            </div>
+        </section>
+
+        <!-- Firma -->
+        <section class="pt-4 border-t border-slate-200">
+            <h2 class="text-lg font-semibold text-emerald-800 mb-3">Firma profesional</h2>
+            <div class="grid grid-cols-3 gap-4 text-sm">
+                <div><label class="block text-xs text-slate-600 mb-1">Fecha del documento</label><input type="date" x-model="d.fecha" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Trabajador/a Social</label><input type="text" x-model="d.profesional" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Nº de colegiación</label><input type="text" x-model="d.colegiado" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Visado dirección de centro</label><input type="text" x-model="d.visado_direccion" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="Nombre del director/a"></div>
+            </div>
+        </section>
+
+        <div class="flex items-center justify-between gap-3 pt-4 border-t border-slate-200">
+            <a href="peticiones-trabajo-social.html" class="text-sm text-slate-600 hover:underline">← Volver al backlog</a>
+            <div class="flex gap-2 text-xs text-slate-500"><span>Estado: <strong :class="estado.includes('Firmada') ? 'text-rose-700' : ''" x-text="estado"></strong></span>·<span>Guardado: <span x-text="ultimoGuardado || '—'"></span></span></div>
+        </div>
+    </form>
+</main>
+</div>
+
+<script>
+function baja() {
+    return {
+        estado: 'Borrador',
+        ultimoGuardado: '',
+        gestiones: ['Comunicación al/la usuario/a y familia', 'Inventario y entrega de pertenencias', 'Cierre del expediente sociosanitario', 'Cierre del Plan de Vida (PV)', 'Devolución de dinero de bolsillo', 'Entrega documentación clínica copia', 'Notificación al equipo del centro', 'Notificación al gestor/a de caso', 'Coordinación con destino receptor', 'Despedida formal con compañeros'],
+        organismos: ['Junta de Castilla y León — Sección Discapacidad', 'CEAS / Servicios Sociales municipales', 'Centro de salud (médico de cabecera)', 'Mutua o aseguradora', 'Familia / Tutor legal', 'Curador o curadora asistencial', 'Equipo Aspanias receptor', 'Administración Aspanias (facturación)', 'Recursos humanos (incidencia plantilla)', 'Registro civil (si fallecimiento)'],
+        d: {
+            nombre: 'González Pérez, Carlos',
+            dni: '87654321B',
+            fecha_nacimiento: '1972-09-04',
+            tutor: 'González López, Aurora (madre · curadora representativa)',
+            centro: 'Vivienda con apoyos · La Paloma',
+            tipo_plaza: 'Concierto público',
+            fecha_ingreso: '2022-01-10',
+            fecha_baja: '',
+            tiempo_servicio: '4 años, 5 meses',
+            motivo_categoria: '',
+            motivo_descripcion: '',
+            destino_tipo: '',
+            destino_persona: '',
+            destino_observaciones: '',
+            gestiones_realizadas: [],
+            gestiones_obs: '',
+            ultimo_facturado: new Date().toISOString().slice(0, 7),
+            prorrateo: 'Pendiente cálculo',
+            saldo_bolsillo: null,
+            pertenencias: '',
+            notificaciones: [],
+            fecha: new Date().toISOString().slice(0, 10),
+            profesional: 'García López, María',
+            colegiado: 'COTSB · 2487',
+            visado_direccion: '',
+        },
+        guardar() { this.estado = 'Borrador guardado'; this.ultimoGuardado = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'}); },
+        firmar() {
+            if (!this.d.motivo_categoria || !this.d.fecha_baja) { alert('Falta especificar motivo de baja y fecha efectiva.'); return; }
+            if (confirm('¿Firmar la baja definitiva? Esta acción NO se puede revertir desde la UI · queda registrada en bitácora.')) {
+                this.estado = 'Firmada · baja efectiva';
+                this.ultimoGuardado = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'});
+            }
+        },
+    };
+}
+</script>
+</body>
+</html>

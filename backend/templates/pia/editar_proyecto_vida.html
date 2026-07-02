@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Editar Proyecto de Vida · {{ persona }} · ÁGORA{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+    <div>
+        <a href="{% url 'planes_vida:proyecto_vida' persona.id plan.anualidad %}" class="text-sm text-slate-500 hover:text-slate-700">← Volver al documento</a>
+        <h1 class="mt-2 text-2xl font-semibold tracking-tight">Editar Proyecto de Vida · {{ persona.apellido_1 }}, {{ persona.nombre }}</h1>
+        <p class="text-sm text-slate-500">Anualidad {{ plan.anualidad }} · Documento publicable en REPRISS</p>
+    </div>
+
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Cabecera</legend>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Fecha</label>
+                    {{ form.fecha|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium mb-1">Elaborado por</label>
+                    {{ form.elaborado_por|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-amber-700">Deseos y Metas</legend>
+            <div>
+                <label class="block text-sm font-medium mb-1">Sueño 1</label>
+                {{ form.sueno_1|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Sueño 2</label>
+                {{ form.sueno_2|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Sueño 3</label>
+                {{ form.sueno_3|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+            </div>
+        </fieldset>
+
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-2">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-amber-700">Valores</legend>
+            {{ form.valores|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+        </fieldset>
+
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-amber-700">Día a día</legend>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1 text-emerald-700">Lo que me gusta</label>
+                    {{ form.me_gusta_dia_a_dia|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1 text-rose-700">Lo que NO me gusta</label>
+                    {{ form.no_me_gusta_dia_a_dia|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-amber-700">Red de apoyos</legend>
+            <div>
+                <label class="block text-sm font-medium mb-1">Apoyos naturales (familia, amigos)</label>
+                {{ form.apoyos_naturales|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Apoyos profesionales</label>
+                {{ form.apoyos_profesionales|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Apoyos comunitarios</label>
+                {{ form.apoyos_comunitarios|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+            </div>
+        </fieldset>
+
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-2">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-amber-700">Hitos · Mi Historia de Vida</legend>
+            {{ form.hitos_historia_vida|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+        </fieldset>
+
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-2">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">REPRISS</legend>
+            <label class="inline-flex items-center gap-2 text-sm">
+                {{ form.publicado_en_repriss }}
+                <span>Marcar como publicado en REPRISS por Dirección</span>
+            </label>
+        </fieldset>
+
+        <div class="flex items-center justify-end gap-2 sticky bottom-4 bg-slate-50/80 backdrop-blur p-3 rounded-lg border border-slate-200">
+            <a href="{% url 'planes_vida:proyecto_vida' persona.id plan.anualidad %}" class="rounded border border-slate-300 bg-white px-4 py-2 text-sm hover:border-slate-400">Cancelar</a>
+            <button type="submit" class="rounded bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700">Guardar Proyecto de Vida</button>
+        </div>
+    </form>
+</section>
+{% endblock %}

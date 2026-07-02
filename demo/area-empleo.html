@@ -1,0 +1,527 @@
+<!-- @rol: gerencia, direccion_centro -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área de Empleo · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Prototipo nueva interfaz</span> · datos ficticios · sólo para validación</div>
+
+<div class="flex min-h-screen" x-data="{ userMenu: false, vista: 'cee' }">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <!-- Sidebar canónico se inyecta aquí por build_demo.py -->
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- ===== CONTENIDO ===== -->
+    <main class="flex-1 min-w-0">
+
+        <!-- Breadcrumb + acciones -->
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a>
+                <span class="mx-1">›</span>
+                <a href="areas.html" class="hover:text-emerald-700">Áreas transversales</a>
+                <span class="mx-1">›</span>
+                <span class="text-slate-700">Área de Empleo</span>
+            </nav>
+            <div class="flex items-center gap-2 shrink-0">
+                <button class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-emerald-400">📊 Memoria empleo</button>
+                <button class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-emerald-400">+ Persona trabajadora</button>
+                <button class="rounded-lg bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">+ Nuevo cliente</button>
+            </div>
+        </div>
+
+        <div class="px-8 py-6 max-w-7xl space-y-6">
+
+            <!-- Cabecera -->
+            <header class="rounded-xl border border-slate-200 bg-white p-6">
+                <div class="flex items-start gap-5 flex-wrap">
+                    <div class="w-16 h-16 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-3xl shrink-0">💼</div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <h1 class="text-2xl font-semibold tracking-tight">Área de Empleo</h1>
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Área transversal</span>
+                        </div>
+                        <p class="text-sm text-slate-600 mt-1">Dos Centros Especiales de Empleo del grupo (<strong>CEE Fundación CISA</strong> y <strong>CEE CISA EMPLEA</strong>), empleo con apoyo en empresa ordinaria y orientación laboral (USAP).</p>
+                        <div class="mt-3 grid gap-x-6 gap-y-2 grid-cols-1 md:grid-cols-2 text-xs">
+                            <div class="rounded-lg bg-blue-50 border border-blue-200 px-3 py-2">
+                                <p class="font-semibold text-blue-900">CEE Fundación CISA</p>
+                                <p class="text-blue-800 mt-0.5">Líneas industriales y de producción · base operativa Cellophane</p>
+                            </div>
+                            <div class="rounded-lg bg-indigo-50 border border-indigo-200 px-3 py-2">
+                                <p class="font-semibold text-indigo-900">CEE CISA EMPLEA</p>
+                                <p class="text-indigo-800 mt-0.5">Servicios, infraestructura y empleo con apoyo en empresa ordinaria</p>
+                            </div>
+                        </div>
+                        <div class="mt-3 grid gap-x-6 gap-y-1 grid-cols-2 md:grid-cols-4 text-xs">
+                            <div><span class="text-slate-500">Director:</span> Roberto Ortega</div>
+                            <div><span class="text-slate-500">Personas trabajadoras:</span> 142</div>
+                            <div><span class="text-slate-500">Líneas activas:</span> 13</div>
+                            <div><span class="text-slate-500">Clientes ordinarios:</span> 5 grandes cuentas</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPIs -->
+                <div class="mt-5 grid gap-3 grid-cols-2 md:grid-cols-5 pt-5 border-t border-slate-100">
+                    <div>
+                        <p class="text-xs text-slate-500">CEE Aspaniasmerc</p>
+                        <p class="text-2xl font-light mt-0.5">112 <span class="text-sm text-slate-400 font-normal">personas</span></p>
+                        <p class="text-[10px] text-slate-400">Empleo protegido</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500">Empleo con apoyo</p>
+                        <p class="text-2xl font-light mt-0.5">18 <span class="text-sm text-slate-400 font-normal">personas</span></p>
+                        <p class="text-[10px] text-slate-400">CISA EMPLEA</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500">USAP · orientación</p>
+                        <p class="text-2xl font-light mt-0.5">12 <span class="text-sm text-slate-400 font-normal">personas</span></p>
+                        <p class="text-[10px] text-slate-400">En itinerario</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500">Formación pre-laboral</p>
+                        <p class="text-2xl font-light mt-0.5">24 <span class="text-sm text-slate-400 font-normal">personas</span></p>
+                        <p class="text-[10px] text-slate-400">3 itinerarios activos</p>
+                    </div>
+                    <div class="rounded-lg bg-emerald-50 border border-emerald-200 px-3 py-2 -m-1">
+                        <p class="text-xs text-emerald-700">Facturación 2025</p>
+                        <p class="text-2xl font-light mt-0.5 text-emerald-900">3,4 M€</p>
+                        <p class="text-[10px] text-emerald-700">+ 8 % vs 2024</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Tabs -->
+            <div class="border-b border-slate-200 flex items-center gap-1 overflow-x-auto">
+                <button @click="vista = 'cee'" :class="vista === 'cee' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Líneas de actividad (CEE)</button>
+                <button @click="vista = 'usap'" :class="vista === 'usap' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">USAP · orientación</button>
+                <button @click="vista = 'ecaa'" :class="vista === 'ecaa' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Empleo con apoyo</button>
+                <button @click="vista = 'formacion'" :class="vista === 'formacion' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Formación pre-laboral</button>
+                <button @click="vista = 'personas'" :class="vista === 'personas' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap">Personas trabajadoras</button>
+            </div>
+
+            <!-- Vista: Líneas de actividad CEE -->
+            <div x-show="vista === 'cee'" class="space-y-5">
+                <p class="text-sm text-slate-500">13 líneas activas repartidas entre los dos Centros Especiales de Empleo del grupo. Datos a 17/06/2026.</p>
+
+                <!-- 1. LÍNEAS DE PRODUCCIÓN -->
+                <section>
+                    <h2 class="text-sm font-semibold tracking-tight mb-3 flex items-center gap-2">🏭 Líneas de producción <span class="text-xs text-slate-400 font-normal">· 5 líneas · CEE Fundación CISA</span></h2>
+                    <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-blue-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-lg">🧴</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">CEE F. CISA · L'Oréal</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-blue-700">L'Oréal</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Manipulado y empaquetado de productos cosméticos</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Personas:</span> <strong>28</strong></div>
+                                <div><span class="text-slate-500">Turnos:</span> 2</div>
+                                <div><span class="text-slate-500">Responsable:</span> M. Sanz</div>
+                                <div><span class="text-slate-500">Ubicación:</span> Nave 2</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-blue-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg">♻</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">CEE F. CISA · L'Oréal</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-blue-700">GIR L'Oréal</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Gestión integral de residuos en planta L'Oréal Burgos</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Personas:</span> <strong>9</strong></div>
+                                <div><span class="text-slate-500">Turnos:</span> 1</div>
+                                <div><span class="text-slate-500">Responsable:</span> J. Castro</div>
+                                <div><span class="text-slate-500">Ubicación:</span> Planta cliente</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-blue-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center text-lg">🥤</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">CEE F. CISA · PepsiCo</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-blue-700">PepsiCo</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Manipulado promocional y empaquetado de campañas</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Personas:</span> <strong>11</strong></div>
+                                <div><span class="text-slate-500">Turnos:</span> 1 (campañas)</div>
+                                <div><span class="text-slate-500">Responsable:</span> A. Pinilla</div>
+                                <div><span class="text-slate-500">Ubicación:</span> Nave 1</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-blue-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-slate-200 text-slate-700 flex items-center justify-center text-lg">♻</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">CEE F. CISA · Ubisa</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-blue-700">Ubisa</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Servicios auxiliares de reciclaje en siderúrgica Ubisa (Burgos)</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Personas:</span> <strong>6</strong></div>
+                                <div><span class="text-slate-500">Turnos:</span> 1</div>
+                                <div><span class="text-slate-500">Responsable:</span> P. Hernando</div>
+                                <div><span class="text-slate-500">Ubicación:</span> Planta cliente</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-blue-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center text-lg">🧰</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">CEE F. CISA · varios</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-blue-700">Otros manipulados</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Pedidos puntuales · subcontratas locales · campañas</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Personas:</span> <strong>12</strong></div>
+                                <div><span class="text-slate-500">Cliente:</span> Variado</div>
+                                <div><span class="text-slate-500">Responsable:</span> M. Quintana</div>
+                                <div><span class="text-slate-500">Ubicación:</span> Nave 2</div>
+                            </div>
+                        </a>
+
+                    </div>
+                </section>
+
+                <!-- 2. SERVICIOS -->
+                <section>
+                    <h2 class="text-sm font-semibold tracking-tight mb-3 flex items-center gap-2">🧹 Servicios <span class="text-xs text-slate-400 font-normal">· 3 líneas · CEE CISA EMPLEA</span></h2>
+                    <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-indigo-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-lg">🧽</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">CEE CISA EMPLEA</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-indigo-700">Limpieza</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Equipo de limpieza industrial — centros del grupo y oficinas externas</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Personas:</span> <strong>8</strong></div>
+                                <div><span class="text-slate-500">Cliente:</span> Grupo + ext.</div>
+                                <div><span class="text-slate-500">Responsable:</span> N. Vicario</div>
+                                <div><span class="text-slate-500">Ubicación:</span> Itinerante</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-indigo-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-orange-100 text-orange-700 flex items-center justify-center text-lg">🍳</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">CEE CISA EMPLEA</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-indigo-700">Catering · cocinas</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Cocina central y servicio de catering a los centros del grupo</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Personas:</span> <strong>14</strong></div>
+                                <div><span class="text-slate-500">Cliente:</span> Grupo</div>
+                                <div><span class="text-slate-500">Responsable:</span> C. Bárcena</div>
+                                <div><span class="text-slate-500">Ubicación:</span> Cocina central</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-indigo-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-cyan-100 text-cyan-700 flex items-center justify-center text-lg">🧺</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">CEE CISA EMPLEA</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-indigo-700">Lavandería</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Lavandería industrial para los 18 centros del grupo + clientes externos</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Personas:</span> <strong>11</strong></div>
+                                <div><span class="text-slate-500">Cliente:</span> Grupo + ext.</div>
+                                <div><span class="text-slate-500">Responsable:</span> S. Renedo</div>
+                                <div><span class="text-slate-500">Ubicación:</span> Nave 4</div>
+                            </div>
+                        </a>
+
+                    </div>
+                </section>
+
+                <!-- 3. INFRAESTRUCTURA, MANTENIMIENTO Y LÍNEA VERDE -->
+                <section>
+                    <h2 class="text-sm font-semibold tracking-tight mb-3 flex items-center gap-2">🌿 Infraestructura, mantenimiento y línea verde <span class="text-xs text-slate-400 font-normal">· 5 líneas · CEE CISA EMPLEA</span></h2>
+                    <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-indigo-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-stone-100 text-stone-700 flex items-center justify-center text-lg">🔧</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">CEE CISA EMPLEA</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-indigo-700">Mantenimiento</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Mantenimiento técnico de edificios e instalaciones del grupo</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Personas:</span> <strong>2</strong></div>
+                                <div><span class="text-slate-500">Cliente:</span> Grupo</div>
+                                <div><span class="text-slate-500">Responsable:</span> T. Aguilar</div>
+                                <div><span class="text-slate-500">Ubicación:</span> Itinerante</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-indigo-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-yellow-100 text-yellow-700 flex items-center justify-center text-lg">🫒</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">CEE CISA EMPLEA</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-indigo-700">Aceite vegetal</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Envasado y distribución de aceite — marca blanca regional</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Personas:</span> <strong>7</strong></div>
+                                <div><span class="text-slate-500">Cliente:</span> Mixto</div>
+                                <div><span class="text-slate-500">Responsable:</span> R. Cuesta</div>
+                                <div><span class="text-slate-500">Ubicación:</span> Nave 1</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-indigo-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-violet-100 text-violet-700 flex items-center justify-center text-lg">🕯</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">CEE CISA EMPLEA · Intecum</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-indigo-700">Intecum</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Apoyo a personas en cuidados de fin de vida — acompañamiento y servicios funerarios humanizados</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Personas:</span> <strong>5</strong></div>
+                                <div><span class="text-slate-500">Cliente:</span> Familias</div>
+                                <div><span class="text-slate-500">Responsable:</span> L. Ortega</div>
+                                <div><span class="text-slate-500">Ubicación:</span> Nave 3 · domicilios</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-indigo-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-lime-100 text-lime-700 flex items-center justify-center text-lg">🌳</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">CEE CISA EMPLEA · Ayto.</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-indigo-700">Jardinería</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Mantenimiento de zonas verdes — convenio con Ayuntamientos</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Personas:</span> <strong>5</strong></div>
+                                <div><span class="text-slate-500">Cliente:</span> Ayto. + grupo</div>
+                                <div><span class="text-slate-500">Responsable:</span> D. Pinto</div>
+                                <div><span class="text-slate-500">Ubicación:</span> Itinerante</div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="rounded-xl border border-slate-200 bg-white p-5 hover:border-indigo-300 hover:shadow-sm transition group">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-green-100 text-green-700 flex items-center justify-center text-lg">🌱</div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">CEE CISA EMPLEA</span>
+                            </div>
+                            <p class="mt-3 font-semibold text-sm group-hover:text-indigo-700">Viveros</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Producción y venta de plantel ornamental y planta de temporada</p>
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                                <div><span class="text-slate-500">Personas:</span> <strong>4</strong></div>
+                                <div><span class="text-slate-500">Cliente:</span> Particular</div>
+                                <div><span class="text-slate-500">Responsable:</span> Q. Saiz</div>
+                                <div><span class="text-slate-500">Ubicación:</span> Vivero Villayerno</div>
+                            </div>
+                        </a>
+
+                    </div>
+                </section>
+
+                <!-- Resumen -->
+                <section class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-xs text-slate-600 leading-relaxed">
+                    <p><strong class="text-slate-800">Convenio aplicable</strong>: XV Convenio Colectivo General de Centros y Servicios de Atención a Personas con Discapacidad. <strong>Cláusula social</strong>: el 70 % de la plantilla de ambos CEE son personas con discapacidad intelectual reconocida ≥ 33 %.</p>
+                    <p class="mt-2"><strong class="text-blue-900">CEE Fundación CISA</strong> (5 líneas · 66 trabajadores): líneas industriales de producción para grandes cuentas externalizadas. · <strong class="text-indigo-900">CEE CISA EMPLEA</strong> (8 líneas · 56 trabajadores): servicios al grupo y a terceros + línea verde + acompañamiento Intecum. Empleo con apoyo (18 personas) se gestiona desde CISA EMPLEA.</p>
+                </section>
+            </div>
+
+            <!-- Vista: USAP -->
+            <div x-show="vista === 'usap'" x-cloak class="space-y-5">
+                <p class="text-sm text-slate-500">Unidad de Servicios de Apoyo Profesional · itinerarios personalizados de orientación e inserción laboral.</p>
+                <div class="grid gap-4 md:grid-cols-3">
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <p class="text-xs text-slate-500">En itinerario activo</p>
+                        <p class="text-3xl font-light mt-1">12</p>
+                        <p class="text-[10px] text-slate-400">de los cuales 4 en fase de inserción</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <p class="text-xs text-slate-500">Insertados en 2025</p>
+                        <p class="text-3xl font-light mt-1 text-emerald-700">9</p>
+                        <p class="text-[10px] text-slate-400">7 en empresa ordinaria · 2 en CEE</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <p class="text-xs text-slate-500">Tiempo medio en itinerario</p>
+                        <p class="text-3xl font-light mt-1">14 m</p>
+                        <p class="text-[10px] text-slate-400">desde alta hasta inserción</p>
+                    </div>
+                </div>
+                <div class="rounded-xl border border-slate-200 bg-white p-5">
+                    <h3 class="text-sm font-semibold mb-3">Pasos del itinerario</h3>
+                    <ol class="space-y-2 text-sm text-slate-700">
+                        <li class="flex items-start gap-3"><span class="text-emerald-600 mt-0.5">①</span> Acogida y entrevista inicial — perfil profesional, expectativas, apoyos.</li>
+                        <li class="flex items-start gap-3"><span class="text-emerald-600 mt-0.5">②</span> Valoración de competencias laborales — equipo multidisciplinar.</li>
+                        <li class="flex items-start gap-3"><span class="text-emerald-600 mt-0.5">③</span> Plan individual de inserción — objetivos, formación necesaria, calendario.</li>
+                        <li class="flex items-start gap-3"><span class="text-emerald-600 mt-0.5">④</span> Formación habilidades sociolaborales — talleres grupales y prácticas en empresa.</li>
+                        <li class="flex items-start gap-3"><span class="text-emerald-600 mt-0.5">⑤</span> Intermediación con empresas y CEE.</li>
+                        <li class="flex items-start gap-3"><span class="text-emerald-600 mt-0.5">⑥</span> Seguimiento en el puesto durante 6 meses tras inserción.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Vista: Empleo con apoyo -->
+            <div x-show="vista === 'ecaa'" x-cloak class="space-y-5">
+                <p class="text-sm text-slate-500">Empleo en empresa ordinaria con apoyo de preparador laboral · gestionado por CISA EMPLEA.</p>
+                <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <p class="text-xs text-slate-500">Personas en empleo</p>
+                        <p class="text-3xl font-light mt-1">18</p>
+                        <div class="mt-2 flex flex-wrap gap-1 text-[10px]">
+                            <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Hostelería · 6</span>
+                            <span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Reposición · 4</span>
+                            <span class="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800">Logística · 3</span>
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Atención · 3</span>
+                            <span class="px-2 py-0.5 rounded-full bg-slate-200 text-slate-700">Otros · 2</span>
+                        </div>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <p class="text-xs text-slate-500">Empresas colaboradoras</p>
+                        <p class="text-3xl font-light mt-1">11</p>
+                        <p class="text-[10px] text-slate-400">en Burgos provincia</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <p class="text-xs text-slate-500">Preparadores laborales</p>
+                        <p class="text-3xl font-light mt-1">2</p>
+                        <p class="text-[10px] text-slate-400">ratio 1:9 · seguimiento mensual</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Formación -->
+            <div x-show="vista === 'formacion'" x-cloak class="space-y-5">
+                <p class="text-sm text-slate-500">Itinerarios de formación pre-laboral · prepara a la persona para incorporarse al empleo protegido o con apoyo.</p>
+                <div class="grid gap-4 md:grid-cols-3">
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <h3 class="text-sm font-semibold">Habilidades sociolaborales</h3>
+                        <p class="text-xs text-slate-500 mt-1">Puntualidad, trabajo en equipo, comunicación con compañeros y mandos.</p>
+                        <p class="mt-3 text-xs"><strong>10</strong> personas · 4 h/semana</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <h3 class="text-sm font-semibold">Manipulación industrial</h3>
+                        <p class="text-xs text-slate-500 mt-1">Uso seguro de herramientas, EPI, normas de calidad y control de pedidos.</p>
+                        <p class="mt-3 text-xs"><strong>8</strong> personas · 6 h/semana</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <h3 class="text-sm font-semibold">Atención al público</h3>
+                        <p class="text-xs text-slate-500 mt-1">Acogida, comunicación, manejo básico de TPV — para hostelería y reposición.</p>
+                        <p class="mt-3 text-xs"><strong>6</strong> personas · 5 h/semana</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Personas -->
+            <div x-show="vista === 'personas'" x-cloak class="space-y-3">
+                <p class="text-sm text-slate-500">Listado de personas trabajadoras · clic para abrir su ficha personal y vincular el contrato.</p>
+                <div class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                            <tr>
+                                <th class="px-5 py-2 text-left font-medium">Persona</th>
+                                <th class="px-5 py-2 text-left font-medium">Modalidad</th>
+                                <th class="px-5 py-2 text-left font-medium">Línea / empresa</th>
+                                <th class="px-5 py-2 text-left font-medium">Antigüedad</th>
+                                <th class="px-5 py-2 text-left font-medium">Jornada</th>
+                                <th class="px-5 py-2 text-center font-medium">Apoyo</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium"><a href="persona-detalle.html" class="hover:text-blue-700">Castro Núñez, Elena</a></td><td>CEE · indefinido</td><td>L'Oréal</td><td class="text-xs">8 a 3 m</td><td>100 %</td><td class="text-center">—</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium"><a href="persona-detalle.html" class="hover:text-blue-700">Sanz Herrero, Lucía</a></td><td>CEE · indefinido</td><td>PepsiCo</td><td class="text-xs">5 a 1 m</td><td>87 %</td><td class="text-center">—</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium"><a href="persona-detalle.html" class="hover:text-blue-700">Aguilar Bravo, Carlos</a></td><td>Empleo c/ apoyo</td><td>Mercadona · reposición</td><td class="text-xs">2 a 7 m</td><td>75 %</td><td class="text-center text-emerald-600">✓ Activo</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium"><a href="persona-detalle.html" class="hover:text-blue-700">Vicario León, Pablo</a></td><td>CEE · indefinido</td><td>Lavandería</td><td class="text-xs">11 a 8 m</td><td>100 %</td><td class="text-center">—</td></tr>
+                            <tr class="hover:bg-slate-50"><td class="px-5 py-2.5 font-medium"><a href="persona-detalle.html" class="hover:text-blue-700">Pinto Renedo, Jorge</a></td><td>CEE · IT</td><td>Jardinería</td><td class="text-xs">4 a 2 m</td><td>100 % (IT)</td><td class="text-center">—</td></tr>
+                            <tr class="bg-slate-50"><td colspan="6" class="px-5 py-2 text-xs text-slate-500 text-center">Mostrando 5 de 142 personas trabajadoras · <a href="#" class="text-blue-700 hover:underline">ver listado completo →</a></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<!-- Búsqueda Ctrl+K -->
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, cita..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

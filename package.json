@@ -1,0 +1,14 @@
+{
+  "name": "agora-aspanias-demo",
+  "version": "1.0.0",
+  "description": "Tailwind build pipeline para la demo de ÁGORA",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./demo/_assets/tailwind.input.css -o ./demo/_assets/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./demo/_assets/tailwind.input.css -o ./demo/_assets/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.1",
+    "tailwindcss": "^4.3.1"
+  }
+}

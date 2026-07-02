@@ -1,0 +1,930 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipo · Calendario laboral 2026 — ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        [x-cloak] { display: none !important; }
+        .dia { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; border-radius: 3px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="flex min-h-screen" x-data="{
+    userMenu: false,
+    vista: 'centro',
+    centroSel: 'Residencia Fuentecillas',
+    convenio: 'residencias',
+    año: 2026,
+    estadoCal: 'aprobado',
+    modalSimular: false,
+    modalIndividuales: false,
+    escenarioActivo: null,
+    escenarios: [
+        { id: 'A', nombre: 'Escenario A · concentrar vacaciones en julio', creado: '03 jun 2026 · F. Martínez', cobertura: 78, delta_horas: -120 },
+        { id: 'B', nombre: 'Escenario B · prolongación IT López Pérez', creado: '04 jun 2026 · F. Martínez', cobertura: 91, delta_horas: -160 }
+    ],
+    tipoSim: 'mover_vacaciones',
+    toast: false,
+    aplicarEscenario(id) {
+        this.escenarioActivo = id;
+        this.toast = 'Escenario ' + id + ' aplicado en la vista. No se ha modificado el calendario aprobado.';
+        setTimeout(() => this.toast = false, 3000);
+    },
+    centrosGrupo() {
+        return [
+            { nombre: 'Residencia Fuentecillas', cnv: 'D.I.', personas: 67, profes: 14 },
+            { nombre: 'Residencia Quintanadueñas', cnv: 'D.I.', personas: 41, profes: 12 },
+            { nombre: 'Residencia Páramo', cnv: 'D.I.', personas: 38, profes: 11 },
+            { nombre: 'Residencia Castilla', cnv: 'D.I.', personas: 35, profes: 10 },
+            { nombre: 'CO Fuentecillas', cnv: 'D.I.', personas: 28, profes: 7 },
+            { nombre: 'CO Plata', cnv: 'D.I.', personas: 22, profes: 6 },
+            { nombre: 'CO Castrillo del Val', cnv: 'D.I.', personas: 18, profes: 5 },
+            { nombre: 'CD Fuentecillas', cnv: 'D.I.', personas: 24, profes: 6 },
+            { nombre: 'CD Quintanadueñas', cnv: 'D.I.', personas: 16, profes: 4 },
+            { nombre: 'CD Salas de los Infantes', cnv: 'Res.', personas: 12, profes: 8 },
+            { nombre: 'CD Villadiego', cnv: 'Res.', personas: 10, profes: 7 },
+            { nombre: 'Vivienda Bda. del Pilar', cnv: 'D.I.', personas: 8, profes: 3 },
+            { nombre: 'Vivienda San Cristóbal', cnv: 'D.I.', personas: 6, profes: 3 },
+            { nombre: 'Servicio Puentes', cnv: 'D.I.', personas: 22, profes: 6 },
+            { nombre: 'Vida Independiente', cnv: 'D.I.', personas: 14, profes: 4 },
+            { nombre: 'A Gusto en Casa', cnv: 'D.I.', personas: 12, profes: 5 },
+            { nombre: 'Intecum', cnv: 'Res.', personas: 8, profes: 6 },
+            { nombre: 'Sede / transversales', cnv: 'D.I.', personas: 0, profes: 13 }
+        ];
+    }
+}">
+
+    <!-- =========================================================== -->
+    <!-- SIDEBAR (idéntico al resto del módulo Equipo)                -->
+    <!-- =========================================================== -->
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight"><p class="text-base font-semibold tracking-tight">ÁGORA</p><p class="text-[10px] text-slate-500">Grupo Social Aspanias</p></div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100">
+            <div class="w-full flex items-center gap-2.5 p-2 rounded-lg">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0"><p class="text-sm font-medium truncate">Federico Martínez</p><p class="text-[10px] text-slate-500 truncate">Gerencia</p></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- =========================================================== -->
+    <!-- MAIN                                                        -->
+    <!-- =========================================================== -->
+    <main class="flex-1 min-w-0">
+
+        <!-- Breadcrumb -->
+        <div class="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-slate-200 px-8 py-3">
+            <nav class="text-xs text-slate-500 flex items-center gap-1.5">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a><span>›</span>
+                <a href="profesionales.html" class="hover:text-emerald-700">Equipo</a><span>›</span>
+                <span class="text-slate-900 font-medium">Calendario laboral <span x-text="año"></span></span>
+            </nav>
+        </div>
+
+        <!-- Cabecera -->
+        <header class="px-8 pt-6 pb-2 border-b border-slate-200 bg-white">
+            <div class="flex items-start justify-between mb-4 flex-wrap gap-3">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <h1 class="text-2xl font-semibold tracking-tight">Calendario laboral <span x-text="año"></span></h1>
+                        <!-- Estado del calendario -->
+                        <span x-show="estadoCal === 'borrador'" class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-medium">🟡 Borrador</span>
+                        <span x-show="estadoCal === 'aprobado'" class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-medium">✅ Aprobado por Dirección</span>
+                        <span x-show="estadoCal === 'firmado'" class="px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 text-[11px] font-medium">📜 Firmado por RLT</span>
+                        <span x-show="escenarioActivo" class="px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[11px] font-medium">🧪 Escenario <span x-text="escenarioActivo"></span></span>
+                    </div>
+                    <p class="text-sm text-slate-500">Convenio aplicable según centro · 187 profesionales · 18 centros y servicios · Grupo Social Aspanias</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button @click="año = año - 1" class="px-2 py-1.5 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">‹</button>
+                    <span class="text-sm font-semibold px-1" x-text="año"></span>
+                    <button @click="año = año + 1" class="px-2 py-1.5 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">›</button>
+                    <button @click="modalSimular = true" class="ml-2 px-3 py-2 text-sm rounded-lg border border-purple-300 bg-purple-50 text-purple-800 hover:bg-purple-100 font-medium">🧪 Simular variación</button>
+                    <button @click="modalIndividuales = true" class="px-3 py-2 text-sm rounded-lg border border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 font-medium">📆 Generar individuales</button>
+                    <button @click="toast = 'PDF del calendario generado · listo para tablón del centro'; setTimeout(()=>toast=false, 2400)" class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white hover:bg-slate-50">📄 PDF tablón</button>
+                    <button @click="toast = 'Calendario enviado a Comité de Empresa para firma'; setTimeout(()=>toast=false, 2400)" class="px-3 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">📜 Enviar a RLT</button>
+                </div>
+            </div>
+
+            <!-- Tabs principales del módulo Equipo (con la nueva 4ª tab) -->
+            <nav class="flex gap-1 -mb-px">
+                <a href="profesionales.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">👤 Profesionales</a>
+                <a href="vacaciones.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">🏖 Vacaciones y ausencias</a>
+                <a href="turnos.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">🕒 Turnos</a>
+                <a href="calendario-laboral.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-emerald-700 text-emerald-700">📆 Calendario laboral</a>
+                <a href="patrones-turno.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">🔁 Patrones de turno</a>
+            </nav>
+        </header>
+
+        <!-- Sub-tabs Centro / Grupo -->
+        <section class="px-8 py-4 bg-white border-b border-slate-200">
+            <div class="flex items-center gap-3 flex-wrap">
+                <div class="flex items-center gap-1 bg-slate-100 rounded-lg p-1">
+                    <button @click="vista = 'centro'" :class="vista === 'centro' ? 'bg-white shadow-sm text-emerald-700' : 'text-slate-600'" class="px-3 py-1.5 text-xs rounded-md font-medium">🏢 Por centro</button>
+                    <button @click="vista = 'grupo'" :class="vista === 'grupo' ? 'bg-white shadow-sm text-emerald-700' : 'text-slate-600'" class="px-3 py-1.5 text-xs rounded-md font-medium">🌐 Vista grupo (18)</button>
+                </div>
+
+                <!-- Selector de centro (solo si vista=centro) -->
+                <select x-show="vista === 'centro'" x-model="centroSel" @change="convenio = centroSel.includes('Salas') || centroSel.includes('Villadiego') || centroSel === 'Intecum' ? 'residencias' : 'discapacidad'" class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white font-medium">
+                    <option>Residencia Fuentecillas</option>
+                    <option>Residencia Quintanadueñas</option>
+                    <option>Residencia Páramo</option>
+                    <option>Residencia Castilla</option>
+                    <option>CO Fuentecillas</option>
+                    <option>CO Plata</option>
+                    <option>CD Fuentecillas</option>
+                    <option>CD Salas de los Infantes</option>
+                    <option>CD Villadiego</option>
+                    <option>Vida Independiente</option>
+                    <option>A Gusto en Casa</option>
+                    <option>Intecum</option>
+                </select>
+
+                <!-- Selector de escenarios -->
+                <div class="ml-auto flex items-center gap-2">
+                    <span class="text-xs text-slate-500">Escenarios guardados:</span>
+                    <template x-for="esc in escenarios" :key="esc.id">
+                        <button @click="aplicarEscenario(esc.id)" :class="escenarioActivo === esc.id ? 'bg-purple-700 text-white' : 'bg-white text-slate-700 border-slate-300'" class="px-2 py-1 text-[11px] rounded border font-medium" x-text="'Escenario ' + esc.id"></button>
+                    </template>
+                    <button x-show="escenarioActivo" @click="escenarioActivo = null; toast = 'Vuelto al calendario aprobado'; setTimeout(()=>toast=false,2000)" class="px-2 py-1 text-[11px] rounded border border-slate-300 bg-white text-slate-700">Volver a aprobado</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- VISTA CENTRO                                  -->
+        <!-- ============================================ -->
+        <div x-show="vista === 'centro'">
+
+            <!-- KPIs balance horas anuales -->
+            <section class="px-8 py-5 bg-white border-b border-slate-200">
+                <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
+                    <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                        <p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Convenio</p>
+                        <p x-show="convenio === 'discapacidad'" class="mt-1 text-sm font-semibold text-emerald-800">VII Discapacidad</p>
+                        <p x-show="convenio === 'residencias'" class="mt-1 text-sm font-semibold text-sky-800">VII Residencias Mayores</p>
+                        <p x-show="convenio === 'discapacidad'" class="text-[10px] text-slate-500">Aspaniasmerc 2016 SLU</p>
+                        <p x-show="convenio === 'residencias'" class="text-[10px] text-slate-500">Fundación Aspanias Burgos</p>
+                    </div>
+                    <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                        <p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Jornada convenio</p>
+                        <p x-show="convenio === 'discapacidad'" class="mt-1 text-xl font-light">1 752 <span class="text-xs text-slate-500">h/año</span></p>
+                        <p x-show="convenio === 'residencias'" class="mt-1 text-xl font-light">1 770 <span class="text-xs text-slate-500">h/año</span></p>
+                        <p class="text-[10px] text-slate-500">Art. 18 conv.</p>
+                    </div>
+                    <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                        <p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Festivos</p>
+                        <p class="mt-1 text-xl font-light">14 <span class="text-xs text-slate-500">días</span></p>
+                        <p class="text-[10px] text-slate-500">9 nac. + 3 CyL + 2 Burgos</p>
+                    </div>
+                    <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                        <p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Vacaciones del centro</p>
+                        <p class="mt-1 text-xl font-light text-emerald-700">308 <span class="text-xs text-slate-500">días</span></p>
+                        <p class="text-[10px] text-slate-500">22 prof. × 14 días previstos</p>
+                    </div>
+                    <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                        <p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Horas reales centro</p>
+                        <p class="mt-1 text-xl font-light" :class="escenarioActivo ? 'text-purple-700' : 'text-emerald-700'">
+                            <span x-show="!escenarioActivo">22 458 h</span>
+                            <span x-show="escenarioActivo === 'A'">22 338 h</span>
+                            <span x-show="escenarioActivo === 'B'">22 298 h</span>
+                        </p>
+                        <p x-show="escenarioActivo" class="text-[10px] text-purple-700">vs aprobado: <span x-show="escenarioActivo==='A'">−120 h</span><span x-show="escenarioActivo==='B'">−160 h</span></p>
+                        <p x-show="!escenarioActivo" class="text-[10px] text-slate-500">disponibles año</p>
+                    </div>
+                    <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                        <p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Cobertura media</p>
+                        <p class="mt-1 text-xl font-light text-emerald-700">
+                            <span x-show="!escenarioActivo">93 %</span>
+                            <span x-show="escenarioActivo === 'A'" class="text-amber-700">78 %</span>
+                            <span x-show="escenarioActivo === 'B'" class="text-emerald-700">91 %</span>
+                        </p>
+                        <p x-show="escenarioActivo === 'A'" class="text-[10px] text-amber-700">⚠ Bajo objetivo (85 %)</p>
+                        <p x-show="!escenarioActivo || escenarioActivo === 'B'" class="text-[10px] text-slate-500">objetivo: 85 %</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leyenda + opciones -->
+            <section class="px-8 py-3 bg-slate-50 border-b border-slate-200">
+                <div class="flex items-center gap-3 text-[11px] flex-wrap">
+                    <span class="font-semibold text-slate-600 uppercase tracking-wide">Leyenda:</span>
+                    <span class="flex items-center gap-1"><span class="dia bg-white border border-slate-300"></span> Laborable</span>
+                    <span class="flex items-center gap-1"><span class="dia bg-slate-100 border border-slate-200"></span> Descanso semanal</span>
+                    <span class="flex items-center gap-1"><span class="dia bg-rose-200 border border-rose-300"></span> Festivo nacional</span>
+                    <span class="flex items-center gap-1"><span class="dia bg-orange-200 border border-orange-300"></span> Festivo CyL</span>
+                    <span class="flex items-center gap-1"><span class="dia bg-amber-200 border border-amber-300"></span> Festivo Burgos</span>
+                    <span class="flex items-center gap-1"><span class="dia bg-emerald-200 border border-emerald-300"></span> Vacaciones programadas</span>
+                    <span class="flex items-center gap-1"><span class="dia bg-sky-100 border border-sky-200"></span> Puente identificado</span>
+                    <span class="flex items-center gap-1"><span class="dia bg-purple-200 border-2 border-purple-500"></span> Modificado por escenario</span>
+                </div>
+            </section>
+
+            <!-- Mosaico 12 meses -->
+            <section class="px-8 py-6">
+                <div class="bg-white rounded-xl border border-slate-200 p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-base font-semibold">📅 Vista anual — <span x-text="centroSel"></span></h2>
+                        <p class="text-xs text-slate-500">Año <strong x-text="año"></strong> · clic en un día para añadir nota</p>
+                    </div>
+
+                    <div class="grid grid-cols-3 lg:grid-cols-4 gap-4">
+
+                        <!-- ENERO -->
+                        <div>
+                            <h3 class="text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wide flex items-center justify-between">Enero <span class="text-[10px] text-slate-400 normal-case">168 h</span></h3>
+                            <div class="grid grid-cols-7 gap-0.5 text-[9px] text-slate-400 text-center mb-0.5"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                            <div class="grid grid-cols-7 gap-0.5">
+                                <span class="dia"></span><span class="dia"></span><span class="dia"></span>
+                                <span class="dia bg-rose-200 border border-rose-300" title="Año Nuevo">1</span>
+                                <span class="dia bg-white border border-slate-300">2</span>
+                                <span class="dia bg-slate-100">3</span><span class="dia bg-slate-100">4</span>
+                                <span class="dia bg-white border border-slate-300">5</span>
+                                <span class="dia bg-rose-200 border border-rose-300" title="Reyes">6</span>
+                                <span class="dia bg-white border border-slate-300">7</span>
+                                <span class="dia bg-white border border-slate-300">8</span>
+                                <span class="dia bg-white border border-slate-300">9</span>
+                                <span class="dia bg-slate-100">10</span><span class="dia bg-slate-100">11</span>
+                                <span class="dia bg-white border border-slate-300">12</span><span class="dia bg-white border border-slate-300">13</span><span class="dia bg-white border border-slate-300">14</span><span class="dia bg-white border border-slate-300">15</span><span class="dia bg-white border border-slate-300">16</span>
+                                <span class="dia bg-slate-100">17</span><span class="dia bg-slate-100">18</span>
+                                <span class="dia bg-white border border-slate-300">19</span><span class="dia bg-white border border-slate-300">20</span><span class="dia bg-white border border-slate-300">21</span><span class="dia bg-white border border-slate-300">22</span><span class="dia bg-white border border-slate-300">23</span>
+                                <span class="dia bg-slate-100">24</span><span class="dia bg-slate-100">25</span>
+                                <span class="dia bg-white border border-slate-300">26</span><span class="dia bg-white border border-slate-300">27</span><span class="dia bg-white border border-slate-300">28</span><span class="dia bg-white border border-slate-300">29</span><span class="dia bg-white border border-slate-300">30</span>
+                                <span class="dia bg-slate-100">31</span>
+                            </div>
+                        </div>
+
+                        <!-- FEBRERO -->
+                        <div>
+                            <h3 class="text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wide flex items-center justify-between">Febrero <span class="text-[10px] text-slate-400 normal-case">160 h</span></h3>
+                            <div class="grid grid-cols-7 gap-0.5 text-[9px] text-slate-400 text-center mb-0.5"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                            <div class="grid grid-cols-7 gap-0.5">
+                                <span class="dia"></span><span class="dia"></span><span class="dia"></span><span class="dia"></span><span class="dia"></span><span class="dia"></span>
+                                <span class="dia bg-slate-100">1</span>
+                                <span class="dia bg-white border border-slate-300">2</span><span class="dia bg-white border border-slate-300">3</span><span class="dia bg-white border border-slate-300">4</span><span class="dia bg-white border border-slate-300">5</span><span class="dia bg-white border border-slate-300">6</span>
+                                <span class="dia bg-slate-100">7</span><span class="dia bg-slate-100">8</span>
+                                <span class="dia bg-white border border-slate-300">9</span><span class="dia bg-white border border-slate-300">10</span><span class="dia bg-white border border-slate-300">11</span><span class="dia bg-white border border-slate-300">12</span><span class="dia bg-white border border-slate-300">13</span>
+                                <span class="dia bg-slate-100">14</span><span class="dia bg-slate-100">15</span>
+                                <span class="dia bg-white border border-slate-300">16</span><span class="dia bg-white border border-slate-300">17</span><span class="dia bg-white border border-slate-300">18</span><span class="dia bg-white border border-slate-300">19</span><span class="dia bg-white border border-slate-300">20</span>
+                                <span class="dia bg-slate-100">21</span><span class="dia bg-slate-100">22</span>
+                                <span class="dia bg-white border border-slate-300">23</span><span class="dia bg-white border border-slate-300">24</span><span class="dia bg-white border border-slate-300">25</span><span class="dia bg-white border border-slate-300">26</span><span class="dia bg-white border border-slate-300">27</span>
+                                <span class="dia bg-slate-100">28</span>
+                            </div>
+                        </div>
+
+                        <!-- MARZO -->
+                        <div>
+                            <h3 class="text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wide flex items-center justify-between">Marzo <span class="text-[10px] text-slate-400 normal-case">176 h</span></h3>
+                            <div class="grid grid-cols-7 gap-0.5 text-[9px] text-slate-400 text-center mb-0.5"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                            <div class="grid grid-cols-7 gap-0.5">
+                                <span class="dia"></span><span class="dia"></span><span class="dia"></span><span class="dia"></span><span class="dia"></span><span class="dia"></span>
+                                <span class="dia bg-slate-100">1</span>
+                                <span class="dia bg-white border border-slate-300">2</span><span class="dia bg-white border border-slate-300">3</span><span class="dia bg-white border border-slate-300">4</span><span class="dia bg-white border border-slate-300">5</span><span class="dia bg-white border border-slate-300">6</span>
+                                <span class="dia bg-slate-100">7</span><span class="dia bg-slate-100">8</span>
+                                <span class="dia bg-white border border-slate-300">9</span><span class="dia bg-white border border-slate-300">10</span><span class="dia bg-white border border-slate-300">11</span><span class="dia bg-white border border-slate-300">12</span><span class="dia bg-white border border-slate-300">13</span>
+                                <span class="dia bg-slate-100">14</span><span class="dia bg-slate-100">15</span>
+                                <span class="dia bg-white border border-slate-300">16</span><span class="dia bg-white border border-slate-300">17</span><span class="dia bg-white border border-slate-300">18</span><span class="dia bg-white border border-slate-300">19</span><span class="dia bg-white border border-slate-300">20</span>
+                                <span class="dia bg-slate-100">21</span><span class="dia bg-slate-100">22</span>
+                                <span class="dia bg-white border border-slate-300">23</span><span class="dia bg-white border border-slate-300">24</span><span class="dia bg-white border border-slate-300">25</span><span class="dia bg-white border border-slate-300">26</span><span class="dia bg-white border border-slate-300">27</span>
+                                <span class="dia bg-slate-100">28</span><span class="dia bg-slate-100">29</span>
+                                <span class="dia bg-white border border-slate-300">30</span><span class="dia bg-white border border-slate-300">31</span>
+                            </div>
+                        </div>
+
+                        <!-- ABRIL -->
+                        <div>
+                            <h3 class="text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wide flex items-center justify-between">Abril <span class="text-[10px] text-slate-400 normal-case">152 h</span></h3>
+                            <div class="grid grid-cols-7 gap-0.5 text-[9px] text-slate-400 text-center mb-0.5"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                            <div class="grid grid-cols-7 gap-0.5">
+                                <span class="dia"></span><span class="dia"></span>
+                                <span class="dia bg-white border border-slate-300">1</span><span class="dia bg-white border border-slate-300">2</span>
+                                <span class="dia bg-rose-200 border border-rose-300" title="Viernes Santo">3</span>
+                                <span class="dia bg-slate-100">4</span><span class="dia bg-slate-100">5</span>
+                                <span class="dia bg-sky-100" title="Puente Semana Santa">6</span><span class="dia bg-sky-100">7</span>
+                                <span class="dia bg-white border border-slate-300">8</span><span class="dia bg-white border border-slate-300">9</span><span class="dia bg-white border border-slate-300">10</span>
+                                <span class="dia bg-slate-100">11</span><span class="dia bg-slate-100">12</span>
+                                <span class="dia bg-white border border-slate-300">13</span><span class="dia bg-white border border-slate-300">14</span><span class="dia bg-white border border-slate-300">15</span><span class="dia bg-white border border-slate-300">16</span><span class="dia bg-white border border-slate-300">17</span>
+                                <span class="dia bg-slate-100">18</span><span class="dia bg-slate-100">19</span>
+                                <span class="dia bg-white border border-slate-300">20</span><span class="dia bg-white border border-slate-300">21</span><span class="dia bg-white border border-slate-300">22</span>
+                                <span class="dia bg-orange-200 border border-orange-300" title="Día Castilla y León">23</span>
+                                <span class="dia bg-sky-100" title="Puente">24</span>
+                                <span class="dia bg-slate-100">25</span><span class="dia bg-slate-100">26</span>
+                                <span class="dia bg-white border border-slate-300">27</span><span class="dia bg-white border border-slate-300">28</span><span class="dia bg-white border border-slate-300">29</span><span class="dia bg-white border border-slate-300">30</span>
+                            </div>
+                        </div>
+
+                        <!-- MAYO -->
+                        <div>
+                            <h3 class="text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wide flex items-center justify-between">Mayo <span class="text-[10px] text-slate-400 normal-case">160 h</span></h3>
+                            <div class="grid grid-cols-7 gap-0.5 text-[9px] text-slate-400 text-center mb-0.5"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                            <div class="grid grid-cols-7 gap-0.5">
+                                <span class="dia"></span><span class="dia"></span><span class="dia"></span><span class="dia"></span>
+                                <span class="dia bg-rose-200 border border-rose-300" title="Día del Trabajo">1</span>
+                                <span class="dia bg-slate-100">2</span><span class="dia bg-slate-100">3</span>
+                                <span class="dia bg-white border border-slate-300">4</span><span class="dia bg-white border border-slate-300">5</span><span class="dia bg-white border border-slate-300">6</span><span class="dia bg-white border border-slate-300">7</span><span class="dia bg-white border border-slate-300">8</span>
+                                <span class="dia bg-slate-100">9</span><span class="dia bg-slate-100">10</span>
+                                <span class="dia bg-white border border-slate-300">11</span><span class="dia bg-white border border-slate-300">12</span><span class="dia bg-white border border-slate-300">13</span><span class="dia bg-white border border-slate-300">14</span><span class="dia bg-white border border-slate-300">15</span>
+                                <span class="dia bg-slate-100">16</span><span class="dia bg-slate-100">17</span>
+                                <span class="dia bg-white border border-slate-300">18</span><span class="dia bg-white border border-slate-300">19</span><span class="dia bg-white border border-slate-300">20</span><span class="dia bg-white border border-slate-300">21</span><span class="dia bg-white border border-slate-300">22</span>
+                                <span class="dia bg-slate-100">23</span><span class="dia bg-slate-100">24</span>
+                                <span class="dia bg-white border border-slate-300">25</span><span class="dia bg-white border border-slate-300">26</span><span class="dia bg-white border border-slate-300">27</span><span class="dia bg-white border border-slate-300">28</span><span class="dia bg-white border border-slate-300">29</span>
+                                <span class="dia bg-slate-100">30</span><span class="dia bg-slate-100">31</span>
+                            </div>
+                        </div>
+
+                        <!-- JUNIO -->
+                        <div>
+                            <h3 class="text-xs font-semibold text-emerald-800 mb-1.5 uppercase tracking-wide flex items-center justify-between">Junio (actual) <span class="text-[10px] text-emerald-700 normal-case">152 h</span></h3>
+                            <div class="grid grid-cols-7 gap-0.5 text-[9px] text-slate-400 text-center mb-0.5"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                            <div class="grid grid-cols-7 gap-0.5">
+                                <span class="dia bg-white border border-slate-300">1</span><span class="dia bg-emerald-200 border border-emerald-300" title="Domínguez Vélez · Vacaciones">2</span><span class="dia bg-emerald-200 border border-emerald-300">3</span><span class="dia bg-emerald-200 border border-emerald-300">4</span>
+                                <span class="dia bg-white border border-slate-300 ring-2 ring-emerald-500" title="Hoy">5</span>
+                                <span class="dia bg-slate-100">6</span><span class="dia bg-slate-100">7</span>
+                                <span class="dia bg-emerald-200 border border-emerald-300">8</span><span class="dia bg-emerald-200 border border-emerald-300">9</span><span class="dia bg-emerald-200 border border-emerald-300">10</span><span class="dia bg-emerald-200 border border-emerald-300">11</span><span class="dia bg-emerald-200 border border-emerald-300">12</span>
+                                <span class="dia bg-slate-100">13</span><span class="dia bg-slate-100">14</span>
+                                <span class="dia bg-white border border-slate-300">15</span><span class="dia bg-white border border-slate-300">16</span><span class="dia bg-white border border-slate-300">17</span><span class="dia bg-white border border-slate-300">18</span><span class="dia bg-white border border-slate-300">19</span>
+                                <span class="dia bg-slate-100">20</span><span class="dia bg-slate-100">21</span>
+                                <span class="dia bg-white border border-slate-300">22</span><span class="dia bg-white border border-slate-300">23</span><span class="dia bg-white border border-slate-300">24</span><span class="dia bg-white border border-slate-300">25</span><span class="dia bg-white border border-slate-300">26</span>
+                                <span class="dia bg-slate-100">27</span><span class="dia bg-slate-100">28</span>
+                                <span class="dia bg-amber-200 border border-amber-300" title="San Pedro · Burgos">29</span><span class="dia bg-white border border-slate-300">30</span>
+                            </div>
+                        </div>
+
+                        <!-- JULIO -->
+                        <div>
+                            <h3 class="text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wide flex items-center justify-between">Julio <span class="text-[10px]" :class="escenarioActivo === 'A' ? 'text-purple-700' : 'text-slate-400'">
+                                <span x-show="!escenarioActivo">176 h</span>
+                                <span x-show="escenarioActivo === 'A'">96 h ⚠</span>
+                                <span x-show="escenarioActivo === 'B'">176 h</span>
+                            </span></h3>
+                            <div class="grid grid-cols-7 gap-0.5 text-[9px] text-slate-400 text-center mb-0.5"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                            <div class="grid grid-cols-7 gap-0.5">
+                                <span class="dia"></span><span class="dia"></span>
+                                <span class="dia bg-white border border-slate-300">1</span><span class="dia bg-white border border-slate-300">2</span><span class="dia bg-white border border-slate-300">3</span>
+                                <span class="dia bg-slate-100">4</span><span class="dia bg-slate-100">5</span>
+                                <!-- Escenario A: concentrar vacaciones en julio -->
+                                <span class="dia border" :class="escenarioActivo === 'A' ? 'bg-purple-200 border-purple-500 border-2' : 'bg-white border-slate-300'">6</span>
+                                <span class="dia border" :class="escenarioActivo === 'A' ? 'bg-purple-200 border-purple-500 border-2' : 'bg-white border-slate-300'">7</span>
+                                <span class="dia border" :class="escenarioActivo === 'A' ? 'bg-purple-200 border-purple-500 border-2' : 'bg-white border-slate-300'">8</span>
+                                <span class="dia border" :class="escenarioActivo === 'A' ? 'bg-purple-200 border-purple-500 border-2' : 'bg-white border-slate-300'">9</span>
+                                <span class="dia border" :class="escenarioActivo === 'A' ? 'bg-purple-200 border-purple-500 border-2' : 'bg-white border-slate-300'">10</span>
+                                <span class="dia bg-slate-100">11</span><span class="dia bg-slate-100">12</span>
+                                <span class="dia border" :class="escenarioActivo === 'A' ? 'bg-purple-200 border-purple-500 border-2' : 'bg-white border-slate-300'">13</span>
+                                <span class="dia border" :class="escenarioActivo === 'A' ? 'bg-purple-200 border-purple-500 border-2' : 'bg-white border-slate-300'">14</span>
+                                <span class="dia border" :class="escenarioActivo === 'A' ? 'bg-purple-200 border-purple-500 border-2' : 'bg-white border-slate-300'">15</span>
+                                <span class="dia border" :class="escenarioActivo === 'A' ? 'bg-purple-200 border-purple-500 border-2' : 'bg-white border-slate-300'">16</span>
+                                <span class="dia border" :class="escenarioActivo === 'A' ? 'bg-purple-200 border-purple-500 border-2' : 'bg-white border-slate-300'">17</span>
+                                <span class="dia bg-slate-100">18</span><span class="dia bg-slate-100">19</span>
+                                <span class="dia bg-white border border-slate-300">20</span><span class="dia bg-white border border-slate-300">21</span><span class="dia bg-white border border-slate-300">22</span><span class="dia bg-white border border-slate-300">23</span><span class="dia bg-white border border-slate-300">24</span>
+                                <span class="dia bg-slate-100">25</span><span class="dia bg-slate-100">26</span>
+                                <span class="dia bg-white border border-slate-300">27</span><span class="dia bg-white border border-slate-300">28</span><span class="dia bg-white border border-slate-300">29</span><span class="dia bg-white border border-slate-300">30</span><span class="dia bg-white border border-slate-300">31</span>
+                            </div>
+                        </div>
+
+                        <!-- AGOSTO -->
+                        <div>
+                            <h3 class="text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wide flex items-center justify-between">Agosto <span class="text-[10px] text-slate-400 normal-case">96 h</span></h3>
+                            <div class="grid grid-cols-7 gap-0.5 text-[9px] text-slate-400 text-center mb-0.5"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                            <div class="grid grid-cols-7 gap-0.5">
+                                <span class="dia"></span><span class="dia"></span><span class="dia"></span><span class="dia"></span><span class="dia"></span>
+                                <span class="dia bg-slate-100">1</span><span class="dia bg-slate-100">2</span>
+                                <span class="dia bg-emerald-200 border border-emerald-300">3</span><span class="dia bg-emerald-200 border border-emerald-300">4</span><span class="dia bg-emerald-200 border border-emerald-300">5</span><span class="dia bg-emerald-200 border border-emerald-300">6</span><span class="dia bg-emerald-200 border border-emerald-300">7</span>
+                                <span class="dia bg-slate-100">8</span><span class="dia bg-slate-100">9</span>
+                                <span class="dia bg-emerald-200 border border-emerald-300">10</span><span class="dia bg-emerald-200 border border-emerald-300">11</span><span class="dia bg-emerald-200 border border-emerald-300">12</span><span class="dia bg-emerald-200 border border-emerald-300">13</span><span class="dia bg-emerald-200 border border-emerald-300">14</span>
+                                <span class="dia bg-rose-200 border border-rose-300" title="Asunción">15</span><span class="dia bg-slate-100">16</span>
+                                <span class="dia bg-emerald-200 border border-emerald-300">17</span><span class="dia bg-emerald-200 border border-emerald-300">18</span><span class="dia bg-emerald-200 border border-emerald-300">19</span><span class="dia bg-emerald-200 border border-emerald-300">20</span><span class="dia bg-emerald-200 border border-emerald-300">21</span>
+                                <span class="dia bg-slate-100">22</span><span class="dia bg-slate-100">23</span>
+                                <span class="dia bg-emerald-200 border border-emerald-300">24</span><span class="dia bg-emerald-200 border border-emerald-300">25</span><span class="dia bg-emerald-200 border border-emerald-300">26</span><span class="dia bg-emerald-200 border border-emerald-300">27</span><span class="dia bg-emerald-200 border border-emerald-300">28</span>
+                                <span class="dia bg-slate-100">29</span><span class="dia bg-slate-100">30</span>
+                                <span class="dia bg-white border border-slate-300">31</span>
+                            </div>
+                        </div>
+
+                        <!-- SEPTIEMBRE -->
+                        <div>
+                            <h3 class="text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wide flex items-center justify-between">Septiembre <span class="text-[10px] text-slate-400 normal-case">176 h</span></h3>
+                            <div class="grid grid-cols-7 gap-0.5 text-[9px] text-slate-400 text-center mb-0.5"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                            <div class="grid grid-cols-7 gap-0.5">
+                                <span class="dia"></span>
+                                <span class="dia bg-white border border-slate-300">1</span><span class="dia bg-white border border-slate-300">2</span><span class="dia bg-white border border-slate-300">3</span><span class="dia bg-white border border-slate-300">4</span>
+                                <span class="dia bg-slate-100">5</span><span class="dia bg-slate-100">6</span>
+                                <span class="dia bg-white border border-slate-300">7</span><span class="dia bg-white border border-slate-300">8</span><span class="dia bg-white border border-slate-300">9</span><span class="dia bg-white border border-slate-300">10</span><span class="dia bg-white border border-slate-300">11</span>
+                                <span class="dia bg-slate-100">12</span><span class="dia bg-slate-100">13</span>
+                                <span class="dia bg-white border border-slate-300">14</span><span class="dia bg-white border border-slate-300">15</span><span class="dia bg-white border border-slate-300">16</span><span class="dia bg-white border border-slate-300">17</span><span class="dia bg-white border border-slate-300">18</span>
+                                <span class="dia bg-slate-100">19</span><span class="dia bg-slate-100">20</span>
+                                <span class="dia bg-white border border-slate-300">21</span><span class="dia bg-white border border-slate-300">22</span><span class="dia bg-white border border-slate-300">23</span><span class="dia bg-white border border-slate-300">24</span><span class="dia bg-white border border-slate-300">25</span>
+                                <span class="dia bg-slate-100">26</span><span class="dia bg-slate-100">27</span>
+                                <span class="dia bg-white border border-slate-300">28</span><span class="dia bg-white border border-slate-300">29</span><span class="dia bg-white border border-slate-300">30</span>
+                            </div>
+                        </div>
+
+                        <!-- OCTUBRE -->
+                        <div>
+                            <h3 class="text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wide flex items-center justify-between">Octubre <span class="text-[10px] text-slate-400 normal-case">168 h</span></h3>
+                            <div class="grid grid-cols-7 gap-0.5 text-[9px] text-slate-400 text-center mb-0.5"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                            <div class="grid grid-cols-7 gap-0.5">
+                                <span class="dia"></span><span class="dia"></span><span class="dia"></span>
+                                <span class="dia bg-white border border-slate-300">1</span><span class="dia bg-white border border-slate-300">2</span>
+                                <span class="dia bg-slate-100">3</span><span class="dia bg-slate-100">4</span>
+                                <span class="dia bg-white border border-slate-300">5</span><span class="dia bg-white border border-slate-300">6</span><span class="dia bg-white border border-slate-300">7</span><span class="dia bg-white border border-slate-300">8</span><span class="dia bg-white border border-slate-300">9</span>
+                                <span class="dia bg-slate-100">10</span><span class="dia bg-slate-100">11</span>
+                                <span class="dia bg-rose-200 border border-rose-300" title="Hispanidad">12</span>
+                                <span class="dia bg-white border border-slate-300">13</span><span class="dia bg-white border border-slate-300">14</span><span class="dia bg-white border border-slate-300">15</span><span class="dia bg-white border border-slate-300">16</span>
+                                <span class="dia bg-slate-100">17</span><span class="dia bg-slate-100">18</span>
+                                <span class="dia bg-white border border-slate-300">19</span><span class="dia bg-white border border-slate-300">20</span><span class="dia bg-white border border-slate-300">21</span><span class="dia bg-white border border-slate-300">22</span><span class="dia bg-white border border-slate-300">23</span>
+                                <span class="dia bg-slate-100">24</span><span class="dia bg-slate-100">25</span>
+                                <span class="dia bg-white border border-slate-300">26</span><span class="dia bg-white border border-slate-300">27</span><span class="dia bg-white border border-slate-300">28</span><span class="dia bg-white border border-slate-300">29</span><span class="dia bg-white border border-slate-300">30</span>
+                                <span class="dia bg-slate-100">31</span>
+                            </div>
+                        </div>
+
+                        <!-- NOVIEMBRE -->
+                        <div>
+                            <h3 class="text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wide flex items-center justify-between">Noviembre <span class="text-[10px] text-slate-400 normal-case">160 h</span></h3>
+                            <div class="grid grid-cols-7 gap-0.5 text-[9px] text-slate-400 text-center mb-0.5"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                            <div class="grid grid-cols-7 gap-0.5">
+                                <span class="dia"></span><span class="dia"></span><span class="dia"></span><span class="dia"></span><span class="dia"></span><span class="dia"></span>
+                                <span class="dia bg-rose-200 border border-rose-300" title="Todos los Santos">1</span>
+                                <span class="dia bg-white border border-slate-300">2</span><span class="dia bg-white border border-slate-300">3</span><span class="dia bg-white border border-slate-300">4</span><span class="dia bg-white border border-slate-300">5</span><span class="dia bg-white border border-slate-300">6</span>
+                                <span class="dia bg-slate-100">7</span><span class="dia bg-slate-100">8</span>
+                                <span class="dia bg-white border border-slate-300">9</span><span class="dia bg-white border border-slate-300">10</span><span class="dia bg-white border border-slate-300">11</span><span class="dia bg-white border border-slate-300">12</span><span class="dia bg-white border border-slate-300">13</span>
+                                <span class="dia bg-slate-100">14</span><span class="dia bg-slate-100">15</span>
+                                <span class="dia bg-white border border-slate-300">16</span><span class="dia bg-white border border-slate-300">17</span><span class="dia bg-white border border-slate-300">18</span><span class="dia bg-white border border-slate-300">19</span><span class="dia bg-white border border-slate-300">20</span>
+                                <span class="dia bg-slate-100">21</span><span class="dia bg-slate-100">22</span>
+                                <span class="dia bg-white border border-slate-300">23</span><span class="dia bg-white border border-slate-300">24</span><span class="dia bg-white border border-slate-300">25</span><span class="dia bg-white border border-slate-300">26</span><span class="dia bg-white border border-slate-300">27</span>
+                                <span class="dia bg-slate-100">28</span><span class="dia bg-slate-100">29</span>
+                                <span class="dia bg-white border border-slate-300">30</span>
+                            </div>
+                        </div>
+
+                        <!-- DICIEMBRE -->
+                        <div>
+                            <h3 class="text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wide flex items-center justify-between">Diciembre <span class="text-[10px] text-slate-400 normal-case">144 h</span></h3>
+                            <div class="grid grid-cols-7 gap-0.5 text-[9px] text-slate-400 text-center mb-0.5"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                            <div class="grid grid-cols-7 gap-0.5">
+                                <span class="dia"></span>
+                                <span class="dia bg-white border border-slate-300">1</span><span class="dia bg-white border border-slate-300">2</span><span class="dia bg-white border border-slate-300">3</span><span class="dia bg-white border border-slate-300">4</span>
+                                <span class="dia bg-slate-100">5</span>
+                                <span class="dia bg-rose-200 border border-rose-300" title="Constitución">6</span>
+                                <span class="dia bg-sky-100" title="Puente">7</span>
+                                <span class="dia bg-rose-200 border border-rose-300" title="Inmaculada">8</span>
+                                <span class="dia bg-white border border-slate-300">9</span><span class="dia bg-white border border-slate-300">10</span><span class="dia bg-white border border-slate-300">11</span>
+                                <span class="dia bg-slate-100">12</span><span class="dia bg-slate-100">13</span>
+                                <span class="dia bg-white border border-slate-300">14</span><span class="dia bg-white border border-slate-300">15</span><span class="dia bg-white border border-slate-300">16</span><span class="dia bg-white border border-slate-300">17</span><span class="dia bg-white border border-slate-300">18</span>
+                                <span class="dia bg-slate-100">19</span><span class="dia bg-slate-100">20</span>
+                                <span class="dia bg-white border border-slate-300">21</span><span class="dia bg-white border border-slate-300">22</span><span class="dia bg-white border border-slate-300">23</span>
+                                <span class="dia bg-sky-100" title="Puente Navidad">24</span>
+                                <span class="dia bg-rose-200 border border-rose-300" title="Navidad">25</span>
+                                <span class="dia bg-slate-100">26</span><span class="dia bg-slate-100">27</span>
+                                <span class="dia bg-white border border-slate-300">28</span><span class="dia bg-white border border-slate-300">29</span><span class="dia bg-white border border-slate-300">30</span><span class="dia bg-white border border-slate-300">31</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detector de puentes + balance horas + tabla profesional -->
+            <section class="px-8 pb-6 grid md:grid-cols-3 gap-4">
+
+                <!-- Puentes detectados -->
+                <div class="bg-white rounded-xl border border-slate-200 p-5">
+                    <h3 class="text-sm font-semibold mb-3">🌉 Puentes y picos identificados</h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="p-2 rounded border border-sky-200 bg-sky-50">
+                            <p class="font-semibold text-sky-900">Semana Santa · 3-7 abr</p>
+                            <p class="text-sky-700">Viernes Santo + fin de semana largo. Cobertura prevista: 86 %.</p>
+                        </div>
+                        <div class="p-2 rounded border border-sky-200 bg-sky-50">
+                            <p class="font-semibold text-sky-900">Puente CyL · 23-26 abr</p>
+                            <p class="text-sky-700">Día de Castilla y León (jueves) + viernes puente. Cobertura: 79 %.</p>
+                        </div>
+                        <div class="p-2 rounded border border-amber-200 bg-amber-50">
+                            <p class="font-semibold text-amber-900">Verano · 1-31 ago</p>
+                            <p class="text-amber-700">Pico de vacaciones del centro. Cobertura mínima objetivo 70 %.</p>
+                        </div>
+                        <div class="p-2 rounded border border-sky-200 bg-sky-50">
+                            <p class="font-semibold text-sky-900">Puente diciembre · 6-8 dic</p>
+                            <p class="text-sky-700">Constitución (domingo) + Inmaculada (martes). Cobertura: 84 %.</p>
+                        </div>
+                        <div class="p-2 rounded border border-sky-200 bg-sky-50">
+                            <p class="font-semibold text-sky-900">Navidad · 24-26 dic</p>
+                            <p class="text-sky-700">Nochebuena + Navidad. Cobertura mínima objetivo 70 %.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Balance horas anuales -->
+                <div class="bg-white rounded-xl border border-slate-200 p-5">
+                    <h3 class="text-sm font-semibold mb-3">⏱ Balance horas anuales</h3>
+                    <div class="space-y-1.5 text-xs">
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><span class="text-slate-600">Jornada convenio</span><span class="font-medium" x-text="convenio === 'discapacidad' ? '+ 1 752 h' : '+ 1 770 h'"></span></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><span class="text-slate-600">Festivos (14 × 8 h)</span><span class="font-medium text-rose-700">− 112 h</span></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><span class="text-slate-600">Vacaciones (22 días × 8)</span><span class="font-medium text-emerald-700">− 176 h</span></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><span class="text-slate-600">Asuntos propios (4 × 8)</span><span class="font-medium text-amber-700">− 32 h</span></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><span class="text-slate-600">Formación obligatoria</span><span class="font-medium text-sky-700">− 20 h</span></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5 text-slate-400"><span class="italic">IT estimada (3 % absent.)</span><span class="italic">− 47 h</span></div>
+                        <div class="flex justify-between pt-2 border-t-2 border-slate-300"><span class="font-semibold">Horas reales / profesional</span><span class="font-bold text-emerald-700" x-text="convenio === 'discapacidad' ? '1 365 h' : '1 383 h'"></span></div>
+                        <div class="flex justify-between pt-1 text-[10px] text-slate-500"><span>× 14 profesionales</span><span x-text="convenio === 'discapacidad' ? '19 110 h centro' : '19 362 h centro'"></span></div>
+                    </div>
+                </div>
+
+                <!-- Festivos del año -->
+                <div class="bg-white rounded-xl border border-slate-200 p-5">
+                    <h3 class="text-sm font-semibold mb-3">📅 Festivos <span x-text="año"></span></h3>
+                    <div class="space-y-1 text-xs">
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-400"></span><span class="flex-1">1 ene · <span class="font-medium">Año Nuevo</span></span><span class="text-slate-400 text-[10px]">Nac.</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-400"></span><span class="flex-1">6 ene · <span class="font-medium">Reyes</span></span><span class="text-slate-400 text-[10px]">Nac.</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-400"></span><span class="flex-1">3 abr · <span class="font-medium">Viernes Santo</span></span><span class="text-slate-400 text-[10px]">Nac.</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-orange-400"></span><span class="flex-1">23 abr · <span class="font-medium">Día Castilla y León</span></span><span class="text-slate-400 text-[10px]">CyL</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-400"></span><span class="flex-1">1 may · <span class="font-medium">Día del Trabajo</span></span><span class="text-slate-400 text-[10px]">Nac.</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-amber-400"></span><span class="flex-1">29 jun · <span class="font-medium">San Pedro y San Pablo</span></span><span class="text-slate-400 text-[10px]">Burgos</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-400"></span><span class="flex-1">15 ago · <span class="font-medium">Asunción</span></span><span class="text-slate-400 text-[10px]">Nac.</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-amber-400"></span><span class="flex-1">2 oct · <span class="font-medium">Curpillos (a confirmar)</span></span><span class="text-slate-400 text-[10px]">Burgos</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-400"></span><span class="flex-1">12 oct · <span class="font-medium">Hispanidad</span></span><span class="text-slate-400 text-[10px]">Nac.</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-400"></span><span class="flex-1">1 nov · <span class="font-medium">Todos los Santos</span></span><span class="text-slate-400 text-[10px]">Nac.</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-400"></span><span class="flex-1">6 dic · <span class="font-medium">Constitución</span></span><span class="text-slate-400 text-[10px]">Nac.</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-400"></span><span class="flex-1">8 dic · <span class="font-medium">Inmaculada</span></span><span class="text-slate-400 text-[10px]">Nac.</span></div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-400"></span><span class="flex-1">25 dic · <span class="font-medium">Navidad</span></span><span class="text-slate-400 text-[10px]">Nac.</span></div>
+                        <div class="flex items-center gap-2 text-slate-400"><span class="w-2 h-2 rounded-full bg-orange-400"></span><span class="flex-1 italic">+ 1 CyL pendiente publicar BOCyL</span></div>
+                    </div>
+                    <div class="mt-3 pt-2 border-t border-slate-100 text-[10px] text-slate-500">
+                        Fuente: Resolución MITES + Decreto Junta CyL + Acuerdo Ayto. Burgos. Actualizable hasta 31 oct año anterior.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Historial de versiones + nota integración -->
+            <section class="px-8 pb-8">
+                <div class="bg-white rounded-xl border border-slate-200 p-5">
+                    <h3 class="text-sm font-semibold mb-3">📜 Versiones del calendario</h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex items-center gap-3 p-2 rounded border border-emerald-200 bg-emerald-50/40">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            <div class="flex-1">
+                                <p class="font-medium">v3.0 · Vigente</p>
+                                <p class="text-slate-500">Aprobada por Comité de Dirección · 18 nov 2025 · Firmada por RLT 02 dic 2025</p>
+                            </div>
+                            <button class="text-emerald-700 hover:underline">Ver →</button>
+                        </div>
+                        <div class="flex items-center gap-3 p-2 rounded border border-slate-200">
+                            <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+                            <div class="flex-1">
+                                <p class="font-medium">v2.1 · Sustituida</p>
+                                <p class="text-slate-500">Borrador con incorporación festivo CyL · 12 nov 2025</p>
+                            </div>
+                            <button class="text-slate-600 hover:underline">Ver →</button>
+                        </div>
+                        <div class="flex items-center gap-3 p-2 rounded border border-slate-200">
+                            <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+                            <div class="flex-1">
+                                <p class="font-medium">v2.0 · Sustituida</p>
+                                <p class="text-slate-500">Primera versión enviada a RLT · 28 oct 2025</p>
+                            </div>
+                            <button class="text-slate-600 hover:underline">Ver →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 rounded-lg border border-sky-200 bg-sky-50 p-4 text-xs text-sky-900">
+                    <p class="font-semibold mb-1">🔗 Integración con SIGPER</p>
+                    <p>El calendario laboral es <strong>fuente de verdad en SIGPER</strong> una vez en producción. ÁGORA lo consume vía API para mostrarlo, identificar puentes, simular variaciones y bloquear turnos. La aprobación formal y la firma por la RLT siguen ocurriendo en SIGPER. Mientras tanto, este módulo funciona con datos cargados manualmente.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- VISTA GRUPO                                   -->
+        <!-- ============================================ -->
+        <div x-show="vista === 'grupo'" x-cloak>
+
+            <section class="px-8 py-5 bg-white border-b border-slate-200">
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                    <div class="rounded-lg border border-slate-200 px-4 py-3"><p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Centros</p><p class="mt-1 text-2xl font-light">18</p><p class="text-[10px] text-slate-500">14 grupo Aspaniasmerc + 4 Fundación</p></div>
+                    <div class="rounded-lg border border-slate-200 px-4 py-3"><p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Calendarios aprobados</p><p class="mt-1 text-2xl font-light text-emerald-700">15 / 18</p><p class="text-[10px] text-slate-500">3 en revisión RLT</p></div>
+                    <div class="rounded-lg border border-slate-200 px-4 py-3"><p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Horas grupo año</p><p class="mt-1 text-2xl font-light">327 555 h</p><p class="text-[10px] text-slate-500">187 prof × media</p></div>
+                    <div class="rounded-lg border border-slate-200 px-4 py-3"><p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Pico vacaciones</p><p class="mt-1 text-2xl font-light text-amber-700">Agosto</p><p class="text-[10px] text-slate-500">46 % plantilla solicitada</p></div>
+                    <div class="rounded-lg border border-slate-200 px-4 py-3"><p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Alerta cobertura</p><p class="mt-1 text-2xl font-light text-rose-700">2 centros</p><p class="text-[10px] text-slate-500">bajo objetivo 85 %</p></div>
+                </div>
+            </section>
+
+            <section class="px-8 py-6">
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-base font-semibold">🌐 Matriz grupo · cobertura prevista por mes y centro</h2>
+                            <p class="text-xs text-slate-500">Verde ≥ 90 % · ámbar 75-89 % · rojo &lt; 75 %. Datos calculados con el calendario aprobado de cada centro.</p>
+                        </div>
+                        <button class="text-xs text-emerald-700 hover:underline">📥 Exportar Excel</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs min-w-[900px]">
+                            <thead class="bg-slate-50 text-[10px] uppercase tracking-wide text-slate-500">
+                                <tr>
+                                    <th class="px-3 py-2 text-left w-56">Centro</th>
+                                    <th class="px-2 py-2 text-center">Cnv.</th>
+                                    <th class="px-1 py-2 text-center">Ene</th>
+                                    <th class="px-1 py-2 text-center">Feb</th>
+                                    <th class="px-1 py-2 text-center">Mar</th>
+                                    <th class="px-1 py-2 text-center">Abr</th>
+                                    <th class="px-1 py-2 text-center">May</th>
+                                    <th class="px-1 py-2 text-center bg-emerald-50">Jun</th>
+                                    <th class="px-1 py-2 text-center">Jul</th>
+                                    <th class="px-1 py-2 text-center bg-amber-50">Ago</th>
+                                    <th class="px-1 py-2 text-center">Sep</th>
+                                    <th class="px-1 py-2 text-center">Oct</th>
+                                    <th class="px-1 py-2 text-center">Nov</th>
+                                    <th class="px-1 py-2 text-center">Dic</th>
+                                    <th class="px-2 py-2 text-right">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <template x-for="(c, i) in centrosGrupo()" :key="i">
+                                    <tr class="hover:bg-emerald-50/40">
+                                        <td class="px-3 py-2 font-medium" x-text="c.nombre"></td>
+                                        <td class="px-2 py-2 text-center"><span class="text-[10px] px-1.5 py-0.5 rounded-full" :class="c.cnv === 'Res.' ? 'bg-sky-100 text-sky-800' : 'bg-emerald-100 text-emerald-800'" x-text="c.cnv"></span></td>
+                                        <td class="px-1 py-2 text-center font-semibold text-emerald-700">96</td>
+                                        <td class="px-1 py-2 text-center font-semibold text-emerald-700">95</td>
+                                        <td class="px-1 py-2 text-center font-semibold text-emerald-700">94</td>
+                                        <td class="px-1 py-2 text-center font-semibold" :class="i % 4 === 0 ? 'text-amber-700' : 'text-emerald-700'" x-text="i % 4 === 0 ? '82' : '92'"></td>
+                                        <td class="px-1 py-2 text-center font-semibold text-emerald-700">93</td>
+                                        <td class="px-1 py-2 text-center font-semibold text-emerald-700 bg-emerald-50/40">91</td>
+                                        <td class="px-1 py-2 text-center font-semibold" :class="i % 3 === 0 ? 'text-amber-700' : 'text-emerald-700'" x-text="i % 3 === 0 ? '83' : '90'"></td>
+                                        <td class="px-1 py-2 text-center font-semibold bg-amber-50/40" :class="i === 0 || i === 4 ? 'text-rose-700' : (i % 2 === 0 ? 'text-amber-700' : 'text-emerald-700')" x-text="i === 0 ? '68' : (i === 4 ? '72' : (i % 2 === 0 ? '79' : '87'))"></td>
+                                        <td class="px-1 py-2 text-center font-semibold text-emerald-700">93</td>
+                                        <td class="px-1 py-2 text-center font-semibold text-emerald-700">94</td>
+                                        <td class="px-1 py-2 text-center font-semibold text-emerald-700">95</td>
+                                        <td class="px-1 py-2 text-center font-semibold" :class="i % 5 === 0 ? 'text-amber-700' : 'text-emerald-700'" x-text="i % 5 === 0 ? '81' : '88'"></td>
+                                        <td class="px-2 py-2 text-right">
+                                            <span x-show="i < 15" class="text-[10px] text-emerald-700">✓ Aprobado</span>
+                                            <span x-show="i >= 15" class="text-[10px] text-amber-700">⏳ Pendiente RLT</span>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Recomendaciones automáticas -->
+                <div class="mt-5 grid md:grid-cols-2 gap-4">
+                    <div class="bg-white rounded-xl border border-amber-200 p-5">
+                        <h3 class="text-sm font-semibold text-amber-900 mb-3">⚠ Alertas de cobertura</h3>
+                        <ul class="space-y-2 text-xs text-amber-900">
+                            <li class="flex gap-2"><span class="font-bold">·</span><span><strong>Residencia Fuentecillas · agosto</strong>: 68 % cobertura prevista. <strong>Acción sugerida</strong>: reducir solapamiento de vacaciones reasignando 3 días de Cano Martín a julio.</span></li>
+                            <li class="flex gap-2"><span class="font-bold">·</span><span><strong>CO Fuentecillas · agosto</strong>: 72 % cobertura. <strong>Acción sugerida</strong>: refuerzo de bolsa o cierre técnico 10-21 ago.</span></li>
+                            <li class="flex gap-2"><span class="font-bold">·</span><span><strong>3 centros pendientes firma RLT</strong>: Vida Independiente, A Gusto en Casa, Intecum. Plazo límite: 30 nov 2025.</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-sky-200 p-5">
+                        <h3 class="text-sm font-semibold text-sky-900 mb-3">💡 Optimización del calendario</h3>
+                        <ul class="space-y-2 text-xs text-sky-900">
+                            <li class="flex gap-2"><span class="font-bold">·</span><span>Si se distribuyen las vacaciones de agosto al 70 % en julio y 30 % en septiembre, la cobertura mínima sube del 79 % al 88 % en todos los centros residenciales.</span></li>
+                            <li class="flex gap-2"><span class="font-bold">·</span><span>Programar formación obligatoria en febrero (mes con menor cobertura asistencial requerida) ahorra ~120 h efectivas anuales por centro.</span></li>
+                            <li class="flex gap-2"><span class="font-bold">·</span><span>El convenio VII Residencias permite distribuir hasta el 5 % de jornada de forma irregular. Margen disponible: 88 h/profesional.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- =========================================================== -->
+    <!-- MODAL Simular variación                                     -->
+    <!-- =========================================================== -->
+    <div x-show="modalSimular" x-cloak x-transition.opacity class="fixed inset-0 z-50 bg-slate-900/40 flex items-start justify-center pt-16 px-4" @click.self="modalSimular = false">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto">
+            <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+                <div>
+                    <h3 class="text-lg font-semibold">🧪 Simular variación</h3>
+                    <p class="text-xs text-slate-500 mt-0.5">Probar un cambio sin afectar al calendario aprobado</p>
+                </div>
+                <button @click="modalSimular = false" class="text-slate-400 hover:text-slate-600 text-xl leading-none">×</button>
+            </div>
+            <div class="px-6 py-5 space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">Tipo de variación</label>
+                    <select x-model="tipoSim" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white">
+                        <option value="mover_vacaciones">📅 Mover vacaciones</option>
+                        <option value="it_prolongada">⚕ Simular prolongación de IT</option>
+                        <option value="festivo_local">🏛 Cambiar festivo local</option>
+                        <option value="reduccion">⏱ Reducción de jornada</option>
+                        <option value="ampliacion">📈 Ampliación temporal (refuerzo verano)</option>
+                        <option value="cierre">🚪 Cierre técnico (vivienda agosto)</option>
+                    </select>
+                </div>
+
+                <div x-show="tipoSim === 'mover_vacaciones'" class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Profesional</label>
+                        <select class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300">
+                            <option>Cano Martín, Rosa</option>
+                            <option>Ruiz Sánchez, Ana</option>
+                            <option>Pérez Calderón, A.</option>
+                            <option>Equipo completo del centro</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Mover desde</label><input type="date" value="2026-08-10" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">A</label><input type="date" value="2026-07-06" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></div>
+                    </div>
+                </div>
+
+                <div x-show="tipoSim === 'it_prolongada'" class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Profesional</label>
+                        <select class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300">
+                            <option>López Pérez, Marta (IT actual)</option>
+                            <option>Otro…</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Hasta</label><input type="date" value="2026-09-30" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Probabilidad</label><select class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"><option>Alta</option><option selected>Media</option><option>Baja</option></select></div>
+                    </div>
+                </div>
+
+                <div x-show="tipoSim === 'festivo_local'" class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Festivo a modificar</label>
+                        <select class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300">
+                            <option>Curpillos (pendiente publicar)</option>
+                            <option>San Pedro y San Pablo</option>
+                            <option>Añadir festivo local</option>
+                        </select>
+                    </div>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">Nueva fecha</label><input type="date" value="2026-10-02" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">Nombre del escenario</label>
+                    <input type="text" placeholder="Ej. Concentrar vacaciones en julio" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300">
+                </div>
+
+                <div class="rounded-lg border border-purple-200 bg-purple-50 p-3 text-xs text-purple-900">
+                    <p class="font-semibold mb-1">Impacto previsto del cambio</p>
+                    <ul class="space-y-0.5">
+                        <li>· Horas reales centro: <strong>−120 h</strong></li>
+                        <li>· Cobertura media: <strong>93 % → 88 %</strong></li>
+                        <li>· Mes con menor cobertura: <strong>agosto (68 % → 76 %)</strong></li>
+                        <li>· Coste estimado refuerzo: <strong>+ 2 340 €</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="px-6 py-3 border-t border-slate-200 flex justify-end gap-2">
+                <button @click="modalSimular = false" class="px-3 py-2 text-sm rounded-lg border border-slate-300 hover:bg-slate-50">Cancelar</button>
+                <button @click="modalSimular = false; toast = 'Solo visualización — no se guarda'; setTimeout(()=>toast=false,2200)" class="px-3 py-2 text-sm rounded-lg border border-purple-300 bg-white text-purple-800 hover:bg-purple-50 font-medium">Probar sin guardar</button>
+                <button @click="modalSimular = false; toast = 'Escenario guardado · disponible en la barra de la cabecera'; setTimeout(()=>toast=false,2600)" class="px-4 py-2 text-sm rounded-lg bg-purple-700 text-white hover:bg-purple-800 font-medium">Guardar escenario</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================== -->
+    <!-- MODAL Generar calendarios individuales                       -->
+    <!-- =========================================================== -->
+    <div x-show="modalIndividuales" x-cloak x-transition.opacity class="fixed inset-0 z-50 bg-slate-900/40 flex items-start justify-center pt-12 px-4" @click.self="modalIndividuales = false">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[88vh] overflow-y-auto">
+            <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+                <div>
+                    <h3 class="text-lg font-semibold">📆 Generar calendarios individuales</h3>
+                    <p class="text-xs text-slate-500 mt-0.5">Aplicar el calendario laboral aprobado v3.0 al equipo de <strong x-text="centroSel"></strong></p>
+                </div>
+                <button @click="modalIndividuales = false" class="text-slate-400 hover:text-slate-600 text-xl leading-none">×</button>
+            </div>
+
+            <div class="px-6 py-4 border-b border-slate-200 bg-slate-50/60 flex items-center gap-4 flex-wrap">
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="todos" class="rounded" checked>
+                    <label for="todos" class="text-xs font-medium">Seleccionar 14 / 14</label>
+                </div>
+                <span class="text-xs text-slate-500">|</span>
+                <span class="text-xs"><strong class="text-emerald-700">9 generados</strong> · <strong class="text-amber-700">3 pendientes</strong> · <strong class="text-slate-500">2 sin patrón asignado</strong></span>
+                <div class="ml-auto flex gap-2">
+                    <button @click="modalIndividuales = false; toast = 'Calendarios regenerados con la última versión aprobada (14/14)'; setTimeout(()=>toast=false,2800)" class="px-3 py-1.5 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">🔄 Regenerar todos</button>
+                    <button @click="modalIndividuales = false; toast = 'Enviado por email a las 14 personas trabajadoras para firma'; setTimeout(()=>toast=false,2800)" class="px-3 py-1.5 text-xs rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">📧 Enviar a equipo</button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500 border-b border-slate-200">
+                        <tr>
+                            <th class="px-3 py-2 text-left w-8"></th>
+                            <th class="px-3 py-2 text-left">Profesional</th>
+                            <th class="px-3 py-2 text-left">Patrón asignado</th>
+                            <th class="px-3 py-2 text-right">H. asign.</th>
+                            <th class="px-3 py-2 text-right">H. obj.</th>
+                            <th class="px-3 py-2 text-center">Saldo</th>
+                            <th class="px-3 py-2 text-left">Estado</th>
+                            <th class="px-3 py-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr><td class="px-3 py-2"><input type="checkbox" checked class="rounded"></td><td class="px-3 py-2 font-medium">Bárcena Sanz, R.</td><td class="px-3 py-2 text-xs"><span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">M-V Mañana</span></td><td class="px-3 py-2 text-right">1 752 h</td><td class="px-3 py-2 text-right text-slate-500">1 752 h</td><td class="px-3 py-2 text-center text-emerald-700">✓ 0</td><td class="px-3 py-2"><span class="text-[11px] text-emerald-700">✓ Firmado 02/12/2025</span></td><td class="px-3 py-2 text-right"><a href="calendario-individual-pdf.html" class="text-emerald-700 text-xs hover:underline">PDF →</a></td></tr>
+                        <tr><td class="px-3 py-2"><input type="checkbox" checked class="rounded"></td><td class="px-3 py-2 font-medium">Martínez Andrés, L.</td><td class="px-3 py-2 text-xs"><span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">M-V Mañana</span></td><td class="px-3 py-2 text-right">1 752 h</td><td class="px-3 py-2 text-right text-slate-500">1 752 h</td><td class="px-3 py-2 text-center text-emerald-700">✓ 0</td><td class="px-3 py-2"><span class="text-[11px] text-emerald-700">✓ Firmado 04/12/2025</span></td><td class="px-3 py-2 text-right"><a href="calendario-individual-pdf.html" class="text-emerald-700 text-xs hover:underline">PDF →</a></td></tr>
+                        <tr><td class="px-3 py-2"><input type="checkbox" checked class="rounded"></td><td class="px-3 py-2 font-medium">López Pérez, Marta</td><td class="px-3 py-2 text-xs"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Rotativo 7 días</span></td><td class="px-3 py-2 text-right">1 770 h</td><td class="px-3 py-2 text-right text-slate-500">1 770 h</td><td class="px-3 py-2 text-center text-emerald-700">✓ 0</td><td class="px-3 py-2"><span class="text-[11px] text-emerald-700">✓ Firmado 02/12/2025</span></td><td class="px-3 py-2 text-right"><a href="calendario-individual-pdf.html" class="text-emerald-700 text-xs hover:underline">PDF →</a></td></tr>
+                        <tr><td class="px-3 py-2"><input type="checkbox" checked class="rounded"></td><td class="px-3 py-2 font-medium">Ruiz Sánchez, Ana</td><td class="px-3 py-2 text-xs"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Rotativo 7 días</span></td><td class="px-3 py-2 text-right">1 770 h</td><td class="px-3 py-2 text-right text-slate-500">1 770 h</td><td class="px-3 py-2 text-center text-emerald-700">✓ 0</td><td class="px-3 py-2"><span class="text-[11px] text-emerald-700">✓ Firmado 05/12/2025</span></td><td class="px-3 py-2 text-right"><a href="calendario-individual-pdf.html" class="text-emerald-700 text-xs hover:underline">PDF →</a></td></tr>
+                        <tr><td class="px-3 py-2"><input type="checkbox" checked class="rounded"></td><td class="px-3 py-2 font-medium">Cano Martín, Rosa</td><td class="px-3 py-2 text-xs"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Rotativo 7 días</span></td><td class="px-3 py-2 text-right">1 770 h</td><td class="px-3 py-2 text-right text-slate-500">1 770 h</td><td class="px-3 py-2 text-center text-emerald-700">✓ 0</td><td class="px-3 py-2"><span class="text-[11px] text-emerald-700">✓ Firmado 02/12/2025</span></td><td class="px-3 py-2 text-right"><a href="calendario-individual-pdf.html" class="text-emerald-700 text-xs hover:underline">PDF →</a></td></tr>
+                        <tr><td class="px-3 py-2"><input type="checkbox" checked class="rounded"></td><td class="px-3 py-2 font-medium">García López, Inés</td><td class="px-3 py-2 text-xs"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Rotativo 7 días</span></td><td class="px-3 py-2 text-right">1 770 h</td><td class="px-3 py-2 text-right text-slate-500">1 770 h</td><td class="px-3 py-2 text-center text-emerald-700">✓ 0</td><td class="px-3 py-2"><span class="text-[11px] text-emerald-700">✓ Firmado 02/12/2025</span></td><td class="px-3 py-2 text-right"><a href="calendario-individual-pdf.html" class="text-emerald-700 text-xs hover:underline">PDF →</a></td></tr>
+                        <tr><td class="px-3 py-2"><input type="checkbox" checked class="rounded"></td><td class="px-3 py-2 font-medium">Pérez Calderón, A.</td><td class="px-3 py-2 text-xs"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Rotativo 7 días</span></td><td class="px-3 py-2 text-right">1 770 h</td><td class="px-3 py-2 text-right text-slate-500">1 770 h</td><td class="px-3 py-2 text-center text-emerald-700">✓ 0</td><td class="px-3 py-2"><span class="text-[11px] text-emerald-700">✓ Firmado 03/12/2025</span></td><td class="px-3 py-2 text-right"><a href="calendario-individual-pdf.html" class="text-emerald-700 text-xs hover:underline">PDF →</a></td></tr>
+                        <tr><td class="px-3 py-2"><input type="checkbox" checked class="rounded"></td><td class="px-3 py-2 font-medium">Castro, M. José</td><td class="px-3 py-2 text-xs"><span class="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">Nocturno fijo</span></td><td class="px-3 py-2 text-right">1 770 h</td><td class="px-3 py-2 text-right text-slate-500">1 770 h</td><td class="px-3 py-2 text-center text-emerald-700">✓ 0</td><td class="px-3 py-2"><span class="text-[11px] text-emerald-700">✓ Firmado 03/12/2025</span></td><td class="px-3 py-2 text-right"><a href="calendario-individual-pdf.html" class="text-emerald-700 text-xs hover:underline">PDF →</a></td></tr>
+                        <tr><td class="px-3 py-2"><input type="checkbox" checked class="rounded"></td><td class="px-3 py-2 font-medium">Núñez, Sergio</td><td class="px-3 py-2 text-xs"><span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Parcial mañana</span></td><td class="px-3 py-2 text-right">880 h</td><td class="px-3 py-2 text-right text-slate-500">880 h</td><td class="px-3 py-2 text-center text-emerald-700">✓ 0</td><td class="px-3 py-2"><span class="text-[11px] text-emerald-700">✓ Firmado 04/12/2025</span></td><td class="px-3 py-2 text-right"><a href="calendario-individual-pdf.html" class="text-emerald-700 text-xs hover:underline">PDF →</a></td></tr>
+                        <tr class="bg-amber-50/30"><td class="px-3 py-2"><input type="checkbox" checked class="rounded"></td><td class="px-3 py-2 font-medium">Renedo, Pilar</td><td class="px-3 py-2 text-xs"><span class="px-2 py-0.5 rounded-full bg-sky-100 text-sky-800">M-V Tarde</span></td><td class="px-3 py-2 text-right">1 540 h</td><td class="px-3 py-2 text-right text-slate-500">1 540 h</td><td class="px-3 py-2 text-center text-emerald-700">✓ 0</td><td class="px-3 py-2"><span class="text-[11px] text-amber-700">⏳ Pendiente firma trabajadora</span></td><td class="px-3 py-2 text-right"><a href="calendario-individual-pdf.html" class="text-amber-700 text-xs hover:underline">PDF →</a></td></tr>
+                        <tr class="bg-amber-50/30"><td class="px-3 py-2"><input type="checkbox" checked class="rounded"></td><td class="px-3 py-2 font-medium">Alonso, Daniel</td><td class="px-3 py-2 text-xs"><span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Parcial mañana</span></td><td class="px-3 py-2 text-right">880 h</td><td class="px-3 py-2 text-right text-slate-500">880 h</td><td class="px-3 py-2 text-center text-emerald-700">✓ 0</td><td class="px-3 py-2"><span class="text-[11px] text-amber-700">⏳ Pendiente firma trabajador</span></td><td class="px-3 py-2 text-right"><a href="calendario-individual-pdf.html" class="text-amber-700 text-xs hover:underline">PDF →</a></td></tr>
+                        <tr class="bg-amber-50/30"><td class="px-3 py-2"><input type="checkbox" checked class="rounded"></td><td class="px-3 py-2 font-medium">Dr. Ruiz, Antonio</td><td class="px-3 py-2 text-xs"><span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">M-V Mañana</span></td><td class="px-3 py-2 text-right">1 752 h</td><td class="px-3 py-2 text-right text-slate-500">1 752 h</td><td class="px-3 py-2 text-center text-emerald-700">✓ 0</td><td class="px-3 py-2"><span class="text-[11px] text-amber-700">⏳ Pendiente firma trabajador</span></td><td class="px-3 py-2 text-right"><a href="calendario-individual-pdf.html" class="text-amber-700 text-xs hover:underline">PDF →</a></td></tr>
+                        <tr class="bg-slate-50"><td class="px-3 py-2"><input type="checkbox" class="rounded"></td><td class="px-3 py-2 font-medium text-slate-500">Sustituto bolsa #4</td><td class="px-3 py-2 text-xs"><span class="px-2 py-0.5 rounded-full bg-slate-200 text-slate-700">— sin patrón —</span></td><td class="px-3 py-2 text-right text-slate-400">—</td><td class="px-3 py-2 text-right text-slate-400">—</td><td class="px-3 py-2 text-center text-slate-400">—</td><td class="px-3 py-2"><span class="text-[11px] text-slate-600">⚠ Asignar patrón antes de generar</span></td><td class="px-3 py-2 text-right"><a href="patrones-turno.html" class="text-slate-600 text-xs hover:underline">Asignar →</a></td></tr>
+                        <tr class="bg-slate-50"><td class="px-3 py-2"><input type="checkbox" class="rounded"></td><td class="px-3 py-2 font-medium text-slate-500">Sustituto bolsa #7</td><td class="px-3 py-2 text-xs"><span class="px-2 py-0.5 rounded-full bg-slate-200 text-slate-700">— sin patrón —</span></td><td class="px-3 py-2 text-right text-slate-400">—</td><td class="px-3 py-2 text-right text-slate-400">—</td><td class="px-3 py-2 text-center text-slate-400">—</td><td class="px-3 py-2"><span class="text-[11px] text-slate-600">⚠ Asignar patrón antes de generar</span></td><td class="px-3 py-2 text-right"><a href="patrones-turno.html" class="text-slate-600 text-xs hover:underline">Asignar →</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="px-6 py-3 border-t border-slate-200 bg-emerald-50/40 text-xs text-emerald-900">
+                <p><strong>Algoritmo:</strong> calendario laboral del centro (festivos + jornada) + patrón asignado a cada profesional + vacaciones aprobadas + formación programada + ausencias activas. Se valida automáticamente: descanso entre jornadas, descanso semanal, máximo de horas extra, trabajo nocturno, domingos y festivos.</p>
+            </div>
+
+            <div class="px-6 py-3 border-t border-slate-200 flex justify-end gap-2">
+                <button @click="modalIndividuales = false" class="px-3 py-2 text-sm rounded-lg border border-slate-300 hover:bg-slate-50">Cerrar</button>
+                <button @click="modalIndividuales = false; toast = '12 PDFs generados · descargados a /calendarios/2026/'; setTimeout(()=>toast=false,2800)" class="px-4 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">📥 Descargar 12 PDFs</button>
+            </div>
+        </div>
+    </div>
+
+    <div x-show="toast" x-cloak x-transition.opacity class="fixed bottom-6 right-6 z-50 rounded-lg bg-slate-900 text-white px-4 py-3 shadow-xl text-sm" x-text="toast"></div>
+</div>
+
+</body>
+</html>

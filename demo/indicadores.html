@@ -1,0 +1,510 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablero · Indicadores · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · todos los datos son ficticios</div>
+
+<div class="flex min-h-screen" x-data="{ userMenu: false }">
+
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100 relative">
+            <button @click="userMenu = !userMenu" class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">Federico Martínez</p>
+                    <p class="text-[10px] text-slate-500 truncate">Gerencia</p>
+                </div>
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div x-show="userMenu" x-cloak @click.outside="userMenu = false" class="absolute bottom-full left-3 right-3 mb-1 rounded-lg border border-slate-200 bg-white shadow-lg py-1 z-20">
+                <a href="personas-lista.html?mio=1" class="block px-3 py-1.5 text-sm text-emerald-700 hover:bg-emerald-50 font-medium">⭐ Mis personas</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Mi perfil</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Preferencias</a>
+                <div class="border-t border-slate-100 my-1"></div>
+                <a href="#" class="block px-3 py-1.5 text-sm text-rose-700 hover:bg-rose-50">Cerrar sesión</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate"><a href="index.html" class="hover:text-emerald-700">Inicio</a> <span class="mx-1">›</span> <span class="text-slate-700">Tablero · Indicadores</span></nav>
+            <div class="flex items-center gap-2 shrink-0"></div>
+        </div>
+        <div class="px-8 py-6 max-w-7xl">
+
+
+            <div class="flex items-center justify-between flex-wrap gap-3">
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">Cuadro de mando</h1>
+                    <p class="text-sm text-slate-500">Periodo: mayo 2026 · Grupo Social Aspanias · Última actualización 19/05/2026 09:14</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <select class="rounded border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                        <option>Mayo 2026</option>
+                        <option>Abril 2026</option>
+                        <option>Q1 2026</option>
+                        <option>Anual 2025</option>
+                    </select>
+                    <button class="rounded bg-emerald-700 text-white px-3 py-1.5 text-sm font-medium hover:bg-emerald-800">Generar memoria PDF</button>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="mt-6 border-b border-slate-200">
+                <nav class="-mb-px flex gap-6 text-sm">
+                    <button onclick="mostrar('general')" id="tab-general" class="border-b-2 border-emerald-700 text-emerald-700 font-medium pb-2">Cuadro general</button>
+                    <button onclick="mostrar('pv')" id="tab-pv" class="border-b-2 border-transparent text-slate-500 hover:text-emerald-700 pb-2">Datos Grupo Aspanias · Planes de Vida</button>
+                    <button onclick="mostrar('gestores')" id="tab-gestores" class="border-b-2 border-transparent text-slate-500 hover:text-emerald-700 pb-2">Gestores de caso</button>
+                    <button onclick="mostrar('hist')" id="tab-hist" class="border-b-2 border-transparent text-slate-500 hover:text-emerald-700 pb-2">Histórico</button>
+                </nav>
+            </div>
+
+            <!-- ===== TAB: CUADRO GENERAL ===== -->
+            <section id="panel-general" class="mt-6 space-y-8">
+
+                <div class="grid gap-4 md:grid-cols-4">
+                    <article class="rounded-xl border border-slate-200 bg-white p-5">
+                        <p class="text-xs uppercase tracking-wide text-slate-500">Personas atendidas</p>
+                        <p class="mt-2 text-3xl font-light">417</p>
+                        <p class="text-xs text-emerald-700 mt-1">↑ 4 vs mes anterior</p>
+                    </article>
+                    <article class="rounded-xl border border-slate-200 bg-white p-5">
+                        <p class="text-xs uppercase tracking-wide text-slate-500">Centros y servicios</p>
+                        <p class="mt-2 text-3xl font-light">13</p>
+                        <p class="text-xs text-slate-500 mt-1">FAB · Aspaniasmerc</p>
+                    </article>
+                    <article class="rounded-xl border border-slate-200 bg-white p-5">
+                        <p class="text-xs uppercase tracking-wide text-slate-500">Medidas Ley 8/2021</p>
+                        <p class="mt-2 text-3xl font-light">247</p>
+                        <p class="text-xs text-slate-500 mt-1">64% del total con figura registrada</p>
+                    </article>
+                    <article class="rounded-xl border border-amber-200 bg-amber-50 p-5">
+                        <p class="text-xs uppercase tracking-wide text-amber-700">Avisos de Dirección</p>
+                        <p class="mt-2 text-3xl font-light text-amber-900">3</p>
+                        <p class="text-xs text-amber-700 mt-1">Cambios gestor/a · <a href="avisos-direccion.html" class="underline">ver bandeja</a></p>
+                    </article>
+                </div>
+
+                <!-- Accesos clínicos rápidos -->
+                <div>
+                    <p class="text-xs uppercase tracking-wide text-slate-500 mb-3">Accesos clínicos y organizativos</p>
+                    <div class="grid gap-4 md:grid-cols-4">
+                        <a href="valoraciones-listado.html" class="group rounded-xl border border-slate-200 bg-white p-5 hover:border-emerald-400 hover:shadow-sm transition">
+                            <div class="flex items-start justify-between mb-2">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                                    <svg class="w-6 h-6" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg>
+                                </div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">5/13 escalas</span>
+                            </div>
+                            <p class="font-semibold text-slate-800 group-hover:text-emerald-700">Valoraciones psicológicas</p>
+                            <p class="text-xs text-slate-500 mt-1">FUMAT · San Martín · INICO-FEAPS · ABS-RC:2 · ICAP + 2 informes</p>
+                        </a>
+                        <a href="control-pv.html" class="group rounded-xl border border-slate-200 bg-white p-5 hover:border-emerald-400 hover:shadow-sm transition">
+                            <div class="flex items-start justify-between mb-2">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                                    <svg class="w-6 h-6" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg>
+                                </div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">Tablero</span>
+                            </div>
+                            <p class="font-semibold text-slate-800 group-hover:text-emerald-700">Control de Plan de Vida</p>
+                            <p class="text-xs text-slate-500 mt-1">Servicios · vigencia · revisión anual</p>
+                        </a>
+                        <a href="agenda-hoy.html" class="group rounded-xl border border-slate-200 bg-white p-5 hover:border-emerald-400 hover:shadow-sm transition">
+                            <div class="flex items-start justify-between mb-2">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                                    <svg class="w-6 h-6" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg>
+                                </div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">Multiprofesional</span>
+                            </div>
+                            <p class="font-semibold text-slate-800 group-hover:text-emerald-700">Agenda</p>
+                            <p class="text-xs text-slate-500 mt-1">Hoy · semana · mes</p>
+                        </a>
+                        <a href="peticiones-trabajo-social.html" class="group rounded-xl border border-slate-200 bg-white p-5 hover:border-emerald-400 hover:shadow-sm transition">
+                            <div class="flex items-start justify-between mb-2">
+                                <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
+                                    <svg class="w-6 h-6" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg>
+                                </div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-medium">12 peticiones</span>
+                            </div>
+                            <p class="font-semibold text-slate-800 group-hover:text-emerald-700">Peticiones del equipo</p>
+                            <p class="text-xs text-slate-500 mt-1">Trabajo Social · 5 implementadas · 2 análisis · 5 pendientes</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid gap-6 md:grid-cols-2">
+                    <article class="rounded-xl border border-slate-200 bg-white p-5">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Distribución por colectivo</h2>
+                        <div class="mt-4 space-y-3">
+                            <div>
+                                <div class="flex items-center justify-between text-sm mb-1"><span>Discapacidad intelectual</span><span class="font-medium">213 · 56%</span></div>
+                                <div class="w-full bg-slate-100 rounded h-3"><div class="bg-emerald-600 h-3 rounded" style="width:56%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between text-sm mb-1"><span>Mayores dependientes</span><span class="font-medium">112 · 29%</span></div>
+                                <div class="w-full bg-slate-100 rounded h-3"><div class="bg-blue-500 h-3 rounded" style="width:29%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between text-sm mb-1"><span>Inserción laboral</span><span class="font-medium">38 · 10%</span></div>
+                                <div class="w-full bg-slate-100 rounded h-3"><div class="bg-purple-500 h-3 rounded" style="width:10%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between text-sm mb-1"><span>Familias</span><span class="font-medium">20 · 5%</span></div>
+                                <div class="w-full bg-slate-100 rounded h-3"><div class="bg-rose-400 h-3 rounded" style="width:5%"></div></div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="rounded-xl border border-slate-200 bg-white p-5">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Top 6 centros por nº de personas</h2>
+                        <ul class="mt-4 space-y-2 text-sm">
+                            <li class="flex justify-between"><span>Residencia Fuentecillas</span><span class="font-medium">62</span></li>
+                            <li class="flex justify-between"><span>Áreas de Vivienda</span><span class="font-medium">48</span></li>
+                            <li class="flex justify-between"><span>Centro de Día Río Arlanza</span><span class="font-medium">44</span></li>
+                            <li class="flex justify-between"><span>C. Multiactividad V. Aleixandre</span><span class="font-medium">41</span></li>
+                            <li class="flex justify-between"><span>Residencia Salas de los Infantes</span><span class="font-medium">36</span></li>
+                            <li class="flex justify-between"><span>Residencia Santa María</span><span class="font-medium">29</span></li>
+                        </ul>
+                        <p class="mt-3 text-xs text-slate-500">
+                            <a href="control-pv.html" class="underline hover:text-emerald-700">Ver desglose completo de los 18 centros y servicios →</a>
+                            <span class="mx-1">·</span>
+                            <a href="mapa-ocupacion.html" class="underline hover:text-emerald-700">🛏 Mapa de ocupación</a>
+                        </p>
+                    </article>
+                </div>
+
+                <div class="grid gap-6 md:grid-cols-3">
+                    <article class="rounded-xl border border-slate-200 bg-white p-5">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Ley 8/2021</h2>
+                        <ul class="mt-3 space-y-1 text-sm">
+                            <li class="flex justify-between"><span>Apoyo judicial</span><span class="font-medium">78</span></li>
+                            <li class="flex justify-between"><span>Apoyo voluntario</span><span class="font-medium">94</span></li>
+                            <li class="flex justify-between"><span>Apoyo de hecho</span><span class="font-medium">75</span></li>
+                            <li class="flex justify-between"><span>Sin medida</span><span class="font-medium">136</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="rounded-xl border border-slate-200 bg-white p-5">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Intervenciones del mes</h2>
+                        <p class="mt-2 text-3xl font-light">2 418</p>
+                        <ul class="mt-3 space-y-1 text-sm">
+                            <li class="flex justify-between"><span>Individuales</span><span class="font-medium">1 420</span></li>
+                            <li class="flex justify-between"><span>Familiares</span><span class="font-medium">312</span></li>
+                            <li class="flex justify-between"><span>Multiprofesionales</span><span class="font-medium">486</span></li>
+                            <li class="flex justify-between"><span>Externas</span><span class="font-medium">200</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="rounded-xl border border-slate-200 bg-white p-5">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Notificaciones a familias (CERCA)</h2>
+                        <p class="mt-2 text-3xl font-light">96%</p>
+                        <p class="text-xs text-slate-500">Tasa de notificación de citas notificables</p>
+                        <ul class="mt-3 space-y-1 text-sm">
+                            <li class="flex justify-between"><span>Mensajes enviados</span><span class="font-medium">1 842</span></li>
+                            <li class="flex justify-between"><span>Acuse de lectura</span><span class="font-medium">81%</span></li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="rounded-xl border border-blue-200 bg-blue-50 p-5">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-800">Exportes externos pseudonimizados</h2>
+                    <p class="mt-2 text-sm text-blue-900">
+                        Todos los exportes externos se generan <strong>sin DNI, nombre ni dirección</strong>. Disponibles en Excel y PDF con plantilla institucional Aspanias.
+                    </p>
+                    <div class="mt-3 flex gap-2 flex-wrap">
+                        <button class="rounded bg-white border border-blue-300 text-blue-800 px-3 py-1.5 text-sm hover:bg-blue-100">Memoria anual · Fundación Aspanias Burgos</button>
+                        <button class="rounded bg-white border border-blue-300 text-blue-800 px-3 py-1.5 text-sm hover:bg-blue-100">Memoria anual · Aspaniasmerc</button>
+                        <button class="rounded bg-white border border-blue-300 text-blue-800 px-3 py-1.5 text-sm hover:bg-blue-100">Justificación de concierto · Junta de Castilla y León</button>
+                        <button class="rounded bg-white border border-blue-300 text-blue-800 px-3 py-1.5 text-sm hover:bg-blue-100">Informe trimestral a la Junta · Q2 2026</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== TAB: PV ===== -->
+            <section id="panel-pv" class="mt-6 space-y-6 hidden">
+
+                <div class="rounded-xl border border-slate-200 bg-white p-5">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Plan de Vida — Datos Grupo Aspanias</h2>
+                    <p class="text-xs text-slate-500 mt-1">Reproduce la hoja «Datos Grupo Aspanias» del Excel «Registro PV por servicios».</p>
+
+                    <div class="mt-5 grid gap-4 md:grid-cols-5">
+                        <div class="rounded-lg border border-slate-200 p-4">
+                            <p class="text-xs uppercase tracking-wide text-slate-500">Personas atendidas</p>
+                            <p class="mt-1 text-3xl font-light">417</p>
+                        </div>
+                        <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-4">
+                            <p class="text-xs uppercase tracking-wide text-emerald-700">Realizados</p>
+                            <p class="mt-1 text-3xl font-light text-emerald-800">347</p>
+                            <p class="text-xs text-emerald-700 mt-1">91%</p>
+                        </div>
+                        <div class="rounded-lg border border-amber-200 bg-amber-50 p-4">
+                            <p class="text-xs uppercase tracking-wide text-amber-700">Pendientes</p>
+                            <p class="mt-1 text-3xl font-light text-amber-800">36</p>
+                            <p class="text-xs text-amber-700 mt-1">9%</p>
+                        </div>
+                        <div class="rounded-lg border border-blue-200 bg-blue-50 p-4">
+                            <p class="text-xs uppercase tracking-wide text-blue-700">Revisados (anual)</p>
+                            <p class="mt-1 text-3xl font-light text-blue-800">261</p>
+                            <p class="text-xs text-blue-700 mt-1">68%</p>
+                        </div>
+                        <div class="rounded-lg border border-slate-200 p-4">
+                            <p class="text-xs uppercase tracking-wide text-slate-500">Compartidos R/V</p>
+                            <p class="mt-1 text-3xl font-light">198</p>
+                            <p class="text-xs text-slate-500 mt-1">Residencia/Vivienda</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                    <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Desglose por centro</h2>
+                        <a href="control-pv.html" class="text-xs text-emerald-700 hover:underline">Ver tablero Control PV →</a>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
+                                <tr>
+                                    <th class="text-left px-4 py-2">Centro</th>
+                                    <th class="text-left px-4 py-2">Corresponsable</th>
+                                    <th class="text-right px-4 py-2">Personas</th>
+                                    <th class="text-right px-4 py-2">PV realizados</th>
+                                    <th class="text-right px-4 py-2">Pendientes</th>
+                                    <th class="text-right px-4 py-2">Revisados</th>
+                                    <th class="text-right px-4 py-2">% realizado</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr><td class="px-4 py-2 font-medium">Residencia Fuentecillas</td><td class="px-4 py-2 text-slate-500">FAB</td><td class="px-4 py-2 text-right">62</td><td class="px-4 py-2 text-right">60</td><td class="px-4 py-2 text-right">2</td><td class="px-4 py-2 text-right">48</td><td class="px-4 py-2 text-right text-emerald-700 font-medium">97%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">Áreas de Vivienda</td><td class="px-4 py-2 text-slate-500">FAB</td><td class="px-4 py-2 text-right">48</td><td class="px-4 py-2 text-right">46</td><td class="px-4 py-2 text-right">2</td><td class="px-4 py-2 text-right">39</td><td class="px-4 py-2 text-right text-emerald-700 font-medium">96%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">Centro de Día Río Arlanza</td><td class="px-4 py-2 text-slate-500">Aspaniasmerc</td><td class="px-4 py-2 text-right">44</td><td class="px-4 py-2 text-right">36</td><td class="px-4 py-2 text-right">8</td><td class="px-4 py-2 text-right">22</td><td class="px-4 py-2 text-right text-amber-700 font-medium">82%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">C. Multiactividad V. Aleixandre</td><td class="px-4 py-2 text-slate-500">FAB</td><td class="px-4 py-2 text-right">41</td><td class="px-4 py-2 text-right">39</td><td class="px-4 py-2 text-right">2</td><td class="px-4 py-2 text-right">30</td><td class="px-4 py-2 text-right text-emerald-700 font-medium">95%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">Residencia Salas de los Infantes</td><td class="px-4 py-2 text-slate-500">FAB</td><td class="px-4 py-2 text-right">36</td><td class="px-4 py-2 text-right">33</td><td class="px-4 py-2 text-right">3</td><td class="px-4 py-2 text-right">25</td><td class="px-4 py-2 text-right text-emerald-700 font-medium">92%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">Residencia Santa María</td><td class="px-4 py-2 text-slate-500">FAB</td><td class="px-4 py-2 text-right">29</td><td class="px-4 py-2 text-right">28</td><td class="px-4 py-2 text-right">1</td><td class="px-4 py-2 text-right">21</td><td class="px-4 py-2 text-right text-emerald-700 font-medium">97%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">CD Puentesaúco</td><td class="px-4 py-2 text-slate-500">FAB</td><td class="px-4 py-2 text-right">26</td><td class="px-4 py-2 text-right">24</td><td class="px-4 py-2 text-right">2</td><td class="px-4 py-2 text-right">17</td><td class="px-4 py-2 text-right text-emerald-700 font-medium">92%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">Servicio Puentes</td><td class="px-4 py-2 text-slate-500">Aspaniasmerc</td><td class="px-4 py-2 text-right">22</td><td class="px-4 py-2 text-right">18</td><td class="px-4 py-2 text-right">4</td><td class="px-4 py-2 text-right">12</td><td class="px-4 py-2 text-right text-amber-700 font-medium">82%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">CD Salas</td><td class="px-4 py-2 text-slate-500">FAB</td><td class="px-4 py-2 text-right">20</td><td class="px-4 py-2 text-right">19</td><td class="px-4 py-2 text-right">1</td><td class="px-4 py-2 text-right">14</td><td class="px-4 py-2 text-right text-emerald-700 font-medium">95%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">CD Asistencial Quintanadueñas</td><td class="px-4 py-2 text-slate-500">FAB</td><td class="px-4 py-2 text-right">20</td><td class="px-4 py-2 text-right">18</td><td class="px-4 py-2 text-right">2</td><td class="px-4 py-2 text-right">13</td><td class="px-4 py-2 text-right text-emerald-700 font-medium">90%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">Residencia Quintanadueñas</td><td class="px-4 py-2 text-slate-500">FAB</td><td class="px-4 py-2 text-right">15</td><td class="px-4 py-2 text-right">12</td><td class="px-4 py-2 text-right">3</td><td class="px-4 py-2 text-right">8</td><td class="px-4 py-2 text-right text-amber-700 font-medium">80%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">Colegio EE Puentesaúco</td><td class="px-4 py-2 text-slate-500">FAB</td><td class="px-4 py-2 text-right">12</td><td class="px-4 py-2 text-right">9</td><td class="px-4 py-2 text-right">3</td><td class="px-4 py-2 text-right">6</td><td class="px-4 py-2 text-right text-amber-700 font-medium">75%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">CD Asistencial Salas</td><td class="px-4 py-2 text-slate-500">Aspaniasmerc</td><td class="px-4 py-2 text-right">8</td><td class="px-4 py-2 text-right">5</td><td class="px-4 py-2 text-right">3</td><td class="px-4 py-2 text-right">6</td><td class="px-4 py-2 text-right text-amber-700 font-medium">63%</td></tr>
+                            </tbody>
+                            <tfoot class="bg-slate-50 font-semibold">
+                                <tr>
+                                    <td class="px-4 py-2">Total Grupo</td>
+                                    <td class="px-4 py-2 text-slate-500">18 centros y servicios</td>
+                                    <td class="px-4 py-2 text-right">417</td>
+                                    <td class="px-4 py-2 text-right">347</td>
+                                    <td class="px-4 py-2 text-right">36</td>
+                                    <td class="px-4 py-2 text-right">261</td>
+                                    <td class="px-4 py-2 text-right text-emerald-700">91%</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white p-5">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Documentos del Plan de Vida — completitud</h2>
+                    <p class="text-xs text-slate-500 mt-1">% de personas con cada documento del protocolo completado en su anualidad vigente.</p>
+                    <div class="mt-4 grid gap-4 md:grid-cols-5">
+                        <div>
+                            <p class="text-xs text-slate-500">Historia de Vida</p>
+                            <p class="mt-1 text-2xl font-light">86%</p>
+                            <div class="w-full bg-slate-100 rounded h-2 mt-1"><div class="bg-emerald-600 h-2 rounded" style="width:86%"></div></div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500">Algo sobre mí</p>
+                            <p class="mt-1 text-2xl font-light">79%</p>
+                            <div class="w-full bg-slate-100 rounded h-2 mt-1"><div class="bg-emerald-600 h-2 rounded" style="width:79%"></div></div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500">Plan de apoyo</p>
+                            <p class="mt-1 text-2xl font-light">91%</p>
+                            <div class="w-full bg-slate-100 rounded h-2 mt-1"><div class="bg-emerald-600 h-2 rounded" style="width:91%"></div></div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500">Proyecto de vida</p>
+                            <p class="mt-1 text-2xl font-light">71%</p>
+                            <div class="w-full bg-slate-100 rounded h-2 mt-1"><div class="bg-amber-500 h-2 rounded" style="width:71%"></div></div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500">Revisión objetivos</p>
+                            <p class="mt-1 text-2xl font-light">68%</p>
+                            <div class="w-full bg-slate-100 rounded h-2 mt-1"><div class="bg-amber-500 h-2 rounded" style="width:68%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== TAB: GESTORES ===== -->
+            <section id="panel-gestores" class="mt-6 hidden">
+                <div class="rounded-xl border border-slate-200 bg-white p-5">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Carga de gestores de caso</h2>
+                            <p class="text-xs text-slate-500 mt-1">Reproduce la hoja «Gestores de caso» del Excel. Ratio recomendado ≤ 30 casos/gestor.</p>
+                        </div>
+                        <a href="gestores-caso.html" class="text-xs text-emerald-700 hover:underline">Ver detalle por profesional →</a>
+                    </div>
+                    <div class="mt-4 grid gap-4 md:grid-cols-3 text-sm">
+                        <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-3">
+                            <p class="text-xs text-emerald-700 uppercase">Dentro de ratio</p>
+                            <p class="text-2xl font-light text-emerald-800">17</p>
+                            <p class="text-xs text-emerald-700">profesionales · ≤ 30 casos</p>
+                        </div>
+                        <div class="rounded-lg border border-amber-200 bg-amber-50 p-3">
+                            <p class="text-xs text-amber-700 uppercase">Próximos a ratio</p>
+                            <p class="text-2xl font-light text-amber-800">5</p>
+                            <p class="text-xs text-amber-700">profesionales · 26-30 casos</p>
+                        </div>
+                        <div class="rounded-lg border border-rose-200 bg-rose-50 p-3">
+                            <p class="text-xs text-rose-700 uppercase">Sobrecarga</p>
+                            <p class="text-2xl font-light text-rose-800">2</p>
+                            <p class="text-xs text-rose-700">profesionales · &gt; 30 casos</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== TAB: HISTÓRICO ===== -->
+            <section id="panel-hist" class="mt-6 hidden">
+                <div class="rounded-xl border border-slate-200 bg-white p-5">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Histórico — snapshots mensuales</h2>
+                    <p class="text-xs text-slate-500 mt-1">Reproduce la hoja «Histórico» del Excel. Snapshot generado el primer día de cada mes.</p>
+                    <div class="overflow-x-auto mt-4">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
+                                <tr>
+                                    <th class="text-left px-4 py-2">Mes</th>
+                                    <th class="text-right px-4 py-2">Personas</th>
+                                    <th class="text-right px-4 py-2">PV realizados</th>
+                                    <th class="text-right px-4 py-2">% realizado</th>
+                                    <th class="text-right px-4 py-2">Revisados</th>
+                                    <th class="text-right px-4 py-2">% revisado</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr><td class="px-4 py-2 font-medium">Mayo 2026</td><td class="px-4 py-2 text-right">383</td><td class="px-4 py-2 text-right">347</td><td class="px-4 py-2 text-right text-emerald-700">91%</td><td class="px-4 py-2 text-right">261</td><td class="px-4 py-2 text-right">68%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">Abril 2026</td><td class="px-4 py-2 text-right">379</td><td class="px-4 py-2 text-right">338</td><td class="px-4 py-2 text-right text-emerald-700">89%</td><td class="px-4 py-2 text-right">248</td><td class="px-4 py-2 text-right">65%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">Marzo 2026</td><td class="px-4 py-2 text-right">376</td><td class="px-4 py-2 text-right">329</td><td class="px-4 py-2 text-right text-emerald-700">87%</td><td class="px-4 py-2 text-right">232</td><td class="px-4 py-2 text-right">62%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">Febrero 2026</td><td class="px-4 py-2 text-right">374</td><td class="px-4 py-2 text-right">321</td><td class="px-4 py-2 text-right text-emerald-700">86%</td><td class="px-4 py-2 text-right">218</td><td class="px-4 py-2 text-right">58%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">Enero 2026</td><td class="px-4 py-2 text-right">372</td><td class="px-4 py-2 text-right">312</td><td class="px-4 py-2 text-right text-amber-700">84%</td><td class="px-4 py-2 text-right">206</td><td class="px-4 py-2 text-right">55%</td></tr>
+                                <tr><td class="px-4 py-2 font-medium">Diciembre 2025</td><td class="px-4 py-2 text-right">368</td><td class="px-4 py-2 text-right">304</td><td class="px-4 py-2 text-right text-amber-700">83%</td><td class="px-4 py-2 text-right">198</td><td class="px-4 py-2 text-right">54%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
+
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, cita..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+<script>
+function mostrar(tab) {
+    document.querySelectorAll('[id^="panel-"]').forEach(p => p.classList.add('hidden'));
+    const panel = document.getElementById('panel-' + tab);
+    if (panel) panel.classList.remove('hidden');
+    document.querySelectorAll('[id^="tab-"]').forEach(b => {
+        b.classList.remove('border-emerald-700', 'text-emerald-700', 'font-medium');
+        b.classList.add('border-transparent', 'text-slate-500');
+    });
+    const btn = document.getElementById('tab-' + tab);
+    if (btn) {
+        btn.classList.remove('border-transparent', 'text-slate-500');
+        btn.classList.add('border-emerald-700', 'text-emerald-700', 'font-medium');
+    }
+}
+</script>
+</body>
+</html>

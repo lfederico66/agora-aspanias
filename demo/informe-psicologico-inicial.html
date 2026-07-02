@@ -1,0 +1,434 @@
+<!-- @rol: profesional, gestor_caso, direccion_centro -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Psicológico Inicial · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <link rel="stylesheet" href="_assets/print-valoracion.css" media="print">
+    <script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="flex min-h-screen" x-data="{
+    seccionActiva: 'identificacion',
+    estado: 'borrador',
+    autoguardado: 'Sin cambios',
+    toast: false,
+    secciones: ['identificacion','antecedentes_personales','antecedentes_familiares','autonomia','conducta','caracterologia','intereses','tratamiento','exploracion','ubicacion','conclusiones']
+}">
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight"><p class="text-base font-semibold tracking-tight">ÁGORA</p><p class="text-[10px] text-slate-500">Grupo Social Aspanias</p></div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium">
+                <option value="profesional" selected>🩺 Profesional</option>
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100">
+            <div class="w-full flex items-center gap-2.5 p-2 rounded-lg">
+                <div class="w-9 h-9 rounded-full bg-teal-100 text-teal-800 flex items-center justify-center text-sm font-semibold shrink-0">DA</div>
+                <div class="leading-tight text-left flex-1 min-w-0"><p class="text-sm font-medium truncate">Daniel Alonso</p><p class="text-[10px] text-slate-500 truncate">Psicólogo · Col. CL-1234</p></div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+
+        <div class="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-slate-200 px-8 py-3">
+            <nav class="text-xs text-slate-500 flex items-center gap-1.5">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a><span>›</span>
+                <a href="personas-lista.html" class="hover:text-emerald-700">Personas</a><span>›</span>
+                <a href="persona-detalle.html" class="hover:text-emerald-700">Ruiz Jiménez, A.</a><span>›</span>
+                <a href="valoraciones-listado.html" class="hover:text-emerald-700">Valoraciones</a><span>›</span>
+                <span class="text-slate-900 font-medium">Informe Psicológico Inicial</span>
+            </nav>
+        </div>
+
+        <header class="px-8 pt-6 pb-4 border-b border-slate-200 bg-white">
+            <div class="flex items-start justify-between flex-wrap gap-3">
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">📝 Informe Psicológico Inicial</h1>
+                    <p class="text-sm text-slate-500 mt-1">Protocolo clínico de admisión · Ruiz Jiménez, Asunción · 78 años · Residencia Fuentecillas</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-[11px] text-slate-500" x-text="autoguardado"></span>
+                    <span class="px-2 py-1 text-[11px] rounded-full bg-amber-100 text-amber-800 font-medium" x-show="estado === 'borrador'">🟡 Borrador</span>
+                    <span class="px-2 py-1 text-[11px] rounded-full bg-emerald-100 text-emerald-800 font-medium" x-show="estado === 'firmado'">✅ Firmado</span>
+                    <button @click="autoguardado = 'Guardando…'; setTimeout(() => autoguardado = 'Guardado hace un instante', 800); toast = 'Borrador guardado'; setTimeout(() => toast = false, 1800)" class="px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">💾 Guardar borrador</button>
+                    <a href="informe-psicologico-pdf.html" class="px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">👁 Vista previa PDF</a>
+                    <button @click="estado = 'firmado'; toast = 'Informe firmado y bloqueado'; setTimeout(() => toast = false, 2400)" class="px-4 py-2 text-xs rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">✍ Firmar y cerrar</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex">
+            <!-- Navegación lateral de secciones -->
+            <aside class="w-56 shrink-0 bg-slate-50 border-r border-slate-200 sticky top-[57px] h-[calc(100vh-57px)] overflow-y-auto px-3 py-4">
+                <p class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold mb-2">Secciones (11)</p>
+                <nav class="space-y-0.5 text-xs">
+                    <template x-for="(s, i) in [
+                        {id: 'identificacion', label: '1. Identificación'},
+                        {id: 'antecedentes_personales', label: '2. Antecedentes personales'},
+                        {id: 'antecedentes_familiares', label: '3. Antecedentes familiares'},
+                        {id: 'autonomia', label: '4. Nivel de autonomía'},
+                        {id: 'conducta', label: '5. Esfera de la conducta'},
+                        {id: 'caracterologia', label: '6. Caracterología'},
+                        {id: 'intereses', label: '7. Aficiones, estudios, trabajo'},
+                        {id: 'tratamiento', label: '8. Tratamiento actual'},
+                        {id: 'exploracion', label: '9. Exploración psicopatológica'},
+                        {id: 'ubicacion', label: '10. Ubicación y plaza'},
+                        {id: 'conclusiones', label: '11. Conclusiones y firma'}]" :key="s.id">
+                        <button @click="seccionActiva = s.id" :class="seccionActiva === s.id ? 'bg-emerald-100 text-emerald-800 font-medium' : 'text-slate-700 hover:bg-slate-100'" class="w-full text-left px-2 py-1.5 rounded" x-text="s.label"></button>
+                    </template>
+                </nav>
+            </aside>
+
+            <!-- Contenido del formulario -->
+            <section class="flex-1 px-8 py-6 max-w-3xl">
+
+                <!-- 1. IDENTIFICACIÓN -->
+                <div x-show="seccionActiva === 'identificacion'" class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">1. Identificación</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Nombre y apellidos</label><input value="Ruiz Jiménez, Asunción" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-slate-50" readonly></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Fecha del informe</label><input type="date" value="2026-06-16" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Fecha nacimiento</label><input value="14/03/1948" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-slate-50" readonly></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Edad actual</label><input value="78" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-slate-50" readonly></div>
+                    </div>
+                </div>
+
+                <!-- 2. ANTECEDENTES PERSONALES -->
+                <div x-show="seccionActiva === 'antecedentes_personales'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">2. Antecedentes personales</h2>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">Embarazo, parto, desarrollo</label><textarea rows="3" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300" placeholder="Describir embarazo, parto, hitos del desarrollo psicomotor..."></textarea></div>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">Enfermedades somáticas</label><textarea rows="2" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></textarea></div>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">Enfermedades infectocontagiosas</label><textarea rows="2" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></textarea></div>
+                    <fieldset class="border border-slate-200 rounded-lg p-3"><legend class="text-xs font-medium text-slate-700 px-2">Órganos de los sentidos</legend>
+                        <div class="grid md:grid-cols-2 gap-3 mt-2">
+                            <div><label class="block text-[11px] text-slate-600 mb-1">Visión</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[11px] text-slate-600 mb-1">Audición</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="border border-slate-200 rounded-lg p-3"><legend class="text-xs font-medium text-slate-700 px-2">Enfermedades neurológicas</legend>
+                        <div class="mt-2 space-y-2">
+                            <div><label class="block text-[11px] text-slate-600 mb-1">Epilepsia</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[11px] text-slate-600 mb-1">Otras</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        </div>
+                    </fieldset>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">Enfermedades psíquicas</label><textarea rows="3" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></textarea></div>
+                </div>
+
+                <!-- 3. ANTECEDENTES FAMILIARES -->
+                <div x-show="seccionActiva === 'antecedentes_familiares'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">3. Antecedentes familiares</h2>
+                    <textarea rows="6" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300" placeholder="Antecedentes relevantes en familiares directos (padres, hermanos, hijos): enfermedades psíquicas, somáticas, neurológicas..."></textarea>
+                </div>
+
+                <!-- 4. NIVEL DE AUTONOMÍA -->
+                <div x-show="seccionActiva === 'autonomia'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">4. Nivel de autonomía</h2>
+                    <fieldset class="border border-emerald-200 bg-emerald-50/30 rounded-lg p-3"><legend class="text-xs font-medium text-emerald-900 px-2">AVD básicas</legend>
+                        <div class="mt-2 grid md:grid-cols-2 gap-3">
+                            <div><label class="block text-[11px] text-slate-600 mb-1">Control esfínteres</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[11px] text-slate-600 mb-1">Aseo</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[11px] text-slate-600 mb-1">Comida</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[11px] text-slate-600 mb-1">Deambulación</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[11px] text-slate-600 mb-1">Psicomotricidad</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[11px] text-slate-600 mb-1">Habilidad manual</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        </div>
+                    </fieldset>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">AVD instrumentales</label><textarea rows="3" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300" placeholder="Manejo dinero, transporte, teléfono, medicación..."></textarea></div>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">AVD avanzadas o volitivas</label><textarea rows="3" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300" placeholder="Trabajo, ocio, voluntariado, participación social..."></textarea></div>
+                </div>
+
+                <!-- 5. ESFERA DE LA CONDUCTA -->
+                <div x-show="seccionActiva === 'conducta'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">5. Esfera de la conducta</h2>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">Ambiente familiar</label><textarea rows="3" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></textarea></div>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">Ambiente social</label><textarea rows="3" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></textarea></div>
+
+                    <!-- Conductas heteroagresivas y autolesivas (Laura · 17/06) -->
+                    <fieldset class="border-2 border-rose-200 bg-rose-50/40 rounded-lg p-4">
+                        <legend class="text-xs font-semibold text-rose-900 px-2">🚨 Conductas heteroagresivas y autolesivas</legend>
+
+                        <div class="grid md:grid-cols-2 gap-3 mt-2">
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-700 mb-1">¿Presenta conductas heteroagresivas?</label>
+                                <select class="w-full px-2 py-1.5 text-xs rounded border border-slate-300">
+                                    <option value="">—</option>
+                                    <option>No</option>
+                                    <option>Verbales puntuales</option>
+                                    <option>Verbales frecuentes</option>
+                                    <option>Físicas leves esporádicas</option>
+                                    <option>Físicas graves o frecuentes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-700 mb-1">¿Presenta conductas autolesivas?</label>
+                                <select class="w-full px-2 py-1.5 text-xs rounded border border-slate-300">
+                                    <option value="">—</option>
+                                    <option>No</option>
+                                    <option>Estereotipias sin daño</option>
+                                    <option>Autolesiones leves esporádicas</option>
+                                    <option>Autolesiones graves o frecuentes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-700 mb-1">Frecuencia</label>
+                                <select class="w-full px-2 py-1.5 text-xs rounded border border-slate-300">
+                                    <option value="">—</option>
+                                    <option>Nunca</option>
+                                    <option>Menos de 1 vez al mes</option>
+                                    <option>1-3 veces al mes</option>
+                                    <option>1-6 veces por semana</option>
+                                    <option>1-10 veces al día</option>
+                                    <option>Una o más por hora</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-700 mb-1">Nivel de supervisión que requiere</label>
+                                <select class="w-full px-2 py-1.5 text-xs rounded border border-slate-300">
+                                    <option value="">—</option>
+                                    <option>Supervisión estándar del grupo</option>
+                                    <option>Supervisión reforzada (cerca del/la profesional)</option>
+                                    <option>Supervisión 1:1 en momentos críticos</option>
+                                    <option>Supervisión 1:1 continua</option>
+                                    <option>Apoyo 2:1 en episodios</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-[11px] font-medium text-slate-700 mb-1">Desencadenantes identificados</label>
+                                <textarea rows="3" class="w-full px-2 py-1.5 text-xs rounded border border-slate-300" placeholder="Cambios de rutina, ruido, demandas excesivas, presencia de personas concretas, transiciones, alimentación, dolor, etc."></textarea>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-[11px] font-medium text-slate-700 mb-1">Forma de presentación · descripción topográfica</label>
+                                <textarea rows="2" class="w-full px-2 py-1.5 text-xs rounded border border-slate-300" placeholder="¿Qué hace exactamente? Golpes en cabeza, mordeduras, empujones, gritos, agresión a otros usuarios, agresión a personal..."></textarea>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-[11px] font-medium text-slate-700 mb-1">Gravedad y consecuencias</label>
+                                <textarea rows="2" class="w-full px-2 py-1.5 text-xs rounded border border-slate-300" placeholder="¿Daños físicos producidos? ¿Hospitalización? ¿Lesiones a terceros? ¿Necesita contención?"></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="border border-amber-200 bg-amber-50/30 rounded-lg p-3"><legend class="text-xs font-medium text-amber-900 px-2">Otras conductas de riesgo</legend>
+                        <div class="grid md:grid-cols-3 gap-3 mt-2">
+                            <div><label class="block text-[11px] text-slate-600 mb-1">Hábitos tóxicos</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[11px] text-slate-600 mb-1">Fugas</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[11px] text-slate-600 mb-1">Robos</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Orientaciones en el manejo de la conducta (Laura · 17/06) -->
+                    <fieldset class="border-2 border-emerald-300 bg-emerald-50/40 rounded-lg p-4">
+                        <legend class="text-xs font-semibold text-emerald-900 px-2">🧭 Orientaciones en el manejo de la conducta</legend>
+                        <p class="text-[10px] text-emerald-800 mb-3 italic">Indicaciones operativas para el personal de atención directa (estilo Barquín · siempre incluir en informes Aspanias)</p>
+
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-700 mb-1">Estrategias preventivas (antes del episodio)</label>
+                                <textarea rows="3" class="w-full px-2 py-1.5 text-xs rounded border border-slate-300" placeholder="Anticipar desencadenantes · estructurar el entorno · señales pictográficas · rutinas predecibles · pausas programadas..."></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-700 mb-1">Manejo durante el episodio</label>
+                                <textarea rows="3" class="w-full px-2 py-1.5 text-xs rounded border border-slate-300" placeholder="Cómo actuar en momento de crisis · tono de voz · distancia · acompañamiento · si requiere contención, cuál y cuándo..."></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-700 mb-1">Acciones post-episodio</label>
+                                <textarea rows="3" class="w-full px-2 py-1.5 text-xs rounded border border-slate-300" placeholder="Acompañamiento emocional · registro de episodio · comunicación al equipo · revisión de detonantes..."></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-700 mb-1">Refuerzos positivos eficaces para esta persona</label>
+                                <textarea rows="2" class="w-full px-2 py-1.5 text-xs rounded border border-slate-300" placeholder="¿Qué le motiva? Música, paseos, comida específica, atención individual, actividades concretas..."></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-700 mb-1">Lo que NO debe hacerse</label>
+                                <textarea rows="2" class="w-full px-2 py-1.5 text-xs rounded border border-slate-300" placeholder="Evitar contacto visual prolongado · no levantar la voz · no cambios bruscos · no ignorar..."></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-medium text-slate-700 mb-1">Coordinación con otros profesionales</label>
+                                <textarea rows="2" class="w-full px-2 py-1.5 text-xs rounded border border-slate-300" placeholder="Avisar a psicología si... · revisión farmacológica con psiquiatra cada... · derivación TO para..."></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- 6. CARACTEROLOGÍA -->
+                <div x-show="seccionActiva === 'caracterologia'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">6. Caracterología</h2>
+                    <p class="text-xs text-slate-500">Marcar la posición de la persona en cada eje (selecciona uno o aproxima en el deslizador):</p>
+                    <div class="space-y-3">
+                        <template x-for="par in [['Alegre','Triste'],['Sociable','Solitario'],['Terco','Complaciente'],['Atento','Distraído'],['Tímido','Decidido'],['Tranquilo','Inquieto'],['Mimado','No mimado']]" :key="par[0]">
+                            <div class="grid grid-cols-7 items-center gap-3">
+                                <label class="col-span-2 text-xs font-medium text-emerald-700 text-right" x-text="par[0]"></label>
+                                <input type="range" min="-3" max="3" value="0" class="col-span-3 w-full">
+                                <label class="col-span-2 text-xs font-medium text-rose-700" x-text="par[1]"></label>
+                            </div>
+                        </template>
+                    </div>
+                    <fieldset class="border border-slate-200 rounded-lg p-3"><legend class="text-xs font-medium text-slate-700 px-2">Rasgos adicionales</legend>
+                        <div class="grid grid-cols-3 gap-3 mt-2 text-xs">
+                            <label class="flex items-center gap-2"><input type="checkbox" class="rounded"> Miedoso</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" class="rounded"> Irritable</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" class="rounded"> Mentiroso</label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- 7. INTERESES -->
+                <div x-show="seccionActiva === 'intereses'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">7. Aficiones, estudios y trabajos</h2>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">Aficiones</label><textarea rows="3" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></textarea></div>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">Estudios</label><textarea rows="3" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></textarea></div>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">Trabajos realizados</label><textarea rows="3" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></textarea></div>
+                </div>
+
+                <!-- 8. TRATAMIENTO ACTUAL -->
+                <div x-show="seccionActiva === 'tratamiento'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">8. Tratamiento actual</h2>
+                    <textarea rows="6" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300" placeholder="Tratamientos farmacológicos, no farmacológicos, terapéuticos..."></textarea>
+                    <p class="text-[11px] text-slate-500">💡 Vinculable con el módulo de medicación de la ficha (pestaña Médico).</p>
+                </div>
+
+                <!-- 9. EXPLORACIÓN PSICOPATOLÓGICA -->
+                <div x-show="seccionActiva === 'exploracion'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">9. Exploración psicopatológica</h2>
+                    <div class="grid md:grid-cols-2 gap-3">
+                        <div><label class="block text-[11px] font-medium text-slate-700 mb-1">Apariencia · Conducta</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        <div><label class="block text-[11px] font-medium text-slate-700 mb-1">Comunicación · Lenguaje</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        <div><label class="block text-[11px] font-medium text-slate-700 mb-1">Conciencia vigil</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        <div><label class="block text-[11px] font-medium text-slate-700 mb-1">Orientación</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        <div><label class="block text-[11px] font-medium text-slate-700 mb-1">Atención · Concentración</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        <div><label class="block text-[11px] font-medium text-slate-700 mb-1">Memoria · Funciones mnésicas</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        <div><label class="block text-[11px] font-medium text-slate-700 mb-1">Ánimo deprimido</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        <div><label class="block text-[11px] font-medium text-slate-700 mb-1">Fobias · Obsesiones</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        <div><label class="block text-[11px] font-medium text-slate-700 mb-1">Pensamiento abstracto</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        <div><label class="block text-[11px] font-medium text-slate-700 mb-1">Funciones ejecutivas</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                    </div>
+
+                    <fieldset class="border border-sky-200 bg-sky-50/30 rounded-lg p-3"><legend class="text-xs font-medium text-sky-900 px-2">Praxia (capacidad acciones motoras coordinadas)</legend>
+                        <div class="grid md:grid-cols-2 gap-2 mt-2">
+                            <div><label class="block text-[10px] text-slate-600 mb-1">Del vestido</label><textarea rows="1" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[10px] text-slate-600 mb-1">Constructiva</label><textarea rows="1" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[10px] text-slate-600 mb-1">Ideomotora</label><textarea rows="1" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[10px] text-slate-600 mb-1">Ideacional</label><textarea rows="1" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[10px] text-slate-600 mb-1">Bucofacial</label><textarea rows="1" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="border border-purple-200 bg-purple-50/30 rounded-lg p-3"><legend class="text-xs font-medium text-purple-900 px-2">Gnosias (reconocimiento de objetos/personas/estímulos)</legend>
+                        <div class="grid md:grid-cols-2 gap-2 mt-2">
+                            <div><label class="block text-[10px] text-slate-600 mb-1">Táctiles</label><textarea rows="1" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[10px] text-slate-600 mb-1">Somatognosia</label><textarea rows="1" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[10px] text-slate-600 mb-1">Gnosias verbales</label><textarea rows="1" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[10px] text-slate-600 mb-1">Fisiognosias</label><textarea rows="1" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                            <div><label class="block text-[10px] text-slate-600 mb-1">Gnosias auditivas</label><textarea rows="1" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        </div>
+                    </fieldset>
+
+                    <div class="grid md:grid-cols-2 gap-3">
+                        <div><label class="block text-[11px] font-medium text-slate-700 mb-1">Alteraciones sensoperceptivas</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        <div><label class="block text-[11px] font-medium text-slate-700 mb-1">Funciones cognoscitivas</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        <div><label class="block text-[11px] font-medium text-slate-700 mb-1">Capacidad de juicio</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                        <div><label class="block text-[11px] font-medium text-slate-700 mb-1">Control impulsos</label><textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea></div>
+                    </div>
+                </div>
+
+                <!-- 10. UBICACIÓN -->
+                <div x-show="seccionActiva === 'ubicacion'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">10. Ubicación actual y tipo de plaza asignada</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Centro</label><input value="Residencia Fuentecillas" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-slate-50" readonly></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Plaza</label><select class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"><option>Concertada Junta CyL</option><option>Privada</option><option>Privada con prestación</option><option>Plaza piloto experimental</option></select></div>
+                    </div>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">Observaciones sobre la ubicación</label><textarea rows="3" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></textarea></div>
+                </div>
+
+                <!-- 11. CONCLUSIONES Y FIRMA -->
+                <div x-show="seccionActiva === 'conclusiones'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">11. Conclusiones y firma</h2>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">Conclusiones clínicas y recomendaciones</label><textarea rows="8" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300" placeholder="Síntesis diagnóstica, recomendaciones de tratamiento, derivaciones, programa terapéutico sugerido..."></textarea></div>
+                    <div class="grid md:grid-cols-2 gap-4 mt-6">
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Firmado por</label><input value="Daniel Alonso" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-slate-50" readonly></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Nº colegiado</label><input value="CL-1234" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></div>
+                    </div>
+                    <div class="rounded-lg border border-rose-200 bg-rose-50 p-4 text-xs text-rose-900 mt-4">
+                        <p class="font-semibold mb-1">🔒 Antes de firmar</p>
+                        <p>Al firmar, el informe queda <strong>bloqueado e inmutable</strong>. Cualquier cambio posterior requiere generar un nuevo informe evolutivo. La firma queda registrada en bitácora RGPD con sello de tiempo.</p>
+                    </div>
+                </div>
+
+                <!-- Navegación inferior secciones -->
+                <div class="flex items-center justify-between mt-8 pt-4 border-t border-slate-200">
+                    <button @click="let i = secciones.indexOf(seccionActiva); if (i > 0) seccionActiva = secciones[i-1]" class="px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">‹ Sección anterior</button>
+                    <span class="text-[11px] text-slate-500" x-text="`Sección ${secciones.indexOf(seccionActiva) + 1} de ${secciones.length}`"></span>
+                    <button @click="let i = secciones.indexOf(seccionActiva); if (i < secciones.length - 1) seccionActiva = secciones[i+1]" class="px-3 py-2 text-xs rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">Sección siguiente ›</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div x-show="toast" x-cloak x-transition.opacity class="fixed bottom-6 right-6 z-50 rounded-lg bg-slate-900 text-white px-4 py-3 shadow-xl text-sm" x-text="toast"></div>
+</div>
+
+</body>
+</html>

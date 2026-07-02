@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}{{ titulo }} · ÁGORA{% endblock %}
+
+{# Atajo: clase Tailwind común para los inputs (color emerald institucional) #}
+{% with input_class="w-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" %}
+
+{% block content %}
+<section class="space-y-6">
+    <div>
+        {% if modo == 'editar' %}
+            <a href="{% url 'personas:detalle' persona.id %}" class="text-sm text-slate-500 hover:text-emerald-700">← Volver a la ficha</a>
+        {% else %}
+            <a href="{% url 'personas:lista' %}" class="text-sm text-slate-500 hover:text-emerald-700">← Volver al listado</a>
+        {% endif %}
+        <h1 class="mt-2 text-2xl font-semibold tracking-tight">{{ titulo }}</h1>
+        <p class="text-sm text-slate-500">
+            {% if modo == 'crear' %}
+                Datos básicos. Tras crear la ficha podrás añadir información médica, familiares, medicación y Plan de Vida desde la propia ficha.
+            {% else %}
+                Edita los campos. La información médica, familiares y medicación se editan en sus pestañas dedicadas.
+            {% endif %}
+        </p>
+    </div>
+
+    {% if form.non_field_errors %}
+        <div class="rounded-lg border border-rose-200 bg-rose-50 p-3 text-sm text-rose-800">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        {# === 1 · Identificación === #}
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Identificación</legend>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">{{ form.codigo_interno.label }}</label>
+                    {{ form.codigo_interno|add_class:input_class }}
+                    {% if form.codigo_interno.help_text %}<p class="mt-1 text-xs text-slate-500">{{ form.codigo_interno.help_text }}</p>{% endif %}
+                    {{ form.codigo_interno.errors }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Nombre *</label>
+                    {{ form.nombre|add_class:input_class }}
+                    {{ form.nombre.errors }}
+                </div>
+                <div></div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Primer apellido *</label>
+                    {{ form.apellido_1|add_class:input_class }}
+                    {{ form.apellido_1.errors }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Segundo apellido</label>
+                    {{ form.apellido_2|add_class:input_class }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">DNI / NIE</label>
+                    {{ form.dni_nie|add_class:input_class }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Fecha de nacimiento *</label>
+                    {{ form.fecha_nacimiento|add_class:input_class }}
+                    {{ form.fecha_nacimiento.errors }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Sexo</label>
+                    {{ form.sexo|add_class:input_class }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Nacionalidad (ISO)</label>
+                    {{ form.nacionalidad|add_class:input_class }}
+                </div>
+            </div>
+        </fieldset>
+
+        {# === 2 · Dirección === #}
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Dirección</legend>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Calle y número</label>
+                    {{ form.direccion_calle|add_class:input_class }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">CP</label>
+                    {{ form.direccion_cp|add_class:input_class }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Municipio</label>
+                    {{ form.direccion_municipio|add_class:input_class }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Provincia</label>
+                    {{ form.direccion_provincia|add_class:input_class }}
+                </div>
+            </div>
+        </fieldset>
+
+        {# === 3 · Datos administrativos sanitarios (cifrados en BD) === #}
+        <fieldset class="rounded-lg border border-blue-200 bg-white p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-blue-800">Datos administrativos sanitarios 🔒</legend>
+            <p class="text-xs text-slate-500">Categoría especial RGPD. NUSS y TSI se guardan cifrados en base de datos.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Nº Seguridad Social (NUSS)</label>
+                    {{ form.numero_seguridad_social|add_class:input_class }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Nº Tarjeta Sanitaria (TSI)</label>
+                    {{ form.numero_tarjeta_sanitaria|add_class:input_class }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Caducidad TSI</label>
+                    {{ form.tsi_caducidad|add_class:input_class }}
+                </div>
+                <div class="md:col-span-3">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Centro de salud asignado</label>
+                    {{ form.centro_salud|add_class:input_class }}
+                </div>
+            </div>
+        </fieldset>
+
+        {# === 4 · Comunicación === #}
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Comunicación</legend>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Forma preferente</label>
+                    {{ form.forma_comunicacion_preferente|add_class:input_class }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Idioma</label>
+                    {{ form.idioma_preferente|add_class:input_class }}
+                    <p class="mt-1 text-xs text-slate-500">ISO 639-1 (es, en, fr, gl, eu, ca…)</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">
+                        <span class="inline-flex items-center gap-2">
+                            {{ form.usa_saac }}
+                            <span>Usa SAAC</span>
+                        </span>
+                    </label>
+                    <p class="mt-1 text-xs text-slate-500">Sistema Aumentativo / Alternativo de Comunicación</p>
+                </div>
+                <div class="md:col-span-3">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Notas SAAC (pictogramas, ayudas, etc.)</label>
+                    {{ form.saac_notas|add_class:input_class }}
+                </div>
+            </div>
+        </fieldset>
+
+        {# === 5 · Centro y corresponsable === #}
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Centro y RGPD</legend>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Centro de referencia *</label>
+                    {{ form.centro_referencia|add_class:input_class }}
+                    {{ form.centro_referencia.errors }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Corresponsable RGPD *</label>
+                    {{ form.corresponsable_principal|add_class:input_class }}
+                    {{ form.corresponsable_principal.errors }}
+                    <p class="mt-1 text-xs text-slate-500">Doble corresponsabilidad: Fundación Aspanias Burgos · Aspaniasmerc 2016 S.L.U.</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Fecha de alta en el grupo *</label>
+                    {{ form.fecha_alta|add_class:input_class }}
+                    {{ form.fecha_alta.errors }}
+                </div>
+            </div>
+        </fieldset>
+
+        {# === 6 · Figuras profesionales === #}
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Figuras profesionales · Protocolo Planes de Vida</legend>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Gestor/a de Caso</label>
+                    {{ form.gestor_caso|add_class:input_class }}
+                    <p class="mt-1 text-xs text-slate-500">Máximo 30 casos. ÁGORA avisa si se sobrepasa.</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Persona de Referencia</label>
+                    {{ form.persona_referencia|add_class:input_class }}
+                    <p class="mt-1 text-xs text-slate-500">Vínculo significativo. Aporta información cotidiana.</p>
+                </div>
+            </div>
+        </fieldset>
+
+        {# === 7 · Baja (solo edición) === #}
+        {% if modo == 'editar' %}
+        <fieldset class="rounded-lg border border-amber-200 bg-amber-50 p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-amber-800">Baja</legend>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Fecha de baja</label>
+                    {{ form.fecha_baja|add_class:input_class }}
+                    {{ form.fecha_baja.errors }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Motivo</label>
+                    {{ form.motivo_baja|add_class:input_class }}
+                    {{ form.motivo_baja.errors }}
+                </div>
+            </div>
+        </fieldset>
+        {% endif %}
+
+        {# === 8 · Notas === #}
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-2">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Notas relevantes</legend>
+            {{ form.notas_relevantes|add_class:input_class }}
+            <p class="text-xs text-slate-500">Información transversal corta. No reemplaza la Historia Social ni la Historia de Vida del Plan de Vida.</p>
+        </fieldset>
+
+        <div class="flex items-center justify-end gap-2 sticky bottom-4 bg-slate-50/80 backdrop-blur p-3 rounded-lg border border-slate-200">
+            {% if modo == 'editar' %}
+                <a href="{% url 'personas:detalle' persona.id %}" class="rounded border border-slate-300 bg-white px-4 py-2 text-sm hover:border-slate-400">Cancelar</a>
+            {% else %}
+                <a href="{% url 'personas:lista' %}" class="rounded border border-slate-300 bg-white px-4 py-2 text-sm hover:border-slate-400">Cancelar</a>
+            {% endif %}
+            <button type="submit" class="rounded bg-emerald-700 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-800">
+                {% if modo == 'editar' %}Guardar cambios{% else %}Crear persona atendida{% endif %}
+            </button>
+        </div>
+    </form>
+</section>
+{% endblock %}
+
+{% endwith %}

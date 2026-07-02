@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}{{ titulo }} · ÁGORA{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+    <div>
+        <a href="{% url 'personas:detalle' persona.id %}" class="text-sm text-slate-500 hover:text-slate-700">← Volver a la ficha</a>
+        <h1 class="mt-2 text-2xl font-semibold tracking-tight">{{ titulo }}</h1>
+        <p class="text-sm text-slate-500">Instrumentos disponibles: BVD, ICAP, SIS, Barthel, Tinetti, MMSE, otros.</p>
+    </div>
+
+    {% if form.non_field_errors %}
+        <div class="rounded-lg border border-rose-200 bg-rose-50 p-3 text-sm text-rose-800">{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Datos</legend>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Persona *</label>
+                    {{ form.persona|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Instrumento *</label>
+                    {{ form.instrumento|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Fecha *</label>
+                    {{ form.fecha|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                </div>
+                <div class="md:col-span-3">
+                    <label class="block text-sm font-medium mb-1">Aplicado por *</label>
+                    {{ form.aplicado_por|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-2">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Observaciones</legend>
+            {{ form.observaciones|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+            <p class="text-xs text-slate-500">Conclusiones cualitativas. La puntuación detallada por subescala se introduce desde el admin (campo JSON).</p>
+        </fieldset>
+
+        <div class="flex items-center justify-end gap-2 sticky bottom-4 bg-slate-50/80 backdrop-blur p-3 rounded-lg border border-slate-200">
+            <a href="{% url 'personas:detalle' persona.id %}" class="rounded border border-slate-300 bg-white px-4 py-2 text-sm hover:border-slate-400">Cancelar</a>
+            <button type="submit" class="rounded bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700">Registrar valoración</button>
+        </div>
+    </form>
+</section>
+{% endblock %}

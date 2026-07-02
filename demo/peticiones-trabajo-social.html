@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<!-- @rol: gerencia, direccion_centro -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peticiones · Trabajo Social · ÁGORA</title>
+<link rel="stylesheet" href="_assets/tailwind.css">
+<script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · todos los datos son ficticios</div>
+
+<div class="flex min-h-screen" x-data="{ filtroEstado: 'todas', filtroArea: 'todas' }">
+
+    <!-- SIDEBAR -->
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight"><p class="text-base font-semibold tracking-tight">ÁGORA</p><p class="text-[10px] text-slate-500">Grupo Social Aspanias</p></div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+
+        <div class="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-slate-200 px-8 py-3">
+            <nav class="text-xs text-slate-500 flex items-center gap-1.5">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a><span>›</span>
+                <a href="hoja-ruta.html" class="hover:text-emerald-700">Hoja de ruta</a><span>›</span>
+                <span class="text-slate-900 font-medium">Peticiones · Trabajo Social</span>
+            </nav>
+        </div>
+
+        <header class="px-8 pt-6 pb-4 border-b border-slate-200 bg-white">
+            <div class="flex items-start justify-between gap-3 flex-wrap">
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">📥 Peticiones · Trabajo Social</h1>
+                    <p class="text-sm text-slate-500 mt-1">Backlog de peticiones del equipo asistencial recibidas para incorporar a ÁGORA · trazabilidad y estado de implementación</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50">📊 Exportar Excel</button>
+                    <button class="px-3 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800">+ Nueva petición</button>
+                </div>
+            </div>
+
+            <!-- Contexto del origen -->
+            <div class="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-3 text-xs text-blue-900">
+                <p><strong>Origen:</strong> Email de <strong>Uxue Guerrero Urrutia</strong> (Coordinación de Servicios Asociativos · Asociación Aspanias) · CC: Trabajo Social</p>
+                <p class="mt-0.5"><strong>Fecha:</strong> Miércoles 17 de junio de 2026, 14:26 · <strong>Asunto:</strong> RE: Solicitud de aportaciones de formularios y modelos de informe</p>
+                <p class="mt-0.5"><strong>Adjunto:</strong> COMUNICACIÓN NUEVO INGRESO.docx (modelo de ficha de derivación · usado para mapear el campo)</p>
+            </div>
+        </header>
+
+        <!-- KPIs estado -->
+        <section class="px-8 py-6">
+            <div class="grid gap-4 md:grid-cols-4">
+                <article class="rounded-xl border border-slate-200 bg-white p-5">
+                    <p class="text-xs uppercase tracking-wide text-slate-500">Total peticiones</p>
+                    <p class="mt-2 text-3xl font-light">12</p>
+                    <p class="text-xs text-slate-500 mt-1">3 áreas · 1 remitente</p>
+                </article>
+                <article class="rounded-xl border-2 border-emerald-300 bg-emerald-50 p-5">
+                    <p class="text-xs uppercase tracking-wide text-emerald-700">✓ Implementadas</p>
+                    <p class="mt-2 text-3xl font-light text-emerald-800">12</p>
+                    <p class="text-xs text-emerald-700 mt-1 font-semibold">100% · espacios funcionales creados</p>
+                </article>
+                <article class="rounded-xl border border-amber-200 bg-amber-50/40 p-5 opacity-60">
+                    <p class="text-xs uppercase tracking-wide text-amber-700">⚙ En análisis</p>
+                    <p class="mt-2 text-3xl font-light text-amber-800">0</p>
+                    <p class="text-xs text-amber-700 mt-1">—</p>
+                </article>
+                <article class="rounded-xl border border-slate-200 bg-white p-5 opacity-60">
+                    <p class="text-xs uppercase tracking-wide text-slate-500">⏳ Pendientes</p>
+                    <p class="mt-2 text-3xl font-light text-slate-700">0</p>
+                    <p class="text-xs text-slate-500 mt-1">—</p>
+                </article>
+            </div>
+
+            <!-- Banner cierre -->
+            <div class="mt-4 rounded-lg bg-emerald-700 text-white p-4 flex items-center gap-3">
+                <span class="text-2xl">🎉</span>
+                <div class="flex-1">
+                    <p class="font-semibold">Las 12 peticiones de Uxue ya tienen su espacio funcional en ÁGORA</p>
+                    <p class="text-xs text-emerald-100">Los formularios están operativos con datos sintéticos de ejemplo. La validación con el equipo TS se hará en el pre-piloto Fuentecillas (sept 2026).</p>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="mt-6 flex flex-wrap items-center gap-2 text-xs">
+                <span class="text-slate-500 uppercase tracking-wide">Filtrar:</span>
+                <button @click="filtroEstado = 'todas'" :class="filtroEstado === 'todas' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 rounded-lg font-medium">Todas (12)</button>
+                <button @click="filtroEstado = 'implementada'" :class="filtroEstado === 'implementada' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 rounded-lg font-medium">✓ Implementadas (12)</button>
+                <button @click="filtroEstado = 'analisis'" :class="filtroEstado === 'analisis' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 rounded-lg font-medium opacity-50">⚙ En análisis (0)</button>
+                <button @click="filtroEstado = 'pendiente'" :class="filtroEstado === 'pendiente' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 rounded-lg font-medium opacity-50">⏳ Pendientes (0)</button>
+                <span class="mx-2 text-slate-300">|</span>
+                <button @click="filtroArea = 'todas'" :class="filtroArea === 'todas' ? 'bg-slate-200 text-slate-800' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 rounded-lg font-medium">Todas áreas</button>
+                <button @click="filtroArea = 'info'" :class="filtroArea === 'info' ? 'bg-slate-200 text-slate-800' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 rounded-lg font-medium">📋 Información básica</button>
+                <button @click="filtroArea = 'docs'" :class="filtroArea === 'docs' ? 'bg-slate-200 text-slate-800' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 rounded-lg font-medium">📝 Documentos e informes</button>
+                <button @click="filtroArea = 'seguimiento'" :class="filtroArea === 'seguimiento' ? 'bg-slate-200 text-slate-800' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 rounded-lg font-medium">🔄 Seguimiento</button>
+            </div>
+        </section>
+
+        <!-- ============ BLOQUE 1: INFORMACIÓN BÁSICA ============ -->
+        <section x-show="filtroArea === 'todas' || filtroArea === 'info'" class="px-8 pb-2">
+            <h2 class="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">📋 1 · Información básica <span class="text-slate-400 font-normal normal-case">(7 peticiones)</span></h2>
+            <div class="space-y-3">
+
+                <!-- P01 -->
+                <article x-show="filtroEstado === 'todas' || filtroEstado === 'implementada'" class="rounded-xl border border-emerald-200 bg-white p-4 hover:shadow-sm transition">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">P-01</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Implementada</span>
+                                <span class="text-[10px] text-slate-400">Información básica</span>
+                            </div>
+                            <p class="font-medium text-slate-800">Grado de dependencia</p>
+                            <p class="text-xs text-slate-600 mt-0.5">Visibilidad del grado de dependencia reconocido en la ficha de cada persona atendida.</p>
+                        </div>
+                        <a href="persona-detalle.html" class="text-xs text-emerald-700 hover:underline shrink-0">Ver en ficha →</a>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2 text-[10px] text-slate-500">
+                        <span>📍 <code class="bg-slate-100 px-1 rounded">PersonaAtendida.grado_dependencia</code></span>
+                        <span>·</span><span>Bloque "Datos clínicos" de la ficha</span>
+                    </div>
+                </article>
+
+                <!-- P02 -->
+                <article x-show="filtroEstado === 'todas' || filtroEstado === 'implementada'" class="rounded-xl border border-emerald-200 bg-white p-4 hover:shadow-sm transition">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">P-02</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Implementada</span>
+                                <span class="text-[10px] text-slate-400">Información básica</span>
+                            </div>
+                            <p class="font-medium text-slate-800">Tipo de plaza: pública o privada</p>
+                            <p class="text-xs text-slate-600 mt-0.5">Diferenciación visible del tipo de financiación de la plaza (concierto público vs. plaza privada).</p>
+                        </div>
+                        <a href="documentos-persona.html" class="text-xs text-emerald-700 hover:underline shrink-0">Ver tab Plaza →</a>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2 text-[10px] text-slate-500">
+                        <span>📍 <a href="documentos-persona.html" class="text-emerald-700 hover:underline">documentos-persona.html</a> · pestaña <strong>🏛 Tipo de plaza</strong> · campos: resolución, importe, copago, próxima revisión</span>
+                    </div>
+                </article>
+
+                <!-- P03 -->
+                <article x-show="filtroEstado === 'todas' || filtroEstado === 'implementada'" class="rounded-xl border border-emerald-200 bg-white p-4 hover:shadow-sm transition">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">P-03</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Implementada</span>
+                                <span class="text-[10px] text-slate-400">Información básica</span>
+                            </div>
+                            <p class="font-medium text-slate-800">Medidas de apoyo judicial (Ley 8/2021)</p>
+                            <p class="text-xs text-slate-600 mt-0.5">Existencia o no de medidas de apoyo judicial con especificación de la persona o entidad que ejerce dicho apoyo.</p>
+                        </div>
+                        <a href="persona-detalle.html" class="text-xs text-emerald-700 hover:underline shrink-0">Ver en ficha →</a>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2 text-[10px] text-slate-500">
+                        <span>📍 <code class="bg-slate-100 px-1 rounded">MedidaDeApoyo</code> + <code class="bg-slate-100 px-1 rounded">CorresponsablePrincipal</code></span>
+                        <span>·</span><span>Tutela / curatela / guarda · ámbito de capacidad</span>
+                    </div>
+                </article>
+
+                <!-- P04 -->
+                <article x-show="filtroEstado === 'todas' || filtroEstado === 'implementada'" class="rounded-xl border border-emerald-200 bg-white p-4 hover:shadow-sm transition">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">P-04</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Implementada</span>
+                                <span class="text-[10px] text-slate-400">Información básica</span>
+                            </div>
+                            <p class="font-medium text-slate-800">Personas de referencia con datos de contacto</p>
+                            <p class="text-xs text-slate-600 mt-0.5">Incluyendo nombre, parentesco/relación y número de teléfono · marcado de quién es la persona de referencia principal.</p>
+                        </div>
+                        <a href="persona-detalle.html" class="text-xs text-emerald-700 hover:underline shrink-0">Ver en ficha →</a>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2 text-[10px] text-slate-500">
+                        <span>📍 <code class="bg-slate-100 px-1 rounded">Familiar</code> + <code class="bg-slate-100 px-1 rounded">PersonaDeReferencia</code></span>
+                        <span>·</span><span>Pestaña "Familia y contactos"</span>
+                    </div>
+                </article>
+
+                <!-- P05 -->
+                <article x-show="filtroEstado === 'todas' || filtroEstado === 'implementada'" class="rounded-xl border border-emerald-200 bg-white p-4 hover:shadow-sm transition">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">P-05</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Implementada</span>
+                                <span class="text-[10px] text-slate-400">Información básica</span>
+                            </div>
+                            <p class="font-medium text-slate-800">Prestaciones de las que es beneficiario/a</p>
+                            <p class="text-xs text-slate-600 mt-0.5">Listado de prestaciones económicas vigentes: PNC, jubilación, complemento dependencia, ayudas Junta, IMV, otros.</p>
+                        </div>
+                        <a href="documentos-persona.html" class="text-xs text-emerald-700 hover:underline shrink-0">Ver tab Prestaciones →</a>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2 text-[10px] text-slate-500">
+                        <span>📍 <a href="documentos-persona.html" class="text-emerald-700 hover:underline">documentos-persona.html</a> · pestaña <strong>💶 Prestaciones</strong> · KPI total ingresos + próxima revisión</span>
+                    </div>
+                </article>
+
+                <!-- P06 -->
+                <article x-show="filtroEstado === 'todas' || filtroEstado === 'implementada'" class="rounded-xl border border-emerald-200 bg-white p-4 hover:shadow-sm transition">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">P-06</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Implementada</span>
+                                <span class="text-[10px] text-slate-400">Información básica</span>
+                            </div>
+                            <p class="font-medium text-slate-800">Apartado donde se puedan cargar documentos</p>
+                            <p class="text-xs text-slate-600 mt-0.5">Módulo documental por persona: DNI, certificado de discapacidad, sentencia tutela, prescripciones médicas, etc. con clasificación por tipo.</p>
+                        </div>
+                        <a href="documentos-persona.html" class="text-xs text-emerald-700 hover:underline shrink-0">Ver módulo →</a>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2 text-[10px] text-slate-500">
+                        <span>📍 <a href="documentos-persona.html" class="text-emerald-700 hover:underline">documentos-persona.html</a> · pestaña <strong>📄 Documentos</strong> · 10 tipos predefinidos + modal de subida + RGPD cifrado en reposo</span>
+                    </div>
+                </article>
+
+                <!-- P07 -->
+                <article x-show="filtroEstado === 'todas' || filtroEstado === 'implementada'" class="rounded-xl border border-emerald-200 bg-white p-4 hover:shadow-sm transition">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">P-07</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Implementada</span>
+                                <span class="text-[10px] text-slate-400">Información básica · prioritaria</span>
+                            </div>
+                            <p class="font-medium text-slate-800">Control de caducidad de documentación con avisos/alertas</p>
+                            <p class="text-xs text-slate-600 mt-0.5">Fechas de vencimiento visibles. Alertas en bandeja para identificar documentación próxima a caducar o ya caducada (DNI, sentencia, certificado, prescripciones).</p>
+                        </div>
+                        <a href="documentos-persona.html" class="text-xs text-emerald-700 hover:underline shrink-0">Ver KPIs caducidad →</a>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2 text-[10px] text-slate-500">
+                        <span>📍 4 KPIs (✓ Vigentes / ⚠ Próximos &lt;60 días / 🚨 Caducados) + filtros por estado + columna "caduca en N días" en cada fila</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ============ BLOQUE 2: DOCUMENTOS E INFORMES ============ -->
+        <section x-show="filtroArea === 'todas' || filtroArea === 'docs'" class="px-8 pt-6 pb-2">
+            <h2 class="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">📝 2 · Automatización de documentos e informes <span class="text-slate-400 font-normal normal-case">(4 peticiones)</span></h2>
+            <p class="text-xs text-slate-500 -mt-2 mb-3 italic">Requisito común: firma con nombre + apellidos + nº de colegiación.</p>
+            <div class="space-y-3">
+
+                <!-- P08 -->
+                <article x-show="filtroEstado === 'todas' || filtroEstado === 'implementada'" class="rounded-xl border border-emerald-200 bg-white p-4 hover:shadow-sm transition">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">P-08</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Implementada</span>
+                                <span class="text-[10px] text-slate-400">Documentos</span>
+                            </div>
+                            <p class="font-medium text-slate-800">Informe Social</p>
+                            <p class="text-xs text-slate-600 mt-0.5">Plantilla rellenable de informe social con firma digital del/la trabajador/a social (colegiación visible). PDF institucional A4.</p>
+                        </div>
+                        <a href="informe-social.html" class="text-xs text-emerald-700 hover:underline shrink-0">Abrir informe →</a>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2 text-[10px] text-slate-500">
+                        <span>📍 <a href="informe-social.html" class="text-emerald-700 hover:underline">informe-social.html</a> · 10 secciones (identificación, motivo, situación familiar, económica, discapacidad, salud, vivienda, recursos, diagnóstico, propuesta) + firma + nº colegiación + PDF A4</span>
+                    </div>
+                </article>
+
+                <!-- P09 -->
+                <article x-show="filtroEstado === 'todas' || filtroEstado === 'implementada'" class="rounded-xl border border-emerald-200 bg-white p-4 hover:shadow-sm transition">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">P-09</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Implementada</span>
+                                <span class="text-[10px] text-slate-400">Documentos</span>
+                            </div>
+                            <p class="font-medium text-slate-800">Informe de Valoración (inicial y seguimiento)</p>
+                            <p class="text-xs text-slate-600 mt-0.5">Plantillas rellenables del Informe Inicial y del Informe Evolutivo con firma digital + PDF institucional A4. Categorización por psicología.</p>
+                        </div>
+                        <a href="valoraciones-listado.html" class="text-xs text-emerald-700 hover:underline shrink-0">Ver catálogo →</a>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2 text-[10px] text-slate-500">
+                        <span>📍 <a href="informe-psicologico-inicial.html" class="text-emerald-700 hover:underline">Informe Inicial</a> · <a href="informe-psicologico-evolutivo.html" class="text-emerald-700 hover:underline">Informe Evolutivo</a></span>
+                        <span>·</span><span>+ 5 escalas (FUMAT · San Martín · INICO-FEAPS · ABS-RC:2 · ICAP)</span>
+                    </div>
+                </article>
+
+                <!-- P10 -->
+                <article x-show="filtroEstado === 'todas' || filtroEstado === 'implementada'" class="rounded-xl border border-emerald-200 bg-white p-4 hover:shadow-sm transition">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">P-10</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Implementada</span>
+                                <span class="text-[10px] text-slate-400">Documentos</span>
+                            </div>
+                            <p class="font-medium text-slate-800">Ficha de derivación · Comunicación de Nuevo Ingreso</p>
+                            <p class="text-xs text-slate-600 mt-0.5">Modelo recibido en el adjunto del email (15 campos): Persona · F. Nacimiento · DNI · Discapacidad % · Dependencia · Centro · Módulo · F. Ingreso · Padres/Tutor · Medidas apoyo · Domicilio · Teléfonos · Email · Socio · Cargo bancario · Valoración · Observaciones.</p>
+                        </div>
+                        <a href="ficha-derivacion.html" class="text-xs text-emerald-700 hover:underline shrink-0">Abrir ficha →</a>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2 text-[10px] text-slate-500">
+                        <span>📍 <a href="ficha-derivacion.html" class="text-emerald-700 hover:underline">ficha-derivacion.html</a> · 5 bloques (persona · centro · apoyos · administrativos · observaciones) · firma TS + PDF A4</span>
+                    </div>
+                </article>
+
+                <!-- P11 -->
+                <article x-show="filtroEstado === 'todas' || filtroEstado === 'implementada'" class="rounded-xl border border-emerald-200 bg-white p-4 hover:shadow-sm transition">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">P-11</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Implementada</span>
+                                <span class="text-[10px] text-slate-400">Documentos · vivienda</span>
+                            </div>
+                            <p class="font-medium text-slate-800">Comunicación de baja (especialmente vivienda)</p>
+                            <p class="text-xs text-slate-600 mt-0.5">Plantilla de comunicación oficial de baja para usuarios de vivienda. Motivo, fecha efectiva, gestiones realizadas, persona/entidad receptora.</p>
+                        </div>
+                        <a href="comunicacion-baja.html" class="text-xs text-emerald-700 hover:underline shrink-0">Abrir baja →</a>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2 text-[10px] text-slate-500">
+                        <span>📍 <a href="comunicacion-baja.html" class="text-emerald-700 hover:underline">comunicacion-baja.html</a> · 7 secciones · 8 tipos baja · checklist gestiones · liquidación bolsillo · notificación a 10 organismos · visado dirección</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ============ BLOQUE 3: SEGUIMIENTO ============ -->
+        <section x-show="filtroArea === 'todas' || filtroArea === 'seguimiento'" class="px-8 pt-6 pb-12">
+            <h2 class="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">🔄 3 · Seguimiento de intervenciones <span class="text-slate-400 font-normal normal-case">(1 petición)</span></h2>
+            <div class="space-y-3">
+
+                <!-- P12 -->
+                <article x-show="filtroEstado === 'todas' || filtroEstado === 'implementada'" class="rounded-xl border border-emerald-200 bg-white p-4 hover:shadow-sm transition">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">P-12</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Implementada</span>
+                                <span class="text-[10px] text-slate-400">Seguimiento</span>
+                            </div>
+                            <p class="font-medium text-slate-800">Vista rápida de actuaciones más relevantes en el perfil de la persona</p>
+                            <p class="text-xs text-slate-600 mt-0.5">Espacio de seguimiento dentro de la ficha donde el equipo registra actuaciones, intervenciones y gestiones. Facilita la coordinación entre profesionales.</p>
+                        </div>
+                        <a href="persona-detalle.html" class="text-xs text-emerald-700 hover:underline shrink-0">Ver timeline →</a>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2 text-[10px] text-slate-500">
+                        <span>📍 Pestaña "Intervenciones y valoraciones" · timeline cronológico filtrable por área (TS, Psicología, TO, DUE...)</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Resumen y siguiente paso -->
+        <section class="px-8 pb-12">
+            <div class="rounded-xl bg-slate-100 p-5 text-sm">
+                <h3 class="font-semibold text-slate-800 mb-2">📌 Próximos pasos · todas las peticiones tienen espacio creado</h3>
+                <ul class="space-y-1 list-disc list-inside text-slate-700">
+                    <li><strong>Las 12 peticiones</strong> ya tienen su pantalla operativa con datos sintéticos de ejemplo. Listas para validación con el equipo TS.</li>
+                    <li><strong>Validación con Uxue y equipo TS</strong>: agendar sesión de revisión antes del pre-piloto Fuentecillas (septiembre 2026).</li>
+                    <li><strong>Conectar al backend Django</strong> en Fase 2.6-2.7: persistir los datos en PostgreSQL, gestionar permisos por rol, activar bitácora.</li>
+                    <li><strong>Cron de alertas de caducidad</strong>: diario · genera entradas en bandeja de avisos cuando faltan menos de 60 días o cuando ya están caducados.</li>
+                    <li>Cada nueva petición del equipo se sumará al backlog con trazabilidad P-NN.</li>
+                </ul>
+                <p class="mt-3 text-xs text-slate-500">Para añadir nuevas peticiones · contactar con gerencia@aspaniasburgos.com o usar el botón <em>+ Nueva petición</em>.</p>
+            </div>
+        </section>
+    </main>
+</div>
+
+</body>
+</html>

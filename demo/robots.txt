@@ -1,0 +1,5 @@
+# ÁGORA — Demo estática del Grupo Social Aspanias
+# Esta demo NO debe ser indexada por buscadores.
+# Datos ficticios generados con Faker; sin información real.
+User-agent: *
+Disallow: /

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<!-- @rol: profesional, gestor_caso, direccion_centro -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABS-RC:2 — Valoración · ÁGORA</title>
+<link rel="stylesheet" href="_assets/tailwind.css">
+<link rel="stylesheet" href="_assets/print-valoracion.css" media="print">
+<script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+<style>[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+<div class="flex">
+  <aside class="w-64 bg-white border-r border-slate-200 min-h-screen flex flex-col fixed inset-y-0 left-0 z-10">
+    <div class="px-4 py-4 border-b border-slate-200"><a href="index.html" class="flex items-center gap-2"><div class="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold">Á</div><span class="text-lg font-semibold text-slate-800">ÁGORA</span></a></div>
+    <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+  </aside>
+
+<main class="flex-1 ml-64 p-6" x-data="absRc2()" x-cloak>
+
+  <div class="mb-6 flex items-start justify-between">
+    <div>
+      <nav class="text-xs text-slate-500 mb-2"><a href="personas-lista.html" class="hover:underline">Personas</a> · <a href="persona-detalle.html" class="hover:underline">Ficha persona</a> · <a href="valoraciones-listado.html" class="hover:underline">Valoraciones</a> · <span class="text-slate-700">ABS-RC:2</span></nav>
+      <h1 class="text-2xl font-bold text-slate-800">ABS-RC:2 — Escala de Conducta Adaptativa</h1>
+      <p class="text-sm text-slate-600 mt-1">Lambert, Nihira y Leland · Adaptación española Universidad de Burgos (I. García Alonso) · Residencias y Comunidad — 2ª edición</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <button @click="window.print()" class="px-3 py-2 text-sm rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50">🖨️ Imprimir</button>
+      <button @click="guardar()" class="px-3 py-2 text-sm rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">💾 Guardar</button>
+      <button @click="firmar()" class="px-3 py-2 text-sm rounded-lg bg-slate-800 text-white hover:bg-slate-900">✍️ Firmar</button>
+    </div>
+  </div>
+
+  <div class="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-900">
+    <p><strong>⚠️ Categoría especial art. 9 RGPD</strong> — Toda lectura/edición queda registrada en bitácora.</p>
+    <p class="mt-1"><strong>📋 Hoja de captura:</strong> Por la densidad del instrumento (niveles graduados por ítem), administre la escala con el cuadernillo oficial Pro-Ed/UB y registre aquí la <strong>puntuación directa final</strong> por ítem. El sistema calcula los totales por dominio y el perfil global.</p>
+  </div>
+
+  <!-- Selector parte -->
+  <div class="mb-6 flex gap-2">
+    <button @click="parte=1" :class="parte===1 ? 'bg-emerald-600 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-4 py-2 text-sm rounded-lg font-medium">Parte 1 — Conducta adaptativa (Dominios I-X)</button>
+    <button @click="parte=2" :class="parte===2 ? 'bg-emerald-600 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-4 py-2 text-sm rounded-lg font-medium">Parte 2 — Conducta desadaptada (XI-XVIII)</button>
+  </div>
+
+  <div class="grid grid-cols-12 gap-6">
+
+    <aside class="col-span-3">
+      <div class="sticky top-4 bg-white rounded-xl border border-slate-200 p-4">
+        <h3 class="text-sm font-semibold text-slate-700 mb-3">Dominios <span class="text-xs text-slate-500" x-text="`(Parte ${parte})`"></span></h3>
+        <ul class="space-y-1 text-xs">
+          <template x-for="d in dominiosActivos()" :key="d.id">
+            <li><a :href="`#dom-${d.id}`" class="flex items-center justify-between px-2 py-1.5 rounded hover:bg-slate-50">
+              <span class="text-slate-700" x-text="`${d.numRomano}. ${d.nombre}`"></span>
+              <span class="text-slate-500 font-mono" x-text="`${itemsCompletadosDom(d)}/${d.items.length}`"></span>
+            </a></li>
+          </template>
+        </ul>
+        <div class="mt-4 pt-3 border-t border-slate-200"><a href="#resultado" class="block px-2 py-1.5 text-xs font-medium text-emerald-700 hover:bg-emerald-50 rounded">📊 Resultado por dominio</a></div>
+      </div>
+    </aside>
+
+    <div class="col-span-9 space-y-6">
+
+      <!-- Datos identificativos -->
+      <section class="bg-white rounded-xl border border-slate-200 p-6">
+        <h2 class="text-lg font-semibold text-slate-800 mb-4">Protocolo de la escala</h2>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div><label class="block text-xs text-slate-600 mb-1">Nombre y apellidos</label><input type="text" x-model="datos.nombre" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Sexo</label><select x-model="datos.sexo" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Femenino</option><option>Masculino</option><option>Otro</option></select></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Fecha de nacimiento</label><input type="date" x-model="datos.fecha_nacimiento" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Edad</label><input type="text" x-model="datos.edad" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Fecha de exploración</label><input type="date" x-model="datos.fecha_exploracion" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Nombre del entrevistador</label><input type="text" x-model="datos.entrevistador" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Persona entrevistada</label><input type="text" x-model="datos.entrevistado" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Relación con el examinado</label><input type="text" x-model="datos.relacion" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Tipología del centro</label><select x-model="datos.tipologia" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Residencial</option><option>Centro de día</option><option>Ocupacional</option><option>Vida independiente</option><option>Comunidad</option></select></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Nombre del centro</label><input type="text" x-model="datos.centro" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div class="col-span-2"><label class="block text-xs text-slate-600 mb-1">Diagnóstico y fecha</label><input type="text" x-model="datos.diagnostico" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="Diagnóstico · fecha"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Prueba usada (CI)</label><input type="text" x-model="datos.prueba_ci" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">CI</label><input type="number" x-model.number="datos.ci" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div class="col-span-2"><label class="block text-xs text-slate-600 mb-1">¿Necesita adaptaciones?</label><input type="text" x-model="datos.adaptaciones" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="Detallar adaptaciones"></div>
+        </div>
+      </section>
+
+      <!-- Dominios -->
+      <template x-for="d in dominiosActivos()" :key="d.id">
+        <section :id="`dom-${d.id}`" class="bg-white rounded-xl border border-slate-200 p-6 scroll-mt-4">
+          <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
+            <div>
+              <h2 class="text-lg font-semibold text-slate-800" x-text="`Dominio ${d.numRomano}. ${d.nombre}`"></h2>
+              <p class="text-xs text-slate-500" x-text="d.descripcion"></p>
+            </div>
+            <div class="text-right">
+              <div class="text-2xl font-bold text-emerald-700" x-text="puntuacionDominio(d)"></div>
+              <div class="text-xs text-slate-500">PD total</div>
+            </div>
+          </div>
+          <ul class="space-y-2">
+            <template x-for="item in d.items" :key="item.n">
+              <li class="grid grid-cols-12 gap-3 items-center py-2 border-b border-slate-100 last:border-0">
+                <span class="col-span-1 text-xs font-mono text-slate-500" x-text="item.n"></span>
+                <div class="col-span-8">
+                  <span class="text-sm text-slate-700 font-medium" x-text="item.nombre"></span>
+                  <template x-if="item.subseccion"><span class="ml-2 text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600" x-text="item.subseccion"></span></template>
+                </div>
+                <div class="col-span-3 flex items-center gap-2 justify-end">
+                  <input type="number" :min="item.min || 0" :max="item.max" x-model.number="respuestas[item.n]" class="w-20 px-2 py-1.5 text-sm text-center border border-slate-300 rounded">
+                  <span class="text-xs text-slate-500 font-mono" x-text="`/${item.max}`"></span>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </section>
+      </template>
+
+      <section class="bg-white rounded-xl border border-slate-200 p-6">
+        <h2 class="text-lg font-semibold text-slate-800 mb-3">Observaciones</h2>
+        <textarea x-model="datos.observaciones" rows="4" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Aspectos relevantes…"></textarea>
+      </section>
+
+      <!-- Resultado -->
+      <section id="resultado" class="bg-white rounded-xl border-2 border-emerald-200 p-6">
+        <h2 class="text-lg font-semibold text-emerald-800 mb-4">📊 Resumen por dominio</h2>
+        <table class="w-full text-sm">
+          <thead><tr class="bg-slate-50 text-xs text-slate-600"><th class="text-left p-2">Dominio</th><th class="text-center p-2">PD</th><th class="text-center p-2">Máx</th><th class="text-left p-2">Perfil</th></tr></thead>
+          <tbody>
+            <template x-for="d in [...dominiosParte1, ...dominiosParte2]" :key="d.id">
+              <tr class="hover:bg-slate-50">
+                <td class="p-2 border-b border-slate-100 font-medium text-xs" x-text="`${d.numRomano}. ${d.nombre}`"></td>
+                <td class="p-2 border-b border-slate-100 text-center font-mono" x-text="puntuacionDominio(d)"></td>
+                <td class="p-2 border-b border-slate-100 text-center font-mono text-slate-500" x-text="maxDominio(d)"></td>
+                <td class="p-2 border-b border-slate-100">
+                  <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+                    <div class="h-full" :class="d.parte===1 ? 'bg-emerald-500' : 'bg-rose-500'" :style="`width: ${maxDominio(d) ? (puntuacionDominio(d)/maxDominio(d))*100 : 0}%`"></div>
+                  </div>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+        <div class="grid grid-cols-2 gap-4 mt-6">
+          <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4 text-center">
+            <div class="text-xs text-emerald-700 uppercase mb-1">Parte 1 — Conducta adaptativa</div>
+            <div class="text-3xl font-bold text-emerald-800" x-text="totalParte1()"></div>
+            <div class="text-xs text-emerald-600 mt-1" x-text="`de ${maxParte1()} máx · mayor = mejor`"></div>
+          </div>
+          <div class="bg-rose-50 border border-rose-200 rounded-lg p-4 text-center">
+            <div class="text-xs text-rose-700 uppercase mb-1">Parte 2 — Conducta desadaptada</div>
+            <div class="text-3xl font-bold text-rose-800" x-text="totalParte2()"></div>
+            <div class="text-xs text-rose-600 mt-1" x-text="`de ${maxParte2()} máx · menor = mejor`"></div>
+          </div>
+        </div>
+        <p class="text-xs text-slate-500 italic mt-4">Las puntuaciones estándar y los percentiles requieren las tablas del manual ABS-RC:2 (Lambert et al.). El sistema almacena las PD; los profesionales pueden añadirlas en el campo conclusiones del informe psicológico.</p>
+      </section>
+
+      <div class="flex items-center justify-between gap-3 pb-12">
+        <a href="valoraciones-listado.html" class="text-sm text-slate-600 hover:underline">← Volver al listado</a>
+        <div class="flex gap-2">
+          <button @click="guardar()" class="px-4 py-2 text-sm rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">💾 Guardar borrador</button>
+          <button @click="firmar()" class="px-4 py-2 text-sm rounded-lg bg-slate-800 text-white hover:bg-slate-900">✍️ Firmar y cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+
+<script>
+function absRc2() {
+  return {
+    parte: 1,
+    estado: 'Borrador',
+    ultimoGuardado: '',
+    datos: {
+      nombre:'', sexo:'', fecha_nacimiento:'', edad:'', fecha_exploracion: new Date().toISOString().slice(0,10),
+      entrevistador:'', entrevistado:'', relacion:'', tipologia:'', centro:'',
+      diagnostico:'', prueba_ci:'', ci:null, adaptaciones:'', observaciones:'',
+    },
+    respuestas: {},
+
+    // ============== PARTE 1 — CONDUCTA ADAPTATIVA ==============
+    dominiosParte1: [
+      { id:1, parte:1, numRomano:'I', nombre:'Independencia', descripcion:'Comida, uso del servicio, limpieza, apariencia, cuidado ropa, viaje, otras (24 ítems)',
+        items: [
+          { n:1, nombre:'Uso de los utensilios para comer', subseccion:'A. Comida', max:6 },
+          { n:2, nombre:'Comer en público',                 subseccion:'A. Comida', max:3 },
+          { n:3, nombre:'Beber',                            subseccion:'A. Comida', max:3 },
+          { n:4, nombre:'Conductas en la mesa',             subseccion:'A. Comida', max:10 },
+          { n:5, nombre:'Entrenamiento en el uso del servicio', subseccion:'B. Servicio', max:8 },
+          { n:6, nombre:'Autocuidados en el baño',          subseccion:'B. Servicio', max:6 },
+          { n:7, nombre:'Lavado de manos y cara',           subseccion:'C. Limpieza', max:5 },
+          { n:8, nombre:'Baño',                             subseccion:'C. Limpieza', max:6 },
+          { n:9, nombre:'Higiene personal',                 subseccion:'C. Limpieza', max:4 },
+          { n:10, nombre:'Lavado de dientes',               subseccion:'C. Limpieza', max:5 },
+          { n:11, nombre:'Postura',                         subseccion:'D. Apariencia', max:4 },
+          { n:12, nombre:'Ropas',                           subseccion:'D. Apariencia', max:4 },
+          { n:13, nombre:'Cuidado de las ropas',            subseccion:'E. Cuidado ropa', max:6 },
+          { n:14, nombre:'Ropa sucia',                      subseccion:'E. Cuidado ropa', max:4 },
+          { n:15, nombre:'Vestirse',                        subseccion:'F. Vestido', max:6 },
+          { n:16, nombre:'Desvestirse',                     subseccion:'F. Vestido', max:5 },
+          { n:17, nombre:'Otras actividades de vestido',    subseccion:'F. Vestido', max:5 },
+          { n:18, nombre:'Sentido de la dirección',         subseccion:'G. Viaje', max:5 },
+          { n:19, nombre:'Transportes',                     subseccion:'G. Viaje', max:5 },
+          { n:20, nombre:'Movilidad',                       subseccion:'G. Viaje', max:4 },
+          { n:21, nombre:'Seguridad en las calles',         subseccion:'G. Viaje', max:5 },
+          { n:22, nombre:'Uso del teléfono',                subseccion:'H. Otras', max:6 },
+          { n:23, nombre:'Diversas funciones',              subseccion:'H. Otras', max:4 },
+          { n:24, nombre:'Seguridad y facilidades',         subseccion:'H. Otras', max:4 },
+        ]},
+      { id:2, parte:1, numRomano:'II', nombre:'Desarrollo físico', descripcion:'Visión, audición, movimientos corporales, control de manos y extremidades',
+        items: [
+          { n:25, nombre:'Visión', max:3 },
+          { n:26, nombre:'Audición', max:3 },
+          { n:27, nombre:'Movimientos del cuerpo', max:4 },
+          { n:28, nombre:'Equilibrio', max:4 },
+          { n:29, nombre:'Control de las manos', max:4 },
+          { n:30, nombre:'Funciones de las extremidades', max:4 },
+        ]},
+      { id:3, parte:1, numRomano:'III', nombre:'Destrezas económicas', descripcion:'Manejo del dinero, banco, presupuesto, compras',
+        items: [
+          { n:31, nombre:'Manejo del dinero', max:5 },
+          { n:32, nombre:'Uso del banco', max:4 },
+          { n:33, nombre:'Presupuesto', max:4 },
+          { n:34, nombre:'Recados', max:4 },
+          { n:35, nombre:'Compra', max:4 },
+          { n:36, nombre:'Recursos para hacer compras', max:4 },
+        ]},
+      { id:4, parte:1, numRomano:'IV', nombre:'Desarrollo del lenguaje', descripcion:'Lectura, escritura, expresión, comprensión, conversación',
+        items: [
+          { n:37, nombre:'Escritura',                      subseccion:'A. Lectura/escritura', max:4 },
+          { n:38, nombre:'Escritura manual',               subseccion:'A. Lectura/escritura', max:4 },
+          { n:39, nombre:'Expresión preverbal',            subseccion:'B. Lenguaje expresivo', max:4 },
+          { n:40, nombre:'Articulación',                   subseccion:'B. Lenguaje expresivo', max:4 },
+          { n:41, nombre:'Producción del lenguaje',        subseccion:'B. Lenguaje expresivo', max:5 },
+          { n:42, nombre:'Uso de la palabra',              subseccion:'B. Lenguaje expresivo', max:4 },
+          { n:43, nombre:'Comprensión lectora',            subseccion:'A. Lectura/escritura', max:4 },
+          { n:44, nombre:'Comprensión de instrucciones',   subseccion:'D. Lenguaje receptivo', max:4 },
+          { n:45, nombre:'Conversación',                   subseccion:'C. Lenguaje social', max:5 },
+          { n:46, nombre:'Desarrollo variado del lenguaje',subseccion:'C. Lenguaje social', max:5 },
+        ]},
+      { id:5, parte:1, numRomano:'V', nombre:'Números y tiempo', descripcion:'Concepto y manejo de números y tiempo',
+        items: [
+          { n:47, nombre:'Números', max:5 },
+          { n:48, nombre:'Tiempo', max:4 },
+          { n:49, nombre:'Concepto del tiempo', max:5 },
+        ]},
+      { id:6, parte:1, numRomano:'VI', nombre:'Actividades domésticas', descripcion:'Limpieza, cocina, otras tareas del hogar',
+        items: [
+          { n:50, nombre:'Limpieza de las habitaciones',  subseccion:'A. Limpieza', max:4 },
+          { n:51, nombre:'Lavado de ropa',                subseccion:'A. Limpieza', max:4 },
+          { n:52, nombre:'Poner la mesa',                 subseccion:'B. Cocina', max:3 },
+          { n:53, nombre:'Preparación de las comidas',    subseccion:'B. Cocina', max:5 },
+          { n:54, nombre:'Recogida de la mesa',           subseccion:'B. Cocina', max:3 },
+          { n:55, nombre:'Actividades domésticas generales', subseccion:'C. Otras', max:4 },
+        ]},
+      { id:7, parte:1, numRomano:'VII', nombre:'Actividades prevocacionales', descripcion:'Trabajo/colegio, actividades de tiempo libre',
+        items: [
+          { n:56, nombre:'Hábitos de trabajo',                max:4 },
+          { n:57, nombre:'Trabajo/colegio — Realización',     max:4 },
+          { n:58, nombre:'Actividades de tiempo libre',       max:4 },
+        ]},
+      { id:8, parte:1, numRomano:'VIII', nombre:'Auto-dirección', descripcion:'Iniciativa, perseverancia, tiempo libre',
+        items: [
+          { n:59, nombre:'Iniciativa',     subseccion:'A. Iniciativa', max:4 },
+          { n:60, nombre:'Pasividad',      subseccion:'A. Iniciativa', max:4 },
+          { n:61, nombre:'Atención',       subseccion:'B. Perseverancia', max:4 },
+          { n:62, nombre:'Persistencia',   subseccion:'B. Perseverancia', max:4 },
+          { n:63, nombre:'Tiempo libre',   subseccion:'C. Tiempo libre', max:4 },
+        ]},
+      { id:9, parte:1, numRomano:'IX', nombre:'Responsabilidad', descripcion:'Pertenencias y responsabilidad general',
+        items: [
+          { n:64, nombre:'Pertenencias personales',    max:4 },
+          { n:65, nombre:'Responsabilidad general',    max:4 },
+          { n:66, nombre:'Responsabilidad personal',   max:4 },
+        ]},
+      { id:10, parte:1, numRomano:'X', nombre:'Socialización', descripcion:'Cooperación, consideración, interacción, madurez',
+        items: [
+          { n:67, nombre:'Cooperación',                          max:4 },
+          { n:68, nombre:'Consideración hacia otras personas',   max:4 },
+          { n:69, nombre:'Conciencia de otros',                  max:4 },
+          { n:70, nombre:'Interacción con otros',                max:4 },
+          { n:71, nombre:'Participación en actividades de grupo',max:4 },
+          { n:72, nombre:'Egoísmo',                              max:4 },
+          { n:73, nombre:'Madurez social',                       max:4 },
+        ]},
+    ],
+
+    // ============== PARTE 2 — CONDUCTA DESADAPTADA ==============
+    dominiosParte2: [
+      { id:11, parte:2, numRomano:'XI', nombre:'Conducta social', descripcion:'Amenazas físicas o verbales hacia otros',
+        items: [
+          { n:74, nombre:'Amenazas o agresiones a otros',  max:6 },
+          { n:75, nombre:'Pelea con otros',                max:6 },
+          { n:76, nombre:'Reacciones agresivas verbales',  max:6 },
+        ]},
+      { id:12, parte:2, numRomano:'XII', nombre:'Conformidad', descripcion:'Acatamiento de normas y autoridad',
+        items: [
+          { n:77, nombre:'Desobediencia a autoridad',     max:6 },
+          { n:78, nombre:'Hábitos no conformistas',       max:6 },
+        ]},
+      { id:13, parte:2, numRomano:'XIII', nombre:'Confianza', descripcion:'Honradez en propiedad y veracidad',
+        items: [
+          { n:79, nombre:'Robos a otros',           max:6 },
+          { n:80, nombre:'Mentir o engañar',        max:6 },
+        ]},
+      { id:14, parte:2, numRomano:'XIV', nombre:'Comportamientos estereotipados', descripcion:'Conductas repetitivas, automatismos, hiperactividad',
+        items: [
+          { n:81, nombre:'Estereotipias',              max:6 },
+          { n:82, nombre:'Hábitos extraños',           max:6 },
+          { n:83, nombre:'Hiperactividad',             max:6 },
+        ]},
+      { id:15, parte:2, numRomano:'XV', nombre:'Conducta sexual', descripcion:'Comportamientos sexuales socialmente inapropiados',
+        items: [
+          { n:84, nombre:'Masturbación en público',      max:6 },
+          { n:85, nombre:'Conducta sexual inadecuada',   max:6 },
+        ]},
+      { id:16, parte:2, numRomano:'XVI', nombre:'Comportamientos autoabusivos', descripcion:'Conductas dañinas hacia sí mismo',
+        items: [
+          { n:86, nombre:'Autolesiones',                  max:6 },
+          { n:87, nombre:'Tendencias autodestructivas',   max:6 },
+        ]},
+      { id:17, parte:2, numRomano:'XVII', nombre:'Compromiso social', descripcion:'Aislamiento, retraimiento, falta de iniciativa social',
+        items: [
+          { n:88, nombre:'Aislamiento',                   max:6 },
+          { n:89, nombre:'Retraimiento social',           max:6 },
+        ]},
+      { id:18, parte:2, numRomano:'XVIII', nombre:'Comportamiento interpersonal', descripcion:'Adecuación al trato con otras personas',
+        items: [
+          { n:90, nombre:'Inapropiada interacción interpersonal', max:6 },
+          { n:91, nombre:'Hábitos disruptivos en interacción',    max:6 },
+        ]},
+    ],
+
+    dominiosActivos() { return this.parte===1 ? this.dominiosParte1 : this.dominiosParte2; },
+
+    puntuacionDominio(d) { return d.items.reduce((s,i)=> s + (this.respuestas[i.n] || 0), 0); },
+    maxDominio(d) { return d.items.reduce((s,i)=> s + i.max, 0); },
+    itemsCompletadosDom(d) { return d.items.filter(i => this.respuestas[i.n] != null && this.respuestas[i.n] !== '').length; },
+
+    totalParte1() { return this.dominiosParte1.reduce((s,d)=> s + this.puntuacionDominio(d), 0); },
+    totalParte2() { return this.dominiosParte2.reduce((s,d)=> s + this.puntuacionDominio(d), 0); },
+    maxParte1() { return this.dominiosParte1.reduce((s,d)=> s + this.maxDominio(d), 0); },
+    maxParte2() { return this.dominiosParte2.reduce((s,d)=> s + this.maxDominio(d), 0); },
+
+    guardar() { this.estado='Borrador guardado'; this.ultimoGuardado = new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}); },
+    firmar() { if (confirm('¿Firmar la valoración?')) { this.estado='Firmada'; this.ultimoGuardado = new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}); } },
+  };
+}
+</script>
+</body>
+</html>

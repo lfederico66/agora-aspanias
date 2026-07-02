@@ -1,0 +1,185 @@
+<!-- @rol: profesional, gestor_caso, direccion_centro -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe psicológico inicial · Ruiz Jiménez, A. — ÁGORA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        @page { size: A4; margin: 14mm 14mm; }
+        @media print {
+            body { background: white !important; }
+            .no-print { display: none !important; }
+            .a4 { box-shadow: none !important; border: 0 !important; margin: 0 !important; }
+            .page-break { page-break-after: always; }
+        }
+        @media screen {
+            body { background: #e5e7eb; }
+            .a4 { width: 210mm; min-height: 297mm; margin: 14mm auto; background: white; box-shadow: 0 4px 24px rgba(0,0,0,0.1); border-radius: 4px; padding: 14mm 14mm; }
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+<!-- Barra superior solo pantalla -->
+<div class="no-print sticky top-0 z-20 bg-white border-b border-slate-200 px-6 py-2.5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+        <a href="informe-psicologico-inicial.html" class="text-xs text-slate-600 hover:text-emerald-700">‹ Volver al formulario</a>
+        <span class="text-slate-300">|</span>
+        <span class="text-sm font-semibold">Informe Psicológico Inicial · Ruiz Jiménez, A.</span>
+        <span class="px-2 py-0.5 text-[10px] rounded-full bg-emerald-100 text-emerald-800 font-medium">✅ Firmado</span>
+    </div>
+    <div class="flex items-center gap-2">
+        <button onclick="window.print()" class="px-3 py-1.5 text-xs rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">🖨 Imprimir / PDF</button>
+    </div>
+</div>
+
+<!-- PDF A4 -->
+<div class="a4">
+
+    <!-- Cabecera institucional -->
+    <header class="flex items-center justify-between border-b-2 border-emerald-700 pb-3 mb-4">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-lg bg-emerald-700 text-white flex items-center justify-center">
+                <svg viewBox="0 0 40 40" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+            </div>
+            <div class="leading-tight">
+                <p class="text-base font-bold tracking-tight">FUNDACIÓN ASPANIAS BURGOS</p>
+                <p class="text-[10px] text-slate-600">G-09013257 · C/ Calzadas, 36 · 09004 Burgos · 947 247 808</p>
+                <p class="text-[10px] text-slate-600">Área de Psicología — Residencia Fuentecillas</p>
+            </div>
+        </div>
+        <div class="text-right">
+            <p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Informe Psicológico</p>
+            <p class="text-2xl font-light">INICIAL</p>
+            <p class="text-[10px] text-slate-500">Protocolo clínico de admisión</p>
+            <p class="text-[10px] text-slate-500 mt-1">Ref. INF-2026-0042</p>
+        </div>
+    </header>
+
+    <!-- Datos identificativos -->
+    <section class="border border-slate-300 rounded p-3 mb-4 grid grid-cols-2 gap-x-4 gap-y-1 text-[11px]">
+        <div class="grid grid-cols-3 gap-2"><dt class="col-span-1 text-slate-500">Apellidos y nombre</dt><dd class="col-span-2 font-semibold">Ruiz Jiménez, Asunción</dd></div>
+        <div class="grid grid-cols-3 gap-2"><dt class="col-span-1 text-slate-500">Fecha nacimiento</dt><dd class="col-span-2">14/03/1948 (78 años)</dd></div>
+        <div class="grid grid-cols-3 gap-2"><dt class="col-span-1 text-slate-500">Fecha informe</dt><dd class="col-span-2 font-semibold">16/06/2026</dd></div>
+        <div class="grid grid-cols-3 gap-2"><dt class="col-span-1 text-slate-500">Centro</dt><dd class="col-span-2">Residencia Fuentecillas · Hab. 12-2</dd></div>
+        <div class="grid grid-cols-3 gap-2"><dt class="col-span-1 text-slate-500">Plaza</dt><dd class="col-span-2">Concertada Junta CyL</dd></div>
+        <div class="grid grid-cols-3 gap-2"><dt class="col-span-1 text-slate-500">Profesional</dt><dd class="col-span-2">Daniel Alonso · Col. CL-1234</dd></div>
+    </section>
+
+    <!-- 1. ANTECEDENTES -->
+    <section class="mb-3">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-emerald-800 border-b border-emerald-200 pb-1 mb-2">1. Antecedentes personales</h2>
+        <div class="text-[10.5px] space-y-1.5 leading-snug">
+            <p><strong>Embarazo, parto, desarrollo:</strong> Embarazo a término. Parto eutócico. Desarrollo psicomotor sin incidencias relevantes en la infancia.</p>
+            <p><strong>Enfermedades somáticas:</strong> HTA en tratamiento desde 2015. Artrosis bilateral de rodillas.</p>
+            <p><strong>Visión:</strong> Presbicia corregida con gafas. <strong>Audición:</strong> Hipoacusia leve oído derecho.</p>
+            <p><strong>Enfermedades neurológicas:</strong> Sin antecedentes. <strong>Epilepsia:</strong> No.</p>
+            <p><strong>Enfermedades psíquicas:</strong> Episodio depresivo moderado (2018), remitido. No tratamiento actual.</p>
+        </div>
+    </section>
+
+    <section class="mb-3">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-emerald-800 border-b border-emerald-200 pb-1 mb-2">2. Antecedentes familiares</h2>
+        <p class="text-[10.5px] leading-snug">Madre con demencia tipo Alzheimer (diagnosticada a los 82). Padre fallecido por cardiopatía (75 años). Una hermana sin antecedentes psiquiátricos relevantes.</p>
+    </section>
+
+    <!-- 3. AUTONOMÍA -->
+    <section class="mb-3">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-emerald-800 border-b border-emerald-200 pb-1 mb-2">3. Nivel de autonomía</h2>
+        <table class="w-full text-[10px] border-collapse">
+            <tbody>
+                <tr><td class="py-0.5 pr-2 text-slate-500 w-1/4">AVD básicas</td><td>Control esfínteres: <strong>conservado</strong>. Aseo: precisa supervisión. Comida: independiente. Deambulación: con apoyo (andador).</td></tr>
+                <tr><td class="py-0.5 pr-2 text-slate-500">AVD instrumentales</td><td>Manejo dinero limitado. Necesita ayuda con teléfono, medicación y transporte.</td></tr>
+                <tr><td class="py-0.5 pr-2 text-slate-500">AVD avanzadas</td><td>Participa en talleres del centro y grupo de cocina. No realiza actividad laboral.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- 4. CONDUCTA -->
+    <section class="mb-3">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-emerald-800 border-b border-emerald-200 pb-1 mb-2">4. Esfera de la conducta</h2>
+        <p class="text-[10.5px] leading-snug"><strong>Ambiente familiar:</strong> Una hija visita semanalmente. Relación cercana. <strong>Ambiente social:</strong> Sociable con compañeras del centro. <strong>Hábitos tóxicos:</strong> No. <strong>Fugas / robos:</strong> No registrados.</p>
+    </section>
+
+    <!-- 5. CARACTEROLOGÍA -->
+    <section class="mb-3">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-emerald-800 border-b border-emerald-200 pb-1 mb-2">5. Caracterología</h2>
+        <p class="text-[10.5px] leading-snug">Alegre, sociable, tranquila, atenta, complaciente. Sin rasgos de irritabilidad ni mendacidad. Tendencia leve a la timidez en grupos numerosos.</p>
+    </section>
+
+    <!-- 6. INTERESES -->
+    <section class="mb-3">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-emerald-800 border-b border-emerald-200 pb-1 mb-2">6. Aficiones · estudios · trabajo</h2>
+        <p class="text-[10.5px] leading-snug"><strong>Aficiones:</strong> Cocina, música (copla, Manolo Escobar), pasear, ver televisión. <strong>Estudios:</strong> Primarios. <strong>Trabajos:</strong> Costurera durante 32 años. Jubilada desde 2013.</p>
+    </section>
+
+    <!-- 7. TRATAMIENTO -->
+    <section class="mb-3">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-emerald-800 border-b border-emerald-200 pb-1 mb-2">7. Tratamiento actual</h2>
+        <p class="text-[10.5px] leading-snug">Enalapril 10 mg/día. Paracetamol 1 g a demanda para artralgia. Sin tratamiento psicofarmacológico actual.</p>
+    </section>
+
+    <!-- 8. EXPLORACIÓN PSICOPATOLÓGICA -->
+    <section class="mb-3">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-emerald-800 border-b border-emerald-200 pb-1 mb-2">8. Exploración psicopatológica</h2>
+        <table class="w-full text-[10px] border-collapse">
+            <tbody>
+                <tr><td class="py-0.5 pr-2 text-slate-500 w-1/4">Apariencia · Conducta</td><td>Cuidada. Colaboradora durante la entrevista.</td></tr>
+                <tr><td class="py-0.5 pr-2 text-slate-500">Comunicación · Lenguaje</td><td>Fluido, coherente. Vocabulario rico para su nivel formativo.</td></tr>
+                <tr><td class="py-0.5 pr-2 text-slate-500">Conciencia · Orientación</td><td>Orientada en persona, espacio y tiempo.</td></tr>
+                <tr><td class="py-0.5 pr-2 text-slate-500">Atención · Memoria</td><td>Atención conservada. Memoria de trabajo levemente reducida. Memoria episódica conservada.</td></tr>
+                <tr><td class="py-0.5 pr-2 text-slate-500">Ánimo · Afecto</td><td>Eutímica. No clínica afectiva reseñable.</td></tr>
+                <tr><td class="py-0.5 pr-2 text-slate-500">Praxias</td><td>Conservadas (vestido, constructiva, ideomotora, ideacional, bucofacial).</td></tr>
+                <tr><td class="py-0.5 pr-2 text-slate-500">Gnosias</td><td>Conservadas (táctiles, somatognosia, verbales, fisiognosias, auditivas).</td></tr>
+                <tr><td class="py-0.5 pr-2 text-slate-500">Juicio · Control impulsos</td><td>Conservado. Sin impulsividad clínicamente significativa.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- 9. CONCLUSIONES -->
+    <section class="mb-3 border-2 border-emerald-300 rounded p-3 bg-emerald-50/30">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-emerald-800 mb-2">9. Conclusiones y recomendaciones</h2>
+        <p class="text-[10.5px] leading-snug">Mujer de 78 años con autonomía conservada para AVD básicas pero precisa apoyos en AVD instrumentales por limitación motora (artrosis). Funciones cognitivas conservadas con leve afectación de memoria de trabajo. No clínica psicopatológica relevante actualmente. Antecedente de episodio depresivo remitido. <strong>Se recomienda:</strong></p>
+        <ul class="text-[10.5px] list-disc list-inside mt-1 space-y-0.5">
+            <li>Plaza concertada en Residencia Fuentecillas (asignada).</li>
+            <li>Participación en grupo de estimulación cognitiva 2 veces/semana.</li>
+            <li>Continuar tratamiento médico actual.</li>
+            <li>Vigilancia activa del estado anímico dado el antecedente de 2018.</li>
+            <li>Revaloración psicológica anual (Informe Evolutivo).</li>
+        </ul>
+    </section>
+
+    <!-- Firma -->
+    <section class="border-t-2 border-slate-300 pt-3 mt-4">
+        <p class="text-[9px] text-slate-600 mb-3 text-justify leading-snug">El presente informe psicológico se emite a efectos clínicos y queda incorporado al historial sociosanitario de la persona atendida. Los datos contenidos son <strong>categoría especial art. 9 RGPD</strong>: acceso restringido a profesional sanitario autorizado, registrado en bitácora y conservado durante 5 años post-baja (Ley 41/2002). Firma electrónica cualificada con sello de tiempo.</p>
+        <div class="grid grid-cols-2 gap-6 mt-3">
+            <div class="border-t border-slate-400 pt-1.5">
+                <p class="text-[9px] uppercase tracking-widest text-slate-500 font-semibold">Profesional firmante</p>
+                <p class="text-[11px] mt-1 font-semibold">Daniel Alonso</p>
+                <p class="text-[10px] text-slate-600">Psicólogo · Colegiado nº CL-1234</p>
+                <p class="text-[9px] text-slate-500 mt-5">Fecha y firma: 16 / 06 / 2026</p>
+                <p class="text-[9px] text-slate-500 italic mt-1">[Firma electrónica cualificada ÁGORA · sello 16/06/2026 12:47:23]</p>
+            </div>
+            <div class="border-t border-slate-400 pt-1.5">
+                <p class="text-[9px] uppercase tracking-widest text-slate-500 font-semibold">Visto bueno · Dirección Técnica</p>
+                <p class="text-[11px] mt-1">Bárcena Sanz, Roberto</p>
+                <p class="text-[10px] text-slate-600">Dirección Residencia Fuentecillas</p>
+                <p class="text-[9px] text-slate-500 mt-5">Fecha y firma: ___ / ___ / 2026</p>
+                <p class="text-[9px] text-slate-500 italic mt-1">[Pendiente firma]</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="mt-4 pt-2 border-t border-slate-200 flex items-center justify-between text-[8px] text-slate-500">
+        <span>Fundación Aspanias Burgos · CIF G-09013257 · Informe INF-2026-0042</span>
+        <span>Generado por ÁGORA · 16/06/2026 · Documento 1 de 1</span>
+    </footer>
+</div>
+
+</body>
+</html>

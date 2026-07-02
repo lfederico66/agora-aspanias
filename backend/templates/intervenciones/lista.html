@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Intervenciones · {{ persona.apellido_1 }}, {{ persona.nombre }} · ÁGORA{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+
+    <div>
+        <a href="{% url 'personas:detalle' persona.id %}" class="text-sm text-slate-500 hover:text-emerald-700">← Volver a la ficha</a>
+    </div>
+
+    {# Cabecera con identidad de la persona #}
+    <div class="rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+        <div class="h-16 bg-gradient-to-r from-emerald-700 to-emerald-900"></div>
+        <div class="px-6 pb-4">
+            <div class="flex items-end justify-between flex-wrap gap-4 -mt-8">
+                <div class="flex items-end gap-4">
+                    <div class="w-20 h-20 rounded-2xl bg-emerald-100 text-emerald-800 border-4 border-white shadow-md flex items-center justify-center text-2xl font-semibold">
+                        {{ persona.nombre|slice:":1" }}{{ persona.apellido_1|slice:":1" }}
+                    </div>
+                    <div class="pb-2">
+                        <h1 class="text-2xl font-semibold tracking-tight text-slate-900">{{ persona.apellido_1 }} {{ persona.apellido_2 }}, {{ persona.nombre }}</h1>
+                        <p class="text-sm text-slate-500 font-mono">{{ persona.codigo_interno }} · {{ persona.centro_referencia.nombre }}</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 pb-2 flex-wrap">
+                    <a href="{% url 'intervenciones:crear_valoracion' persona.id %}" class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm hover:border-emerald-400">+ Nueva valoración</a>
+                    <a href="{% url 'intervenciones:crear' persona.id %}" class="rounded-lg bg-emerald-700 text-white px-3 py-1.5 text-sm font-medium hover:bg-emerald-800">+ Nueva intervención</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# KPIs #}
+    <div class="grid gap-3 md:grid-cols-4">
+        <div class="rounded-xl border border-slate-200 bg-white p-4">
+            <p class="text-xs uppercase tracking-wide text-slate-500">Intervenciones</p>
+            <p class="mt-1 text-3xl font-light">{{ kpis.total }}</p>
+            <p class="text-xs text-slate-500">en el período seleccionado</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4">
+            <p class="text-xs uppercase tracking-wide text-slate-500">Valoraciones</p>
+            <p class="mt-1 text-3xl font-light">{{ kpis.valoraciones }}</p>
+            <p class="text-xs text-slate-500">BVD · ICAP · Barthel · etc.</p>
+        </div>
+        <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+            <p class="text-xs uppercase tracking-wide text-emerald-700">Vinculadas a objetivo PV</p>
+            <p class="mt-1 text-3xl font-light text-emerald-800">{{ kpis.vinculadas_objetivo }}</p>
+            <p class="text-xs text-emerald-700">trazables al Plan de Vida</p>
+        </div>
+        <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
+            <p class="text-xs uppercase tracking-wide text-amber-700">Confidencialidad restringida</p>
+            <p class="mt-1 text-3xl font-light text-amber-800">{{ kpis.restringidas }}</p>
+            <p class="text-xs text-amber-700">acceso limitado</p>
+        </div>
+    </div>
+
+    {# Filtros #}
+    <form method="get" class="rounded-xl border border-slate-200 bg-white p-4 flex items-center gap-3 flex-wrap">
+        <div class="flex items-center gap-2 text-sm">
+            <label class="text-xs uppercase tracking-wide text-slate-500">Período</label>
+            <select name="desde" class="rounded border border-slate-300 px-2 py-1 text-sm" onchange="this.form.submit()">
+                <option value="30" {% if rango == '30' %}selected{% endif %}>30 días</option>
+                <option value="90" {% if rango == '90' %}selected{% endif %}>90 días</option>
+                <option value="365" {% if rango == '365' %}selected{% endif %}>1 año</option>
+                <option value="todo" {% if rango == 'todo' %}selected{% endif %}>Todo</option>
+            </select>
+        </div>
+        <span class="text-slate-300">|</span>
+        <div class="flex items-center gap-2 text-sm">
+            <label class="text-xs uppercase tracking-wide text-slate-500">Tipo</label>
+            <select name="tipo" class="rounded border border-slate-300 px-2 py-1 text-sm" onchange="this.form.submit()">
+                <option value="">Todos</option>
+                {% for t in tipos %}
+                    <option value="{{ t.codigo }}" {% if tipo_actual == t.codigo %}selected{% endif %}>{{ t.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <span class="text-slate-300">|</span>
+        <div class="flex items-center gap-2 text-sm">
+            <label class="text-xs uppercase tracking-wide text-slate-500">Mostrar</label>
+            <select name="ver" class="rounded border border-slate-300 px-2 py-1 text-sm" onchange="this.form.submit()">
+                <option value="todo" {% if ver_actual == 'todo' %}selected{% endif %}>Todo</option>
+                <option value="intervenciones" {% if ver_actual == 'intervenciones' %}selected{% endif %}>Solo intervenciones</option>
+                <option value="valoraciones" {% if ver_actual == 'valoraciones' %}selected{% endif %}>Solo valoraciones</option>
+            </select>
+        </div>
+        <a href="?" class="ml-auto text-xs text-slate-500 hover:text-rose-700">Limpiar filtros</a>
+    </form>
+
+    {# Timeline cronológico unificado #}
+    <div class="space-y-4">
+        {% for item in timeline %}
+            {% if item.tipo_item == 'intervencion' %}
+                {% with i=item.obj %}
+                <article class="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+                    <div class="flex gap-4">
+                        <div class="w-1.5 bg-{{ i.tipo.color }}-400"></div>
+                        <div class="flex-1 p-4">
+                            <div class="flex items-start justify-between flex-wrap gap-2">
+                                <div>
+                                    <p class="text-xs uppercase tracking-wide text-slate-500">
+                                        {{ i.fecha_hora|date:"l j \d\e F · H:i"|capfirst }}
+                                    </p>
+                                    <p class="font-semibold mt-0.5">{{ i.tipo.nombre }}</p>
+                                    <p class="text-xs text-slate-500">{{ i.profesional.nombre_completo }}{% if i.profesional.rol_principal %} · {{ i.profesional.rol_principal.nombre }}{% endif %}</p>
+                                </div>
+                                <div class="flex flex-col items-end gap-1">
+                                    {% if i.confidencialidad != 'normal' %}
+                                        <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">🔒 {{ i.get_confidencialidad_display }}</span>
+                                    {% endif %}
+                                    <a href="{% url 'intervenciones:editar' persona.id i.id %}" class="text-xs text-emerald-700 hover:underline">Editar</a>
+                                </div>
+                            </div>
+                            <p class="mt-3 text-sm text-slate-700 whitespace-pre-line">{{ i.descripcion }}</p>
+                            {% if i.objetivo_vinculado %}
+                                <div class="mt-3 inline-flex items-center gap-2 rounded-lg bg-emerald-50 border border-emerald-200 px-3 py-1.5 text-xs text-emerald-900">
+                                    <span class="font-semibold">🎯 Objetivo PV</span>
+                                    <span>{{ i.objetivo_vinculado }}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </article>
+                {% endwith %}
+            {% else %}
+                {% with v=item.obj %}
+                <article class="rounded-xl border-l-4 border-blue-400 border-y border-r border-slate-200 bg-blue-50/30 shadow-sm overflow-hidden">
+                    <div class="p-4">
+                        <div class="flex items-start justify-between flex-wrap gap-2">
+                            <div>
+                                <p class="text-xs uppercase tracking-wide text-blue-700">
+                                    📋 Valoración · {{ v.fecha|date:"l j \d\e F"|capfirst }}
+                                </p>
+                                <p class="font-semibold mt-0.5">{{ v.instrumento|default:v.get_instrumento_display }}</p>
+                                <p class="text-xs text-slate-500">Aplicada por {{ v.aplicado_por.nombre_completo|default:"—" }}</p>
+                            </div>
+                        </div>
+                        {% if v.observaciones %}
+                            <p class="mt-3 text-sm text-slate-700 whitespace-pre-line">{{ v.observaciones }}</p>
+                        {% endif %}
+                    </div>
+                </article>
+                {% endwith %}
+            {% endif %}
+        {% empty %}
+            <article class="rounded-xl border border-dashed border-slate-300 bg-white p-12 text-center text-sm text-slate-500">
+                No hay intervenciones ni valoraciones registradas en este período.
+                <div class="mt-4 flex justify-center gap-2">
+                    <a href="{% url 'intervenciones:crear' persona.id %}" class="rounded bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">+ Nueva intervención</a>
+                    <a href="{% url 'intervenciones:crear_valoracion' persona.id %}" class="rounded border border-slate-300 bg-white px-3 py-1.5 text-xs hover:border-emerald-400">+ Nueva valoración</a>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+
+    {# Aviso de confidencialidad #}
+    {% if kpis.restringidas %}
+    <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+        <p class="text-xs uppercase tracking-wide text-amber-700 font-semibold">Confidencialidad reforzada</p>
+        <p class="mt-1">{{ kpis.restringidas }} intervención{{ kpis.restringidas|pluralize:"es" }} de este timeline tiene{{ kpis.restringidas|pluralize:"n" }} acceso restringido (clínica o jurídica). Cada lectura se registra en bitácora con tu identidad y motivo.</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

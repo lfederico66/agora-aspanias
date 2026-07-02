@@ -1,0 +1,672 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centros · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · todos los datos son ficticios</div>
+
+<div class="flex min-h-screen" x-data="{ userMenu: false }">
+
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100 relative">
+            <button @click="userMenu = !userMenu" class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">Federico Martínez</p>
+                    <p class="text-[10px] text-slate-500 truncate">Gerencia</p>
+                </div>
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div x-show="userMenu" x-cloak @click.outside="userMenu = false" class="absolute bottom-full left-3 right-3 mb-1 rounded-lg border border-slate-200 bg-white shadow-lg py-1 z-20">
+                <a href="personas-lista.html?mio=1" class="block px-3 py-1.5 text-sm text-emerald-700 hover:bg-emerald-50 font-medium">⭐ Mis personas</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Mi perfil</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Preferencias</a>
+                <div class="border-t border-slate-100 my-1"></div>
+                <a href="#" class="block px-3 py-1.5 text-sm text-rose-700 hover:bg-rose-50">Cerrar sesión</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate"><a href="index.html" class="hover:text-emerald-700">Inicio</a> <span class="mx-1">›</span> <span class="text-slate-700">Centros</span></nav>
+            <div class="flex items-center gap-2 shrink-0"></div>
+        </div>
+        <div class="px-8 py-6 max-w-7xl">
+
+
+        
+
+        <div class="flex items-end justify-between flex-wrap gap-3">
+            <div>
+                <h1 class="text-2xl font-semibold tracking-tight">Centros y servicios del grupo</h1>
+                <p class="text-sm text-slate-500">18 centros y servicios · 417 personas atendidas · Fundación Aspanias Burgos</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <select class="rounded border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                    <option>Todas las ubicaciones</option>
+                    <option>Burgos</option>
+                    <option>Quintanadueñas</option>
+                    <option>Salas de los Infantes</option>
+                    <option>Villadiego</option>
+                </select>
+                <select class="rounded border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                    <option>Todo tipo de servicio</option>
+                    <option>Residencia DI</option>
+                    <option>Residencia Personas Mayores</option>
+                    <option>Centro de Día</option>
+                    <option>Centro Integral / Multiactividad</option>
+                    <option>Centro Educativo</option>
+                    <option>Vivienda</option>
+                    <option>Centro de Día Asistencial</option>
+                    <option>Servicio Puentes</option>
+                </select>
+                <button class="rounded border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-600 hover:border-emerald-400">⤓ Exportar</button>
+            </div>
+        </div>
+
+        <!-- KPIs grupo -->
+        <div class="grid gap-3 md:grid-cols-4">
+            <div class="rounded-xl border border-slate-200 bg-white p-4">
+                <p class="text-xs uppercase tracking-wide text-slate-500">Centros activos</p>
+                <p class="mt-1 text-3xl font-light">18</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">en 4 localidades</p>
+            </div>
+            <div class="rounded-xl border border-slate-200 bg-white p-4">
+                <p class="text-xs uppercase tracking-wide text-slate-500">Personas atendidas</p>
+                <p class="mt-1 text-3xl font-light">417</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">DI · mayores · inserción</p>
+            </div>
+            <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                <p class="text-xs uppercase tracking-wide text-emerald-700">% PV realizado</p>
+                <p class="mt-1 text-3xl font-light text-emerald-800">87 %</p>
+                <p class="text-[11px] text-emerald-700 mt-0.5">media del grupo</p>
+            </div>
+            <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                <p class="text-xs uppercase tracking-wide text-amber-700">Avisos pendientes</p>
+                <p class="mt-1 text-3xl font-light text-amber-800">3</p>
+                <p class="text-[11px] text-amber-700 mt-0.5">requieren acción</p>
+            </div>
+        </div>
+
+        <!-- === RESIDENCIAS DI === -->
+        <section>
+            <div class="flex items-baseline justify-between mb-3">
+                <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-500">🏠 Atención residencial · Discapacidad intelectual</h2>
+                <p class="text-xs text-slate-400">4 servicios · 97 plazas residenciales</p>
+            </div>
+            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+                <div class="rounded-xl border-2 border-emerald-200 bg-white hover:border-emerald-400 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Residencia Fuentecillas</h3>
+                            <p class="text-xs text-emerald-700 font-medium">★ Centro piloto · Burgos · DI</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Plazas residencia</p><p class="font-semibold">29 / 30</p></div>
+                        <div><p class="text-xs text-slate-500">Plazas libres</p><p class="font-semibold text-blue-700">1</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-emerald-700">97 %</p></div>
+                        <div><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Lucía Martínez</p></div>
+                    </div>
+                    <p class="mt-3 text-[10px] text-slate-500">↗ Este centro también ofrece <span class="text-amber-700 font-medium">Centro de día (19 plazas)</span></p>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Residencia Puentesaúco</h3>
+                            <p class="text-xs text-slate-500">Burgos · DI</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">26</p></div>
+                        <div><p class="text-xs text-slate-500">Plazas libres</p><p class="font-semibold text-blue-700">1</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-emerald-700">96 %</p></div>
+                        <div><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Carmen Saiz</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Residencia Quintanadueñas</h3>
+                            <p class="text-xs text-slate-500">Quintanadueñas · DI</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">24</p></div>
+                        <div><p class="text-xs text-slate-500">Plazas libres</p><p class="font-semibold text-blue-700">0</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-emerald-700">90 %</p></div>
+                        <div><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Javier Renedo</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Residencia Salas de los Infantes</h3>
+                            <p class="text-xs text-slate-500">Salas de los Infantes · DI</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">18</p></div>
+                        <div><p class="text-xs text-slate-500">Plazas libres</p><p class="font-semibold text-blue-700">1</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-emerald-700">92 %</p></div>
+                        <div><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Beatriz Hernando</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === RESIDENCIAS PERSONAS MAYORES === -->
+        <section>
+            <div class="flex items-baseline justify-between mb-3">
+                <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-500">🏠 Atención residencial · Personas mayores dependientes</h2>
+                <p class="text-xs text-slate-400">2 centros · 60 personas</p>
+            </div>
+            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Residencia Río Arlanza</h3>
+                            <p class="text-xs text-slate-500">Salas de los Infantes · Mayores</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">32</p></div>
+                        <div><p class="text-xs text-slate-500">Plazas libres</p><p class="font-semibold text-blue-700">3</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-emerald-700">86 %</p></div>
+                        <div><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Mercedes Antolín</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Residencia Santa María</h3>
+                            <p class="text-xs text-slate-500">Villadiego · Mayores</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">28</p></div>
+                        <div><p class="text-xs text-slate-500">Plazas libres</p><p class="font-semibold text-blue-700">2</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-emerald-700">85 %</p></div>
+                        <div><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Esther Gil</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === CENTROS DE DÍA Y MULTIACTIVIDAD === -->
+        <section>
+            <div class="flex items-baseline justify-between mb-3">
+                <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-500">☀ Atención diurna · Centros de día y ocupacionales</h2>
+                <p class="text-xs text-slate-400">7 servicios · 148 plazas de día</p>
+            </div>
+            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+                <div class="rounded-xl border-2 border-emerald-200 bg-white hover:border-emerald-400 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Centro de Día Fuentecillas</h3>
+                            <p class="text-xs text-emerald-700 font-medium">★ Centro piloto · Burgos · DI</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Plazas CD</p><p class="font-semibold">19 / 20</p></div>
+                        <div><p class="text-xs text-slate-500">Plazas libres</p><p class="font-semibold text-blue-700">1</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-emerald-700">97 %</p></div>
+                        <div><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Lucía Martínez</p></div>
+                    </div>
+                    <p class="mt-3 text-[10px] text-slate-500">↗ Este centro también ofrece <span class="text-indigo-700 font-medium">Residencia (29 plazas)</span></p>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Centro Multiactividad Vicente Aleixandre</h3>
+                            <p class="text-xs text-slate-500">Burgos · DI</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">38</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-emerald-700">88 %</p></div>
+                        <div class="col-span-2"><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Roberto Salazar</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Centro de Día Puentesaúco</h3>
+                            <p class="text-xs text-slate-500">Burgos · DI</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Atrasado</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">28</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-amber-700">83 %</p></div>
+                        <div class="col-span-2"><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Marta Ibáñez</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Centro de Día Quintanadueñas</h3>
+                            <p class="text-xs text-slate-500">Quintanadueñas · DI</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">22</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-emerald-700">91 %</p></div>
+                        <div class="col-span-2"><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Inés Calleja</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Centro de Día Salas de los Infantes</h3>
+                            <p class="text-xs text-slate-500">Salas de los Infantes · DI</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Atrasado</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">18</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-amber-700">80 %</p></div>
+                        <div class="col-span-2"><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Pedro Olmos</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Centro de Día Asistencial Quintanadueñas</h3>
+                            <p class="text-xs text-slate-500">Quintanadueñas · Sociosanitario</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Atrasado</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">13</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-amber-700">82 %</p></div>
+                        <div class="col-span-2"><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Patricia Lozano</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Centro de Día Asistencial Salas de los Infantes</h3>
+                            <p class="text-xs text-slate-500">Salas de los Infantes · Sociosanitario</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-800">Crítico</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">10</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-rose-700">68 %</p></div>
+                        <div class="col-span-2"><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Jorge Tudanca</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === EDUCACIÓN, VIVIENDA E INSERCIÓN === -->
+        <section>
+            <div class="flex items-baseline justify-between mb-3">
+                <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-500">🌱 Programas de autonomía, vivienda e inserción</h2>
+                <p class="text-xs text-slate-400">4 centros · 92 personas</p>
+            </div>
+            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Colegio de Educación Especial Puentesaúco</h3>
+                            <p class="text-xs text-slate-500">Burgos · Menores · DI</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Atrasado</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Alumnado</p><p class="font-semibold">24</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-amber-700">78 %</p></div>
+                        <div class="col-span-2"><p class="text-xs text-slate-500">Dirección</p><p class="font-semibold text-xs">Ana Bañuelos</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Áreas de Vivienda</h3>
+                            <p class="text-xs text-slate-500">Burgos · DI · Viviendas tuteladas</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">32</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-emerald-700">94 %</p></div>
+                        <div class="col-span-2"><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Sara Domínguez</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Servicio Puentes</h3>
+                            <p class="text-xs text-slate-500">Burgos · Inserción y autonomía</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">22</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-emerald-700">89 %</p></div>
+                        <div class="col-span-2"><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Diego Camarero</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-emerald-700">Vida Independiente</h3>
+                            <p class="text-xs text-slate-500">Burgos · Programa de autonomía y vivienda</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">14</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-emerald-700">93 %</p></div>
+                        <div class="col-span-2"><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Sara Domínguez Vélez</p></div>
+                    </div>
+                </a>
+                    <div class="border-t border-slate-100 bg-slate-50/60 text-slate-600 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-emerald-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === PROYECTOS EXPERIMENTALES === -->
+        <section>
+            <div class="flex items-baseline justify-between mb-3">
+                <h2 class="text-xs font-semibold uppercase tracking-widest text-purple-700">🚪 Atención domiciliaria · Proyectos experimentales</h2>
+                <p class="text-xs text-purple-700">2 proyectos · 20 personas · innovación social · atención en el propio hogar</p>
+            </div>
+            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+                <div class="rounded-xl border-2 border-purple-200 bg-purple-50/40 hover:border-purple-400 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-purple-700">A Gusto en Casa</h3>
+                            <p class="text-xs text-purple-700 font-medium">🧪 Experimental · Burgos · Atención en domicilio</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Piloto</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">12</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-emerald-700">95 %</p></div>
+                        <div class="col-span-2"><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Mercedes Antolín Robles</p></div>
+                    </div>
+                    <p class="mt-3 text-[10px] text-purple-700">Apoyo profesional para mantener a la persona en su propio domicilio el máximo tiempo posible.</p>
+                </a>
+                    <div class="border-t border-purple-100 bg-purple-50/30 text-purple-800 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-purple-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border-2 border-purple-200 bg-purple-50/40 hover:border-purple-400 hover:shadow-md transition overflow-hidden flex flex-col">
+                    <a href="centro-detalle.html" class="group block p-5 flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="font-semibold text-base group-hover:text-purple-700">Intecum</h3>
+                            <p class="text-xs text-purple-700 font-medium">🧪 Experimental · Burgos · Cuidados al final de la vida</p>
+                        </div>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Piloto</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                        <div><p class="text-xs text-slate-500">Personas</p><p class="font-semibold">8</p></div>
+                        <div><p class="text-xs text-slate-500">% PV realiz.</p><p class="font-semibold text-emerald-700">96 %</p></div>
+                        <div class="col-span-2"><p class="text-xs text-slate-500">Coord.</p><p class="font-semibold text-xs">Esther Gil Tobar</p></div>
+                    </div>
+                    <p class="mt-3 text-[10px] text-purple-700">Programa de acompañamiento integral en cuidados continuados y final de vida.</p>
+                </a>
+                    <div class="border-t border-purple-100 bg-purple-50/30 text-purple-800 px-4 py-2 flex items-center justify-between text-xs">
+                        <span class="flex items-center gap-1.5">🧑‍💼 Equipo del centro</span>
+                        <a href="centro-detalle.html#equipo" class="text-purple-700 hover:underline font-medium">Ver equipo →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === RESUMEN POR UBICACIÓN === -->
+        <section class="mt-6">
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Distribución por ubicación</h2>
+            <div class="grid gap-3 md:grid-cols-4">
+                <div class="rounded-xl border border-slate-200 bg-white p-4">
+                    <div class="flex items-center gap-2 mb-2"><span class="text-lg">📍</span><h3 class="font-semibold text-sm">Burgos</h3></div>
+                    <p class="text-2xl font-light">9 <span class="text-sm text-slate-500">centros</span></p>
+                    <p class="text-xs text-slate-500 mt-1">230 personas atendidas</p>
+                </div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4">
+                    <div class="flex items-center gap-2 mb-2"><span class="text-lg">📍</span><h3 class="font-semibold text-sm">Quintanadueñas</h3></div>
+                    <p class="text-2xl font-light">3 <span class="text-sm text-slate-500">centros</span></p>
+                    <p class="text-xs text-slate-500 mt-1">59 personas atendidas</p>
+                </div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4">
+                    <div class="flex items-center gap-2 mb-2"><span class="text-lg">📍</span><h3 class="font-semibold text-sm">Salas de los Infantes</h3></div>
+                    <p class="text-2xl font-light">4 <span class="text-sm text-slate-500">centros</span></p>
+                    <p class="text-xs text-slate-500 mt-1">78 personas atendidas</p>
+                </div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4">
+                    <div class="flex items-center gap-2 mb-2"><span class="text-lg">📍</span><h3 class="font-semibold text-sm">Villadiego</h3></div>
+                    <p class="text-2xl font-light">1 <span class="text-sm text-slate-500">centro</span></p>
+                    <p class="text-xs text-slate-500 mt-1">28 personas atendidas</p>
+                </div>
+            </div>
+        </section>
+        </div>
+    </main>
+</div>
+
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, cita..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

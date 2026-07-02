@@ -1,0 +1,857 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facturación · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · todos los datos son ficticios</div>
+
+<div class="flex min-h-screen" x-data="{
+        userMenu: false,
+        tab: 'resumen',
+        nuevoServ: false, generarModal: false, toast: '', mostrarToast: false,
+        centroSel: 'fuentecillas',
+        personasPorCentro: {
+            'fuentecillas': [
+                'Arnaiz Tudanca, Fernando','González Pérez, Marta','Manzanedo Olalla, Esther','Martín Cardeñoso, Roberto','Moreno Pascual, Ana','Rodríguez García, Carlos','Sáez de Antón, Inés','Sanz Ibáñez, José Luis','Velasco Jiménez, Javier'
+            ],
+            'puentesauco': [
+                'Aguado Lara, Luis','Bermejo Núñez, Natalia','López Vela, Víctor','Manzano Castaño, Claudia','Reyes Bermúdez, Beatriz'
+            ],
+            'quintanaduenas': [
+                'Bañuelos Antón, Andrea','Cárcamo Rojo, Roberto','Iglesias Marín, María','Olmedo Sastre, Sonia','Tudela Fernández, Fátima'
+            ],
+            'salas': [
+                'Cuadrado Tobar, Teresa','Domínguez Cuesta, David','Gil Estévez, Eduardo','Ortega Galán, Gabriel','Prieto Núñez, Noelia','Ruiz Jaen, Javier','Torres Renedo, Raquel','Vázquez Xavier, Xavi'
+            ],
+            'rio-arlanza': [
+                'Antolín Robles, Mercedes','Caballero Lago, Antonio','Ezquerra Pinto, Fernando','García Plaza, Pedro','López Agüero, Sagrario','Pérez Olaz, Justa'
+            ],
+            'santa-maria': [
+                'Castaño Ruano, Visitación','Díaz Pino, Aurora','Fernández Bordel, Jesús','Granell Rodríguez, Silvia','Sebastián Yagüe, Mariano'
+            ],
+            'v-aleixandre': [
+                'Hernando Pascual, Beatriz','Plaza Cuevas, Ana','Renedo Llanos, Pilar','Sastre Manso, Olga','Zorrilla Pinto, Carmen'
+            ],
+            'areas-vivienda': [
+                'Camarero Ruiz, Diego','Domínguez Vélez, Sara','Lozano Cruz, Patricia','Salazar Ovejero, Roberto','Tudanca Esteban, Jorge'
+            ],
+            'colegio-puentesauco': [
+                'Alumno · iniciales L.A.','Alumno · iniciales M.B.','Alumno · iniciales R.C.','Alumno · iniciales S.D.'
+            ]
+        }
+    }">
+
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100 relative">
+            <button @click="userMenu = !userMenu" class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">Federico Martínez</p>
+                    <p class="text-[10px] text-slate-500 truncate">Gerencia</p>
+                </div>
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div x-show="userMenu" x-cloak @click.outside="userMenu = false" class="absolute bottom-full left-3 right-3 mb-1 rounded-lg border border-slate-200 bg-white shadow-lg py-1 z-20">
+                <a href="personas-lista.html?mio=1" class="block px-3 py-1.5 text-sm text-emerald-700 hover:bg-emerald-50 font-medium">⭐ Mis personas</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Mi perfil</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Preferencias</a>
+                <div class="border-t border-slate-100 my-1"></div>
+                <a href="#" class="block px-3 py-1.5 text-sm text-rose-700 hover:bg-rose-50">Cerrar sesión</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate"><a href="index.html" class="hover:text-emerald-700">Inicio</a> <span class="mx-1">›</span> <span class="text-slate-700">Facturación</span></nav>
+            <div class="flex items-center gap-2 shrink-0">
+                <button class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-emerald-400">⤓ Excel (formato actual)</button>
+                <button class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-emerald-400">↗ SAGE / Contaplus</button>
+                <button @click="generarModal = true" class="rounded-lg bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">📄 Generar factura</button>
+                <button @click="nuevoServ = true" class="rounded-lg border border-emerald-700 text-emerald-700 px-3 py-1.5 text-xs font-medium hover:bg-emerald-50">+ Servicio extraordinario</button>
+            </div>
+        </div>
+
+        <div class="px-8 py-6 max-w-7xl space-y-5">
+
+            <!-- Cabecera -->
+            <header>
+                <p class="text-xs uppercase tracking-widest text-emerald-700 font-semibold">Junio 2026 · Económico-Financiero</p>
+                <h1 class="mt-1 text-2xl font-semibold tracking-tight">Facturación y servicios extraordinarios</h1>
+                <p class="mt-1 text-sm text-slate-500">Sustituye la carpeta <code>FAB/2026</code> de Excel mensuales · responsables: Sonia Ureta, Dori González</p>
+            </header>
+
+            <!-- KPIs macro -->
+            <section class="grid gap-3 md:grid-cols-4">
+                <div class="rounded-xl border-2 border-emerald-300 bg-emerald-50 p-4">
+                    <p class="text-xs text-emerald-700 font-medium">Facturado mes (estimado)</p>
+                    <p class="mt-0.5 text-2xl font-light text-emerald-800">312.480 €</p>
+                    <p class="text-[10px] text-emerald-700">383 facturas · cierra 30/06</p>
+                </div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4">
+                    <p class="text-xs text-slate-500">Servicios extras (mes)</p>
+                    <p class="mt-0.5 text-2xl font-light">28.940 €</p>
+                    <p class="text-[10px] text-slate-500">142 registros · 8 tipos</p>
+                </div>
+                <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                    <p class="text-xs text-amber-700">Pendiente de facturar</p>
+                    <p class="mt-0.5 text-2xl font-light text-amber-800">17 reg.</p>
+                    <p class="text-[10px] text-amber-700">requieren revisión</p>
+                </div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4">
+                    <p class="text-xs text-slate-500">Mes anterior (mayo)</p>
+                    <p class="mt-0.5 text-2xl font-light">307.910 €</p>
+                    <p class="text-[10px] text-emerald-700">+1,5 % vs. mayo · ✓ cerrado</p>
+                </div>
+            </section>
+
+            <!-- Tabs internas -->
+            <div class="border-b border-slate-200 flex items-center gap-1 -mb-1 overflow-x-auto">
+                <button @click="tab = 'resumen'" :class="tab === 'resumen' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-2 text-sm font-medium border-b-2 whitespace-nowrap">📊 Resumen mensual</button>
+                <button @click="tab = 'extras'" :class="tab === 'extras' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-2 text-sm font-medium border-b-2 whitespace-nowrap">📋 Servicios extraordinarios (142)</button>
+                <button @click="tab = 'catalogo'" :class="tab === 'catalogo' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-2 text-sm font-medium border-b-2 whitespace-nowrap">🏷 Catálogo y tarifas</button>
+                <button @click="tab = 'facturas'" :class="tab === 'facturas' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-2 text-sm font-medium border-b-2 whitespace-nowrap">📑 Facturas emitidas</button>
+                <button @click="tab = 'concilia'" :class="tab === 'concilia' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'" class="px-4 py-2 text-sm font-medium border-b-2 whitespace-nowrap">🔗 Conciliación</button>
+            </div>
+
+            <!-- TAB Resumen mensual -->
+            <section x-show="tab === 'resumen'" class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                <div class="px-5 py-3 border-b border-slate-200">
+                    <h2 class="text-sm font-semibold">Resumen mensual por centro · Junio 2026</h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Habitual + extraordinarios · click en una celda para detalle</p>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-medium">Centro</th>
+                                <th class="px-4 py-2 text-right font-medium">Personas</th>
+                                <th class="px-4 py-2 text-right font-medium">Habitual €</th>
+                                <th class="px-4 py-2 text-right font-medium">Extras €</th>
+                                <th class="px-4 py-2 text-right font-medium">Total €</th>
+                                <th class="px-4 py-2 text-center font-medium">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer">
+                                <td class="px-4 py-2.5 font-medium">Residencia Fuentecillas</td>
+                                <td class="px-4 py-2.5 text-right text-slate-600">48</td>
+                                <td class="px-4 py-2.5 text-right">42.180 €</td>
+                                <td class="px-4 py-2.5 text-right">3.420 €</td>
+                                <td class="px-4 py-2.5 text-right font-semibold">45.600 €</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">En curso</span></td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer">
+                                <td class="px-4 py-2.5 font-medium">Residencia Puentesaúco</td>
+                                <td class="px-4 py-2.5 text-right text-slate-600">26</td>
+                                <td class="px-4 py-2.5 text-right">23.140 €</td>
+                                <td class="px-4 py-2.5 text-right">2.180 €</td>
+                                <td class="px-4 py-2.5 text-right font-semibold">25.320 €</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">En curso</span></td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer">
+                                <td class="px-4 py-2.5 font-medium">Residencia Quintanadueñas</td>
+                                <td class="px-4 py-2.5 text-right text-slate-600">24</td>
+                                <td class="px-4 py-2.5 text-right">21.360 €</td>
+                                <td class="px-4 py-2.5 text-right">1.890 €</td>
+                                <td class="px-4 py-2.5 text-right font-semibold">23.250 €</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">En curso</span></td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer">
+                                <td class="px-4 py-2.5 font-medium">Residencia Salas de los Infantes</td>
+                                <td class="px-4 py-2.5 text-right text-slate-600">18</td>
+                                <td class="px-4 py-2.5 text-right">16.020 €</td>
+                                <td class="px-4 py-2.5 text-right">4.520 €</td>
+                                <td class="px-4 py-2.5 text-right font-semibold">20.540 €</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">En curso</span></td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer">
+                                <td class="px-4 py-2.5 font-medium">Residencia Río Arlanza (Mayores)</td>
+                                <td class="px-4 py-2.5 text-right text-slate-600">32</td>
+                                <td class="px-4 py-2.5 text-right">38.400 €</td>
+                                <td class="px-4 py-2.5 text-right">2.760 €</td>
+                                <td class="px-4 py-2.5 text-right font-semibold">41.160 €</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">En curso</span></td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer">
+                                <td class="px-4 py-2.5 font-medium">Residencia Santa María (Villadiego)</td>
+                                <td class="px-4 py-2.5 text-right text-slate-600">28</td>
+                                <td class="px-4 py-2.5 text-right">33.600 €</td>
+                                <td class="px-4 py-2.5 text-right">2.140 €</td>
+                                <td class="px-4 py-2.5 text-right font-semibold">35.740 €</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">En curso</span></td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer">
+                                <td class="px-4 py-2.5 font-medium">Centro Multiactividad V. Aleixandre</td>
+                                <td class="px-4 py-2.5 text-right text-slate-600">38</td>
+                                <td class="px-4 py-2.5 text-right">15.200 €</td>
+                                <td class="px-4 py-2.5 text-right">820 €</td>
+                                <td class="px-4 py-2.5 text-right font-semibold">16.020 €</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">En curso</span></td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer">
+                                <td class="px-4 py-2.5 font-medium">Áreas de Vivienda</td>
+                                <td class="px-4 py-2.5 text-right text-slate-600">32</td>
+                                <td class="px-4 py-2.5 text-right">19.840 €</td>
+                                <td class="px-4 py-2.5 text-right">1.450 €</td>
+                                <td class="px-4 py-2.5 text-right font-semibold">21.290 €</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">En curso</span></td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer">
+                                <td class="px-4 py-2.5 font-medium">Colegio EE Puentesaúco</td>
+                                <td class="px-4 py-2.5 text-right text-slate-600">24</td>
+                                <td class="px-4 py-2.5 text-right">8.760 €</td>
+                                <td class="px-4 py-2.5 text-right text-rose-700">5.620 €</td>
+                                <td class="px-4 py-2.5 text-right font-semibold">14.380 €</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800" title="Comedor + transporte + madrugadores">✓ Cerrado</span></td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer text-xs text-slate-500">
+                                <td colspan="6" class="px-4 py-2 text-center">+ 6 centros más (CD, UA, Servicio Puentes) · <a href="#" class="text-emerald-700 hover:underline">ver todos</a></td>
+                            </tr>
+                            <tr class="bg-slate-50 font-semibold">
+                                <td class="px-4 py-2.5">TOTAL grupo · junio 2026 (estimado)</td>
+                                <td class="px-4 py-2.5 text-right">383</td>
+                                <td class="px-4 py-2.5 text-right">283.540 €</td>
+                                <td class="px-4 py-2.5 text-right">28.940 €</td>
+                                <td class="px-4 py-2.5 text-right text-emerald-800">312.480 €</td>
+                                <td class="px-4 py-2.5"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB Servicios extraordinarios -->
+            <section x-show="tab === 'extras'" x-cloak class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                <div class="px-5 py-3 border-b border-slate-200 flex items-end justify-between flex-wrap gap-3">
+                    <div>
+                        <h2 class="text-sm font-semibold">Servicios extraordinarios · todos los centros</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Sustituye las hojas <code>ATT EXTRA *</code> del Excel · 142 registros este mes</p>
+                    </div>
+                    <button @click="nuevoServ = true" class="rounded-lg bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">+ Nuevo servicio</button>
+                </div>
+                <div class="px-5 py-3 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2 flex-wrap">
+                    <select class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                        <option>Todos los centros</option>
+                        <option>Residencia Fuentecillas</option>
+                        <option>Residencia Puentesaúco</option>
+                        <option>Residencia Quintanadueñas</option>
+                        <option>Residencia Salas de los Infantes</option>
+                        <option>Áreas de Vivienda</option>
+                        <option>Colegio EE Puentesaúco</option>
+                    </select>
+                    <select class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                        <option>Todos los servicios</option>
+                        <option>Acompañamiento médico</option>
+                        <option>Acompañamiento a urgencias</option>
+                        <option>Acompañamiento a juzgados</option>
+                        <option>Pruebas diagnósticas (Salas)</option>
+                        <option>Kilometraje</option>
+                        <option>Podología</option>
+                        <option>Atención fin de semana</option>
+                        <option>Comedor</option>
+                        <option>Transporte escolar</option>
+                    </select>
+                    <select class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                        <option>Junio 2026</option>
+                        <option>Mayo 2026</option>
+                        <option>Abril 2026</option>
+                        <option>Personalizado…</option>
+                    </select>
+                    <div class="relative flex-1 min-w-[200px]">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">🔎</span>
+                        <input type="search" placeholder="Buscar por persona o descripción…" class="w-full pl-10 pr-3 py-1.5 rounded-lg border border-slate-300 bg-white outline-none text-sm focus:border-emerald-500">
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-medium">Fecha</th>
+                                <th class="px-4 py-2 text-left font-medium">Persona</th>
+                                <th class="px-4 py-2 text-left font-medium">Centro</th>
+                                <th class="px-4 py-2 text-left font-medium">Servicio</th>
+                                <th class="px-4 py-2 text-left font-medium">Detalle</th>
+                                <th class="px-4 py-2 text-right font-medium">Unid.</th>
+                                <th class="px-4 py-2 text-right font-medium">Tarifa</th>
+                                <th class="px-4 py-2 text-right font-medium">Importe</th>
+                                <th class="px-4 py-2 text-center font-medium">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 text-slate-700">02/06/2026</td>
+                                <td class="px-4 py-2 font-medium">González Pérez, Marta</td>
+                                <td class="px-4 py-2 text-xs text-slate-500">Fuentecillas</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-800">Podología</span></td>
+                                <td class="px-4 py-2 text-xs text-slate-600">Sesión mensual</td>
+                                <td class="px-4 py-2 text-right">1</td>
+                                <td class="px-4 py-2 text-right">15,00 €</td>
+                                <td class="px-4 py-2 text-right font-semibold">15,00 €</td>
+                                <td class="px-4 py-2 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Pendiente</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 text-slate-700">03/06/2026</td>
+                                <td class="px-4 py-2 font-medium">Sanz Ibáñez, José Luis</td>
+                                <td class="px-4 py-2 text-xs text-slate-500">Fuentecillas</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Acomp. médico</span></td>
+                                <td class="px-4 py-2 text-xs text-slate-600">CS Burgos Norte · análisis</td>
+                                <td class="px-4 py-2 text-right">2,5 h</td>
+                                <td class="px-4 py-2 text-right">14,20 €</td>
+                                <td class="px-4 py-2 text-right font-semibold">35,50 €</td>
+                                <td class="px-4 py-2 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Pendiente</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 text-slate-700">04/06/2026</td>
+                                <td class="px-4 py-2 font-medium">Antolín Robles, Mercedes</td>
+                                <td class="px-4 py-2 text-xs text-slate-500">Río Arlanza</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Acomp. urgencias</span></td>
+                                <td class="px-4 py-2 text-xs text-slate-600">HUBU · noche 23h-3h</td>
+                                <td class="px-4 py-2 text-right">4 h</td>
+                                <td class="px-4 py-2 text-right">14,20 €</td>
+                                <td class="px-4 py-2 text-right font-semibold">56,80 €</td>
+                                <td class="px-4 py-2 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Pendiente</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 text-slate-700">05/06/2026</td>
+                                <td class="px-4 py-2 font-medium">Sáez de Antón, Inés</td>
+                                <td class="px-4 py-2 text-xs text-slate-500">Salas (Resi)</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">Endocrino</span></td>
+                                <td class="px-4 py-2 text-xs text-slate-600">CS Salas · revisión + km</td>
+                                <td class="px-4 py-2 text-right">2 h + 40 km</td>
+                                <td class="px-4 py-2 text-right">14 € + 0,25 €/km</td>
+                                <td class="px-4 py-2 text-right font-semibold">38,00 €</td>
+                                <td class="px-4 py-2 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Pendiente</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 text-slate-700">06/06/2026</td>
+                                <td class="px-4 py-2 font-medium">Alumno · iniciales L.A.</td>
+                                <td class="px-4 py-2 text-xs text-slate-500">Colegio EE</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Comedor</span></td>
+                                <td class="px-4 py-2 text-xs text-slate-600">Mes completo junio</td>
+                                <td class="px-4 py-2 text-right">1 mes</td>
+                                <td class="px-4 py-2 text-right">95,00 €</td>
+                                <td class="px-4 py-2 text-right font-semibold">95,00 €</td>
+                                <td class="px-4 py-2 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">✓ Cerrado</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 text-slate-700">06/06/2026</td>
+                                <td class="px-4 py-2 font-medium">Alumno · iniciales L.A.</td>
+                                <td class="px-4 py-2 text-xs text-slate-500">Colegio EE</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Transporte escolar</span></td>
+                                <td class="px-4 py-2 text-xs text-slate-600">Mes completo junio</td>
+                                <td class="px-4 py-2 text-right">1 mes</td>
+                                <td class="px-4 py-2 text-right">75,00 €</td>
+                                <td class="px-4 py-2 text-right font-semibold">75,00 €</td>
+                                <td class="px-4 py-2 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">✓ Cerrado</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 text-slate-700">07/06/2026</td>
+                                <td class="px-4 py-2 font-medium">Aguado Lara, Luis</td>
+                                <td class="px-4 py-2 text-xs text-slate-500">Quintanadueñas</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-orange-100 text-orange-800">Atenc. fin semana</span></td>
+                                <td class="px-4 py-2 text-xs text-slate-600">Sábado 7 · cierre tarde</td>
+                                <td class="px-4 py-2 text-right">1 día</td>
+                                <td class="px-4 py-2 text-right">22,00 €</td>
+                                <td class="px-4 py-2 text-right font-semibold">22,00 €</td>
+                                <td class="px-4 py-2 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Pendiente</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 text-slate-700">08/06/2026</td>
+                                <td class="px-4 py-2 font-medium">Rodríguez García, Carlos</td>
+                                <td class="px-4 py-2 text-xs text-slate-500">Fuentecillas</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Acomp. juzgados</span></td>
+                                <td class="px-4 py-2 text-xs text-slate-600">Trámite curatela</td>
+                                <td class="px-4 py-2 text-right">3 h</td>
+                                <td class="px-4 py-2 text-right">14,00 €</td>
+                                <td class="px-4 py-2 text-right font-semibold">42,00 €</td>
+                                <td class="px-4 py-2 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Pendiente</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="px-5 py-3 border-t border-slate-200 flex items-center justify-between flex-wrap gap-2 text-xs">
+                    <p class="text-slate-600"><strong>Mostrando 1 – 8</strong> de <strong>142 servicios</strong> · suma del mes: 28.940 €</p>
+                    <div class="flex items-center gap-1">
+                        <button class="px-2 py-1 rounded border border-slate-300 text-slate-400" disabled>‹</button>
+                        <button class="px-2 py-1 rounded bg-emerald-700 text-white w-7">1</button>
+                        <button class="px-2 py-1 rounded border border-slate-300 hover:border-emerald-400 w-7">2</button>
+                        <button class="px-2 py-1 rounded border border-slate-300 hover:border-emerald-400">…</button>
+                        <button class="px-2 py-1 rounded border border-slate-300 hover:border-emerald-400 w-7">18</button>
+                        <button class="px-2 py-1 rounded border border-slate-300 hover:border-emerald-400">›</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB Catálogo y tarifas -->
+            <section x-show="tab === 'catalogo'" x-cloak class="space-y-4">
+                <div class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                    <div class="px-5 py-3 border-b border-slate-200 flex items-end justify-between flex-wrap gap-3">
+                        <div>
+                            <h2 class="text-sm font-semibold">Catálogo de servicios por centro</h2>
+                            <p class="text-xs text-slate-500 mt-0.5">Cada centro define su propio catálogo y tarifas vigentes · histórico conservado</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <select class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                                <option>Residencia Fuentecillas</option>
+                                <option>Residencia Puentesaúco</option>
+                                <option>Residencia Salas</option>
+                                <option>Centro de Día Quintanadueñas</option>
+                                <option>Colegio EE Puentesaúco</option>
+                                <option>Áreas de Vivienda</option>
+                            </select>
+                            <button class="rounded-lg bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">+ Nuevo servicio en catálogo</button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                                <tr>
+                                    <th class="px-4 py-2 text-left font-medium">Código</th>
+                                    <th class="px-4 py-2 text-left font-medium">Servicio</th>
+                                    <th class="px-4 py-2 text-left font-medium">Unidad</th>
+                                    <th class="px-4 py-2 text-right font-medium">Tarifa actual</th>
+                                    <th class="px-4 py-2 text-left font-medium">Vigente desde</th>
+                                    <th class="px-4 py-2 text-center font-medium">Activo</th>
+                                    <th class="px-4 py-2"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-4 py-2 font-mono text-xs">FUE-AM</td>
+                                    <td class="px-4 py-2 font-medium">Acompañamiento médico</td>
+                                    <td class="px-4 py-2 text-slate-600">Hora</td>
+                                    <td class="px-4 py-2 text-right">14,50 €</td>
+                                    <td class="px-4 py-2 text-xs text-slate-500">01/01/2026</td>
+                                    <td class="px-4 py-2 text-center text-emerald-700">✓</td>
+                                    <td class="px-4 py-2 text-center"><button class="text-xs text-emerald-700 hover:underline">✎</button></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-4 py-2 font-mono text-xs">FUE-AU</td>
+                                    <td class="px-4 py-2 font-medium">Acompañamiento a urgencias</td>
+                                    <td class="px-4 py-2 text-slate-600">Hora</td>
+                                    <td class="px-4 py-2 text-right">14,20 €</td>
+                                    <td class="px-4 py-2 text-xs text-slate-500">01/01/2026</td>
+                                    <td class="px-4 py-2 text-center text-emerald-700">✓</td>
+                                    <td class="px-4 py-2 text-center"><button class="text-xs text-emerald-700 hover:underline">✎</button></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-4 py-2 font-mono text-xs">FUE-AJ</td>
+                                    <td class="px-4 py-2 font-medium">Acompañamiento a juzgados</td>
+                                    <td class="px-4 py-2 text-slate-600">Hora</td>
+                                    <td class="px-4 py-2 text-right">14,00 €</td>
+                                    <td class="px-4 py-2 text-xs text-slate-500">01/01/2026</td>
+                                    <td class="px-4 py-2 text-center text-emerald-700">✓</td>
+                                    <td class="px-4 py-2 text-center"><button class="text-xs text-emerald-700 hover:underline">✎</button></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-4 py-2 font-mono text-xs">FUE-POD</td>
+                                    <td class="px-4 py-2 font-medium">Podología</td>
+                                    <td class="px-4 py-2 text-slate-600">Sesión</td>
+                                    <td class="px-4 py-2 text-right">15,00 €</td>
+                                    <td class="px-4 py-2 text-xs text-slate-500">01/01/2026</td>
+                                    <td class="px-4 py-2 text-center text-emerald-700">✓</td>
+                                    <td class="px-4 py-2 text-center"><button class="text-xs text-emerald-700 hover:underline">✎</button></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-4 py-2 font-mono text-xs">FUE-KM</td>
+                                    <td class="px-4 py-2 font-medium">Kilometraje</td>
+                                    <td class="px-4 py-2 text-slate-600">Km</td>
+                                    <td class="px-4 py-2 text-right">0,25 €</td>
+                                    <td class="px-4 py-2 text-xs text-slate-500">01/01/2026</td>
+                                    <td class="px-4 py-2 text-center text-emerald-700">✓</td>
+                                    <td class="px-4 py-2 text-center"><button class="text-xs text-emerald-700 hover:underline">✎</button></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-4 py-2 font-mono text-xs">FUE-IV</td>
+                                    <td class="px-4 py-2 font-medium">Viaje ida-vuelta</td>
+                                    <td class="px-4 py-2 text-slate-600">Viaje</td>
+                                    <td class="px-4 py-2 text-right">80,96 €</td>
+                                    <td class="px-4 py-2 text-xs text-slate-500">01/01/2026</td>
+                                    <td class="px-4 py-2 text-center text-emerald-700">✓</td>
+                                    <td class="px-4 py-2 text-center"><button class="text-xs text-emerald-700 hover:underline">✎</button></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 opacity-60">
+                                    <td class="px-4 py-2 font-mono text-xs">FUE-AT</td>
+                                    <td class="px-4 py-2 font-medium line-through">Atención extra (genérico)</td>
+                                    <td class="px-4 py-2 text-slate-600">Unidad</td>
+                                    <td class="px-4 py-2 text-right">variable</td>
+                                    <td class="px-4 py-2 text-xs text-slate-500">01/01/2023</td>
+                                    <td class="px-4 py-2 text-center text-slate-400">✗</td>
+                                    <td class="px-4 py-2 text-center"><button class="text-xs text-emerald-700 hover:underline">Activar</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="px-5 py-3 border-t border-slate-100 text-xs text-slate-500">
+                        Catálogo de Residencia Fuentecillas · 6 servicios activos · 1 inactivo (histórico). Cambiar tarifa genera un nuevo registro histórico (no se sobrescribe).
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB Facturas emitidas -->
+            <section x-show="tab === 'facturas'" x-cloak class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                <div class="px-5 py-3 border-b border-slate-200">
+                    <h2 class="text-sm font-semibold">Facturas emitidas</h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Una por persona y mes · estado de pago y enlace al fichero contable</p>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-medium">Nº factura</th>
+                                <th class="px-4 py-2 text-left font-medium">Persona</th>
+                                <th class="px-4 py-2 text-left font-medium">Centro</th>
+                                <th class="px-4 py-2 text-left font-medium">Periodo</th>
+                                <th class="px-4 py-2 text-right font-medium">Habitual</th>
+                                <th class="px-4 py-2 text-right font-medium">Extras</th>
+                                <th class="px-4 py-2 text-right font-medium">Total</th>
+                                <th class="px-4 py-2 text-center font-medium">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50 cursor-pointer" onclick="location.href='factura-detalle.html'">
+                                <td class="px-4 py-2 font-mono text-xs">F-2026/05/0042</td>
+                                <td class="px-4 py-2 font-medium">González Pérez, Marta</td>
+                                <td class="px-4 py-2 text-xs text-slate-500">Fuentecillas</td>
+                                <td class="px-4 py-2 text-slate-600">Mayo 2026</td>
+                                <td class="px-4 py-2 text-right">878,50 €</td>
+                                <td class="px-4 py-2 text-right">29,70 €</td>
+                                <td class="px-4 py-2 text-right font-semibold">908,20 €</td>
+                                <td class="px-4 py-2 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">✓ Pagada</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 cursor-pointer" onclick="location.href='factura-detalle.html'">
+                                <td class="px-4 py-2 font-mono text-xs">F-2026/05/0043</td>
+                                <td class="px-4 py-2 font-medium">Sanz Ibáñez, José Luis</td>
+                                <td class="px-4 py-2 text-xs text-slate-500">Fuentecillas</td>
+                                <td class="px-4 py-2 text-slate-600">Mayo 2026</td>
+                                <td class="px-4 py-2 text-right">878,50 €</td>
+                                <td class="px-4 py-2 text-right">14,20 €</td>
+                                <td class="px-4 py-2 text-right font-semibold">892,70 €</td>
+                                <td class="px-4 py-2 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">✓ Pagada</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 cursor-pointer" onclick="location.href='factura-detalle.html'">
+                                <td class="px-4 py-2 font-mono text-xs">F-2026/05/0156</td>
+                                <td class="px-4 py-2 font-medium">Antolín Robles, Mercedes</td>
+                                <td class="px-4 py-2 text-xs text-slate-500">Río Arlanza</td>
+                                <td class="px-4 py-2 text-slate-600">Mayo 2026</td>
+                                <td class="px-4 py-2 text-right">1.200,00 €</td>
+                                <td class="px-4 py-2 text-right">0,00 €</td>
+                                <td class="px-4 py-2 text-right font-semibold">1.200,00 €</td>
+                                <td class="px-4 py-2 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Emitida</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB Conciliación -->
+            <section x-show="tab === 'concilia'" x-cloak class="space-y-4">
+                <div class="rounded-xl border border-slate-200 bg-white p-5">
+                    <h2 class="text-sm font-semibold mb-2">🔗 Conciliación FAB-GNRAL vs. ÁGORA · Mayo 2026</h2>
+                    <p class="text-xs text-slate-500 mb-3">Comparación final con el Excel histórico del Dpto. Económico para validar la migración</p>
+
+                    <div class="grid gap-3 md:grid-cols-3">
+                        <div class="rounded-lg border border-slate-200 p-3">
+                            <p class="text-xs text-slate-500">Total según FAB-GNRAL (Excel)</p>
+                            <p class="mt-1 text-xl font-light">307.910,40 €</p>
+                        </div>
+                        <div class="rounded-lg border border-slate-200 p-3">
+                            <p class="text-xs text-slate-500">Total calculado por ÁGORA</p>
+                            <p class="mt-1 text-xl font-light">307.910,40 €</p>
+                        </div>
+                        <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-3">
+                            <p class="text-xs text-emerald-700 font-medium">Diferencia</p>
+                            <p class="mt-1 text-xl font-light text-emerald-800">0,00 €</p>
+                            <p class="text-[10px] text-emerald-700">✓ Conciliado</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-100">
+                        <p class="text-xs font-medium mb-2">Comparativa por centro</p>
+                        <table class="w-full text-xs">
+                            <thead class="text-slate-500">
+                                <tr><th class="text-left py-1">Centro</th><th class="text-right">Excel</th><th class="text-right">ÁGORA</th><th class="text-right">Δ</th></tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr><td class="py-1">Residencia Fuentecillas</td><td class="text-right">44.940,00</td><td class="text-right">44.940,00</td><td class="text-right text-emerald-700">0,00</td></tr>
+                                <tr><td class="py-1">Residencia Puentesaúco</td><td class="text-right">24.870,00</td><td class="text-right">24.870,00</td><td class="text-right text-emerald-700">0,00</td></tr>
+                                <tr><td class="py-1">Residencia Quintanadueñas</td><td class="text-right">22.890,00</td><td class="text-right">22.890,00</td><td class="text-right text-emerald-700">0,00</td></tr>
+                                <tr><td class="py-1">Resto centros (12)</td><td class="text-right">215.210,40</td><td class="text-right">215.210,40</td><td class="text-right text-emerald-700">0,00</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="rounded-xl bg-blue-50 border border-blue-200 p-3 text-xs text-blue-800">
+                    💡 Durante la migración inicial (Fase 4.5), ÁGORA correrá en paralelo con el Excel actual hasta que la conciliación sea estable durante 3 meses consecutivos. Solo entonces se sustituye el flujo.
+                </div>
+            </section>
+
+            <!-- Aviso RGPD -->
+            <section class="rounded-xl bg-slate-50 border border-slate-200 p-3 text-xs text-slate-600">
+                <p>🔐 <strong>Acceso restringido</strong>: solo Administración (Sonia Ureta · Dori González) y Gerencia. Cada movimiento queda registrado en bitácora con usuario, IP, timestamp. Los datos económicos son <em>información personal sensible</em>. Retención: 6 años (LGT). Exportación a software contable (SAGE / Contaplus / A3) en proceso de definición.</p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Modal Generar factura -->
+    <div x-show="generarModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm px-4" @click.self="generarModal = false">
+        <div class="w-full max-w-2xl rounded-2xl bg-white shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+            <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between sticky top-0 bg-white z-10">
+                <h3 class="font-semibold">📄 Generar factura mensual</h3>
+                <button @click="generarModal = false" class="w-7 h-7 rounded-full hover:bg-slate-100 text-slate-500">✕</button>
+            </div>
+            <div class="p-5 space-y-4 text-sm">
+                <div class="grid gap-3 md:grid-cols-3">
+                    <label class="block">
+                        <span class="text-xs font-medium text-slate-700">Centro</span>
+                        <select x-model="centroSel" class="mt-0.5 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500 text-sm">
+                            <option value="fuentecillas">Residencia Fuentecillas</option>
+                            <option value="puentesauco">Residencia Puentesaúco</option>
+                            <option value="quintanaduenas">Residencia Quintanadueñas</option>
+                            <option value="salas">Residencia Salas</option>
+                            <option value="rio-arlanza">Residencia Río Arlanza</option>
+                            <option value="santa-maria">Residencia Santa María</option>
+                            <option value="v-aleixandre">C. Multiactividad V. Aleixandre</option>
+                            <option value="areas-vivienda">Áreas de Vivienda</option>
+                            <option value="colegio-puentesauco">Colegio EE Puentesaúco</option>
+                        </select>
+                    </label>
+                    <label class="block">
+                        <span class="text-xs font-medium text-slate-700">Persona</span>
+                        <select class="mt-0.5 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500 text-sm">
+                            <option value="">— Selecciona persona —</option>
+                            <template x-for="p in personasPorCentro[centroSel] || []" :key="p">
+                                <option x-text="p" :value="p"></option>
+                            </template>
+                        </select>
+                    </label>
+                    <label class="block">
+                        <span class="text-xs font-medium text-slate-700">Periodo</span>
+                        <select class="mt-0.5 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500 text-sm">
+                            <option>Junio 2026 (en curso)</option>
+                            <option>Mayo 2026</option>
+                            <option>Abril 2026</option>
+                            <option>Personalizado…</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                    <p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold mb-2">Previsualización (cálculo automático)</p>
+                    <div class="space-y-1.5 text-sm">
+                        <div class="flex items-center justify-between"><span>Plaza concertada (30 días · 29,28 €/día)</span><span class="font-medium">878,50 €</span></div>
+                        <div class="flex items-center justify-between text-slate-600"><span>+ Acompañamiento médico (2,5 h · 03/06)</span><span>35,50 €</span></div>
+                        <div class="flex items-center justify-between text-slate-600"><span>+ Podología (02/06)</span><span>15,00 €</span></div>
+                        <div class="flex items-center justify-between text-slate-600"><span>+ Kilometraje (24 km · 03/06)</span><span>6,00 €</span></div>
+                        <div class="pt-2 mt-2 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500"><span>IVA (exento art. 20 LIVA)</span><span>— €</span></div>
+                        <div class="pt-2 border-t-2 border-slate-300 flex items-center justify-between font-bold text-emerald-700"><span>TOTAL FACTURA</span><span class="text-lg">935,00 €</span></div>
+                    </div>
+                </div>
+                <div class="grid gap-3 md:grid-cols-2">
+                    <label class="block">
+                        <span class="text-xs font-medium text-slate-700">Forma de pago</span>
+                        <select class="mt-0.5 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500 text-sm">
+                            <option>Domiciliación SEPA</option>
+                            <option>Transferencia</option>
+                            <option>Efectivo (ventanilla)</option>
+                        </select>
+                    </label>
+                    <label class="block">
+                        <span class="text-xs font-medium text-slate-700">Fecha de emisión</span>
+                        <input type="date" value="2026-06-05" class="mt-0.5 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500 text-sm">
+                    </label>
+                </div>
+                <div class="rounded-lg bg-blue-50 border border-blue-200 p-3 text-xs text-blue-800">
+                    💡 Al generar, se creará la factura en estado <strong>Borrador</strong>. Podrás revisarla antes de marcarla como Emitida. La emisión definitiva queda registrada en bitácora.
+                </div>
+            </div>
+            <div class="px-5 py-3 border-t border-slate-200 flex items-center justify-end gap-2 bg-white sticky bottom-0">
+                <button @click="generarModal = false" class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm text-slate-700 hover:border-emerald-400">Cancelar</button>
+                <button @click="generarModal = false; toast = '📄 Factura F-2026/06/0042 generada en borrador'; mostrarToast = true; setTimeout(() => mostrarToast = false, 3000); setTimeout(() => window.open('factura-detalle.html', '_blank'), 500)" class="rounded-lg bg-emerald-700 text-white px-4 py-2 text-sm font-medium hover:bg-emerald-800">📄 Generar y previsualizar</button>
+            </div>
+        </div>
+    </div>
+
+        <!-- Toast de confirmación -->
+    <div x-show="mostrarToast" x-cloak x-transition.opacity class="fixed bottom-6 right-6 z-50 rounded-lg bg-emerald-700 text-white px-5 py-3 shadow-2xl flex items-center gap-2">
+        <span x-text="toast" class="text-sm font-medium"></span>
+    </div>
+
+
+    <!-- Modal "Nuevo servicio extraordinario" -->
+<div x-show="nuevoServ" x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm px-4" @click.self="nuevoServ = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+            <h3 class="font-semibold">+ Nuevo servicio extraordinario</h3>
+            <button @click="nuevoServ = false" class="w-7 h-7 rounded-full hover:bg-slate-100 text-slate-500">✕</button>
+        </div>
+        <div class="p-5 space-y-3 text-sm">
+            <div class="grid gap-3 md:grid-cols-2">
+                <label class="block">
+                    <span class="text-xs font-medium text-slate-700">Centro</span>
+                    <select x-model="centroSel" class="mt-0.5 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500">
+                        <option value="fuentecillas">Residencia Fuentecillas</option>
+                        <option value="puentesauco">Residencia Puentesaúco</option>
+                        <option value="quintanaduenas">Residencia Quintanadueñas</option>
+                        <option value="salas">Residencia Salas de los Infantes</option>
+                        <option value="rio-arlanza">Residencia Río Arlanza (Mayores)</option>
+                        <option value="santa-maria">Residencia Santa María (Villadiego)</option>
+                        <option value="v-aleixandre">C. Multiactividad V. Aleixandre</option>
+                        <option value="areas-vivienda">Áreas de Vivienda</option>
+                        <option value="colegio-puentesauco">Colegio EE Puentesaúco</option>
+                    </select>
+                </label>
+                <label class="block">
+                    <span class="text-xs font-medium text-slate-700">Persona atendida <span class="text-slate-400" x-text="'· ' + (personasPorCentro[centroSel]?.length || 0) + ' del centro'"></span></span>
+                    <select class="mt-0.5 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500">
+                        <option value="">— Selecciona persona —</option>
+                        <template x-for="p in personasPorCentro[centroSel] || []" :key="p">
+                            <option x-text="p" :value="p"></option>
+                        </template>
+                    </select>
+                </label>
+            </div>
+            <div class="grid gap-3 md:grid-cols-2">
+                <label class="block">
+                    <span class="text-xs font-medium text-slate-700">Tipo de servicio</span>
+                    <select class="mt-0.5 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500">
+                        <option>Acompañamiento médico (14,50 €/h)</option>
+                        <option>Acompañamiento a urgencias (14,20 €/h)</option>
+                        <option>Acompañamiento a juzgados (14,00 €/h)</option>
+                        <option>Podología (15,00 €/sesión)</option>
+                        <option>Kilometraje (0,25 €/km)</option>
+                        <option>Viaje ida-vuelta (80,96 €)</option>
+                        <option>Pago delegado (variable)</option>
+                    </select>
+                </label>
+                <label class="block">
+                    <span class="text-xs font-medium text-slate-700">Fecha del servicio</span>
+                    <input type="date" value="2026-06-04" class="mt-0.5 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500">
+                </label>
+            </div>
+            <label class="block">
+                <span class="text-xs font-medium text-slate-700">Descripción / detalle</span>
+                <input type="text" placeholder="Ej.: Endocrino HUBU · acompañamiento mañana" class="mt-0.5 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500">
+            </label>
+            <div class="grid gap-3 md:grid-cols-3">
+                <label class="block">
+                    <span class="text-xs font-medium text-slate-700">Unidades</span>
+                    <input type="number" step="0.5" value="2" class="mt-0.5 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500">
+                </label>
+                <label class="block">
+                    <span class="text-xs font-medium text-slate-700">Tarifa (€)</span>
+                    <input type="number" step="0.01" value="14.50" disabled class="mt-0.5 w-full rounded-lg border border-slate-300 px-3 py-2 bg-slate-50 text-slate-700">
+                </label>
+                <label class="block">
+                    <span class="text-xs font-medium text-slate-700">Importe (calculado)</span>
+                    <input type="text" value="29,00 €" disabled class="mt-0.5 w-full rounded-lg border border-emerald-300 bg-emerald-50 text-emerald-800 px-3 py-2 font-semibold">
+                </label>
+            </div>
+            <label class="block">
+                <span class="text-xs font-medium text-slate-700">Observaciones</span>
+                <textarea rows="2" class="mt-0.5 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-emerald-500" placeholder="Anotaciones internas (opcional)…"></textarea>
+            </label>
+        </div>
+        <div class="px-5 py-3 border-t border-slate-200 flex items-center justify-end gap-2">
+            <button @click="nuevoServ = false" class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm text-slate-700 hover:border-emerald-400">Cancelar</button>
+            <button @click="nuevoServ = false; toast = '✓ Servicio extraordinario guardado correctamente'; mostrarToast = true; setTimeout(() => mostrarToast = false, 3000)" class="rounded-lg bg-emerald-700 text-white px-4 py-2 text-sm font-medium hover:bg-emerald-800">Guardar servicio</button>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+<!-- Búsqueda Ctrl+K -->
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, factura..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

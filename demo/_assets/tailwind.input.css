@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* Fuentes (sustituye al <link> de Google Fonts que el CDN inyectaba) */
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+/* Fuente de contenido para purgar */
+@source "../*.html";
+@source "../_partials/*.html";

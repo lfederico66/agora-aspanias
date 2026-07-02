@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Control de Planes de Vida · ÁGORA{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+
+    <div class="flex items-end justify-between flex-wrap gap-3">
+        <div>
+            <h1 class="text-2xl font-semibold tracking-tight">Control de Planes de Vida por servicio</h1>
+            <p class="text-sm text-slate-500">{{ resumen|length }} centros · {{ agregado.personas }} personas · Fundación Aspanias Burgos + Aspaniasmerc 2016 S.L.U.</p>
+        </div>
+        <div class="flex items-center gap-2">
+            <a href="{% url 'indicadores:cuadro_mando' %}" class="rounded border border-slate-300 bg-white px-3 py-1.5 text-sm hover:border-emerald-400">Cuadro de mando →</a>
+        </div>
+    </div>
+
+    {# KPIs grupo #}
+    <div class="grid gap-3 md:grid-cols-5">
+        <div class="rounded-xl border border-slate-200 bg-white p-4">
+            <p class="text-xs uppercase tracking-wide text-slate-500">Personas</p>
+            <p class="mt-1 text-3xl font-light">{{ agregado.personas }}</p>
+        </div>
+        <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+            <p class="text-xs uppercase tracking-wide text-emerald-700">PV realizados</p>
+            <p class="mt-1 text-3xl font-light text-emerald-800">{{ agregado.realizados }} <span class="text-base">· {{ agregado.pct_realizado }}%</span></p>
+        </div>
+        <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
+            <p class="text-xs uppercase tracking-wide text-amber-700">Pendientes</p>
+            <p class="mt-1 text-3xl font-light text-amber-800">{{ agregado.pendientes }}</p>
+        </div>
+        <div class="rounded-xl border border-blue-200 bg-blue-50 p-4">
+            <p class="text-xs uppercase tracking-wide text-blue-700">Revisados</p>
+            <p class="mt-1 text-3xl font-light text-blue-800">{{ agregado.revisados }}</p>
+        </div>
+        <div class="rounded-xl border border-rose-200 bg-rose-50 p-4">
+            <p class="text-xs uppercase tracking-wide text-rose-700">Fuera de plazo</p>
+            <p class="mt-1 text-3xl font-light text-rose-800">{{ agregado.fuera_plazo }}</p>
+        </div>
+    </div>
+
+    {# Tablero por centro #}
+    <div class="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+        <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Tablero por centro</h2>
+            <p class="text-xs text-slate-500">Click en un centro para ver el detalle</p>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
+                    <tr>
+                        <th class="text-left px-4 py-2">Centro / Servicio</th>
+                        <th class="text-left px-4 py-2">Corresponsable</th>
+                        <th class="text-right px-4 py-2">Personas</th>
+                        <th class="text-right px-4 py-2">Realizados</th>
+                        <th class="text-right px-4 py-2">Pendientes</th>
+                        <th class="text-right px-4 py-2">Revisados</th>
+                        <th class="text-right px-4 py-2">Fuera plazo</th>
+                        <th class="text-right px-4 py-2">% real.</th>
+                        <th class="text-left px-4 py-2">Estado</th>
+                        <th class="text-left px-4 py-2"></th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {% for fila in resumen %}
+                    <tr class="hover:bg-slate-50">
+                        <td class="px-4 py-2 font-medium">
+                            <a href="{% url 'planes_vida:control_pv_servicio' fila.centro.codigo %}" class="hover:text-emerald-700">{{ fila.centro.nombre }}</a>
+                        </td>
+                        <td class="px-4 py-2 text-slate-500">{{ fila.centro.get_corresponsable_display }}</td>
+                        <td class="px-4 py-2 text-right">{{ fila.personas }}</td>
+                        <td class="px-4 py-2 text-right">{{ fila.realizados }}</td>
+                        <td class="px-4 py-2 text-right">{{ fila.pendientes }}</td>
+                        <td class="px-4 py-2 text-right">{{ fila.revisados }}</td>
+                        <td class="px-4 py-2 text-right {% if fila.fuera_plazo %}text-rose-700 font-medium{% else %}text-slate-400{% endif %}">{{ fila.fuera_plazo }}</td>
+                        <td class="px-4 py-2 text-right font-medium
+                            {% if fila.estado_visual == 'al_dia' %}text-emerald-700
+                            {% elif fila.estado_visual == 'atrasado' %}text-amber-700
+                            {% else %}text-rose-700{% endif %}">{{ fila.pct_realizado }}%</td>
+                        <td class="px-4 py-2">
+                            {% if fila.estado_visual == 'al_dia' %}
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span>
+                            {% elif fila.estado_visual == 'atrasado' %}
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Atrasado</span>
+                            {% else %}
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-800">Crítico</span>
+                            {% endif %}
+                        </td>
+                        <td class="px-4 py-2 text-right">
+                            <a href="{% url 'planes_vida:control_pv_servicio' fila.centro.codigo %}" class="text-emerald-700 text-xs hover:underline">Ver →</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="10" class="px-4 py-12 text-center text-sm text-slate-500">No hay centros activos todavía.</td></tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot class="bg-slate-50 font-semibold">
+                    <tr>
+                        <td class="px-4 py-2">Total Grupo</td>
+                        <td class="px-4 py-2 text-slate-500">{{ resumen|length }} centros</td>
+                        <td class="px-4 py-2 text-right">{{ agregado.personas }}</td>
+                        <td class="px-4 py-2 text-right text-emerald-700">{{ agregado.realizados }}</td>
+                        <td class="px-4 py-2 text-right text-amber-700">{{ agregado.pendientes }}</td>
+                        <td class="px-4 py-2 text-right text-blue-700">{{ agregado.revisados }}</td>
+                        <td class="px-4 py-2 text-right text-rose-700">{{ agregado.fuera_plazo }}</td>
+                        <td class="px-4 py-2 text-right text-emerald-700">{{ agregado.pct_realizado }}%</td>
+                        <td class="px-4 py-2"></td>
+                        <td class="px-4 py-2"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    {# Notas institucionales #}
+    <div class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-sm text-emerald-900">
+            <p class="font-semibold uppercase tracking-wide text-xs text-emerald-700">Migración del Excel</p>
+            <p class="mt-2">Este módulo de ÁGORA sustituye al archivo <code class="bg-white px-1 rounded text-xs">Registro PV por servicios. Global Grupo Aspanias.xlsx</code>. Los datos se actualizan automáticamente al editar el Plan de Vida de cada persona.</p>
+        </div>
+        <div class="rounded-xl border border-blue-200 bg-blue-50 p-5 text-sm text-blue-900">
+            <p class="font-semibold uppercase tracking-wide text-xs text-blue-700">Compartido con Residencia/Vivienda</p>
+            <p class="mt-2">Cuando una persona vive en una residencia o vivienda del grupo, su Plan de Vida puede compartirse con el centro asistencial correspondiente. La doble corresponsabilidad RGPD permite el acceso entre centros bajo bitácora compartida.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

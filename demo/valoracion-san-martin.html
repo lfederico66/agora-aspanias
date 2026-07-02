@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<!-- @rol: profesional, gestor_caso, direccion_centro -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escala San Martín — Valoración · ÁGORA</title>
+<link rel="stylesheet" href="_assets/tailwind.css">
+<link rel="stylesheet" href="_assets/print-valoracion.css" media="print">
+<script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+<style>[x-cloak]{display:none!important}.scroll-thin::-webkit-scrollbar{width:6px}.scroll-thin::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}</style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+
+<div class="flex">
+
+  <!-- Sidebar canónico -->
+  <aside class="w-64 bg-white border-r border-slate-200 min-h-screen flex flex-col fixed inset-y-0 left-0 z-10">
+    <div class="px-4 py-4 border-b border-slate-200">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold">Á</div>
+        <span class="text-lg font-semibold text-slate-800">ÁGORA</span>
+      </a>
+    </div>
+    <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+  </aside>
+
+<main class="flex-1 ml-64 p-6" x-data="sanmartin()" x-cloak>
+
+  <!-- Cabecera -->
+  <div class="mb-6 flex items-start justify-between">
+    <div>
+      <nav class="text-xs text-slate-500 mb-2"><a href="personas-lista.html" class="hover:underline">Personas</a> · <a href="persona-detalle.html" class="hover:underline">Ficha persona</a> · <a href="valoraciones-listado.html" class="hover:underline">Valoraciones</a> · <span class="text-slate-700">Escala San Martín</span></nav>
+      <h1 class="text-2xl font-bold text-slate-800">Escala San Martín</h1>
+      <p class="text-sm text-slate-600 mt-1">Verdugo, Gómez, Arias, Santamaría, Navallas, Fernández y Hierro (2014) · Calidad de Vida — personas con discapacidad intelectual con apoyos extensos/generalizados</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <button @click="imprimir()" class="px-3 py-2 text-sm rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50">🖨️ Imprimir</button>
+      <button @click="guardar()" class="px-3 py-2 text-sm rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">💾 Guardar</button>
+      <button @click="firmar()" class="px-3 py-2 text-sm rounded-lg bg-slate-800 text-white hover:bg-slate-900">✍️ Firmar</button>
+    </div>
+  </div>
+
+  <!-- Banner autoguardado -->
+  <div class="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-900 flex items-center gap-2">
+    <span>⚠️</span>
+    <span><strong>Categoría especial art. 9 RGPD</strong> — datos de salud. Cada lectura/edición se registra en bitácora. Borrador autoguardado cada 30 s.</span>
+  </div>
+
+  <div class="grid grid-cols-12 gap-6">
+
+    <!-- Sidebar lateral con progreso -->
+    <aside class="col-span-3">
+      <div class="sticky top-4 bg-white rounded-xl border border-slate-200 p-4">
+        <h3 class="text-sm font-semibold text-slate-700 mb-3">Progreso</h3>
+        <div class="mb-3">
+          <div class="flex justify-between text-xs text-slate-600 mb-1">
+            <span>Completado</span>
+            <span><span x-text="itemsRespondidos()"></span>/95</span>
+          </div>
+          <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div class="h-full bg-emerald-500 transition-all" :style="`width: ${(itemsRespondidos()/95)*100}%`"></div>
+          </div>
+        </div>
+        <ul class="space-y-1 text-xs">
+          <template x-for="d in dimensiones" :key="d.key">
+            <li>
+              <a :href="`#dim-${d.key}`" class="flex items-center justify-between px-2 py-1.5 rounded hover:bg-slate-50">
+                <span class="text-slate-700" x-text="d.nombre"></span>
+                <span class="text-slate-500 font-mono" x-text="`${itemsCompletadosDim(d)}/${d.items.length} · PD ${puntuacionDirecta(d)}`"></span>
+              </a>
+            </li>
+          </template>
+        </ul>
+        <div class="mt-4 pt-3 border-t border-slate-200">
+          <a href="#resultado" class="block px-2 py-1.5 text-xs font-medium text-emerald-700 hover:bg-emerald-50 rounded">📊 Resultado y perfil</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Formulario principal -->
+    <div class="col-span-9 space-y-6">
+
+      <!-- Datos identificativos -->
+      <section class="bg-white rounded-xl border border-slate-200 p-6">
+        <h2 class="text-lg font-semibold text-slate-800 mb-4">Datos de la persona evaluada</h2>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div><label class="block text-xs text-slate-600 mb-1">Nombre y apellidos</label><input type="text" x-model="datos.nombre" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Fecha de nacimiento</label><input type="date" x-model="datos.fecha_nacimiento" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Fecha de aplicación</label><input type="date" x-model="datos.fecha_aplicacion" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Nivel de necesidades de apoyo</label><select x-model="datos.nivel_apoyo" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Extenso</option><option>Generalizado</option></select></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Nivel de dependencia</label><select x-model="datos.dependencia" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Grado I (moderada)</option><option>Grado II (severa)</option><option>Grado III (gran dependencia)</option></select></div>
+          <div><label class="block text-xs text-slate-600 mb-1">% discapacidad</label><input type="number" x-model.number="datos.pct_discapacidad" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+        </div>
+        <div class="mt-4">
+          <label class="block text-xs text-slate-600 mb-2">Otras condiciones (marque las que procedan)</label>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <template x-for="c in condicionesLista" :key="c">
+              <label class="flex items-center gap-2"><input type="checkbox" :value="c" x-model="datos.condiciones"><span x-text="c"></span></label>
+            </template>
+          </div>
+        </div>
+      </section>
+
+      <!-- Informadores -->
+      <section class="bg-white rounded-xl border border-slate-200 p-6">
+        <h2 class="text-lg font-semibold text-slate-800 mb-4">Informadores</h2>
+        <template x-for="(inf, i) in datos.informadores" :key="i">
+          <div class="mb-4 p-4 bg-slate-50 rounded-lg">
+            <div class="text-sm font-medium text-slate-700 mb-2" x-text="`Informador ${i+1}`"></div>
+            <div class="grid grid-cols-2 gap-3 text-sm">
+              <div><label class="block text-xs text-slate-600 mb-1">Nombre y apellidos</label><input type="text" x-model="inf.nombre" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+              <div><label class="block text-xs text-slate-600 mb-1">Relación</label><select x-model="inf.relacion" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Profesional</option><option>Madre/Padre</option><option>Hermano/a</option><option>Tutor/a legal</option><option>Otra</option></select></div>
+              <div><label class="block text-xs text-slate-600 mb-1">Tiempo de contacto (años/meses)</label><input type="text" x-model="inf.tiempo" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="2 años 3 meses"></div>
+              <div><label class="block text-xs text-slate-600 mb-1">Frecuencia</label><select x-model="inf.frecuencia" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Varias veces/semana</option><option>Una vez/semana</option><option>Una vez/dos semanas</option><option>Una vez/mes</option></select></div>
+            </div>
+          </div>
+        </template>
+      </section>
+
+      <!-- Instrucciones -->
+      <section class="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm text-blue-900">
+        <p><strong>Instrucciones:</strong> Marque la opción que MEJOR describa a la persona evaluada para cada afirmación. No deje cuestiones en blanco.</p>
+        <p class="mt-2"><strong>Clave de respuesta:</strong> <span class="font-mono">N</span> Nunca (1) · <span class="font-mono">A</span> Algunas veces (2) · <span class="font-mono">F</span> Frecuentemente (3) · <span class="font-mono">S</span> Siempre (4)</p>
+      </section>
+
+      <!-- Dimensiones (8 secciones) -->
+      <template x-for="d in dimensiones" :key="d.key">
+        <section :id="`dim-${d.key}`" class="bg-white rounded-xl border border-slate-200 p-6 scroll-mt-4">
+          <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
+            <div>
+              <h2 class="text-lg font-semibold text-slate-800" x-text="d.nombre"></h2>
+              <p class="text-xs text-slate-500" x-text="`Ítems ${d.items[0]}–${d.items[d.items.length-1]} · ${d.items.length} ítems`"></p>
+            </div>
+            <div class="text-right">
+              <div class="text-2xl font-bold text-emerald-700" x-text="puntuacionDirecta(d)"></div>
+              <div class="text-xs text-slate-500">PD total</div>
+            </div>
+          </div>
+          <ul class="space-y-3">
+            <template x-for="n in d.items" :key="n">
+              <li class="grid grid-cols-12 gap-3 items-start py-2 border-b border-slate-100 last:border-0">
+                <span class="col-span-1 text-xs font-mono text-slate-500 pt-2" x-text="n"></span>
+                <span class="col-span-7 text-sm text-slate-700" x-text="items[n].texto"></span>
+                <div class="col-span-4 flex gap-1 justify-end">
+                  <template x-for="v in [1,2,3,4]" :key="v">
+                    <button @click="respuestas[n] = v" :class="respuestas[n]===v ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white text-slate-600 border-slate-300 hover:bg-slate-50'" class="w-9 h-9 rounded border text-xs font-semibold transition-colors" :title="['','Nunca','Algunas veces','Frecuentemente','Siempre'][v]">
+                      <span x-text="['','N','A','F','S'][v]"></span>
+                    </button>
+                  </template>
+                </div>
+                <template x-if="items[n].matiz">
+                  <p class="col-span-12 text-xs text-amber-700 bg-amber-50 px-2 py-1 rounded mt-1" x-text="items[n].matiz"></p>
+                </template>
+              </li>
+            </template>
+          </ul>
+        </section>
+      </template>
+
+      <!-- Observaciones libres -->
+      <section class="bg-white rounded-xl border border-slate-200 p-6">
+        <h2 class="text-lg font-semibold text-slate-800 mb-3">Observaciones de la evaluación</h2>
+        <textarea x-model="datos.observaciones" rows="4" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Aspectos relevantes de la aplicación, contexto, comportamiento del informador…"></textarea>
+      </section>
+
+      <!-- Resultado y perfil -->
+      <section id="resultado" class="bg-white rounded-xl border-2 border-emerald-200 p-6 scroll-mt-4">
+        <h2 class="text-lg font-semibold text-emerald-800 mb-4">📊 Resumen de puntuaciones y perfil de Calidad de Vida</h2>
+
+        <table class="w-full text-sm border-collapse mb-6">
+          <thead>
+            <tr class="bg-slate-50 text-xs text-slate-600">
+              <th class="text-left p-2 border-b border-slate-200">Dimensión</th>
+              <th class="text-center p-2 border-b border-slate-200">PD</th>
+              <th class="text-center p-2 border-b border-slate-200">PE</th>
+              <th class="text-center p-2 border-b border-slate-200">Percentil</th>
+              <th class="text-left p-2 border-b border-slate-200">Perfil</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template x-for="d in dimensiones" :key="d.key">
+              <tr class="hover:bg-slate-50">
+                <td class="p-2 border-b border-slate-100 font-medium" x-text="`${d.key} · ${d.nombre}`"></td>
+                <td class="p-2 border-b border-slate-100 text-center font-mono" x-text="puntuacionDirecta(d)"></td>
+                <td class="p-2 border-b border-slate-100 text-center font-mono font-semibold" x-text="puntuacionEstandar(d)"></td>
+                <td class="p-2 border-b border-slate-100 text-center font-mono" x-text="`${percentilDim(d)}%`"></td>
+                <td class="p-2 border-b border-slate-100">
+                  <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-emerald-500" :style="`width: ${(puntuacionEstandar(d)/20)*100}%`"></div>
+                  </div>
+                </td>
+              </tr>
+            </template>
+            <tr class="bg-emerald-50 font-semibold">
+              <td class="p-2">Puntuación estándar total (suma)</td>
+              <td class="p-2"></td>
+              <td class="p-2 text-center font-mono" x-text="sumaPE()"></td>
+              <td colspan="2" class="p-2"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- KPIs índice CdV -->
+        <div class="grid grid-cols-3 gap-4 mb-4">
+          <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4 text-center">
+            <div class="text-xs text-emerald-700 uppercase mb-1">Índice de Calidad de Vida</div>
+            <div class="text-3xl font-bold text-emerald-800" x-text="indiceCV()"></div>
+            <div class="text-xs text-emerald-600 mt-1">PE compuesta</div>
+          </div>
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
+            <div class="text-xs text-blue-700 uppercase mb-1">Percentil del Índice</div>
+            <div class="text-3xl font-bold text-blue-800" x-text="`${percentilICV()}%`"></div>
+            <div class="text-xs text-blue-600 mt-1">comparado población referencia</div>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 text-center">
+            <div class="text-xs text-slate-600 uppercase mb-1">Estado del registro</div>
+            <div class="text-lg font-semibold text-slate-800" x-text="estado"></div>
+            <div class="text-xs text-slate-500 mt-1">Último guardado: <span x-text="ultimoGuardado || '—'"></span></div>
+          </div>
+        </div>
+
+        <p class="text-xs text-slate-500 italic">Los baremos del manual San Martín (2014) están aproximados linealmente para uso operativo. Para informe clínico definitivo, contrastar con las tablas oficiales del manual (Apéndice B).</p>
+      </section>
+
+      <!-- Acciones bajo el formulario -->
+      <div class="flex items-center justify-between gap-3 pb-12">
+        <a href="valoraciones-listado.html" class="text-sm text-slate-600 hover:underline">← Volver al listado</a>
+        <div class="flex gap-2">
+          <button @click="guardar()" class="px-4 py-2 text-sm rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">💾 Guardar borrador</button>
+          <button @click="firmar()" class="px-4 py-2 text-sm rounded-lg bg-slate-800 text-white hover:bg-slate-900">✍️ Firmar y cerrar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+</div>
+
+<script>
+function sanmartin() {
+  return {
+    estado: 'Borrador',
+    ultimoGuardado: '',
+    datos: {
+      nombre: '', fecha_nacimiento: '', fecha_aplicacion: new Date().toISOString().slice(0,10),
+      nivel_apoyo: '', dependencia: '', pct_discapacidad: null,
+      condiciones: [], observaciones: '',
+      informadores: [
+        { nombre:'', relacion:'', tiempo:'', frecuencia:'' },
+        { nombre:'', relacion:'', tiempo:'', frecuencia:'' },
+      ],
+    },
+    condicionesLista: [
+      'Limitaciones motoras EESS','Limitaciones motoras EEII',
+      'Discapacidad auditiva/sordera','Discapacidad visual',
+      'Parálisis cerebral','Epilepsia',
+      'Problemas de salud mental','Trastorno emocional',
+      'TEA','Síndrome de Down',
+      'Problemas de salud graves','Problemas de comportamiento',
+    ],
+    respuestas: {},
+    items: {
+      // AUTODETERMINACIÓN (12 ítems · 1-12)
+      1:{texto:'Las personas que le proporcionan apoyos tienen en cuenta sus preferencias y elecciones'},
+      2:{texto:'Participa en la elaboración de su plan individual de apoyos'},
+      3:{texto:'El personal del centro respeta sus decisiones'},
+      4:{texto:'Elige cómo pasar su tiempo libre'},
+      5:{texto:'Se toman medidas específicas para permitir que ejerza influencia en su entorno (ambiente físico, material, social)'},
+      6:{texto:'Se toman medidas específicas para permitir que haga elecciones'},
+      7:{texto:'Tiene oportunidades para negarse a hacer actividades irrelevantes para su salud (ocio, hora de irse a la cama, ropa que otros le eligen…)'},
+      8:{texto:'Elige la comida o parte de la comida cuando hay variedad en 1º, 2º y postre'},
+      9:{texto:'Decora la habitación a su gusto'},
+      10:{texto:'Se le proporcionan apoyos que tienen en cuenta sus necesidades, deseos y preferencias (personas, estar solo/en grupo, lugares, tiempo, ritmos)'},
+      11:{texto:'Se considera detenidamente la decisión de llevar a cabo una acción si la persona la experimenta como desagradable (cuidado personal, comida, actividades)'},
+      12:{texto:'Tiene un programa diario de actividades adecuado a sus preferencias'},
+
+      // BIENESTAR EMOCIONAL (12 ítems · 13-24)
+      13:{texto:'Las personas que le proporcionan apoyos disponen de un listado de conductas observables que expresan sus estados emocionales (mapas, registros, etc.)'},
+      14:{texto:'Se informa a la persona con antelación sobre los cambios de personas que le proporcionan apoyos (turnos, bajas, vacaciones, situaciones familiares…)'},
+      15:{texto:'Las personas que le proporcionan apoyos conocen sus expresiones individuales de bienestar emocional'},
+      16:{texto:'Las personas que le proporcionan apoyos conocen sus expresiones individuales de angustia'},
+      17:{texto:'Las personas que le proporcionan apoyos conocen cómo expresa sus deseos'},
+      18:{texto:'Las personas que le proporcionan apoyos ponen atención a las expresiones faciales, miradas y dirección de la vista, voz, tensión muscular, postura, movimiento y reacciones fisiológicas'},
+      19:{texto:'Tiene una ficha personal donde consta lo que le gusta, le tranquiliza, lo que no soporta y cómo puede reaccionar, que todo el personal conoce y debe cumplir'},
+      20:{texto:'Se le proporcionan pautas y consejos específicos para ayudar a controlar sus conductas'},
+      21:{texto:'Las personas que le proporcionan apoyos cuentan con formación en técnicas de Apoyo Conductual Positivo'},
+      22:{texto:'Se le proporcionan cariño, afecto y contacto físico apropiados cuando los necesita'},
+      23:{texto:'Se toman medidas específicas para optimizar la atmósfera o el ambiente de grupo'},
+      24:{texto:'Se toman medidas específicas para conseguir que su entorno sea reconocible y predecible (espacios, temporalización, personas, actividades)'},
+
+      // BIENESTAR FÍSICO (12 ítems · 25-36)
+      25:{texto:'Tiene una dieta adaptada a sus características y necesidades'},
+      26:{texto:'Realiza actividades y ejercicios físicos adecuados a sus características y necesidades'},
+      27:{texto:'Toma la cantidad de comida y líquidos aconsejada para mantener un buen estado de salud'},
+      28:{texto:'Se cuida la preparación y la presentación de la comida (composición, gusto, variedad, temperatura, etc.)'},
+      29:{texto:'Las personas que le proporcionan apoyos cuentan con formación específica acerca de las cuestiones de salud concretas de la persona'},
+      30:{texto:'Tiene una adecuada higiene (dientes, pelo, uñas, cuerpo) e imagen personal (ropa adecuada para su edad, para la ocasión, etc.)'},
+      31:{texto:'Se mueve por diferentes espacios (interiores y exteriores)'},
+      32:{texto:'Se toman medidas específicas para prevenir o tratar problemas derivados de discapacidades físicas (espasticidad, rigidez, deformidad, etc.)'},
+      33:{texto:'Se toman medidas específicas en relación con su movilidad para estimular su independencia'},
+      34:{texto:'Se toman medidas específicas para prevenir o tratar el dolor'},
+      35:{texto:'Se presta especial atención al diagnóstico y el tratamiento de las discapacidades sensoriales que pueda tener', matiz:'Si la persona no tiene discapacidad sensorial, valore igualmente si se presta atención a su prevención y control.'},
+      36:{texto:'Las personas que le proporcionan apoyos ofrecen guía y apoyo acerca de su sexualidad'},
+
+      // BIENESTAR MATERIAL (12 ítems · 37-48)
+      37:{texto:'Se repone o repara el material de la persona cuando está deteriorado'},
+      38:{texto:'El centro al que acude está adaptado a sus características (sensoriales, cognitivas, conductuales, físicas)', matiz:'Centro = centro de día, ocupacional, ocio y tiempo libre, etc.'},
+      39:{texto:'El centro al que acude toma medidas específicas para evitar riesgos como golpes, caídas y fugas', matiz:'Centro = centro de día, ocupacional, ocio y tiempo libre, etc.'},
+      40:{texto:'Tiene un espacio físico con sus pertenencias personales a su alcance'},
+      41:{texto:'Las ayudas técnicas que necesita han sido adaptadas de forma individual'},
+      42:{texto:'Se evalúa el efecto de las ayudas técnicas en el funcionamiento y la conducta de la persona'},
+      43:{texto:'Dispone de las ayudas técnicas que necesita'},
+      44:{texto:'Las personas que le proporcionan apoyos entienden los sistemas alternativos de comunicación que necesita', matiz:'Si no los necesita, marque "Siempre".'},
+      45:{texto:'Cuenta con sus propios materiales para entretenerse (juegos, revistas, música, televisión, etc.)'},
+      46:{texto:'Dispone de los bienes materiales que necesita'},
+      47:{texto:'Se toman medidas específicas para adaptar el entorno en el que vive a las capacidades y limitaciones de la persona (sensoriales, cognitivas, conductuales, físicas)'},
+      48:{texto:'Se toman medidas específicas para adaptar el entorno en el que vive a sus deseos y preferencias'},
+
+      // DERECHOS (12 ítems · 49-60)
+      49:{texto:'Las personas que le proporcionan apoyos disponen de formación específica sobre ética y respeto de los derechos de las personas con discapacidad'},
+      50:{texto:'Las personas que le proporcionan apoyo tratan a la persona con respeto (tono adecuado, no infantilizan, términos positivos, evitan comentarios negativos en público, evitan hablar delante como si no estuviera presente…)'},
+      51:{texto:'En el servicio al que acude se respetan y defienden sus derechos (confidencialidad, información sobre sus derechos como usuario, etc.)'},
+      52:{texto:'La persona conoce su carta de derechos personalizada'},
+      53:{texto:'En el centro al que acude se respeta su intimidad (llamar antes de entrar, cerrar la puerta cuando le duchan, cuando va al WC o cuando le cambian el pañal…)'},
+      54:{texto:'En el centro al que acude la persona cuenta con un espacio donde poder estar sola si lo desea'},
+      55:{texto:'Tiene en regla toda su documentación personal, prestaciones y valoraciones que le corresponden por ley'},
+      56:{texto:'Se toman medidas específicas para respetar su privacidad (durante el cuidado personal y la higiene, sexualidad, información confidencial, etc.)'},
+      57:{texto:'En su entorno es tratado con respeto'},
+      58:{texto:'En el centro al que acude se respetan sus posesiones y su derecho a la propiedad'},
+      59:{texto:'En el centro al que acude se respetan sus derechos'},
+      60:{texto:'El centro respeta la privacidad de la información (difusión de imágenes, datos personales, etc.)'},
+
+      // DESARROLLO PERSONAL (12 ítems · 61-72)
+      61:{texto:'Tiene un programa de actividades con cosas que le gustan y contribuyen a su enriquecimiento personal'},
+      62:{texto:'Las actividades que realiza le permiten el aprendizaje de nuevas habilidades'},
+      63:{texto:'Se le enseñan cosas que le interesan'},
+      64:{texto:'Aprende cosas que le hacen ser más independiente'},
+      65:{texto:'En el centro se le proporcionan instrucciones y modelos para aprender cosas nuevas'},
+      66:{texto:'En el centro tiene oportunidades para demostrar sus habilidades'},
+      67:{texto:'Tiene oportunidades para desarrollar actividades de forma independiente'},
+      68:{texto:'Se toman medidas específicas para mantener sus capacidades y habilidades'},
+      69:{texto:'Se toman medidas específicas para enseñarle nuevas habilidades'},
+      70:{texto:'Se estimula su desarrollo en distintas áreas (cognitiva, social, sensorial, emocional, motora)'},
+      71:{texto:'La estimulación de su desarrollo se lleva a cabo respetando sus ritmos y preferencias (evitando infra y sobre-estimulación)'},
+      72:{texto:'Adquiere nuevas habilidades o experiencias mediante su participación en actividades'},
+
+      // INCLUSIÓN SOCIAL (11 ítems · 73-83)
+      73:{texto:'Tiene oportunidades de conocer otros entornos diferentes al lugar donde vive (viajar, hacer excursiones, rutas turísticas, etc.)'},
+      74:{texto:'Disfruta de vacaciones en entornos inclusivos (hotel, parque, casa rural, playa, montaña, SPA, parques temáticos, etc.)'},
+      75:{texto:'Tiene una ficha de apoyos personalizados que todo el personal conoce y debe cumplir'},
+      76:{texto:'Participa en actividades fuera del centro con personas ajenas a su contexto de apoyos', matiz:'Contexto de apoyos = familiares, profesionales, voluntarios, compañeros del centro, amigos, etc.'},
+      77:{texto:'Participa en actividades inclusivas adecuadas para sus condiciones físicas y mentales'},
+      78:{texto:'Participa en actividades inclusivas que le interesan'},
+      79:{texto:'Las actividades en las que participa tienen en cuenta las instalaciones de ocio y cultura de la zona'},
+      80:{texto:'Se toman medidas específicas para ofertar tanta variedad de actividades como sea posible (actividades nuevas en función de las preferencias)'},
+      81:{texto:'Participa en actividades sociales fuera del lugar donde recibe servicios o apoyos'},
+      82:{texto:'Se toman medidas específicas para potenciar la participación de la persona en la comunidad'},
+      83:{texto:'Utiliza entornos comunitarios (restaurantes, cafeterías, bibliotecas, piscina, cines, parques, playas, etc.)'},
+
+      // RELACIONES INTERPERSONALES (12 ítems · 84-95)
+      84:{texto:'Las personas que le proporcionan apoyos conocen el sistema de comunicación que utiliza'},
+      85:{texto:'En el centro al que acude se identifica la mejor forma de comunicarle información (visual, táctil, auditiva, olfativa, gustativa)'},
+      86:{texto:'En el centro al que acude se diseñan actividades que facilitan las interacciones personales entre compañeros/as'},
+      87:{texto:'En el centro al que acude se proporciona información acerca del estilo interactivo de la persona cuando ésta conoce a gente nueva'},
+      88:{texto:'Celebra acontecimientos importantes para ella y sus personas significativas (cumpleaños, aniversarios)'},
+      89:{texto:'En el centro al que acude se planifican actividades o apoyos que le permitan la interacción social'},
+      90:{texto:'Cuando se interactúa con la persona, se le proporciona el tiempo necesario para que pueda responder'},
+      91:{texto:'Cuando exhibe una conducta concreta, se comprueba de forma sistemática su significado'},
+      92:{texto:'Las personas que le proporcionan apoyos comprueban si la persona les entiende correctamente mediante el análisis de sus reacciones'},
+      93:{texto:'Se toman medidas específicas para mejorar sus habilidades de comunicación'},
+      94:{texto:'Tiene la oportunidad de conocer a personas ajenas al contexto de apoyos', matiz:'Contexto de apoyos = familiares, profesionales, voluntarios, compañeros del centro, amigos, etc.'},
+      95:{texto:'Se toman medidas específicas para mantener y extender sus redes sociales'},
+    },
+    dimensiones: [
+      { key:'AU', nombre:'Autodeterminación',         items: Array.from({length:12},(_,i)=>i+1) },
+      { key:'BE', nombre:'Bienestar Emocional',       items: Array.from({length:12},(_,i)=>i+13) },
+      { key:'BF', nombre:'Bienestar Físico',          items: Array.from({length:12},(_,i)=>i+25) },
+      { key:'BM', nombre:'Bienestar Material',        items: Array.from({length:12},(_,i)=>i+37) },
+      { key:'DE', nombre:'Derechos',                  items: Array.from({length:12},(_,i)=>i+49) },
+      { key:'DP', nombre:'Desarrollo Personal',       items: Array.from({length:12},(_,i)=>i+61) },
+      { key:'IS', nombre:'Inclusión Social',          items: Array.from({length:11},(_,i)=>i+73) },
+      { key:'RI', nombre:'Relaciones Interpersonales',items: Array.from({length:12},(_,i)=>i+84) },
+    ],
+
+    itemsRespondidos() { return Object.values(this.respuestas).filter(v=>v>0).length; },
+    itemsCompletadosDim(d) { return d.items.filter(n => this.respuestas[n]>0).length; },
+    puntuacionDirecta(d) { return d.items.reduce((s,n)=> s + (this.respuestas[n]||0), 0); },
+
+    // PE aproximación lineal: PD se mapea a escala 1-20 según rango teórico de la dimensión
+    puntuacionEstandar(d) {
+      const pd = this.puntuacionDirecta(d);
+      const nItems = d.items.length;
+      const pdMin = nItems;       // todos los ítems = 1
+      const pdMax = nItems * 4;   // todos los ítems = 4
+      if (pd === 0) return 0;
+      const norm = (pd - pdMin) / (pdMax - pdMin);
+      return Math.max(1, Math.min(20, Math.round(1 + norm * 19)));
+    },
+    percentilDim(d) {
+      const pe = this.puntuacionEstandar(d);
+      // Conversión simplificada PE → percentil (campana normalizada)
+      const tabla = {1:1,2:1,3:2,4:2,5:5,6:9,7:16,8:25,9:37,10:50,11:63,12:75,13:84,14:91,15:95,16:98,17:99,18:99,19:99,20:99};
+      return tabla[pe] || 0;
+    },
+    sumaPE() { return this.dimensiones.reduce((s,d)=> s + this.puntuacionEstandar(d), 0); },
+
+    // Índice de Calidad de Vida: suma PE → escala 70-130 (PE compuesta)
+    indiceCV() {
+      const sumaPE = this.sumaPE();
+      if (sumaPE === 0) return 0;
+      // 8 dim × PE rango 1-20 → suma 8-160. Mapear a Índice 70-130 aproximado.
+      const norm = (sumaPE - 8) / (160 - 8);
+      return Math.round(70 + norm * 60);
+    },
+    percentilICV() {
+      const idx = this.indiceCV();
+      // Conversión índice → percentil según tabla pg 15
+      if (idx >= 128) return 99;
+      if (idx >= 122) return 95;
+      if (idx >= 118) return 90;
+      if (idx >= 114) return 85;
+      if (idx >= 112) return 80;
+      if (idx >= 110) return 75;
+      if (idx >= 108) return 70;
+      if (idx >= 106) return 65;
+      if (idx >= 104) return 60;
+      if (idx >= 101) return 55;
+      if (idx >= 100) return 50;
+      if (idx >= 98)  return 45;
+      if (idx >= 96)  return 40;
+      if (idx >= 94)  return 35;
+      if (idx >= 92)  return 30;
+      if (idx >= 90)  return 25;
+      if (idx >= 86)  return 20;
+      if (idx >= 83)  return 15;
+      if (idx >= 79)  return 10;
+      if (idx >= 71)  return 5;
+      return 1;
+    },
+
+    guardar() {
+      this.estado = 'Borrador guardado';
+      const ahora = new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+      this.ultimoGuardado = ahora;
+      window.dispatchEvent(new CustomEvent('toast', {detail:'Borrador guardado'}));
+    },
+    firmar() {
+      if (this.itemsRespondidos() < 95) {
+        alert('Para firmar la valoración deben estar contestados los 95 ítems. Quedan ' + (95-this.itemsRespondidos()) + ' sin responder.');
+        return;
+      }
+      if (confirm('¿Firmar la valoración? Esta acción la deja en estado COMPLETADA y queda registrada en bitácora.')) {
+        this.estado = 'Firmada';
+        const ahora = new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+        this.ultimoGuardado = ahora;
+      }
+    },
+    imprimir() { window.print(); },
+  };
+}
+</script>
+</body>
+</html>

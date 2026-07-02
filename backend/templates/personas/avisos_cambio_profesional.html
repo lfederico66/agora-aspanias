@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Avisos a Dirección · ÁGORA{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+
+    <div class="flex items-end justify-between flex-wrap gap-3">
+        <div>
+            <h1 class="text-2xl font-semibold tracking-tight">Avisos a Dirección</h1>
+            <p class="text-sm text-slate-500">Cambios de Gestor/a de Caso o Persona de Referencia · Protocolo Aspanias §9</p>
+        </div>
+    </div>
+
+    {# KPIs #}
+    <div class="grid gap-3 md:grid-cols-3">
+        <article class="rounded-xl border border-amber-200 bg-amber-50 p-4">
+            <p class="text-xs uppercase tracking-wide text-amber-700">Pendientes</p>
+            <p class="mt-1 text-3xl font-light text-amber-800">{{ kpis.pendiente }}</p>
+            <p class="text-xs text-amber-700">esperan validación</p>
+        </article>
+        <article class="rounded-xl border border-blue-200 bg-blue-50 p-4">
+            <p class="text-xs uppercase tracking-wide text-blue-700">En tratamiento</p>
+            <p class="mt-1 text-3xl font-light text-blue-800">{{ kpis.en_tratamiento }}</p>
+            <p class="text-xs text-blue-700">en revisión</p>
+        </article>
+        <article class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+            <p class="text-xs uppercase tracking-wide text-emerald-700">Resueltos este mes</p>
+            <p class="mt-1 text-3xl font-light text-emerald-800">{{ kpis.resuelto_mes }}</p>
+            <p class="text-xs text-emerald-700">aprobados o cerrados</p>
+        </article>
+    </div>
+
+    {# Filtros chips #}
+    <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-xs uppercase tracking-wide text-slate-500">Filtrar:</span>
+        <a href="?estado=pendiente" class="rounded-full {% if estado == 'pendiente' %}bg-emerald-700 text-white{% else %}bg-white border border-slate-200 text-slate-700 hover:border-emerald-400{% endif %} px-3 py-1 text-xs">Pendientes ({{ kpis.pendiente }})</a>
+        <a href="?estado=en_tratamiento" class="rounded-full {% if estado == 'en_tratamiento' %}bg-emerald-700 text-white{% else %}bg-white border border-slate-200 text-slate-700 hover:border-emerald-400{% endif %} px-3 py-1 text-xs">En tratamiento</a>
+        <a href="?estado=resuelto" class="rounded-full {% if estado == 'resuelto' %}bg-emerald-700 text-white{% else %}bg-white border border-slate-200 text-slate-700 hover:border-emerald-400{% endif %} px-3 py-1 text-xs">Resueltos</a>
+        <a href="?estado=descartado" class="rounded-full {% if estado == 'descartado' %}bg-emerald-700 text-white{% else %}bg-white border border-slate-200 text-slate-700 hover:border-emerald-400{% endif %} px-3 py-1 text-xs">Descartados</a>
+        <a href="?estado=todos" class="rounded-full {% if estado == 'todos' %}bg-emerald-700 text-white{% else %}bg-white border border-slate-200 text-slate-700 hover:border-emerald-400{% endif %} px-3 py-1 text-xs">Todos ({{ kpis.total }})</a>
+    </div>
+
+    {# Bandeja: lista de tarjetas #}
+    <div class="space-y-4">
+        {% for a in avisos %}
+            {% include "personas/_aviso_tarjeta.html" %}
+        {% empty %}
+            <article class="rounded-xl border border-dashed border-slate-300 bg-white p-12 text-center text-sm text-slate-500">
+                {% if estado == 'pendiente' %}
+                    No hay avisos pendientes ahora mismo.
+                {% else %}
+                    No hay avisos en este estado.
+                {% endif %}
+            </article>
+        {% endfor %}
+    </div>
+
+    {# Nota institucional #}
+    <div class="rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900">
+        <p class="text-xs uppercase tracking-wide text-blue-700 font-semibold">Generación automática</p>
+        <p class="mt-1">ÁGORA genera estos avisos automáticamente cada vez que un Coordinador/a propone un cambio de Gestor/a de Caso o Persona de Referencia, conforme al Protocolo de Planes de Vida §9. La decisión y motivo se registran en la bitácora.</p>
+    </div>
+</section>
+{% endblock %}

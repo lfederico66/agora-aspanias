@@ -1,0 +1,197 @@
+<!-- @rol: gestor_caso, direccion_centro, profesional, gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha básica de salud · González Pérez, Marta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page { size: A4; margin: 14mm 14mm 18mm 14mm; }
+        body { font-family: 'Inter', -apple-system, system-ui, sans-serif; color: #111; background: #f3f4f6; margin: 0; }
+        .pagina { background: #fff; max-width: 210mm; min-height: 297mm; margin: 18px auto; padding: 14mm; box-shadow: 0 4px 18px rgba(0,0,0,.08); }
+        h1, h2, h3 { font-family: 'Georgia', 'Times New Roman', serif; }
+        h1 { font-size: 18pt; margin: 0; color: #047857; letter-spacing: .3px; }
+        h2 { font-size: 12pt; margin: 14pt 0 6pt; padding-bottom: 3pt; border-bottom: 1.5pt solid #047857; color: #047857; }
+        h3 { font-size: 10pt; margin: 6pt 0 3pt; color: #444; }
+        .meta { font-size: 9pt; color: #555; }
+        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+        .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; }
+        .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+        .campo { font-size: 9.5pt; }
+        .campo .et { color: #6b7280; text-transform: uppercase; letter-spacing: .4pt; font-size: 7pt; font-weight: 600; }
+        .campo .val { font-weight: 500; color: #111; }
+        .critico { border: 1.5pt solid #be123c; background: #fff1f2; padding: 4mm; border-radius: 4pt; }
+        .critico h3 { color: #9f1239; margin-top: 0; }
+        .critico .val { color: #9f1239; font-weight: 700; }
+        table { width: 100%; border-collapse: collapse; font-size: 9pt; margin-top: 3pt; }
+        th, td { border: .4pt solid #cbd5e1; padding: 3pt 5pt; text-align: left; vertical-align: top; }
+        th { background: #f1f5f9; font-weight: 600; font-size: 8pt; text-transform: uppercase; letter-spacing: .3pt; }
+        .cuidados { background: #ecfdf5; border: .5pt solid #6ee7b7; padding: 3mm 4mm; border-radius: 3pt; font-size: 9pt; }
+        .cuidados .et { color: #047857; font-weight: 700; font-size: 8pt; text-transform: uppercase; letter-spacing: .4pt; }
+        .pie { font-size: 7.5pt; color: #6b7280; margin-top: 8mm; border-top: .5pt solid #cbd5e1; padding-top: 3mm; line-height: 1.4; }
+        .firma { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; margin-top: 12mm; }
+        .firma .linea { border-top: .5pt solid #111; padding-top: 1.5mm; font-size: 9pt; min-height: 16mm; }
+        .barra { position: fixed; top: 0; left: 0; right: 0; background: #047857; color: #fff; padding: 8px 14px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; z-index: 50; }
+        .barra a, .barra button { background: rgba(255,255,255,.18); color: #fff; padding: 5px 12px; border-radius: 6px; text-decoration: none; font-size: 11px; border: 0; cursor: pointer; }
+        .barra a:hover, .barra button:hover { background: rgba(255,255,255,.30); }
+        @media print {
+            .barra { display: none !important; }
+            body { background: #fff; }
+            .pagina { box-shadow: none; margin: 0; max-width: none; padding: 0; }
+        }
+        .logo { display: flex; align-items: center; gap: 10pt; }
+        .logo svg { width: 28pt; height: 28pt; }
+        .cab-derecha { text-align: right; font-size: 8.5pt; color: #555; }
+        .cab-derecha .tit { font-weight: 600; color: #111; font-size: 10pt; }
+        .alergia-badge { display: inline-block; background: #fee2e2; color: #991b1b; padding: 1pt 5pt; border-radius: 3pt; font-size: 8.5pt; font-weight: 600; margin-right: 3pt; }
+    </style>
+</head>
+<body>
+
+<div class="barra">
+    <span>📄 Ficha básica de salud · vista previa</span>
+    <span>
+        <a href="persona-detalle.html">← Volver a la ficha</a>
+        <button onclick="window.print()">🖨 Imprimir / Guardar PDF</button>
+    </span>
+</div>
+
+<div class="pagina">
+
+    <!-- CABECERA INSTITUCIONAL -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 6pt; border-bottom: 1.5pt solid #047857;">
+        <div class="logo">
+            <svg viewBox="0 0 40 40" fill="none" stroke="#047857" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="#047857" stroke="none"/></svg>
+            <div>
+                <h1>FICHA BÁSICA DE SALUD</h1>
+                <p class="meta">Grupo Social Aspanias · Centro de Mayores Fuentecillas</p>
+            </div>
+        </div>
+        <div class="cab-derecha">
+            <p class="tit">Expediente FUE-2026-00001</p>
+            <p>Última revisión: 18/06/2026</p>
+            <p>Documento sintético · Demo ÁGORA</p>
+        </div>
+    </div>
+
+    <!-- DATOS PERSONALES -->
+    <h2>1 · Datos personales</h2>
+    <div class="grid3">
+        <div class="campo"><span class="et">Nombre y apellidos</span><br><span class="val">González Pérez, Marta</span></div>
+        <div class="campo"><span class="et">Fecha nacimiento · edad</span><br><span class="val">14/03/1992 · 34 años</span></div>
+        <div class="campo"><span class="et">DNI</span><br><span class="val">‒‒‒‒‒‒‒‒‒‒ (cifrado)</span></div>
+        <div class="campo"><span class="et">Nº Seguridad Social</span><br><span class="val">‒‒‒‒‒‒‒‒‒‒ (cifrado)</span></div>
+        <div class="campo"><span class="et">Centro de referencia</span><br><span class="val">Residencia Fuentecillas · Mód. A · hab. 12</span></div>
+        <div class="campo"><span class="et">Médico de Atención Primaria</span><br><span class="val">Dr. Ruiz · CS Burgos Norte</span></div>
+    </div>
+
+    <!-- DATOS CRÍTICOS PARA URGENCIAS -->
+    <h2>2 · Datos críticos para urgencias</h2>
+    <div class="critico">
+        <div class="grid3">
+            <div class="campo"><span class="et">Alergias</span><br><span class="alergia-badge">Penicilina</span><span class="alergia-badge">AINE</span></div>
+            <div class="campo"><span class="et">Grupo sanguíneo</span><br><span class="val">A Rh +</span></div>
+            <div class="campo"><span class="et">Restricciones alimentarias</span><br><span class="val">Sin lactosa · evitar frutos secos</span></div>
+        </div>
+    </div>
+
+    <!-- DIAGNÓSTICOS -->
+    <h2>3 · Diagnósticos activos</h2>
+    <table>
+        <thead><tr><th style="width:18%">CIE-11</th><th style="width:42%">Diagnóstico</th><th>Notas · origen</th></tr></thead>
+        <tbody>
+            <tr><td>F71.9</td><td>Discapacidad intelectual moderada</td><td>Confirmado en informe 2009 · INSS</td></tr>
+            <tr><td>G40.9</td><td>Epilepsia focal</td><td>Controlada · última crisis 2022</td></tr>
+            <tr><td>F41.1</td><td>Trastorno de ansiedad generalizada</td><td>En seguimiento por psicología</td></tr>
+        </tbody>
+    </table>
+
+    <!-- MEDICACIÓN -->
+    <h2>4 · Medicación activa</h2>
+    <table>
+        <thead><tr><th>Medicamento</th><th style="width:18%">Pauta</th><th style="width:18%">Indicación</th><th style="width:22%">Prescriptor</th><th style="width:12%">Inicio</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Levetiracetam 500 mg</strong></td><td>1-0-1 (oral)</td><td>Epilepsia</td><td>Dra. Pérez (HUBU)</td><td>14/02/2018</td></tr>
+            <tr><td><strong>Escitalopram 10 mg</strong></td><td>1-0-0 (oral, mañana)</td><td>Ansiedad</td><td>Dr. Ruiz (centro)</td><td>22/09/2023</td></tr>
+            <tr><td><strong>Vitamina D₃ 1000 UI</strong></td><td>0-1-0 (oral, comida)</td><td>Suplemento</td><td>Dr. Ruiz</td><td>10/01/2025</td></tr>
+        </tbody>
+    </table>
+
+    <!-- ANTECEDENTES E INTERVENCIONES -->
+    <h2>5 · Antecedentes e intervenciones quirúrgicas</h2>
+    <div class="grid2">
+        <div>
+            <h3>Antecedentes personales</h3>
+            <ul style="margin: 0; padding-left: 14pt; font-size: 9pt; line-height: 1.5;">
+                <li>Eventración supra e infraumbilical · dolor abdominal recurrente</li>
+                <li>Estreñimiento crónico · pauta laxante</li>
+                <li>Hemorroides grado I · sin sangrado activo</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Intervenciones quirúrgicas</h3>
+            <ul style="margin: 0; padding-left: 14pt; font-size: 9pt; line-height: 1.5;">
+                <li>Apendicectomía · HUBU · 07/11/2019</li>
+                <li>Fistulectomía perianal · HUBU · 14/06/2011</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PLAN DE CUIDADOS DE ENFERMERÍA -->
+    <h2>6 · Plan de salud-cuidados (enfermería)</h2>
+    <div class="grid2">
+        <div class="cuidados"><span class="et">Movilidad</span><br>Autónoma para deambulación. Usa bastón en exteriores. Precaución en escaleras (apoyo verbal).</div>
+        <div class="cuidados"><span class="et">Alimentación</span><br>Dieta blanda baja en lactosa. Sin frutos secos (alergia). Triturar carnes duras. Hidratación 1,5 L/día.</div>
+        <div class="cuidados"><span class="et">Aseo personal</span><br>Autonomía parcial. Apoyo verbal en el orden de pasos. Supervisión en ducha (riesgo de resbalón).</div>
+        <div class="cuidados"><span class="et">Eliminación</span><br>Continente diurno. Pauta laxante por estreñimiento crónico. Control deposición cada 2 días.</div>
+        <div class="cuidados"><span class="et">Sueño y descanso</span><br>Conciliación normal. Despertares ocasionales. No requiere medicación para dormir.</div>
+        <div class="cuidados"><span class="et">Comunicación</span><br>Verbal funcional. Comprende instrucciones sencillas. Pictogramas en situaciones nuevas.</div>
+        <div class="cuidados"><span class="et">Conducta y emocional</span><br>Tranquila. Episodios puntuales de ansiedad en cambios de rutina — se gestionan con anticipación verbal.</div>
+        <div class="cuidados"><span class="et">Observaciones para urgencias</span><br>Acude siempre acompañada de la madre (curadora) o, en su ausencia, gestora de caso.</div>
+    </div>
+
+    <!-- CONTACTOS Y MEDIDA DE APOYO -->
+    <h2>7 · Contactos y medida de apoyo</h2>
+    <div class="grid2">
+        <div>
+            <h3>Familiar de contacto (urgencias)</h3>
+            <div class="campo" style="line-height: 1.6;">
+                <span class="val">Carmen Pérez Llamas</span> — Madre · curadora representativa<br>
+                📞 6‒‒ ‒‒ ‒‒ ‒‒ &nbsp;·&nbsp; ✉ c.perez@‒‒‒‒.es<br>
+                <span class="et">Auto judicial</span> Juzgado 1.ª Inst. nº 4 Burgos · 412/2023
+            </div>
+        </div>
+        <div>
+            <h3>Equipo profesional de referencia</h3>
+            <div class="campo" style="line-height: 1.6;">
+                <span class="et">Gestora de caso</span> Lucía Martínez (TS)<br>
+                <span class="et">Persona de referencia</span> Pilar Renedo (TO)<br>
+                <span class="et">Enfermería</span> M. José Castro (DUE)<br>
+                <span class="et">Centro · contacto 24h</span> Fuentecillas · 947 461 890
+            </div>
+        </div>
+    </div>
+
+    <!-- PIE -->
+    <div class="firma">
+        <div class="linea">
+            <strong>Firma de Enfermería</strong><br>
+            <span class="et" style="font-size: 7.5pt; color: #6b7280;">Profesional responsable de la actualización</span>
+        </div>
+        <div class="linea">
+            <strong>V.º B.º Dirección de Centro</strong><br>
+            <span class="et" style="font-size: 7.5pt; color: #6b7280;">Laura Villa Santamaría · Fuentecillas</span>
+        </div>
+    </div>
+
+    <div class="pie">
+        <p>🔒 <strong>Documento de categoría especial (RGPD art. 9)</strong> · Datos cifrados en reposo. La impresión queda registrada en bitácora con usuario, fecha-hora y motivo. <strong>Uso exclusivo</strong> para servicios sanitarios o de urgencias en presencia del personal autorizado. No reproducir ni almacenar fuera del expediente clínico de la persona.</p>
+        <p>Fundación Aspanias Burgos · NIF G-09122480 · C/ Mariana Pineda 9, 09001 Burgos · www.aspaniasburgos.com</p>
+    </div>
+
+</div>
+
+</body>
+</html>

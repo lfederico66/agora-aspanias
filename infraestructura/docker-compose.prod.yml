@@ -1,0 +1,90 @@
+# ÁGORA — orquestación de producción (VM Ubuntu / Hyper-V de Sistemas Aspanias).
+# Diferencias respecto a docker-compose.yml de desarrollo:
+#  - Gunicorn detrás de Nginx reverse proxy (no runserver)
+#  - PostgreSQL sin exponer puerto al exterior
+#  - Volúmenes con backups separados
+#  - Restart unless-stopped en todos los servicios
+#  - Sin bind mount del código (la imagen incluye el código)
+#
+# Uso desde la VM (después de `git pull` y configurar /opt/agora/.env):
+#     cd /opt/agora
+#     docker compose -f infraestructura/docker-compose.prod.yml up -d
+#
+# Logs:
+#     docker compose -f infraestructura/docker-compose.prod.yml logs -f web
+#
+# Migraciones tras release:
+#     docker compose -f infraestructura/docker-compose.prod.yml exec web python manage.py migrate
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: agora_db_prod
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-agora}
+      POSTGRES_USER: ${POSTGRES_USER:-agora}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - agora_pg_data:/var/lib/postgresql/data
+      - ./backups:/backups  # destino para pg_dump (montado desde la VM)
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-agora} -d ${POSTGRES_DB:-agora}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    # ❌ No exponemos el puerto al host en producción: solo accesible desde la red Docker
+    networks:
+      - agora_internal
+
+  web:
+    build:
+      context: ..
+      dockerfile: infraestructura/Dockerfile
+    container_name: agora_web_prod
+    restart: unless-stopped
+    env_file:
+      - ../backend/.env
+    volumes:
+      - agora_media:/app/media
+      - agora_static:/app/staticfiles
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "python manage.py migrate --noinput &&
+             python manage.py collectstatic --noinput &&
+             gunicorn agora.wsgi:application
+                --bind 0.0.0.0:8000
+                --workers 3
+                --timeout 60
+                --access-logfile -
+                --error-logfile -"
+    networks:
+      - agora_internal
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: agora_nginx_prod
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/agora.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - agora_static:/app/staticfiles:ro
+      - agora_media:/app/media:ro
+    depends_on:
+      - web
+    networks:
+      - agora_internal
+
+volumes:
+  agora_pg_data:
+  agora_media:
+  agora_static:
+
+networks:
+  agora_internal:
+    driver: bridge

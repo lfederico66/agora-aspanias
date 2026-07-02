@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ persona.apellido_1 }}, {{ persona.nombre }} · ÁGORA{% endblock %}
+
+{% block content %}
+<div x-data="{ tab: '{{ tab_inicial }}' }">
+
+    <a href="{% url 'personas:lista' %}" class="text-sm text-slate-500 hover:text-emerald-700">← Volver al listado</a>
+
+    {# ============ BANNER DE IDENTIDAD ============ #}
+    <section class="mt-3 rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+        <div class="h-20 bg-gradient-to-r from-emerald-700 to-emerald-900"></div>
+        <div class="px-6 pb-4">
+            <div class="flex items-end justify-between flex-wrap gap-4 -mt-10">
+                <div class="flex items-end gap-4">
+                    <div class="w-24 h-24 rounded-2xl bg-emerald-100 text-emerald-800 border-4 border-white shadow-md flex items-center justify-center text-3xl font-semibold">
+                        {{ persona.nombre|slice:":1" }}{{ persona.apellido_1|slice:":1" }}
+                    </div>
+                    <div class="pb-2">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <h1 class="text-2xl font-semibold tracking-tight text-slate-900">
+                                {{ persona.apellido_1 }} {{ persona.apellido_2 }}, {{ persona.nombre }}
+                            </h1>
+                            {% for perfil in persona.perfiles_di.all|slice:":1" %}
+                                <span class="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800">Discapacidad intelectual</span>
+                            {% endfor %}
+                            {% for perfil in persona.perfiles_mayor.all|slice:":1" %}
+                                <span class="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">Mayor dependiente</span>
+                            {% endfor %}
+                            {% if persona.activa %}
+                                <span class="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800">● Activa</span>
+                            {% else %}
+                                <span class="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">○ Baja: {{ persona.get_motivo_baja_display|default:"" }}</span>
+                            {% endif %}
+                            {% if medida_apoyo and medida_apoyo.tipo == "apoyo_judicial" %}
+                                <span class="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">Apoyo judicial · Ley 8/2021</span>
+                            {% endif %}
+                        </div>
+                        <p class="text-sm text-slate-500 font-mono">
+                            {{ persona.codigo_interno }} · {{ persona.centro_referencia.nombre }}
+                            {% if persona.ubicacion_residencial %} · 🛏 {{ persona.ubicacion_residencial }}{% endif %}
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 pb-2">
+                    <a href="{% url 'personas:editar' persona.id %}" class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm hover:border-emerald-400">✎ Editar ficha</a>
+                    <a href="{% url 'planes_vida:detalle' persona.id %}" class="rounded-lg bg-emerald-700 text-white px-3 py-1.5 text-sm font-medium hover:bg-emerald-800">📔 Plan de Vida</a>
+                </div>
+            </div>
+
+            <nav class="mt-4 border-b border-slate-200 -mx-6 px-6">
+                <ul class="-mb-px flex gap-6 text-sm overflow-x-auto">
+                    <li><button @click="tab='resumen'" :class="tab==='resumen' ? 'border-emerald-700 text-emerald-700 font-medium' : 'border-transparent text-slate-500 hover:text-emerald-700'" class="border-b-2 pb-2.5 whitespace-nowrap">Resumen</button></li>
+                    <li><button @click="tab='personales'" :class="tab==='personales' ? 'border-emerald-700 text-emerald-700 font-medium' : 'border-transparent text-slate-500 hover:text-emerald-700'" class="border-b-2 pb-2.5 whitespace-nowrap">Datos personales y discapacidad</button></li>
+                    {% if puede_ver_clinica %}
+                        <li><button @click="tab='medica'" :class="tab==='medica' ? 'border-emerald-700 text-emerald-700 font-medium' : 'border-transparent text-slate-500 hover:text-emerald-700'" class="border-b-2 pb-2.5 whitespace-nowrap">Información médica</button></li>
+                    {% else %}
+                        <li><span title="Solo accesible para rol clínico (DUE, médico/a, psicólogo/a)" class="border-b-2 border-transparent text-slate-300 pb-2.5 whitespace-nowrap cursor-not-allowed select-none">🔒 Información médica</span></li>
+                    {% endif %}
+                    <li><button @click="tab='familiares'" :class="tab==='familiares' ? 'border-emerald-700 text-emerald-700 font-medium' : 'border-transparent text-slate-500 hover:text-emerald-700'" class="border-b-2 pb-2.5 whitespace-nowrap">Familiares</button></li>
+                    {% if puede_ver_clinica %}
+                        <li><button @click="tab='medicacion'" :class="tab==='medicacion' ? 'border-emerald-700 text-emerald-700 font-medium' : 'border-transparent text-slate-500 hover:text-emerald-700'" class="border-b-2 pb-2.5 whitespace-nowrap">Medicación</button></li>
+                    {% else %}
+                        <li><span title="Solo accesible para rol clínico" class="border-b-2 border-transparent text-slate-300 pb-2.5 whitespace-nowrap cursor-not-allowed select-none">🔒 Medicación</span></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <div x-show="tab==='resumen'" x-cloak class="mt-6">
+        {% include "personas/_tab_resumen.html" %}
+    </div>
+    <div x-show="tab==='personales'" x-cloak class="mt-6">
+        {% include "personas/_tab_personales.html" %}
+    </div>
+    {% if puede_ver_clinica %}
+        <div x-show="tab==='medica'" x-cloak class="mt-6">
+            {% include "personas/_tab_medica.html" %}
+        </div>
+    {% endif %}
+    <div x-show="tab==='familiares'" x-cloak class="mt-6">
+        {% include "personas/_tab_familiares.html" %}
+    </div>
+    {% if puede_ver_clinica %}
+        <div x-show="tab==='medicacion'" x-cloak class="mt-6">
+            {% include "personas/_tab_medicacion.html" %}
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+# ÁGORA — orquestación de servicios para desarrollo y piloto.
+# Uso desde la raíz del repo:
+#     docker compose -f infraestructura/docker-compose.yml up -d db
+#     docker compose -f infraestructura/docker-compose.yml up web
+# Para producción se usará una variante en infraestructura/docker-compose.prod.yml.
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: agora_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: agora
+      POSTGRES_USER: agora
+      POSTGRES_PASSWORD: agora_local
+    volumes:
+      - agora_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agora -d agora"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "5432:5432"
+
+  web:
+    build:
+      context: ..
+      dockerfile: infraestructura/Dockerfile
+    container_name: agora_web
+    restart: unless-stopped
+    env_file:
+      - ../backend/.env
+    volumes:
+      - ../backend:/app
+      - agora_media:/app/media
+      - agora_static:/app/staticfiles
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             python manage.py runserver 0.0.0.0:8000"
+
+volumes:
+  agora_postgres_data:
+  agora_media:
+  agora_static:

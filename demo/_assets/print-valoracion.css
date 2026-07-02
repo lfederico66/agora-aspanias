@@ -1,0 +1,344 @@
+/* =================================================================
+   ÁGORA · Hoja de impresión institucional
+   Aplicado a: valoraciones psicológicas e informes
+   Objetivo: PDF A4 limpio con cabecera/pie institucional Aspanias
+   ================================================================= */
+
+@media print {
+
+  /* ============ A4 + cabecera/pie corporativos ============ */
+  @page {
+    size: A4 portrait;
+    margin: 22mm 18mm 22mm 18mm;
+
+    @top-left {
+      content: "GRUPO SOCIAL ASPANIAS";
+      font-family: -apple-system, system-ui, sans-serif;
+      font-size: 8pt;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: #047857;
+    }
+    @top-right {
+      content: "ÁGORA";
+      font-family: -apple-system, system-ui, sans-serif;
+      font-size: 8pt;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: #047857;
+    }
+    @bottom-left {
+      content: "Documento confidencial";
+      font-family: -apple-system, system-ui, sans-serif;
+      font-size: 7.5pt;
+      color: #64748b;
+    }
+    @bottom-center {
+      content: "Categoría especial art. 9 RGPD — datos de salud";
+      font-family: -apple-system, system-ui, sans-serif;
+      font-size: 7.5pt;
+      color: #64748b;
+    }
+    @bottom-right {
+      content: "Página " counter(page) " de " counter(pages);
+      font-family: -apple-system, system-ui, sans-serif;
+      font-size: 7.5pt;
+      color: #64748b;
+    }
+  }
+
+  /* ============ Reset general ============ */
+  *, *::before, *::after {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  html, body {
+    background: white !important;
+    color: #0f172a !important;
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 10pt !important;
+    line-height: 1.45 !important;
+  }
+
+  /* ============ Ocultar UI operativa ============ */
+  aside,
+  button,
+  .no-print,
+  [x-cloak] {
+    display: none !important;
+  }
+
+  /* Sidebar de progreso (col-span-3 dentro de grid principal) */
+  main > .grid > aside,
+  main > .grid > .col-span-3 {
+    display: none !important;
+  }
+
+  /* Breadcrumbs y links de navegación */
+  main > div:first-child > div > nav,
+  a[href$="-listado.html"],
+  a[href="persona-detalle.html"],
+  a[href="personas-lista.html"] {
+    display: none !important;
+  }
+
+  /* Banner amarillo RGPD operativo (ya va en pie de página) */
+  .bg-amber-50 {
+    display: none !important;
+  }
+
+  /* Footer con botones Volver/Firmar */
+  main .pb-12,
+  .flex.items-center.justify-between.pb-12 {
+    display: none !important;
+  }
+
+  /* ============ Layout columna única ============ */
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  .grid.grid-cols-12 {
+    display: block !important;
+  }
+  .col-span-9, .col-span-12 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* ============ Tipografía documento ============ */
+  h1 {
+    font-size: 16pt !important;
+    color: #0f172a !important;
+    margin: 4pt 0 2pt 0 !important;
+    page-break-after: avoid;
+  }
+  h1 + p {
+    font-size: 9pt !important;
+    color: #475569 !important;
+    font-style: italic;
+    margin-bottom: 12pt !important;
+  }
+  h2 {
+    font-size: 11.5pt !important;
+    color: #047857 !important;
+    border-bottom: 1pt solid #94a3b8 !important;
+    padding: 3pt 0 !important;
+    margin: 16pt 0 8pt 0 !important;
+    page-break-after: avoid;
+    font-family: -apple-system, system-ui, sans-serif !important;
+  }
+  h3 {
+    font-size: 10.5pt !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    margin: 10pt 0 4pt 0 !important;
+    page-break-after: avoid;
+  }
+  p, li, td, th, span, div, label {
+    font-size: 9.5pt !important;
+  }
+  .text-xs   { font-size: 8.5pt !important; }
+  .text-sm   { font-size: 9.5pt !important; }
+  .text-base { font-size: 10pt !important; }
+  .text-lg   { font-size: 11pt !important; }
+  .text-xl, .text-2xl, .text-3xl {
+    font-size: 14pt !important;
+    color: #047857 !important;
+    font-weight: 700 !important;
+  }
+
+  /* ============ Secciones ============ */
+  section {
+    border: none !important;
+    padding: 0 !important;
+    margin-bottom: 10pt !important;
+    page-break-inside: auto;
+  }
+
+  /* Ocultar las cajas decorativas de PD lateral en cabeceras de sección */
+  section > .flex.items-center.justify-between > .text-right {
+    display: inline-block !important;
+    font-size: 9pt !important;
+    color: #475569 !important;
+  }
+
+  /* ============ Campos de entrada ============ */
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  input[type="email"] {
+    border: none !important;
+    border-bottom: 0.5pt solid #475569 !important;
+    border-radius: 0 !important;
+    padding: 1pt 2pt !important;
+    color: #0f172a !important;
+    font-family: Georgia, serif !important;
+    min-height: 14pt !important;
+  }
+
+  select {
+    border: none !important;
+    border-bottom: 0.5pt solid #475569 !important;
+    border-radius: 0 !important;
+    padding: 1pt 2pt !important;
+    color: #0f172a !important;
+    font-family: Georgia, serif !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    background-image: none !important;
+  }
+
+  textarea {
+    border: 0.5pt solid #94a3b8 !important;
+    border-radius: 2pt !important;
+    padding: 4pt 6pt !important;
+    min-height: 36pt !important;
+    font-family: Georgia, serif !important;
+    color: #0f172a !important;
+  }
+
+  /* Checkboxes accesibles para impresión */
+  input[type="checkbox"] {
+    -webkit-appearance: auto !important;
+    appearance: auto !important;
+    accent-color: #047857 !important;
+  }
+
+  /* Labels pequeñas más juntas */
+  label.flex {
+    display: inline-flex !important;
+    margin-right: 12pt !important;
+    margin-bottom: 3pt !important;
+  }
+
+  /* ============ Botones Likert 1-4 / 0-3 → mostrar solo el seleccionado ============ */
+  /* Patrón: contenedor flex con 3 o 4 botones; uno seleccionado tiene bg-emerald-600 */
+  .col-span-4 button,
+  .col-span-3 button {
+    display: none !important;
+  }
+  .col-span-4 button.bg-emerald-600,
+  .col-span-3 button.bg-emerald-600 {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: white !important;
+    color: #0f172a !important;
+    border: 1pt solid #047857 !important;
+    border-radius: 2pt !important;
+    width: 22pt !important;
+    height: 22pt !important;
+    font-family: -apple-system, system-ui, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 10pt !important;
+    padding: 0 !important;
+  }
+
+  /* Items sin respuesta: añadir guion en lugar de botones vacíos */
+  .col-span-4:empty::after,
+  .col-span-3:empty::after,
+  .col-span-4:has(> button:only-child):not(:has(.bg-emerald-600))::after {
+    content: "—";
+    color: #cbd5e1;
+    font-size: 11pt;
+  }
+
+  /* ============ Tablas resumen ============ */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 6pt 0 !important;
+    page-break-inside: avoid;
+  }
+  th, td {
+    border: 0.4pt solid #94a3b8 !important;
+    padding: 3pt 5pt !important;
+    font-size: 9pt !important;
+    vertical-align: top !important;
+  }
+  thead {
+    background: #f1f5f9 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  thead tr {
+    background: #f1f5f9 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  th {
+    font-weight: 700 !important;
+    text-align: left !important;
+    font-family: -apple-system, system-ui, sans-serif !important;
+  }
+
+  /* Barras de perfil → ocultar (decorativas) */
+  div[style*="background"],
+  .h-3.bg-slate-100,
+  .h-2.bg-slate-100,
+  .h-full {
+    display: none !important;
+  }
+
+  /* ============ KPIs de resultado ============ */
+  .grid.grid-cols-3 > div,
+  .grid.grid-cols-2 > div {
+    border: 0.5pt solid #94a3b8 !important;
+    padding: 6pt !important;
+    text-align: center !important;
+    page-break-inside: avoid;
+  }
+
+  /* ============ Listados de ítems ============ */
+  ul.space-y-2 > li,
+  ul.space-y-3 > li {
+    page-break-inside: avoid;
+    border-bottom: 0.3pt dotted #cbd5e1 !important;
+    padding: 2pt 0 !important;
+  }
+
+  /* ============ Saltos de página estratégicos ============ */
+  section#sec-D,
+  section#sec-E,
+  section#resultado,
+  section[id^="dim-"] {
+    page-break-inside: auto;
+  }
+
+  /* Cabeceras nunca solas al final de página */
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Conservar tablas y bloques de resultado en una misma página */
+  table, .grid.grid-cols-3, .grid.grid-cols-2 {
+    page-break-inside: avoid;
+  }
+
+  /* ============ Bloque de firma al final ============ */
+  section#resultado::after {
+    content: "Firma y sello del/la profesional · Nº de colegiación · Fecha";
+    display: block;
+    margin-top: 24pt;
+    padding-top: 36pt;
+    border-top: 0.5pt solid #475569;
+    text-align: center;
+    font-size: 8.5pt;
+    font-style: italic;
+    color: #475569;
+    page-break-inside: avoid;
+  }
+
+  /* ============ Enlaces sin URL extendida ============ */
+  a[href]::after { content: "" !important; }
+
+  /* ============ Eliminar shadows decorativos Tailwind ============ */
+  .shadow, .shadow-sm, .shadow-md, .shadow-lg {
+    box-shadow: none !important;
+  }
+}

@@ -1,0 +1,301 @@
+<!-- @rol: profesional, gestor_caso, direccion_centro -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Psicológico Evolutivo · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <link rel="stylesheet" href="_assets/print-valoracion.css" media="print">
+    <script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="flex min-h-screen" x-data="{
+    seccionActiva: 'identificacion',
+    estado: 'borrador',
+    autoguardado: 'Sin cambios',
+    toast: false,
+    valoracionAnterior: { fecha: '2025-06-10', profesional: 'Daniel Alonso' },
+    secciones: ['identificacion','cognitivas','instrumentales','conducta_emocional','integracion','dependencia','conclusiones']
+}">
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight"><p class="text-base font-semibold tracking-tight">ÁGORA</p><p class="text-[10px] text-slate-500">Grupo Social Aspanias</p></div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium">
+                <option value="profesional" selected>🩺 Profesional</option>
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100">
+            <div class="w-full flex items-center gap-2.5 p-2 rounded-lg">
+                <div class="w-9 h-9 rounded-full bg-teal-100 text-teal-800 flex items-center justify-center text-sm font-semibold shrink-0">DA</div>
+                <div class="leading-tight text-left flex-1 min-w-0"><p class="text-sm font-medium truncate">Daniel Alonso</p><p class="text-[10px] text-slate-500 truncate">Psicólogo · Col. CL-1234</p></div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+
+        <div class="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-slate-200 px-8 py-3">
+            <nav class="text-xs text-slate-500 flex items-center gap-1.5">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a><span>›</span>
+                <a href="personas-lista.html" class="hover:text-emerald-700">Personas</a><span>›</span>
+                <a href="persona-detalle.html" class="hover:text-emerald-700">Ruiz Jiménez, A.</a><span>›</span>
+                <a href="valoraciones-listado.html" class="hover:text-emerald-700">Valoraciones</a><span>›</span>
+                <span class="text-slate-900 font-medium">Informe Evolutivo</span>
+            </nav>
+        </div>
+
+        <header class="px-8 pt-6 pb-4 border-b border-slate-200 bg-white">
+            <div class="flex items-start justify-between flex-wrap gap-3">
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">🔄 Informe Psicológico Evolutivo</h1>
+                    <p class="text-sm text-slate-500 mt-1">Seguimiento periódico · Ruiz Jiménez, Asunción · valoración anterior: <strong x-text="valoracionAnterior.fecha"></strong> por <strong x-text="valoracionAnterior.profesional"></strong></p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-[11px] text-slate-500" x-text="autoguardado"></span>
+                    <span class="px-2 py-1 text-[11px] rounded-full bg-amber-100 text-amber-800 font-medium" x-show="estado === 'borrador'">🟡 Borrador</span>
+                    <span class="px-2 py-1 text-[11px] rounded-full bg-emerald-100 text-emerald-800 font-medium" x-show="estado === 'firmado'">✅ Firmado</span>
+                    <button @click="autoguardado = 'Guardando…'; setTimeout(() => autoguardado = 'Guardado hace un instante', 800); toast = 'Borrador guardado'; setTimeout(() => toast = false, 1800)" class="px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">💾 Guardar</button>
+                    <a href="informe-psicologico-pdf.html" class="px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">👁 PDF</a>
+                    <button @click="estado = 'firmado'; toast = 'Informe firmado'; setTimeout(() => toast = false, 2400)" class="px-4 py-2 text-xs rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">✍ Firmar</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Banner comparativa -->
+        <div class="px-8 py-3 bg-sky-50 border-b border-sky-200 text-xs text-sky-900 flex items-center justify-between flex-wrap gap-2">
+            <span>📊 <strong>Comparativa automática</strong> habilitada: al rellenar cada función, ÁGORA muestra el dato de la valoración anterior para contextualizar.</span>
+            <a href="#" class="text-sky-700 hover:underline font-medium">Ver informe anterior 2025-06-10 →</a>
+        </div>
+
+        <div class="flex">
+            <!-- Navegación de secciones -->
+            <aside class="w-56 shrink-0 bg-slate-50 border-r border-slate-200 sticky top-[57px] h-[calc(100vh-57px)] overflow-y-auto px-3 py-4">
+                <p class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold mb-2">Secciones (7)</p>
+                <nav class="space-y-0.5 text-xs">
+                    <template x-for="(s, i) in [
+                        {id: 'identificacion', label: '1. Identificación'},
+                        {id: 'cognitivas', label: '2. Funciones cognitivas'},
+                        {id: 'instrumentales', label: '3. Praxias y gnosias'},
+                        {id: 'conducta_emocional', label: '4. Conducta y emoción'},
+                        {id: 'integracion', label: '5. Integración en el centro'},
+                        {id: 'dependencia', label: '6. Minusvalía y dependencia'},
+                        {id: 'conclusiones', label: '7. Conclusiones y firma'}]" :key="s.id">
+                        <button @click="seccionActiva = s.id" :class="seccionActiva === s.id ? 'bg-emerald-100 text-emerald-800 font-medium' : 'text-slate-700 hover:bg-slate-100'" class="w-full text-left px-2 py-1.5 rounded" x-text="s.label"></button>
+                    </template>
+                </nav>
+            </aside>
+
+            <!-- Contenido del formulario -->
+            <section class="flex-1 px-8 py-6 max-w-3xl">
+
+                <!-- 1. IDENTIFICACIÓN -->
+                <div x-show="seccionActiva === 'identificacion'" class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">1. Identificación</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Nombre y apellidos</label><input value="Ruiz Jiménez, Asunción" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-slate-50" readonly></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Edad actual</label><input value="78" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-slate-50" readonly></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Fecha de exploración</label><input type="date" value="2026-06-16" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Año del seguimiento</label><input type="number" value="2026" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></div>
+                    </div>
+                    <div class="rounded-lg border border-sky-200 bg-sky-50 p-3 text-xs text-sky-900">
+                        <p>De la valoración de seguimiento, fundamentada en la información obtenida del contacto con la persona, las manifestaciones de los profesionales del centro y la nueva exploración psicológica realizada en la fecha indicada, se desprende la siguiente información:</p>
+                    </div>
+                </div>
+
+                <!-- 2. FUNCIONES COGNITIVAS -->
+                <div x-show="seccionActiva === 'cognitivas'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">2. Funciones cognitivas</h2>
+                    <template x-for="f in [
+                        {id: 'comunicacion', label: 'Comunicación y lenguaje'},
+                        {id: 'conciencia', label: 'Conciencia vigil'},
+                        {id: 'orientacion', label: 'Orientación'},
+                        {id: 'atencion', label: 'Atención y concentración'},
+                        {id: 'memoria', label: 'Memoria'},
+                        {id: 'razonamiento', label: 'Razonamiento abstracto'},
+                        {id: 'juicio', label: 'Capacidad de juicio'},
+                        {id: 'control_impulsos', label: 'Control de impulsos'}]" :key="f.id">
+                        <div class="grid md:grid-cols-3 gap-3 items-start">
+                            <label class="text-xs font-medium text-slate-700 pt-2" x-text="f.label"></label>
+                            <div class="md:col-span-2">
+                                <textarea rows="2" class="w-full px-2 py-1.5 text-xs rounded border border-slate-300" placeholder="Estado actual..."></textarea>
+                                <p class="text-[10px] text-sky-700 mt-1">📊 Anterior: <em>"Sin cambios significativos. Conservada."</em></p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- 3. FUNCIONES INSTRUMENTALES (PRAXIAS + GNOSIAS) -->
+                <div x-show="seccionActiva === 'instrumentales'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">3. Praxias y gnosias</h2>
+                    <p class="text-xs text-slate-500">Praxia: capacidad para realizar acciones motoras coordinadas con finalidad, conservadas las capacidades motoras. Gnosias: capacidad para reconocer objetos, personas o estímulos en ausencia de alteración sensorial.</p>
+
+                    <fieldset class="border border-sky-200 bg-sky-50/30 rounded-lg p-3">
+                        <legend class="text-xs font-medium text-sky-900 px-2">Praxias</legend>
+                        <div class="grid md:grid-cols-2 gap-3 mt-2">
+                            <template x-for="p in [['vestido','Del vestido'],['constructiva','Constructiva'],['ideomotora','Ideomotora'],['ideacional','Ideacional'],['bucofacial','Bucofacial']]" :key="p[0]">
+                                <div>
+                                    <label class="block text-[11px] text-slate-600 mb-1" x-text="p[1]"></label>
+                                    <textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea>
+                                </div>
+                            </template>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="border border-purple-200 bg-purple-50/30 rounded-lg p-3">
+                        <legend class="text-xs font-medium text-purple-900 px-2">Gnosias</legend>
+                        <div class="grid md:grid-cols-2 gap-3 mt-2">
+                            <template x-for="g in [['tactiles','Táctiles'],['somatognosia','Somatognosia'],['verbales','Gnosias verbales'],['fisiognosias','Fisiognosias'],['auditivas','Gnosias auditivas']]" :key="g[0]">
+                                <div>
+                                    <label class="block text-[11px] text-slate-600 mb-1" x-text="g[1]"></label>
+                                    <textarea rows="2" class="w-full px-2 py-1 text-xs rounded border border-slate-300"></textarea>
+                                </div>
+                            </template>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- 4. CONDUCTA Y EMOCIÓN -->
+                <div x-show="seccionActiva === 'conducta_emocional'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">4. Aspectos conductuales y emocionales</h2>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Cambios significativos respecto a la valoración anterior</label>
+                        <textarea rows="4" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300" placeholder="Sin cambios significativos durante este año. Emocionalmente estable."></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Contacto familiar</label>
+                        <textarea rows="3" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300" placeholder="Mantiene contacto con su familia..."></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Síntesis cognitivo-emocional</label>
+                        <textarea rows="3" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300" placeholder="Cognitivamente, no se ha detectado un descenso en las distintas áreas, manteniéndose en parámetros similares a la valoración anterior."></textarea>
+                    </div>
+                </div>
+
+                <!-- 5. INTEGRACIÓN -->
+                <div x-show="seccionActiva === 'integracion'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">5. Integración en el centro</h2>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Nivel de integración en las actividades del centro</label>
+                        <select class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300">
+                            <option>Adecuado</option>
+                            <option>Parcial — participa selectivamente</option>
+                            <option>Reducido</option>
+                            <option>No integrado</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Observaciones</label>
+                        <textarea rows="4" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300" placeholder="Su nivel de integración en las actividades realizadas en el centro es adecuado..."></textarea>
+                    </div>
+                </div>
+
+                <!-- 6. MINUSVALÍA Y DEPENDENCIA -->
+                <div x-show="seccionActiva === 'dependencia'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">6. Minusvalía, dependencia e ICAP</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Grado de minusvalía</label><div class="flex gap-2"><input type="number" min="0" max="100" placeholder="%" class="w-24 px-3 py-2 text-sm rounded-lg border border-slate-300"><span class="text-xs text-slate-500 pt-2.5">% Resolución de fecha:</span><input type="date" class="px-3 py-2 text-sm rounded-lg border border-slate-300"></div></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Valoración de dependencia</label><select class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"><option>Grado I — Moderada</option><option>Grado II — Severa</option><option>Grado III — Gran dependencia</option><option>No valorada</option></select></div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">ICAP — Resultado del Inventario para la Planificación</label>
+                        <div class="grid md:grid-cols-3 gap-3">
+                            <div><label class="block text-[10px] text-slate-500 mb-1">Edad equivalente</label><input class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300" placeholder="años"></div>
+                            <div><label class="block text-[10px] text-slate-500 mb-1">Nivel de servicios</label><select class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"><option>1 — Independencia total</option><option>2 — Apoyo intermitente</option><option>3 — Apoyo limitado</option><option>4 — Apoyo extenso</option><option>5 — Apoyo generalizado</option></select></div>
+                            <div><label class="block text-[10px] text-slate-500 mb-1">Fecha aplicación</label><input type="date" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></div>
+                        </div>
+                        <p class="text-[11px] text-sky-700 mt-2">💡 Si se ha aplicado el ICAP recientemente, se puede vincular el registro: <a href="valoraciones-listado.html" class="underline">ver valoraciones ICAP →</a></p>
+                    </div>
+                </div>
+
+                <!-- 7. CONCLUSIONES Y FIRMA -->
+                <div x-show="seccionActiva === 'conclusiones'" x-cloak class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">7. Conclusiones y firma</h2>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Conclusiones del seguimiento</label>
+                        <textarea rows="6" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300" placeholder="Síntesis del seguimiento, comparativa con valoración anterior, recomendaciones, propuesta de próxima revaluación..."></textarea>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4 mt-6">
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Firmado por</label><input value="Daniel Alonso" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-slate-50" readonly></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Nº colegiado</label><input value="CL-1234" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></div>
+                    </div>
+                    <div class="rounded-lg border border-rose-200 bg-rose-50 p-4 text-xs text-rose-900 mt-4">
+                        <p class="font-semibold mb-1">🔒 Antes de firmar</p>
+                        <p>Al firmar, el informe queda <strong>bloqueado e inmutable</strong>. Quedará accesible desde la pestaña de valoraciones de la ficha de la persona atendida y comparable con futuros informes evolutivos.</p>
+                    </div>
+                </div>
+
+                <!-- Navegación -->
+                <div class="flex items-center justify-between mt-8 pt-4 border-t border-slate-200">
+                    <button @click="let i = secciones.indexOf(seccionActiva); if (i > 0) seccionActiva = secciones[i-1]" class="px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">‹ Anterior</button>
+                    <span class="text-[11px] text-slate-500" x-text="`Sección ${secciones.indexOf(seccionActiva) + 1} de ${secciones.length}`"></span>
+                    <button @click="let i = secciones.indexOf(seccionActiva); if (i < secciones.length - 1) seccionActiva = secciones[i+1]" class="px-3 py-2 text-xs rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">Siguiente ›</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div x-show="toast" x-cloak x-transition.opacity class="fixed bottom-6 right-6 z-50 rounded-lg bg-slate-900 text-white px-4 py-3 shadow-xl text-sm" x-text="toast"></div>
+</div>
+
+</body>
+</html>

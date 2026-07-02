@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<!-- @rol: profesional, gestor_caso, direccion_centro -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICAP — Valoración · ÁGORA</title>
+<link rel="stylesheet" href="_assets/tailwind.css">
+<link rel="stylesheet" href="_assets/print-valoracion.css" media="print">
+<script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+<style>[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+<div class="flex">
+  <aside class="w-64 bg-white border-r border-slate-200 min-h-screen flex flex-col fixed inset-y-0 left-0 z-10">
+    <div class="px-4 py-4 border-b border-slate-200"><a href="index.html" class="flex items-center gap-2"><div class="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold">Á</div><span class="text-lg font-semibold text-slate-800">ÁGORA</span></a></div>
+    <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+  </aside>
+
+<main class="flex-1 ml-64 p-6" x-data="icap()" x-cloak>
+
+  <div class="mb-6 flex items-start justify-between">
+    <div>
+      <nav class="text-xs text-slate-500 mb-2"><a href="personas-lista.html" class="hover:underline">Personas</a> · <a href="persona-detalle.html" class="hover:underline">Ficha persona</a> · <a href="valoraciones-listado.html" class="hover:underline">Valoraciones</a> · <span class="text-slate-700">ICAP</span></nav>
+      <h1 class="text-2xl font-bold text-slate-800">ICAP — Inventario para la Planificación de Servicios</h1>
+      <p class="text-sm text-slate-600 mt-1">Bruininks, Hill, Woodcock y Weatherman · Adaptación española Montero Centeno (1993) · ICE Universidad de Deusto</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <button @click="window.print()" class="px-3 py-2 text-sm rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50">🖨️ Imprimir</button>
+      <button @click="guardar()" class="px-3 py-2 text-sm rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">💾 Guardar</button>
+      <button @click="firmar()" class="px-3 py-2 text-sm rounded-lg bg-slate-800 text-white hover:bg-slate-900">✍️ Firmar</button>
+    </div>
+  </div>
+
+  <div class="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-900">
+    <strong>⚠️ Categoría especial art. 9 RGPD</strong> — Toda lectura/edición queda registrada en bitácora. Borrador autoguardado.
+  </div>
+
+  <div class="grid grid-cols-12 gap-6">
+
+    <aside class="col-span-3">
+      <div class="sticky top-4 bg-white rounded-xl border border-slate-200 p-4">
+        <h3 class="text-sm font-semibold text-slate-700 mb-3">Secciones ICAP</h3>
+        <ul class="space-y-1 text-xs">
+          <li><a href="#sec-A" class="block px-2 py-1.5 rounded hover:bg-slate-50 text-slate-700">A. Información descriptiva</a></li>
+          <li><a href="#sec-B" class="block px-2 py-1.5 rounded hover:bg-slate-50 text-slate-700">B. Categoría diagnóstica</a></li>
+          <li><a href="#sec-C" class="block px-2 py-1.5 rounded hover:bg-slate-50 text-slate-700">C. Limitaciones funcionales</a></li>
+          <li>
+            <a href="#sec-D" class="block px-2 py-1.5 rounded hover:bg-slate-50 text-slate-700 font-medium">D. Conducta adaptativa</a>
+            <ul class="ml-3 mt-1 space-y-0.5">
+              <template x-for="ad in adaptativa" :key="ad.key">
+                <li><a :href="`#dim-${ad.key}`" class="flex items-center justify-between px-2 py-1 rounded hover:bg-slate-50">
+                  <span class="text-slate-600" x-text="ad.nombre"></span>
+                  <span class="text-slate-500 font-mono text-[10px]" x-text="`${ad.items.filter(n=>respuestasAdapt[n]!=null).length}/${ad.items.length}`"></span>
+                </a></li>
+              </template>
+            </ul>
+          </li>
+          <li><a href="#sec-E" class="block px-2 py-1.5 rounded hover:bg-slate-50 text-slate-700 font-medium">E. Problemas de conducta</a></li>
+          <li><a href="#sec-FGHI" class="block px-2 py-1.5 rounded hover:bg-slate-50 text-slate-700">F-I. Ubicación y servicios</a></li>
+          <li class="pt-2 mt-2 border-t border-slate-200"><a href="#resultado" class="block px-2 py-1.5 text-xs font-medium text-emerald-700 hover:bg-emerald-50 rounded">📊 Resultado e índices</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <div class="col-span-9 space-y-6">
+
+      <!-- ===================== SECCIÓN A ===================== -->
+      <section id="sec-A" class="bg-white rounded-xl border border-slate-200 p-6 scroll-mt-4">
+        <h2 class="text-lg font-semibold text-slate-800 mb-4">A · Información descriptiva</h2>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div class="col-span-2"><label class="block text-xs text-slate-600 mb-1">Apellidos y nombre</label><input type="text" x-model="datos.nombre" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Sexo</label><select x-model="datos.sexo" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Masculino</option><option>Femenino</option><option>Otro</option></select></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Fecha de nacimiento</label><input type="date" x-model="datos.fecha_nacimiento" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Fecha de evaluación</label><input type="date" x-model="datos.fecha_evaluacion" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Estatura (cm)</label><input type="number" x-model.number="datos.estatura" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Peso (kg)</label><input type="number" step="0.1" x-model.number="datos.peso" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Idioma que comprende mejor</label><select x-model="datos.idioma" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Castellano</option><option>Lengua propia de Comunidad Autónoma</option><option>Otro</option></select></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Modo principal de expresión</label><select x-model="datos.expresion" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Ninguno</option><option>Gestos</option><option>Habla</option><option>Lengua de signos</option><option>Tableros / aparatos comunicación</option><option>Otro</option></select></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Estado civil</label><select x-model="datos.estado_civil" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Soltero/a</option><option>Casado/a</option><option>Separado/a</option><option>Divorciado/a</option><option>Viudo/a</option></select></div>
+          <div><label class="block text-xs text-slate-600 mb-1">Estado legal</label><select x-model="datos.estado_legal" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Plenamente responsable</option><option>Padre/madre/pariente tutor</option><option>Tutor no pariente</option><option>Institución / asociación tutora</option></select></div>
+          <div class="col-span-2"><label class="block text-xs text-slate-600 mb-1">Persona que contesta · Relación con la persona evaluada</label><input type="text" x-model="datos.informante" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+          <div class="col-span-2"><label class="block text-xs text-slate-600 mb-1">Motivo de la evaluación</label><textarea x-model="datos.motivo" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></textarea></div>
+        </div>
+      </section>
+
+      <!-- ===================== SECCIÓN B ===================== -->
+      <section id="sec-B" class="bg-white rounded-xl border border-slate-200 p-6 scroll-mt-4">
+        <h2 class="text-lg font-semibold text-slate-800 mb-4">B · Categoría diagnóstica</h2>
+        <div class="space-y-3 text-sm">
+          <div><label class="block text-xs text-slate-600 mb-1">Diagnóstico principal</label>
+            <select x-model="datos.dx_principal" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option value="">—</option>
+              <option>Ninguno</option><option>Autismo</option><option>Ceguera</option>
+              <option>Lesión cerebral o neurológica · síndrome cerebral crónico</option>
+              <option>Drogodependencia</option><option>Sordera</option><option>Epilepsia o convulsiones</option>
+              <option>Retraso mental</option><option>Problemas de salud física</option>
+              <option>Enfermedad mental (con diagnóstico formal): psicosis, esquizofrenia, etc.</option>
+              <option>Problema de salud mental situacional o episódico</option>
+              <option>Otros</option>
+            </select>
+          </div>
+          <div><label class="block text-xs text-slate-600 mb-2">Otros diagnósticos (marque todos los que correspondan)</label>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <template x-for="op in opcionesDx" :key="op">
+                <label class="flex items-center gap-2"><input type="checkbox" :value="op" x-model="datos.otros_dx"><span x-text="op"></span></label>
+              </template>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SECCIÓN C ===================== -->
+      <section id="sec-C" class="bg-white rounded-xl border border-slate-200 p-6 scroll-mt-4">
+        <h2 class="text-lg font-semibold text-slate-800 mb-4">C · Limitaciones funcionales y asistencia necesaria</h2>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div><label class="block text-xs text-slate-600 mb-1">Nivel de retraso mental</label>
+            <select x-model="datos.nivel_rm" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option value="">—</option><option>No tiene retraso mental</option><option>Leve (CI 52-70)</option><option>Moderado (CI 36-51)</option><option>Severo (CI 20-35)</option><option>Profundo (CI &lt;20)</option><option>Desconocido / Desarrollo lento / De riesgo</option>
+            </select>
+          </div>
+          <div><label class="block text-xs text-slate-600 mb-1">Visión</label>
+            <select x-model="datos.vision" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option value="">—</option><option>Buena (con o sin gafas)</option><option>Problemas que limitan lectura/movilidad</option><option>Poca o nula visión</option>
+            </select>
+          </div>
+          <div><label class="block text-xs text-slate-600 mb-1">Audición</label>
+            <select x-model="datos.audicion" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option value="">—</option><option>Oye voces normales</option><option>Solo voces altas</option><option>Audición pobre o nula</option>
+            </select>
+          </div>
+          <div><label class="block text-xs text-slate-600 mb-1">Frecuencia de ataques epilépticos</label>
+            <select x-model="datos.epilepsia" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option value="">—</option><option>Ninguno o controlados</option><option>Cada año o menos</option><option>Mensualmente</option><option>Uno o más a la semana</option>
+            </select>
+          </div>
+          <div><label class="block text-xs text-slate-600 mb-1">Salud</label>
+            <select x-model="datos.salud" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option value="">—</option><option>No limita actividades diarias</option><option>Limita un poco</option><option>Muchas o significativas limitaciones</option>
+            </select>
+          </div>
+          <div><label class="block text-xs text-slate-600 mb-1">Frecuencia atención médica/enfermería</label>
+            <select x-model="datos.atencion_med" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option value="">—</option><option>Menos de una vez al mes</option><option>Mensualmente</option><option>Semanalmente</option><option>Diariamente</option><option>Disponible 24h</option>
+            </select>
+          </div>
+          <div><label class="block text-xs text-slate-600 mb-1">Brazo / mano</label>
+            <select x-model="datos.brazo_mano" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option value="">—</option><option>Sin limitaciones</option><option>Con algunas limitaciones</option><option>Con limitaciones en la mayoría</option>
+            </select>
+          </div>
+          <div><label class="block text-xs text-slate-600 mb-1">Movilidad</label>
+            <select x-model="datos.movilidad" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option value="">—</option><option>Camina sin problemas y sin ayudas</option><option>Generalmente silla de ruedas, o no camina</option><option>Limitado a la cama mayor parte del día</option><option>En cama todo el día</option>
+            </select>
+          </div>
+          <div class="col-span-2"><label class="block text-xs text-slate-600 mb-1">Medicación actual</label><textarea x-model="datos.medicacion" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="Salud física · Anímicos/emocionales · Epilepsia…"></textarea></div>
+        </div>
+      </section>
+
+      <!-- ===================== SECCIÓN D — CONDUCTA ADAPTATIVA ===================== -->
+      <section id="sec-D" class="bg-white rounded-xl border-2 border-emerald-200 p-6 scroll-mt-4">
+        <h2 class="text-lg font-semibold text-emerald-800 mb-2">D · Conducta adaptativa</h2>
+        <div class="text-sm text-slate-700 mb-4 p-3 bg-emerald-50 rounded-lg">
+          <p class="font-medium mb-1">Escala 0-3:</p>
+          <ul class="space-y-0.5 text-xs">
+            <li><strong>0</strong> · Nunca o rara vez — aun pidiéndoselo</li>
+            <li><strong>1</strong> · La realiza aunque no bien (1/4 de las veces) — tal vez necesite que se le pida</li>
+            <li><strong>2</strong> · La realiza bien (3/4 de las veces) — tal vez necesite que se le pida</li>
+            <li><strong>3</strong> · La realiza muy bien — siempre o casi siempre, sin que se le pida</li>
+          </ul>
+          <p class="mt-2 text-xs italic">Puntúe el grado en que realiza la conducta completamente y sin ayuda ni supervisión.</p>
+        </div>
+
+        <template x-for="ad in adaptativa" :key="ad.key">
+          <div :id="`dim-${ad.key}`" class="mb-8 scroll-mt-4">
+            <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-200">
+              <div>
+                <h3 class="text-base font-semibold text-slate-800" x-text="`${ad.numero}. ${ad.nombre}`"></h3>
+                <p class="text-xs text-slate-500" x-text="`${ad.items.length} ítems · puntuación directa máxima ${ad.items.length * 3}`"></p>
+              </div>
+              <div class="text-right">
+                <div class="text-2xl font-bold text-emerald-700" x-text="puntuacionAdapt(ad)"></div>
+                <div class="text-xs text-slate-500">PD total</div>
+              </div>
+            </div>
+            <ul class="space-y-2">
+              <template x-for="n in ad.items" :key="n">
+                <li class="grid grid-cols-12 gap-3 items-start py-2 border-b border-slate-100 last:border-0">
+                  <span class="col-span-1 text-xs font-mono text-slate-500 pt-2" x-text="n"></span>
+                  <span class="col-span-8 text-sm text-slate-700" x-text="textosAdapt[n]"></span>
+                  <div class="col-span-3 flex gap-1 justify-end">
+                    <template x-for="v in [0,1,2,3]" :key="v">
+                      <button @click="respuestasAdapt[n] = v" :class="respuestasAdapt[n]===v ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white text-slate-600 border-slate-300 hover:bg-slate-50'" class="w-9 h-9 rounded border text-xs font-semibold" x-text="v"></button>
+                    </template>
+                  </div>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </template>
+      </section>
+
+      <!-- ===================== SECCIÓN E — PROBLEMAS DE CONDUCTA ===================== -->
+      <section id="sec-E" class="bg-white rounded-xl border-2 border-rose-200 p-6 scroll-mt-4">
+        <h2 class="text-lg font-semibold text-rose-800 mb-2">E · Problemas de conducta</h2>
+        <p class="text-xs text-slate-600 mb-4">Indique si presenta problemas en cada categoría. Si no presenta, deje <strong>Nunca (0)</strong> en frecuencia y <strong>No es grave (0)</strong> en gravedad.</p>
+
+        <div class="space-y-4">
+          <template x-for="(p, idx) in problemasConducta" :key="p.key">
+            <div class="p-4 border border-slate-200 rounded-lg">
+              <div class="flex items-start justify-between mb-2">
+                <div>
+                  <p class="font-semibold text-sm text-slate-800" x-text="`${idx+1}. ${p.nombre}`"></p>
+                  <p class="text-xs text-slate-600 mt-0.5" x-text="p.descripcion"></p>
+                </div>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-medium" x-text="p.tipo"></span>
+              </div>
+              <div class="mt-3">
+                <label class="block text-xs text-slate-600 mb-1">Problema principal (si lo hay)</label>
+                <textarea x-model="problemas[p.key].principal" rows="2" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg" placeholder="Descripción del problema observado"></textarea>
+              </div>
+              <div class="grid grid-cols-2 gap-3 mt-3">
+                <div>
+                  <label class="block text-xs text-slate-600 mb-1">Frecuencia (0-5)</label>
+                  <select x-model.number="problemas[p.key].frecuencia" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg">
+                    <option :value="0">0 · Nunca</option>
+                    <option :value="1">1 · Menos de una vez al mes</option>
+                    <option :value="2">2 · De una a tres veces al mes</option>
+                    <option :value="3">3 · De una a seis veces por semana</option>
+                    <option :value="4">4 · De una a diez veces al día</option>
+                    <option :value="5">5 · Una o más veces en una hora</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs text-slate-600 mb-1">Gravedad (0-4)</label>
+                  <select x-model.number="problemas[p.key].gravedad" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg">
+                    <option :value="0">0 · No es grave</option>
+                    <option :value="1">1 · Ligeramente grave (leve)</option>
+                    <option :value="2">2 · Medianamente grave (moderado)</option>
+                    <option :value="3">3 · Muy grave</option>
+                    <option :value="4">4 · Extremadamente grave (crítico)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <div class="mt-4 p-3 bg-slate-50 rounded-lg">
+          <label class="block text-xs text-slate-600 mb-1">Reacción a la conducta problema</label>
+          <select x-model="datos.reaccion_problema" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg">
+            <option value="">—</option>
+            <option>No hay problemas de conducta</option>
+            <option>No hacen nada o le consuelan</option>
+            <option>Razonando con la persona</option>
+            <option>Ignoran reforzando conductas más positivas</option>
+            <option>Le piden corregir la situación</option>
+            <option>Modifican / reestructuran el entorno</option>
+            <option>Le piden salir de la habitación/aula</option>
+            <option>Retiran privilegios obtenidos</option>
+            <option>Dirección física, traslado o límites físicos</option>
+            <option>Se necesita ayuda de 2+ personas</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- ===================== SECCIONES F-G-H-I ===================== -->
+      <section id="sec-FGHI" class="bg-white rounded-xl border border-slate-200 p-6 scroll-mt-4 space-y-5">
+        <h2 class="text-lg font-semibold text-slate-800">F · Ubicación residencial · G · Servicios de día · H · Apoyos · I · Ocio</h2>
+
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div>
+            <label class="block text-xs text-slate-600 mb-1">F · Residencia actual</label>
+            <select x-model="datos.residencia_actual" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option value="">—</option><option>Con padres o familiares</option><option>Padres adoptivos o familia sustituta</option><option>Independiente en su casa</option><option>Semi-independiente con supervisión regular</option><option>Servicio residencial</option><option>Otro</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-slate-600 mb-1">F · Recomendación de cambio (2 años)</label>
+            <select x-model="datos.residencia_cambio" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option value="">—</option><option>No se recomienda ningún cambio</option><option>Con padres o familiares</option><option>Padres adoptivos / familia sustituta</option><option>Independiente</option><option>Semi-independiente</option><option>Servicio residencial</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-slate-600 mb-1">G · Servicio de día actual</label>
+            <select x-model="datos.servicio_dia" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option value="">—</option><option>Ninguno</option><option>Jardín de infancia / centro día ancianos</option><option>Escuela ordinaria · aula ordinaria</option><option>Escuela ordinaria · ed. especial</option><option>Aula de educación especial</option><option>Centro educación especial</option><option>Centro de día</option><option>Centro ocupacional</option><option>Centro especial de empleo</option><option>Puesto ordinario con apoyo</option><option>Empleo ordinario</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-slate-600 mb-1">G · Recomendación de cambio</label>
+            <select x-model="datos.servicio_dia_cambio" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option value="">—</option><option>No se recomienda ningún cambio</option><option>Centro de día</option><option>Centro ocupacional</option><option>Centro especial de empleo</option><option>Empleo ordinario con apoyo</option><option>Empleo ordinario</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs text-slate-600 mb-2">H · Servicios de apoyo que utiliza actualmente</label>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <template x-for="ap in opcionesApoyo" :key="ap">
+              <label class="flex items-center gap-2"><input type="checkbox" :value="ap" x-model="datos.apoyos_actuales"><span x-text="ap"></span></label>
+            </template>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs text-slate-600 mb-2">I · Actividades sociales y de ocio del último mes</label>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <template x-for="ac in opcionesActividades" :key="ac">
+              <label class="flex items-center gap-2"><input type="checkbox" :value="ac" x-model="datos.actividades"><span x-text="ac"></span></label>
+            </template>
+          </div>
+        </div>
+      </section>
+
+      <!-- Observaciones -->
+      <section class="bg-white rounded-xl border border-slate-200 p-6">
+        <h2 class="text-lg font-semibold text-slate-800 mb-3">Información general y recomendaciones</h2>
+        <textarea x-model="datos.observaciones" rows="5" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Objetivos del programa · Objetivos de servicios · Otras recomendaciones…"></textarea>
+      </section>
+
+      <!-- ===================== RESULTADO ===================== -->
+      <section id="resultado" class="bg-white rounded-xl border-2 border-emerald-200 p-6 scroll-mt-4">
+        <h2 class="text-lg font-semibold text-emerald-800 mb-4">📊 Resumen de puntuaciones</h2>
+
+        <h3 class="text-sm font-semibold text-slate-700 mb-2 uppercase tracking-wide">Conducta adaptativa</h3>
+        <table class="w-full text-sm border-collapse mb-6">
+          <thead>
+            <tr class="bg-slate-50 text-xs text-slate-600">
+              <th class="text-left p-2 border-b">Sección</th>
+              <th class="text-center p-2 border-b">PD</th>
+              <th class="text-center p-2 border-b">Máx</th>
+              <th class="text-left p-2 border-b">Perfil</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template x-for="ad in adaptativa" :key="ad.key">
+              <tr class="hover:bg-slate-50">
+                <td class="p-2 border-b border-slate-100 font-medium" x-text="`${ad.numero}. ${ad.nombre}`"></td>
+                <td class="p-2 border-b border-slate-100 text-center font-mono font-semibold" x-text="puntuacionAdapt(ad)"></td>
+                <td class="p-2 border-b border-slate-100 text-center font-mono text-slate-500" x-text="ad.items.length * 3"></td>
+                <td class="p-2 border-b border-slate-100"><div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-emerald-500" :style="`width: ${(puntuacionAdapt(ad)/(ad.items.length*3))*100}%`"></div></div></td>
+              </tr>
+            </template>
+            <tr class="bg-emerald-50 font-semibold">
+              <td class="p-2">Total Conducta Adaptativa</td>
+              <td class="p-2 text-center font-mono" x-text="totalAdapt()"></td>
+              <td class="p-2 text-center font-mono text-slate-500">231</td>
+              <td class="p-2"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="text-sm font-semibold text-slate-700 mb-2 uppercase tracking-wide">Problemas de conducta · Índices</h3>
+        <table class="w-full text-sm border-collapse mb-6">
+          <thead>
+            <tr class="bg-slate-50 text-xs text-slate-600">
+              <th class="text-left p-2 border-b">Índice</th>
+              <th class="text-center p-2 border-b">Suma F+G</th>
+              <th class="text-center p-2 border-b">Valor</th>
+              <th class="text-center p-2 border-b">Gravedad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="p-2 border-b">Interno (autolesivo + estereotipias + retraimiento)</td><td class="p-2 text-center font-mono" x-text="sumaInterno()"></td><td class="p-2 text-center font-mono font-semibold" x-text="100 - sumaInterno()"></td><td class="p-2 text-center text-xs" x-text="nivelGravedad(100 - sumaInterno())"></td></tr>
+            <tr><td class="p-2 border-b">Asocial (social ofensiva + no colaboradoras)</td><td class="p-2 text-center font-mono" x-text="sumaAsocial()"></td><td class="p-2 text-center font-mono font-semibold" x-text="100 - sumaAsocial()"></td><td class="p-2 text-center text-xs" x-text="nivelGravedad(100 - sumaAsocial())"></td></tr>
+            <tr><td class="p-2 border-b">Externo (heteroagresividad + destrucción + disruptiva)</td><td class="p-2 text-center font-mono" x-text="sumaExterno()"></td><td class="p-2 text-center font-mono font-semibold" x-text="100 - sumaExterno()"></td><td class="p-2 text-center text-xs" x-text="nivelGravedad(100 - sumaExterno())"></td></tr>
+            <tr class="bg-rose-50 font-semibold"><td class="p-2">General (todas las categorías)</td><td class="p-2 text-center font-mono" x-text="sumaGeneral()"></td><td class="p-2 text-center font-mono" x-text="100 - sumaGeneral()"></td><td class="p-2 text-center text-xs" x-text="nivelGravedad(100 - sumaGeneral())"></td></tr>
+          </tbody>
+        </table>
+        <p class="text-xs text-slate-500 italic mb-4">Escala interpretativa: <strong>+10 a -10</strong> Normal · <strong>-11 a -20</strong> Levemente grave · <strong>-21 a -30</strong> Moderadamente grave · <strong>-31 a -40</strong> Grave · <strong>-41 o menos</strong> Muy grave.</p>
+
+        <div class="grid grid-cols-3 gap-4">
+          <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4 text-center">
+            <div class="text-xs text-emerald-700 uppercase mb-1">Total Conducta Adaptativa</div>
+            <div class="text-3xl font-bold text-emerald-800" x-text="totalAdapt()"></div>
+            <div class="text-xs text-emerald-600 mt-1">de 231 máx</div>
+          </div>
+          <div class="bg-rose-50 border border-rose-200 rounded-lg p-4 text-center">
+            <div class="text-xs text-rose-700 uppercase mb-1">Índice General Problemas</div>
+            <div class="text-3xl font-bold text-rose-800" x-text="100 - sumaGeneral()"></div>
+            <div class="text-xs text-rose-600 mt-1" x-text="nivelGravedad(100 - sumaGeneral())"></div>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 text-center">
+            <div class="text-xs text-slate-600 uppercase mb-1">Nivel de Servicio ICAP</div>
+            <div class="text-3xl font-bold text-slate-800" x-text="nivelServicio()"></div>
+            <div class="text-xs text-slate-500 mt-1" x-text="descripcionServicio()"></div>
+          </div>
+        </div>
+
+        <p class="text-xs text-slate-500 italic mt-6">Para las puntuaciones estándar de escala (Edad equivalente, ETM, Intervalo de confianza, Tablas A-F), consultar el Manual ICAP (Bruininks et al. 1986 · adaptación Montero Centeno 1993). ÁGORA almacena la PD y los índices; el psicólogo añade las puntuaciones estándar en el informe.</p>
+      </section>
+
+      <div class="flex items-center justify-between gap-3 pb-12">
+        <a href="valoraciones-listado.html" class="text-sm text-slate-600 hover:underline">← Volver al listado</a>
+        <div class="flex gap-2">
+          <button @click="guardar()" class="px-4 py-2 text-sm rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">💾 Guardar borrador</button>
+          <button @click="firmar()" class="px-4 py-2 text-sm rounded-lg bg-slate-800 text-white hover:bg-slate-900">✍️ Firmar y cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+
+<script>
+function icap() {
+  return {
+    estado: 'Borrador',
+    ultimoGuardado: '',
+    datos: {
+      nombre:'', sexo:'', fecha_nacimiento:'', fecha_evaluacion: new Date().toISOString().slice(0,10),
+      estatura:null, peso:null, idioma:'', expresion:'', estado_civil:'', estado_legal:'',
+      informante:'', motivo:'',
+      dx_principal:'', otros_dx:[],
+      nivel_rm:'', vision:'', audicion:'', epilepsia:'', salud:'', atencion_med:'', brazo_mano:'', movilidad:'', medicacion:'',
+      reaccion_problema:'',
+      residencia_actual:'', residencia_cambio:'', servicio_dia:'', servicio_dia_cambio:'',
+      apoyos_actuales:[], actividades:[],
+      observaciones:'',
+    },
+
+    opcionesDx: ['Autismo','Ceguera','Lesión cerebral/neurológica','Drogodependencia','Sordera','Epilepsia','Retraso mental','Problemas salud física','Enfermedad mental con diagnóstico formal','Problema salud mental episódico','Otros'],
+    opcionesApoyo: ['Valoración, orientación y seguimiento','Intervención o estimulación temprana','Logopedia','Terapia ocupacional','Fisioterapia','Cuidados médicos especializados','Salud mental especializada','Residenciales de respiro','Ayuda en el hogar','Transporte especial','Otro'],
+    opcionesActividades: ['Habló por teléfono con parientes/amigos','Visitó a parientes','Visitó a amigos o vecinos','Fue de compras o comió fuera','Asistió a actividades sociales o de ocio','Tiene un hobby personal'],
+
+    respuestasAdapt: {},
+
+    textosAdapt: {
+      // 1. DESTREZAS MOTORAS (18 ítems)
+      1:'Coge objetos pequeños con la mano',
+      2:'Pasa objetos pequeños de una mano a la otra',
+      3:'Se sienta solo/a, manteniendo la cabeza y la espalda derechas y firmes (sin apoyo) durante treinta segundos',
+      4:'Se mantiene de pie, al menos durante cinco segundos, apoyándose en muebles u otros objetos',
+      5:'Se pone en pie por sí mismo/a',
+      6:'Mete objetos pequeños en recipientes y los vuelve a sacar después',
+      7:'Se mantiene de pie sin ayuda y camina, al menos, unos dos metros',
+      8:'Hace rayas, marcas o garabatos, con lápiz o con pinturas, en una hoja de papel',
+      9:'Quita el envoltorio de objetos pequeños, como chicles o caramelos',
+      10:'Gira las manillas de las puertas y las abre',
+      11:'Sube y baja escaleras (aunque sea agarrándose a la barandilla) alternando los pies de un escalón a otro',
+      12:'Sube por una escalera de dos metros de altura (por ejemplo, la de un tobogán o la de una escalera de tijera)',
+      13:'Corta con tijeras siguiendo una línea recta y gruesa',
+      14:'Escribe su nombre copiándolo de un modelo',
+      15:'Levanta y lleva una bolsa llena de comestibles por lo menos a una distancia de seis metros y la deposita en el suelo',
+      16:'Dobla una carta en tres partes iguales, la introduce en un sobre y luego lo cierra',
+      17:'Enhebra una aguja de coser',
+      18:'Arma objetos de por lo menos diez piezas, que deben ser atornilladas o encajadas entre sí con tuercas y tornillos (juguetes, muebles desarmados)',
+
+      // 2. DESTREZAS SOCIALES Y COMUNICATIVAS (19 ítems)
+      19:'Emite sonidos o gesticula para llamar la atención',
+      20:'Tiende los brazos buscando la persona con la que desea contactar',
+      21:'Cuando se le llama por su nombre, gira la cabeza hacia quien le llama',
+      22:'Cuando se le pide, imita acciones, tales como despedirse o aplaudir',
+      23:'Entrega juguetes u otros objetos a otra persona',
+      24:'Indica "sí" o "no" moviendo la cabeza, o de cualquier otra manera, para responder a preguntas sencillas (p. ej. "¿quieres leche?")',
+      25:'Señala objetos o personas conocidas en una lámina, cuando se le pide',
+      26:'Dice al menos diez palabras, que pueden ser comprendidas por alguien que le conozca bien',
+      27:'Formula preguntas simples (por ejemplo: "¿qué es esto?")',
+      28:'Habla usando frases de tres o cuatro palabras',
+      29:'En actividades grupales, espera por lo menos dos minutos a que le llegue su turno (p. ej. esperar turno para chutar una pelota o beber agua)',
+      30:'Ofrece ayuda a otras personas (p. ej. mantiene la puerta abierta o recoge un objeto que se le ha caído a alguien)',
+      31:'Se comporta de una manera adecuada, sin llamar la atención de los demás, cuando está con sus amigos en lugares públicos (cine, autobús, teatro)',
+      32:'Reacciona correctamente ante la mayoría de las señales, rótulos o símbolos más comunes (STOP, ALTO, CABALLEROS, SEÑORAS, PELIGRO)',
+      33:'Cuenta de manera resumida una historia de forma que otra persona pueda entenderla (por ejemplo, un programa de TV o una película)',
+      34:'Recuerda o sabe cómo localizar números telefónicos y llama a sus amigos',
+      35:'Escribe, a mano o a máquina, notas o cartas legibles y comprensibles, para ser enviadas por correo',
+      36:'Localiza la información que necesita en las páginas amarillas de la guía telefónica o en los anuncios clasificados del periódico',
+      37:'Llama a un servicio de reparaciones o al responsable de la vivienda, cuando se estropea algo importante en su casa (cocina, frigorífico)',
+
+      // 3. DESTREZAS DE LA VIDA PERSONAL (21 ítems)
+      38:'Traga alimentos blandos',
+      39:'Coge y come alimentos como galletas o patatas fritas',
+      40:'Alarga sus brazos y piernas cuando se le viste, para facilitar la tarea',
+      41:'Mantiene sus manos bajo el chorro de agua para lavárselas, cuando está situado ante un lavabo',
+      42:'Come alimentos sólidos usando la cuchara, sin derramar casi nada',
+      43:'Permanece sin orinarse al menos durante tres horas',
+      44:'Se quita el pantalón o la falda y la ropa interior',
+      45:'Evacúa cuando se le sienta en el inodoro (o el orinal en el caso de niños) de acuerdo a un horario regular o cuando se le lleva al cuarto de baño',
+      46:'Se pone camisetas o jerseys, aunque sea al revés',
+      47:'Hace uso del retrete, quitándose y poniéndose la ropa (puede que se orine o defeque encima no más de una vez al mes)',
+      48:'Cierra la puerta del retrete, si es preciso, cuando hace uso del inodoro',
+      49:'Se viste por sí mismo/a, completa y correctamente, incluyendo botones, cinturones, cremalleras y cordones de los zapatos',
+      50:'Utiliza el cuchillo para cortar alimentos, en vez de tratar de comer trozos demasiado grandes',
+      51:'Se enjabona, aclara y seca el pelo',
+      52:'Friega, seca y luego guarda los platos en su lugar',
+      53:'Prepara y combina comidas simples, como huevos fritos, sopa o "sandwiches"',
+      54:'Arregla su dormitorio, lo cual incluye guardar la ropa, cambiar las sábanas, quitar el polvo y barrer el suelo',
+      55:'Prepara listas de compras de por lo menos seis productos para adquirir en una tienda de comestibles',
+      56:'Carga y maneja una lavadora, utilizando la cantidad de detergente y el programa apropiados',
+      57:'Planifica, prepara y sirve una comida completa para más de dos personas',
+      58:'Realiza pequeñas reparaciones de su ropa, como zurcir un roto o coser un botón (o encarga a la persona adecuada)',
+
+      // 4. DESTREZAS DE VIDA EN LA COMUNIDAD (19 ítems)
+      59:'Encuentra juguetes u objetos que se guardan siempre en el mismo lugar',
+      60:'Va solo/a a un determinado cuarto cuando se le manda (por ejemplo: "vete a esperar a la cocina")',
+      61:'Indica cuando ha finalizado una tarea rutinaria o que se le encargó',
+      62:'Permanece sin alejarse durante diez minutos, en un patio o parque sin vallas, cuando se espera que lo haga',
+      63:'Usa correctamente las palabras "mañana" y "noche"',
+      64:'Intercambia un objeto por dinero o por otro objeto de valor (por ejemplo, un libro por otro o por dinero)',
+      65:'Compra objetos que cuestan al menos veinticinco céntimos en máquinas automáticas (dulces, refrescos)',
+      66:'En su barrio, cruza calles, avenidas o cruces sin señalizar, sin que nadie le acompañe',
+      67:'Compra las cosas que se le piden cuando va a hacer un recado, aunque es posible que no cuente el cambio correctamente',
+      68:'Dice la fecha completa de su nacimiento (día, mes y año)',
+      69:'Usa diariamente un reloj para hacer cosas a una hora determinada (p. ej. tomar un autobús o ver un programa de TV)',
+      70:'Cuenta con precisión las vueltas, después de comprar algo con un billete o moneda grande',
+      71:'Maneja herramientas manuales eléctricas, potencialmente peligrosas, y aparatos de piezas móviles (taladro eléctrico, batidora, licuadora)',
+      72:'Cumple con las citas que han sido fijadas por lo menos tres días antes, anotándolas si es necesario',
+      73:'Administra su dinero de forma que cubra los gastos de, por lo menos, una semana (ocio, transporte y otras necesidades)',
+      74:'Trabaja en una tarea a ritmo regular, por lo menos durante dos horas',
+      75:'Rellena formularios y asiste a entrevistas de selección para buscar trabajo',
+      76:'Recibe facturas por correo y efectúa los pagos antes de que venza el plazo',
+      77:'Hace balance mensual de su cuenta bancaria o libreta de ahorros',
+    },
+
+    adaptativa: [
+      { key:'M',  numero:'1', nombre:'Destrezas motoras',                  items: Array.from({length:18},(_,i)=>i+1) },
+      { key:'SC', numero:'2', nombre:'Destrezas sociales y comunicativas', items: Array.from({length:19},(_,i)=>i+19) },
+      { key:'VP', numero:'3', nombre:'Destrezas de la vida personal',      items: Array.from({length:21},(_,i)=>i+38) },
+      { key:'VC', numero:'4', nombre:'Destrezas de vida en la comunidad',  items: Array.from({length:19},(_,i)=>i+59) },
+    ],
+
+    problemasConducta: [
+      { key:'autolesivo',     tipo:'Interno', nombre:'Comportamiento autolesivo o daño a sí mismo',
+        descripcion:'Golpeándose, dándose cabezazos, arañándose, cortándose, mordiéndose, frotándose la piel, tirándose del cabello, pellizcándose o mordiéndose las uñas' },
+      { key:'heteroagresividad', tipo:'Externo', nombre:'Heteroagresividad o daño a otros',
+        descripcion:'Golpear, dar patadas, morder, pinchar, arañar, tirar del pelo, golpear con objeto a personas o animales' },
+      { key:'destruccion',    tipo:'Externo', nombre:'Destrucción de objetos',
+        descripcion:'Intencionadamente romper, estropear o destruir cosas — golpear, rasgar, tirar, quemar, picar' },
+      { key:'disruptiva',     tipo:'Externo', nombre:'Conducta disruptiva',
+        descripcion:'Interferir las actividades de otros — abrazos en exceso, acoso, discutir, buscar pelea, reír/llorar sin motivo, interrumpir, gritar' },
+      { key:'estereotipias',  tipo:'Interno', nombre:'Hábitos atípicos y repetitivos (estereotipias)',
+        descripcion:'Conductas poco usuales, extrañas, repetidas — balancearse, torcerse los dedos, chuparse las manos, tics, hablar solo, rechinar dientes, mirar fijo' },
+      { key:'social_ofensiva',tipo:'Asocial', nombre:'Conducta social ofensiva',
+        descripcion:'Hablar muy alto, blasfemar, mentir, acercarse demasiado, amenazar, escupir, eructar, tocarse genitales en público' },
+      { key:'retraimiento',   tipo:'Interno', nombre:'Retraimiento o falta de atención',
+        descripcion:'Alejarse de otros, temores poco corrientes, mostrarse inactivo, triste, dormir excesivamente, hablar negativamente de sí mismo' },
+      { key:'no_colaboradoras', tipo:'Asocial', nombre:'Conductas no colaboradoras',
+        descripcion:'Negarse a obedecer, no hacer tareas, actuar desafiante, negarse a asistir, llegar tarde, engañar, robar, no respetar reglas' },
+    ],
+    problemas: {
+      autolesivo:        { principal:'', frecuencia:0, gravedad:0 },
+      heteroagresividad: { principal:'', frecuencia:0, gravedad:0 },
+      destruccion:       { principal:'', frecuencia:0, gravedad:0 },
+      disruptiva:        { principal:'', frecuencia:0, gravedad:0 },
+      estereotipias:     { principal:'', frecuencia:0, gravedad:0 },
+      social_ofensiva:   { principal:'', frecuencia:0, gravedad:0 },
+      retraimiento:      { principal:'', frecuencia:0, gravedad:0 },
+      no_colaboradoras:  { principal:'', frecuencia:0, gravedad:0 },
+    },
+
+    puntuacionAdapt(ad) { return ad.items.reduce((s,n)=> s + (this.respuestasAdapt[n] || 0), 0); },
+    totalAdapt() { return this.adaptativa.reduce((s,ad)=> s + this.puntuacionAdapt(ad), 0); },
+
+    sumaCategoria(key) { const p = this.problemas[key]; return (p.frecuencia || 0) + (p.gravedad || 0); },
+    sumaInterno()  { return this.sumaCategoria('autolesivo') + this.sumaCategoria('estereotipias') + this.sumaCategoria('retraimiento'); },
+    sumaAsocial()  { return this.sumaCategoria('social_ofensiva') + this.sumaCategoria('no_colaboradoras'); },
+    sumaExterno()  { return this.sumaCategoria('heteroagresividad') + this.sumaCategoria('destruccion') + this.sumaCategoria('disruptiva'); },
+    sumaGeneral()  { return this.sumaInterno() + this.sumaAsocial() + this.sumaExterno(); },
+
+    nivelGravedad(valor) {
+      if (valor >= -10) return 'Normal';
+      if (valor >= -20) return 'Levemente grave';
+      if (valor >= -30) return 'Moderadamente grave';
+      if (valor >= -40) return 'Grave';
+      return 'Muy grave';
+    },
+
+    nivelServicio() {
+      const pd = this.totalAdapt();
+      if (pd <= 19)  return '1';
+      if (pd <= 29)  return '2';
+      if (pd <= 39)  return '3';
+      if (pd <= 49)  return '4';
+      if (pd <= 59)  return '5';
+      if (pd <= 69)  return '6';
+      if (pd <= 79)  return '7';
+      if (pd <= 89)  return '8';
+      return '9';
+    },
+    descripcionServicio() {
+      const n = parseInt(this.nivelServicio());
+      if (n <= 2) return 'Total atención y supervisión completa';
+      if (n <= 4) return 'Intensa atención y supervisión constante';
+      if (n <= 5) return 'Periódica atención y supervisión frecuente';
+      if (n <= 7) return 'Limitada atención y seguimiento periódico';
+      return 'Sin necesidad de ayuda (o muy poco frecuente)';
+    },
+
+    guardar() { this.estado='Borrador guardado'; this.ultimoGuardado = new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}); },
+    firmar() {
+      const respondidos = Object.values(this.respuestasAdapt).filter(v=>v!=null).length;
+      if (respondidos < 77) {
+        if (!confirm(`Solo ${respondidos}/77 ítems de conducta adaptativa respondidos. ¿Firmar igualmente?`)) return;
+      }
+      if (confirm('¿Firmar la valoración ICAP?')) { this.estado='Firmada'; this.ultimoGuardado = new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}); }
+    },
+  };
+}
+</script>
+</body>
+</html>

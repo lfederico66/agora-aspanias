@@ -1,0 +1,51 @@
+{# Parcial: tabla de personas. Se sirve como pieza individual desde búsqueda HTMX. #}
+<div id="tabla-personas" class="overflow-hidden rounded-lg border border-slate-200 bg-white">
+    <table class="min-w-full divide-y divide-slate-200">
+        <thead class="bg-slate-50">
+            <tr class="text-left text-xs font-medium uppercase tracking-wide text-slate-500">
+                <th class="px-4 py-3">Código</th>
+                <th class="px-4 py-3">Apellidos, nombre</th>
+                <th class="px-4 py-3">Centro</th>
+                <th class="px-4 py-3">Gestor/a de caso</th>
+                <th class="px-4 py-3">Corresponsable</th>
+                <th class="px-4 py-3">Alta</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 text-sm">
+            {% for p in personas %}
+            <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3 font-mono text-xs text-slate-500">{{ p.codigo_interno }}</td>
+                <td class="px-4 py-3">
+                    <a href="{% url 'personas:detalle' p.id %}" class="flex items-center gap-2.5 group">
+                        <span class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-semibold">
+                            {{ p.nombre|slice:":1" }}{{ p.apellido_1|slice:":1" }}
+                        </span>
+                        <span class="font-medium text-slate-900 group-hover:text-emerald-700">
+                            {{ p.apellido_1 }} {{ p.apellido_2 }}, {{ p.nombre }}
+                        </span>
+                    </a>
+                </td>
+                <td class="px-4 py-3 text-slate-600">{{ p.centro_referencia.nombre }}</td>
+                <td class="px-4 py-3 text-slate-600">{{ p.gestor_caso.nombre_completo|default:"—" }}</td>
+                <td class="px-4 py-3">
+                    <span class="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-700">
+                        {{ p.get_corresponsable_principal_display }}
+                    </span>
+                </td>
+                <td class="px-4 py-3 text-slate-500">{{ p.fecha_alta|date:"d/m/Y" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="px-4 py-12 text-center text-sm text-slate-500">
+                    {% if q %}
+                        Sin resultados para «{{ q }}». Prueba con otro término de búsqueda.
+                    {% else %}
+                        No hay personas atendidas registradas todavía. Carga datos sintéticos con
+                        <code class="rounded bg-slate-100 px-1 py-0.5 text-xs">python manage.py cargar_datos_sinteticos</code>.
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

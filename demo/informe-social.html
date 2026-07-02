@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!-- @rol: gerencia, direccion_centro, gestor_caso -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe Social · ÁGORA</title>
+<link rel="stylesheet" href="_assets/tailwind.css">
+<link rel="stylesheet" href="_assets/print-valoracion.css" media="print">
+<script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · datos sintéticos</div>
+
+<div class="flex min-h-screen" x-data="informeSocial()">
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100"><a href="index.html" class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm"><svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg></div><div class="leading-tight"><p class="text-base font-semibold tracking-tight">ÁGORA</p><p class="text-[10px] text-slate-500">Grupo Social Aspanias</p></div></a></div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+    </aside>
+
+<main class="flex-1 min-w-0 p-6" x-cloak>
+    <nav class="text-xs text-slate-500 mb-3"><a href="personas-lista.html" class="hover:underline">Personas</a> · <a href="persona-detalle.html" class="hover:underline">Ficha persona</a> · <span class="text-slate-700">Informe Social</span></nav>
+
+    <div class="mb-6 flex items-start justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-800">Informe Social</h1>
+            <p class="text-sm text-slate-600 mt-1">Trabajo Social · evaluación sociofamiliar · propuesta de intervención</p>
+        </div>
+        <div class="flex gap-2">
+            <button @click="window.print()" class="px-3 py-2 text-sm rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50">🖨️ Imprimir PDF</button>
+            <button @click="guardar()" class="px-3 py-2 text-sm rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">💾 Guardar</button>
+            <button @click="firmar()" class="px-3 py-2 text-sm rounded-lg bg-slate-800 text-white hover:bg-slate-900">✍️ Firmar y cerrar</button>
+        </div>
+    </div>
+
+    <div class="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-900">
+        <strong>⚠️ Categoría especial art. 9 RGPD</strong> — Toda lectura/edición queda registrada en bitácora · acceso restringido a equipo TS y dirección.
+    </div>
+
+    <form class="bg-white rounded-xl border border-slate-200 p-6 space-y-6 max-w-5xl">
+
+        <!-- 1. Datos identificativos -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">1 · Datos identificativos</h2>
+            <div class="grid grid-cols-3 gap-4 text-sm">
+                <div class="col-span-2"><label class="block text-xs text-slate-600 mb-1">Nombre y apellidos</label><input type="text" x-model="d.nombre" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">DNI / NIE</label><input type="text" x-model="d.dni" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Fecha de nacimiento</label><input type="date" x-model="d.fecha_nacimiento" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Estado civil</label><select x-model="d.estado_civil" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Soltero/a</option><option>Casado/a</option><option>Viudo/a</option><option>Pareja de hecho</option><option>Divorciado/a</option></select></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Centro / servicio</label><input type="text" x-model="d.centro" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+            </div>
+        </section>
+
+        <!-- 2. Motivo del informe -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">2 · Motivo del informe</h2>
+            <select x-model="d.motivo_tipo" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg mb-2">
+                <option value="">—</option>
+                <option>Solicitud de plaza pública / concierto</option>
+                <option>Revisión grado dependencia</option>
+                <option>Cambio de centro o servicio</option>
+                <option>Solicitud de medida judicial</option>
+                <option>Coordinación con CEAS / Junta</option>
+                <option>Acreditación situación familiar</option>
+                <option>Solicitud prestación económica</option>
+                <option>Otro</option>
+            </select>
+            <textarea x-model="d.motivo_texto" rows="2" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Descripción del motivo del informe"></textarea>
+        </section>
+
+        <!-- 3. Situación familiar y red de apoyo -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">3 · Situación familiar y red de apoyo</h2>
+            <textarea x-model="d.situacion_familiar" rows="4" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Estructura familiar · convivencia · personas de referencia · red de apoyo informal · dinámica relacional..."></textarea>
+        </section>
+
+        <!-- 4. Situación económica -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">4 · Situación económica</h2>
+            <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                <div><label class="block text-xs text-slate-600 mb-1">Pensiones / prestaciones (€/mes)</label><input type="number" step="0.01" x-model.number="d.ingresos_pensiones" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Otros ingresos familiares (€/mes)</label><input type="number" step="0.01" x-model.number="d.ingresos_otros" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Tipo de pensión</label><select x-model="d.tipo_pension" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>PNC invalidez</option><option>PNC jubilación</option><option>Jubilación contributiva</option><option>Orfandad</option><option>Viudedad</option><option>IMV</option><option>Sin pensión</option></select></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Capacidad económica</label><select x-model="d.capacidad_eco" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Suficiente</option><option>Ajustada</option><option>Vulnerable</option><option>Exclusión</option></select></div>
+            </div>
+            <textarea x-model="d.observaciones_eco" rows="3" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Observaciones económicas: vivienda en propiedad/alquiler, deudas, cargas familiares, copago, etc."></textarea>
+        </section>
+
+        <!-- 5. Discapacidad y dependencia -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">5 · Discapacidad, dependencia y medidas de apoyo</h2>
+            <div class="grid grid-cols-3 gap-4 text-sm">
+                <div><label class="block text-xs text-slate-600 mb-1">% discapacidad</label><input type="number" x-model.number="d.pct_disc" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Grado dependencia</label><select x-model="d.dependencia" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Sin grado</option><option>Grado I</option><option>Grado II</option><option>Grado III</option></select></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Medida de apoyo (Ley 8/2021)</label><select x-model="d.medida_apoyo" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Sin medida</option><option>Curatela representativa</option><option>Curatela asistencial</option><option>Guarda de hecho</option><option>Tutela (anterior reforma)</option></select></div>
+            </div>
+        </section>
+
+        <!-- 6. Salud -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">6 · Salud y autonomía</h2>
+            <textarea x-model="d.salud_autonomia" rows="3" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Patologías relevantes · medicación · grado de autonomía en AVD básicas e instrumentales · necesidades de apoyo identificadas..."></textarea>
+        </section>
+
+        <!-- 7. Vivienda y entorno -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">7 · Vivienda y entorno comunitario</h2>
+            <textarea x-model="d.vivienda" rows="3" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Tipo de vivienda · habitabilidad · accesibilidad · entorno comunitario · acceso a recursos..."></textarea>
+        </section>
+
+        <!-- 8. Recursos sociales activos -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">8 · Recursos sociales en uso</h2>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+                <template x-for="r in recursos" :key="r">
+                    <label class="flex items-center gap-2"><input type="checkbox" :value="r" x-model="d.recursos_activos"><span x-text="r"></span></label>
+                </template>
+            </div>
+        </section>
+
+        <!-- 9. Diagnóstico social -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">9 · Diagnóstico social</h2>
+            <textarea x-model="d.diagnostico" rows="4" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Síntesis de la situación · áreas de necesidad detectadas · factores protectores y de riesgo..."></textarea>
+        </section>
+
+        <!-- 10. Propuesta de intervención -->
+        <section>
+            <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2 mb-3">10 · Propuesta de intervención y/o conclusiones</h2>
+            <textarea x-model="d.propuesta" rows="4" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Objetivos de intervención · gestiones propuestas · derivaciones · coordinación con otros agentes..."></textarea>
+        </section>
+
+        <!-- Firma -->
+        <section class="pt-4 border-t border-slate-200">
+            <h2 class="text-lg font-semibold text-emerald-800 mb-3">Firma profesional</h2>
+            <div class="grid grid-cols-3 gap-4 text-sm">
+                <div><label class="block text-xs text-slate-600 mb-1">Fecha del informe</label><input type="date" x-model="d.fecha" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Trabajador/a Social</label><input type="text" x-model="d.profesional" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+                <div><label class="block text-xs text-slate-600 mb-1">Nº de colegiación</label><input type="text" x-model="d.colegiado" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+            </div>
+        </section>
+
+        <div class="flex items-center justify-between gap-3 pt-4 border-t border-slate-200">
+            <a href="peticiones-trabajo-social.html" class="text-sm text-slate-600 hover:underline">← Volver al backlog</a>
+            <div class="flex gap-2 text-xs text-slate-500"><span>Estado: <strong x-text="estado"></strong></span>·<span>Guardado: <span x-text="ultimoGuardado || '—'"></span></span></div>
+        </div>
+    </form>
+</main>
+</div>
+
+<script>
+function informeSocial() {
+    return {
+        estado: 'Borrador',
+        ultimoGuardado: '',
+        recursos: ['CEAS / Servicios Sociales municipales', 'Centro de día', 'Ayuda a domicilio (SAD)', 'Programa Plena Inclusión', 'Voluntariado familiar', 'Cuidado de respiro', 'Asistencia personal', 'Apoyos pedagógicos', 'Asociacionismo / pares'],
+        d: {
+            nombre: 'Ruiz Jiménez, Ana',
+            dni: '12345678A',
+            fecha_nacimiento: '1985-03-12',
+            estado_civil: 'Soltero/a',
+            centro: 'Residencia Fuentecillas',
+            motivo_tipo: 'Solicitud de plaza pública / concierto',
+            motivo_texto: 'Solicitud de mantenimiento de plaza en régimen de concierto público tras revisión anual del expediente. Se acompaña valoración de dependencia actualizada.',
+            situacion_familiar: 'Núcleo familiar reducido. Padre (Manuel, 72 años) como curador asistencial. Hermana mayor (Pilar, 48 años) residente en Burgos como persona de referencia secundaria. Fallecimiento materno en 2024. Buena dinámica familiar, visitas semanales.',
+            ingresos_pensiones: 615.4,
+            ingresos_otros: 0,
+            tipo_pension: 'PNC invalidez',
+            capacidad_eco: 'Ajustada',
+            observaciones_eco: 'Pensión no contributiva por invalidez (PNC) más complemento por necesidad de tercera persona. Vivienda familiar en propiedad sin cargas. Familia asume copago por encima del mínimo legal.',
+            pct_disc: 76,
+            dependencia: 'Grado II',
+            medida_apoyo: 'Curatela asistencial',
+            salud_autonomia: 'Discapacidad intelectual moderada con buena salud general. Sin patologías crónicas relevantes. Toma medicación pautada de forma supervisada. AVD básicas con apoyo verbal; AVD instrumentales con apoyo extenso.',
+            vivienda: 'Familia con vivienda en propiedad accesible. Acceso a transporte público y recursos comunitarios. Buena vinculación con el barrio.',
+            recursos_activos: ['Centro de día', 'Programa Plena Inclusión', 'Asociacionismo / pares'],
+            diagnostico: 'Mujer con discapacidad intelectual moderada en situación de dependencia severa. Red familiar de apoyo estable pero envejecida. Necesidad de continuidad de apoyos en autonomía personal, integración social y planificación a medio plazo del proyecto vital tras envejecimiento del cuidador principal.',
+            propuesta: 'Se propone: 1) mantenimiento de plaza en régimen de concierto público; 2) refuerzo del Plan de Vida en el eje de autodeterminación; 3) coordinación con CEAS de zona; 4) inicio de planificación de tránsito a vivienda con apoyos en horizonte 5 años.',
+            fecha: new Date().toISOString().slice(0, 10),
+            profesional: 'García López, María',
+            colegiado: 'COTSB · 2487',
+        },
+        guardar() { this.estado = 'Borrador guardado'; this.ultimoGuardado = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'}); },
+        firmar() { if (confirm('¿Firmar el informe social? Quedará registrado en bitácora.')) { this.estado = 'Firmado'; this.ultimoGuardado = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'}); } },
+    };
+}
+</script>
+</body>
+</html>

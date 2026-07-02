@@ -1,0 +1,387 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoja de ruta · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · todos los datos son ficticios</div>
+
+<div class="flex min-h-screen" x-data="{ userMenu: false }">
+
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100 relative">
+            <button @click="userMenu = !userMenu" class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">Federico Martínez</p>
+                    <p class="text-[10px] text-slate-500 truncate">Gerencia</p>
+                </div>
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div x-show="userMenu" x-cloak @click.outside="userMenu = false" class="absolute bottom-full left-3 right-3 mb-1 rounded-lg border border-slate-200 bg-white shadow-lg py-1 z-20">
+                <a href="personas-lista.html?mio=1" class="block px-3 py-1.5 text-sm text-emerald-700 hover:bg-emerald-50 font-medium">⭐ Mis personas</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Mi perfil</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Preferencias</a>
+                <div class="border-t border-slate-100 my-1"></div>
+                <a href="#" class="block px-3 py-1.5 text-sm text-rose-700 hover:bg-rose-50">Cerrar sesión</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate"><a href="index.html" class="hover:text-emerald-700">Inicio</a> <span class="mx-1">›</span> <span class="text-slate-700">Hoja de ruta</span></nav>
+            <div class="flex items-center gap-2 shrink-0">
+                <button class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-emerald-400">🖨 Imprimir</button>
+                <button class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-emerald-400">⤓ PDF</button>
+            </div>
+        </div>
+
+        <div class="px-8 py-8 max-w-5xl">
+
+            <!-- Cabecera -->
+            <header class="mb-10">
+                <p class="text-xs uppercase tracking-widest text-emerald-700 font-semibold">Proyecto ÁGORA · 2026 → 2029</p>
+                <h1 class="mt-2 text-3xl font-semibold tracking-tight">Hoja de ruta</h1>
+                <p class="mt-2 text-slate-600 max-w-2xl">Calendario y compromisos del despliegue de ÁGORA en el Grupo Social Aspanias, desde las decisiones de Fase 0 hasta la consolidación en 2029.</p>
+            </header>
+
+            <!-- KPIs hito -->
+            <section class="grid gap-3 md:grid-cols-4 mb-10">
+                <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                    <p class="text-xs text-emerald-700 font-medium">Fases cerradas</p>
+                    <p class="mt-0.5 text-3xl font-light text-emerald-800">2,5 <span class="text-base">/ 5</span></p>
+                    <p class="text-[10px] text-emerald-700">Fase 0, 1 y 2.5 técnico</p>
+                </div>
+                <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                    <p class="text-xs text-emerald-700 font-medium">Patronato FAB</p>
+                    <p class="mt-0.5 text-lg font-semibold text-emerald-800 leading-tight">✓ Presentado</p>
+                    <p class="text-[10px] text-emerald-700 mt-1">10 de junio de 2026 · validado</p>
+                </div>
+                <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                    <p class="text-xs text-amber-700 font-medium">Próximo hito</p>
+                    <p class="mt-0.5 text-lg font-semibold text-amber-800 leading-tight">Piloto Fuentecillas</p>
+                    <p class="text-[10px] text-amber-700 mt-1">Q1 2027 · ~7 meses para arrancar</p>
+                </div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4">
+                    <p class="text-xs text-slate-500">Despliegue total</p>
+                    <p class="mt-0.5 text-lg font-semibold leading-tight">2027-2029</p>
+                    <p class="text-[10px] text-slate-500 mt-1">18 centros y servicios · 417 personas atendidas</p>
+                </div>
+            </section>
+
+            <!-- Peticiones del equipo -->
+            <section class="mb-10 rounded-xl border border-emerald-200 bg-white p-5">
+                <div class="flex items-start justify-between gap-3 flex-wrap">
+                    <div>
+                        <h2 class="text-sm font-semibold text-emerald-800 uppercase tracking-wide">📥 Peticiones del equipo asistencial</h2>
+                        <p class="text-sm text-slate-600 mt-1">Backlog encolado de peticiones recibidas de los equipos para incorporar a ÁGORA · trazabilidad por número de petición.</p>
+                    </div>
+                    <a href="peticiones-trabajo-social.html" class="px-3 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">Ver backlog →</a>
+                </div>
+                <div class="mt-4 grid gap-3 md:grid-cols-4">
+                    <div class="rounded-lg bg-slate-50 p-3 text-center">
+                        <p class="text-xs text-slate-500">Total recibidas</p>
+                        <p class="text-2xl font-light text-slate-800 mt-1">12</p>
+                        <p class="text-[10px] text-slate-500">Trabajo Social · Uxue G. · 17/06</p>
+                    </div>
+                    <div class="rounded-lg bg-emerald-50 p-3 text-center">
+                        <p class="text-xs text-emerald-700">✓ Implementadas</p>
+                        <p class="text-2xl font-light text-emerald-800 mt-1">5</p>
+                        <p class="text-[10px] text-emerald-700">42% del total</p>
+                    </div>
+                    <div class="rounded-lg bg-amber-50 p-3 text-center">
+                        <p class="text-xs text-amber-700">⚙ En análisis</p>
+                        <p class="text-2xl font-light text-amber-800 mt-1">2</p>
+                        <p class="text-[10px] text-amber-700">Q3 2026</p>
+                    </div>
+                    <div class="rounded-lg bg-white border border-slate-200 p-3 text-center">
+                        <p class="text-xs text-slate-500">⏳ Pendientes</p>
+                        <p class="text-2xl font-light text-slate-700 mt-1">5</p>
+                        <p class="text-[10px] text-slate-500">Fases 2.6 y 2.7</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TIMELINE -->
+            <section class="relative">
+                <!-- Línea vertical -->
+                <div class="absolute left-6 top-2 bottom-0 w-0.5 bg-slate-200"></div>
+
+                <div class="space-y-8">
+
+                    <!-- FASE 0 -->
+                    <article class="relative pl-16">
+                        <div class="absolute left-3 top-2 w-7 h-7 rounded-full bg-emerald-600 border-4 border-emerald-100 flex items-center justify-center shadow-sm">
+                            <span class="text-white text-xs font-bold">✓</span>
+                        </div>
+                        <div class="rounded-xl border border-emerald-200 bg-emerald-50/50 p-5">
+                            <div class="flex items-baseline justify-between flex-wrap gap-2">
+                                <h2 class="text-lg font-semibold text-emerald-900">Fase 0 — Decisiones de alcance</h2>
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-200 text-emerald-900 font-medium">Cerrada · 13/05/2026</span>
+                            </div>
+                            <p class="mt-2 text-sm text-slate-600">Stack tecnológico (Django + HTMX + Alpine.js + PostgreSQL), gobernanza, RGPD, equipo de proyecto.</p>
+                            <ul class="mt-3 space-y-1 text-sm">
+                                <li class="flex items-start gap-2"><span class="text-emerald-600 mt-0.5">✓</span><span>Acta de decisiones firmada por Gerencia</span></li>
+                                <li class="flex items-start gap-2"><span class="text-emerald-600 mt-0.5">✓</span><span>Stack validado por Sistemas Aspanias</span></li>
+                                <li class="flex items-start gap-2"><span class="text-emerald-600 mt-0.5">✓</span><span>Marco RGPD aprobado por Lex Digital</span></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- FASE 1 -->
+                    <article class="relative pl-16">
+                        <div class="absolute left-3 top-2 w-7 h-7 rounded-full bg-emerald-600 border-4 border-emerald-100 flex items-center justify-center shadow-sm">
+                            <span class="text-white text-xs font-bold">✓</span>
+                        </div>
+                        <div class="rounded-xl border border-emerald-200 bg-emerald-50/50 p-5">
+                            <div class="flex items-baseline justify-between flex-wrap gap-2">
+                                <h2 class="text-lg font-semibold text-emerald-900">Fase 1 — Modelo de datos + scaffolding</h2>
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-200 text-emerald-900 font-medium">Cerrada · mayo 2026</span>
+                            </div>
+                            <p class="mt-2 text-sm text-slate-600">26 modelos Django, 6 migraciones, EIPD inicial, tests mínimos, dockerización local.</p>
+                            <ul class="mt-3 space-y-1 text-sm">
+                                <li class="flex items-start gap-2"><span class="text-emerald-600 mt-0.5">✓</span><span>Entidades: PersonaAtendida, PIA, Cita, Intervención, Valoración, Familia, Medicación, Centro, Módulo/Hab/Cama</span></li>
+                                <li class="flex items-start gap-2"><span class="text-emerald-600 mt-0.5">✓</span><span>EIPD v0.2 entregada · base jurídica documentada</span></li>
+                                <li class="flex items-start gap-2"><span class="text-emerald-600 mt-0.5">✓</span><span>27 tests pasando · 0 issues en <code>manage.py check</code></span></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- FASE 2 -->
+                    <article class="relative pl-16">
+                        <div class="absolute left-3 top-2 w-7 h-7 rounded-full bg-emerald-600 border-4 border-emerald-100 flex items-center justify-center shadow-sm">
+                            <span class="text-white text-xs font-bold">✓</span>
+                        </div>
+                        <div class="rounded-xl border border-emerald-200 bg-emerald-50/50 p-5">
+                            <div class="flex items-baseline justify-between flex-wrap gap-2">
+                                <h2 class="text-lg font-semibold text-emerald-900">Fase 2 — Módulos M1 (ficha, PIA, agenda, indicadores)</h2>
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-200 text-emerald-900 font-medium">Cerrada · mayo-junio 2026</span>
+                            </div>
+                            <p class="mt-2 text-sm text-slate-600">Ficha de persona con 5 pestañas, cuadro de mando, agenda Hoy/Semana/Mes, mapa de ocupación, bandeja de avisos.</p>
+                            <ul class="mt-3 space-y-1 text-sm">
+                                <li class="flex items-start gap-2"><span class="text-emerald-600 mt-0.5">✓</span><span>Importador Excel histórico · 13 hojas migradas</span></li>
+                                <li class="flex items-start gap-2"><span class="text-emerald-600 mt-0.5">✓</span><span>Control PV por servicios · sustituye al Excel manual</span></li>
+                                <li class="flex items-start gap-2"><span class="text-emerald-600 mt-0.5">✓</span><span>Endurecimiento técnico (Fase 2.5): cifrado NUSS/TSI, bitácora append-only, permisos clínicos</span></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- HITO PATRONATO · CERRADO -->
+                    <article class="relative pl-16">
+                        <div class="absolute left-3 top-2 w-7 h-7 rounded-full bg-emerald-600 border-4 border-emerald-100 flex items-center justify-center shadow-sm">
+                            <span class="text-white text-sm">✓</span>
+                        </div>
+                        <div class="rounded-xl border-2 border-emerald-300 bg-emerald-50 p-5 shadow-sm">
+                            <div class="flex items-baseline justify-between flex-wrap gap-2">
+                                <h2 class="text-lg font-semibold text-emerald-900">✓ Patronato Fundación Aspanias Burgos · Presentado</h2>
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-300 text-emerald-900 font-bold">10 de junio de 2026 · cerrado</span>
+                            </div>
+                            <p class="mt-2 text-sm text-slate-700">Presentación oficial de ÁGORA al Patronato realizada el 10/06/2026. Proyecto validado para continuar con el pre-piloto y el piloto Fuentecillas.</p>
+                            <ul class="mt-3 space-y-1 text-sm">
+                                <li class="flex items-start gap-2"><span class="text-emerald-700 mt-0.5">✓</span><span>Guion entregado: contexto, demo en vivo, calendario, presupuesto y Q&amp;A</span></li>
+                                <li class="flex items-start gap-2"><span class="text-emerald-700 mt-0.5">✓</span><span>Dossier previo distribuido en plazo</span></li>
+                                <li class="flex items-start gap-2"><span class="text-emerald-700 mt-0.5">✓</span><span>Consejo Aspaniasmerc informado en la misma sesión</span></li>
+                                <li class="flex items-start gap-2"><span class="text-emerald-700 mt-0.5">→</span><span>Próximo hito: <strong>pre-piloto sept 2026</strong> + piloto <strong>Fuentecillas Q1 2027</strong></span></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- FASE 3 -->
+                    <article class="relative pl-16">
+                        <div class="absolute left-3 top-2 w-7 h-7 rounded-full bg-blue-500 border-4 border-blue-100 flex items-center justify-center shadow-sm">
+                            <span class="text-white text-xs font-bold">3</span>
+                        </div>
+                        <div class="rounded-xl border border-blue-200 bg-blue-50/50 p-5">
+                            <div class="flex items-baseline justify-between flex-wrap gap-2">
+                                <h2 class="text-lg font-semibold text-blue-900">Fase 3 — Pre-piloto con equipo asistencial</h2>
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-blue-200 text-blue-900 font-medium">Septiembre 2026</span>
+                            </div>
+                            <p class="mt-2 text-sm text-slate-600">Validación con un equipo asistencial reducido · 4-6 profesionales · datos reales con consentimiento.</p>
+                            <ul class="mt-3 space-y-1 text-sm">
+                                <li class="flex items-start gap-2"><span class="text-blue-600 mt-0.5">○</span><span>Carta a familias + cláusula RGPD en lectura fácil</span></li>
+                                <li class="flex items-start gap-2"><span class="text-blue-600 mt-0.5">○</span><span>Auditoría de datos Excel → ÁGORA</span></li>
+                                <li class="flex items-start gap-2"><span class="text-blue-600 mt-0.5">○</span><span>Selección de 8-10 personas candidatas · informe final</span></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- FASE 4 -->
+                    <article class="relative pl-16">
+                        <div class="absolute left-3 top-2 w-7 h-7 rounded-full bg-indigo-500 border-4 border-indigo-100 flex items-center justify-center shadow-sm">
+                            <span class="text-white text-xs font-bold">4</span>
+                        </div>
+                        <div class="rounded-xl border border-indigo-200 bg-indigo-50/50 p-5">
+                            <div class="flex items-baseline justify-between flex-wrap gap-2">
+                                <h2 class="text-lg font-semibold text-indigo-900">Fase 4 — Piloto Residencia Fuentecillas</h2>
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-indigo-200 text-indigo-900 font-medium">Q1 2027</span>
+                            </div>
+                            <p class="mt-2 text-sm text-slate-600">Despliegue completo en Fuentecillas (48 personas · 14 profesionales) · 3 meses de seguimiento · ajustes en caliente.</p>
+                            <ul class="mt-3 space-y-1 text-sm">
+                                <li class="flex items-start gap-2"><span class="text-indigo-600 mt-0.5">○</span><span>Migración completa de 48 expedientes</span></li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-600 mt-0.5">○</span><span>Formación intensiva 4 sesiones · equipo entero</span></li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-600 mt-0.5">○</span><span>SSO Microsoft 365 en producción · permisos clínicos en vivo</span></li>
+                                <li class="flex items-start gap-2"><span class="text-indigo-600 mt-0.5">○</span><span>Métricas de adopción quincenales · retrospectiva mensual</span></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- FASE 5 -->
+                    <article class="relative pl-16">
+                        <div class="absolute left-3 top-2 w-7 h-7 rounded-full bg-purple-500 border-4 border-purple-100 flex items-center justify-center shadow-sm">
+                            <span class="text-white text-xs font-bold">5</span>
+                        </div>
+                        <div class="rounded-xl border border-purple-200 bg-purple-50/50 p-5">
+                            <div class="flex items-baseline justify-between flex-wrap gap-2">
+                                <h2 class="text-lg font-semibold text-purple-900">Fase 5 — Despliegue progresivo al grupo</h2>
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-purple-200 text-purple-900 font-medium">2027 → 2029</span>
+                            </div>
+                            <p class="mt-2 text-sm text-slate-600">Extensión a los 14 centros restantes en olas trimestrales · prioridad por capacidad de adopción y necesidad.</p>
+                            <div class="mt-4 grid gap-2 text-xs">
+                                <div class="flex items-center gap-3 p-2 rounded bg-white border border-purple-100">
+                                    <span class="font-mono text-purple-700 font-bold w-12">Q2 27</span>
+                                    <span class="text-slate-600">Vicente Aleixandre · Puentesaúco (residencias + CD)</span>
+                                </div>
+                                <div class="flex items-center gap-3 p-2 rounded bg-white border border-purple-100">
+                                    <span class="font-mono text-purple-700 font-bold w-12">Q3 27</span>
+                                    <span class="text-slate-600">Quintanadueñas (3 centros) · Áreas de Vivienda</span>
+                                </div>
+                                <div class="flex items-center gap-3 p-2 rounded bg-white border border-purple-100">
+                                    <span class="font-mono text-purple-700 font-bold w-12">Q4 27</span>
+                                    <span class="text-slate-600">Salas de los Infantes (4 centros) · Río Arlanza Mayores</span>
+                                </div>
+                                <div class="flex items-center gap-3 p-2 rounded bg-white border border-purple-100">
+                                    <span class="font-mono text-purple-700 font-bold w-12">Q1 28</span>
+                                    <span class="text-slate-600">Santa María Villadiego · Servicio Puentes · Colegio EE</span>
+                                </div>
+                                <div class="flex items-center gap-3 p-2 rounded bg-white border border-purple-100">
+                                    <span class="font-mono text-purple-700 font-bold w-12">2028-29</span>
+                                    <span class="text-slate-600">Consolidación · indicadores agregados · memoria anual</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- HORIZONTE -->
+                    <article class="relative pl-16">
+                        <div class="absolute left-3 top-2 w-7 h-7 rounded-full bg-slate-300 border-4 border-slate-100 flex items-center justify-center shadow-sm">
+                            <span class="text-slate-600 text-xs">⌛</span>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+                            <div class="flex items-baseline justify-between flex-wrap gap-2">
+                                <h2 class="text-lg font-semibold text-slate-700">Horizonte · Ley 3/2024 CyL</h2>
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 font-medium">Cierre 2029</span>
+                            </div>
+                            <p class="mt-2 text-sm text-slate-600">Adaptación obligatoria de centros a "unidades de convivencia" según la Ley 3/2024 de Castilla y León. ÁGORA debe estar consolidado y dando soporte completo a todos los centros antes de esta fecha.</p>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- Pie de página informativo -->
+            <section class="mt-12 rounded-xl bg-slate-100 p-5 text-xs text-slate-600">
+                <p class="font-semibold text-slate-800 mb-1">📌 Cómo leer esta hoja de ruta</p>
+                <ul class="space-y-0.5 list-disc list-inside">
+                    <li>Las fechas son <strong>objetivo</strong>, no compromiso contractual.</li>
+                    <li>El hito Patronato 10/06/2026 fue el primer punto de validación formal con la entidad · <strong>completado</strong>.</li>
+                    <li>El próximo hito es el <strong>piloto Fuentecillas (Q1 2027)</strong>, que marca el inicio del uso real con datos.</li>
+                    <li>La fecha límite 2029 viene de la Ley 3/2024 CyL y obliga al grupo a tener su modelo de atención adaptado.</li>
+                    <li>Para más detalle, ver <code>docs/fase0/</code>, <code>docs/fase1/cierre_fase1.md</code> y <code>docs/fase3/plan_prepiloto.md</code>.</li>
+                </ul>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, cita..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

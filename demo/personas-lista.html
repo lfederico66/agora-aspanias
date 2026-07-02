@@ -1,0 +1,424 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personas atendidas · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · todos los datos son ficticios</div>
+
+<div class="flex min-h-screen" x-data="{ userMenu: false }">
+
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100 relative">
+            <button @click="userMenu = !userMenu" class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">Federico Martínez</p>
+                    <p class="text-[10px] text-slate-500 truncate">Gerencia</p>
+                </div>
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div x-show="userMenu" x-cloak @click.outside="userMenu = false" class="absolute bottom-full left-3 right-3 mb-1 rounded-lg border border-slate-200 bg-white shadow-lg py-1 z-20">
+                <a href="personas-lista.html?mio=1" class="block px-3 py-1.5 text-sm text-emerald-700 hover:bg-emerald-50 font-medium">⭐ Mis personas</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Mi perfil</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Preferencias</a>
+                <div class="border-t border-slate-100 my-1"></div>
+                <a href="#" class="block px-3 py-1.5 text-sm text-rose-700 hover:bg-rose-50">Cerrar sesión</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate"><a href="index.html" class="hover:text-emerald-700">Inicio</a> <span class="mx-1">›</span> <span class="text-slate-700">Personas atendidas</span></nav>
+            <div class="flex items-center gap-2 shrink-0"><a href="#" class="rounded-lg bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">+ Nueva persona</a></div>
+        </div>
+        <div class="px-8 py-6 max-w-7xl space-y-5" x-data="{ pagina: 1, totalPaginas: 77, filtro: 'todas', orden: 'alfabetico', mostrarFiltros: false }">
+
+            <!-- Cabecera -->
+            <header class="flex items-end justify-between flex-wrap gap-3">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <h1 class="text-2xl font-semibold tracking-tight">Personas atendidas</h1>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">417 activas</span>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-1">Ficha única para los cuatro colectivos del grupo · ordenadas alfabéticamente por apellidos</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-700 hover:border-emerald-400">⤓ Exportar Excel</button>
+                </div>
+            </header>
+
+            <!-- Buscador grande + acciones -->
+            <section class="rounded-xl border border-slate-200 bg-white p-4 space-y-3">
+                <div class="flex items-center gap-2 flex-wrap">
+                    <div class="relative flex-1 min-w-[280px]">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">🔎</span>
+                        <input type="search" placeholder="Buscar por nombre, apellidos, código ÁGORA, NIF o teléfono…" class="w-full pl-11 pr-10 py-2.5 rounded-lg border border-slate-300 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none text-sm">
+                        <kbd class="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">Ctrl+K</kbd>
+                    </div>
+                    <button @click="mostrarFiltros = !mostrarFiltros" class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 hover:border-emerald-400 flex items-center gap-1.5">
+                        <span>⚙</span> Filtros avanzados
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <a href="#" class="rounded-lg bg-emerald-700 text-white px-3 py-2 text-sm font-medium hover:bg-emerald-800">+ Nueva persona</a>
+                </div>
+
+                <div class="flex gap-2 flex-wrap items-center">
+                    <span class="text-xs text-slate-500 mr-1">Colectivo:</span>
+                    <button @click="filtro='todas'" :class="filtro==='todas' ? 'bg-slate-900 text-white' : 'bg-white border border-slate-200 hover:border-emerald-300 text-slate-700'" class="rounded-full px-3 py-1 text-xs font-medium">Todas <span class="opacity-70">(417)</span></button>
+                    <button @click="filtro='di'" :class="filtro==='di' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-200 hover:border-emerald-300 text-slate-700'" class="rounded-full px-3 py-1 text-xs">Discapacidad intelectual <span class="opacity-70">(213)</span></button>
+                    <button @click="filtro='mayores'" :class="filtro==='mayores' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-200 hover:border-emerald-300 text-slate-700'" class="rounded-full px-3 py-1 text-xs">Mayores dependientes <span class="opacity-70">(60)</span></button>
+                    <button @click="filtro='insercion'" :class="filtro==='insercion' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-200 hover:border-emerald-300 text-slate-700'" class="rounded-full px-3 py-1 text-xs">Inserción laboral <span class="opacity-70">(22)</span></button>
+                    <button @click="filtro='menores'" :class="filtro==='menores' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-200 hover:border-emerald-300 text-slate-700'" class="rounded-full px-3 py-1 text-xs">Menores DI <span class="opacity-70">(24)</span></button>
+                    <button @click="filtro='familias'" :class="filtro==='familias' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-200 hover:border-emerald-300 text-slate-700'" class="rounded-full px-3 py-1 text-xs">Familias <span class="opacity-70">(64)</span></button>
+                </div>
+
+                <div x-show="mostrarFiltros" x-cloak class="pt-3 border-t border-slate-100 grid gap-3 md:grid-cols-4">
+                    <div>
+                        <label class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Centro</label>
+                        <select class="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                            <option>Todos los centros</option>
+                            <option>Residencia Fuentecillas</option>
+                            <option>Residencia Puentesaúco</option>
+                            <option>Residencia Quintanadueñas</option>
+                            <option>Residencia Salas</option>
+                            <option>Residencia Río Arlanza</option>
+                            <option>Residencia Santa María</option>
+                            <option>CD Puentesaúco</option>
+                            <option>CD Quintanadueñas</option>
+                            <option>CD Salas</option>
+                            <option>C. Multiactividad V. Aleixandre</option>
+                            <option>CD Asistencial Quintanadueñas</option>
+                            <option>CD Asistencial Salas</option>
+                            <option>Áreas de Vivienda</option>
+                            <option>Servicio Puentes</option>
+                            <option>Colegio EE Puentesaúco</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Estado PV</label>
+                        <select class="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                            <option>Todos los estados</option>
+                            <option>Al día</option>
+                            <option>Próximo a vencer (28 días)</option>
+                            <option>Atrasado</option>
+                            <option>Sin PV registrado</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Edad</label>
+                        <select class="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                            <option>Cualquier edad</option>
+                            <option>0-17 (menores)</option>
+                            <option>18-30</option>
+                            <option>31-50</option>
+                            <option>51-65</option>
+                            <option>+65 (mayores)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Modalidad</label>
+                        <select class="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                            <option>Cualquier modalidad</option>
+                            <option>Residencial</option>
+                            <option>Centro de día</option>
+                            <option>Vivienda tutelada</option>
+                            <option>Solo familias</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between flex-wrap gap-2 text-xs">
+                    <div class="flex items-center gap-1 flex-wrap">
+                        <span class="text-slate-500 mr-1">Atajos:</span>
+                        <a href="#" class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">⭐ Mi cartera (27)</a>
+                        <a href="#" class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200">Con cita esta semana (43)</a>
+                        <a href="#" class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">PV próximo a vencer (8)</a>
+                        <a href="#" class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-800">Alertas activas (3)</a>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-slate-500">Ordenar por:</span>
+                        <select x-model="orden" class="rounded border border-slate-300 bg-white px-2 py-1 text-xs">
+                            <option value="alfabetico">Apellidos A → Z</option>
+                            <option value="alfabetico_inv">Apellidos Z → A</option>
+                            <option value="reciente">Más recientes</option>
+                            <option value="antiguos">Más antiguos</option>
+                            <option value="edad_asc">Edad ascendente</option>
+                            <option value="edad_desc">Edad descendente</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tabla -->
+            <section class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+
+                <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between text-xs">
+                    <p class="text-slate-600"><strong class="text-slate-900">Mostrando 1 – 5</strong> de <strong class="text-slate-900">417 personas</strong> · ordenadas por apellidos A → Z</p>
+                    <div class="flex items-center gap-2">
+                        <label class="text-slate-500">Por página:</label>
+                        <select class="rounded border border-slate-300 bg-white px-2 py-0.5">
+                            <option selected>5</option>
+                            <option>10</option>
+                            <option>25</option>
+                            <option>50</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                            <tr>
+                                <th class="px-5 py-2.5 text-left font-medium">Persona</th>
+                                <th class="px-5 py-2.5 text-left font-medium">Código ÁGORA</th>
+                                <th class="px-5 py-2.5 text-left font-medium">Edad</th>
+                                <th class="px-5 py-2.5 text-left font-medium">Modalidad</th>
+                                <th class="px-5 py-2.5 text-left font-medium">Gestor/a</th>
+                                <th class="px-5 py-2.5 text-left font-medium">Estado PV</th>
+                                <th class="px-5 py-2.5 text-right font-medium">Próx. cita</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer" onclick="location.href='persona-detalle.html'">
+                                <td class="px-5 py-3 font-medium">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-semibold">AL</div>
+                                        <div>
+                                            <p>Aguado Lara, Luis</p>
+                                            <p class="text-[11px] text-slate-500">Residencia Puentesaúco · DI</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-3 text-xs text-slate-500 font-mono">PUE-2020-00018</td>
+                                <td class="px-5 py-3 text-slate-600">35</td>
+                                <td class="px-5 py-3"><span class="text-xs px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">🛏 Residencia</span></td>
+                                <td class="px-5 py-3 text-slate-600">Carmen Saiz</td>
+                                <td class="px-5 py-3"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-5 py-3 text-right text-xs text-slate-500">Jue 11:00</td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer" onclick="location.href='persona-detalle.html'">
+                                <td class="px-5 py-3 font-medium">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-semibold">AM</div>
+                                        <div>
+                                            <p>Antolín Robles, Mercedes</p>
+                                            <p class="text-[11px] text-slate-500">Residencia Río Arlanza · Mayores</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-3 text-xs text-slate-500 font-mono">ARL-2018-00007</td>
+                                <td class="px-5 py-3 text-slate-600">62</td>
+                                <td class="px-5 py-3"><span class="text-xs px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">🛏 Residencia</span></td>
+                                <td class="px-5 py-3 text-slate-600">Mercedes Antolín</td>
+                                <td class="px-5 py-3"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-5 py-3 text-right text-xs text-slate-500">—</td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer" onclick="location.href='persona-detalle.html'">
+                                <td class="px-5 py-3 font-medium">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-semibold">AT</div>
+                                        <div>
+                                            <p>Arnaiz Tudanca, Fernando</p>
+                                            <p class="text-[11px] text-slate-500">Residencia Fuentecillas · DI</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-3 text-xs text-slate-500 font-mono">FUE-2020-00008</td>
+                                <td class="px-5 py-3 text-slate-600">38</td>
+                                <td class="px-5 py-3"><span class="text-xs px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">🛏 Residencia</span></td>
+                                <td class="px-5 py-3 text-slate-600">Lucía Martínez</td>
+                                <td class="px-5 py-3"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-5 py-3 text-right text-xs text-slate-500">Lun 10:30</td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer" onclick="location.href='persona-detalle.html'">
+                                <td class="px-5 py-3 font-medium">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-semibold">BA</div>
+                                        <div>
+                                            <p>Bañuelos Antón, Andrea</p>
+                                            <p class="text-[11px] text-slate-500">Residencia Fuentecillas · DI</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-3 text-xs text-slate-500 font-mono">FUE-2015-00024</td>
+                                <td class="px-5 py-3 text-slate-600">47</td>
+                                <td class="px-5 py-3"><span class="text-xs px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">🛏 Residencia</span></td>
+                                <td class="px-5 py-3 text-slate-600">Daniel Alonso</td>
+                                <td class="px-5 py-3"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-5 py-3 text-right text-xs text-slate-500">—</td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/40 cursor-pointer" onclick="location.href='persona-detalle.html'">
+                                <td class="px-5 py-3 font-medium">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-semibold">BN</div>
+                                        <div>
+                                            <p>Bermejo Núñez, Natalia <span title="También en Servicio Puentes" class="text-[10px] text-blue-700 ml-1">+1 servicio</span></p>
+                                            <p class="text-[11px] text-slate-500">Residencia Fuentecillas + Servicio Puentes · DI</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-3 text-xs text-slate-500 font-mono">FUE-2019-00013</td>
+                                <td class="px-5 py-3 text-slate-600">39</td>
+                                <td class="px-5 py-3">
+                                    <div class="flex items-center gap-1 flex-wrap">
+                                        <span class="text-xs px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">🛏 Resid.</span>
+                                        <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">🌞 Inserc.</span>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-3 text-slate-600">Lucía Martínez</td>
+                                <td class="px-5 py-3"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Vence 28/06</span></td>
+                                <td class="px-5 py-3 text-right text-xs text-slate-500">Mié 09:30</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="px-5 py-3 border-t border-slate-200 flex items-center justify-between flex-wrap gap-3 text-sm">
+                    <p class="text-slate-600 text-xs">
+                        <strong class="text-slate-900">Página <span x-text="pagina">1</span></strong> de <strong class="text-slate-900">77</strong> · <span class="text-slate-500">Mostrando 1 – 5 de 417 personas</span>
+                    </p>
+                    <div class="flex items-center gap-1">
+                        <button @click="pagina = 1" :disabled="pagina === 1" :class="pagina === 1 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:border-emerald-400'" class="px-2.5 py-1 rounded border border-slate-300" title="Primera">«</button>
+                        <button @click="if (pagina > 1) pagina--" :disabled="pagina === 1" :class="pagina === 1 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:border-emerald-400'" class="px-2.5 py-1 rounded border border-slate-300">‹ Anterior</button>
+                        <button @click="pagina = 1" :class="pagina === 1 ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 hover:border-emerald-400'" class="w-8 h-7 rounded text-xs font-medium">1</button>
+                        <button @click="pagina = 2" :class="pagina === 2 ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 hover:border-emerald-400'" class="w-8 h-7 rounded text-xs font-medium">2</button>
+                        <button @click="pagina = 3" :class="pagina === 3 ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 hover:border-emerald-400'" class="w-8 h-7 rounded text-xs font-medium">3</button>
+                        <button @click="pagina = 4" :class="pagina === 4 ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 hover:border-emerald-400'" class="w-8 h-7 rounded text-xs font-medium">4</button>
+                        <span class="px-1 text-slate-400">…</span>
+                        <button @click="pagina = 77" :class="pagina === 77 ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 hover:border-emerald-400'" class="w-10 h-7 rounded text-xs font-medium">77</button>
+                        <button @click="if (pagina < 77) pagina++" class="text-slate-600 hover:border-emerald-400 px-2.5 py-1 rounded border border-slate-300">Siguiente ›</button>
+                        <button @click="pagina = 77" class="text-slate-600 hover:border-emerald-400 px-2.5 py-1 rounded border border-slate-300" title="Última">»</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Letras alfabéticas (jump rápido) -->
+            <section class="rounded-xl border border-slate-200 bg-white p-4">
+                <p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold mb-2">Saltar a la letra</p>
+                <div class="flex flex-wrap gap-1">
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-emerald-700 text-white">A</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">B</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">C</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">D</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">E</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">F</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">G</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">H</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">I</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">J</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">K</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">L</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">M</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">N</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">Ñ</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">O</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">P</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">Q</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">R</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">S</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">T</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">U</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">V</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">W</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">X</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">Y</button>
+                    <button class="w-7 h-7 rounded font-medium text-xs bg-white border border-slate-300 hover:border-emerald-400 text-slate-700">Z</button>
+                </div>
+            </section>
+
+        
+    </main>
+</div>
+
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, cita..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

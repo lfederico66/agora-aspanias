@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Indicadores · Planes de Vida · ÁGORA{% endblock %}
+
+{% block content %}
+<section class="space-y-8">
+    <div>
+        <h1 class="text-2xl font-semibold tracking-tight">Datos globales · Planes de Vida</h1>
+        <p class="text-sm text-slate-500">Reproduce la hoja "Datos Grupo Aspanias" del registro actual. Cálculo en vivo.</p>
+    </div>
+
+    <!-- KPIs grandes -->
+    <div class="grid gap-4 md:grid-cols-5">
+        <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <p class="text-xs uppercase tracking-wide text-slate-500">Total usuarios</p>
+            <p class="mt-2 text-3xl font-light">{{ d.total_usuarios }}</p>
+            <p class="mt-1 text-xs text-slate-400">FAB: {{ d.usuarios_fab }} · Aspaniasmerc: {{ d.usuarios_aspaniasmerc }}</p>
+        </div>
+        <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-5">
+            <p class="text-xs uppercase tracking-wide text-emerald-700">PV realizados</p>
+            <p class="mt-2 text-3xl font-light text-emerald-900">{{ d.realizados.total }}</p>
+            <p class="mt-1 text-xs text-emerald-700">FAB: {{ d.realizados.fab }} · Aspaniasmerc: {{ d.realizados.aspaniasmerc }}</p>
+        </div>
+        <div class="rounded-xl border border-amber-200 bg-amber-50 p-5">
+            <p class="text-xs uppercase tracking-wide text-amber-800">PV pendientes</p>
+            <p class="mt-2 text-3xl font-light text-amber-900">{{ d.pendientes_realizar.total }}</p>
+            <p class="mt-1 text-xs text-amber-800">FAB: {{ d.pendientes_realizar.fab }} · Aspaniasmerc: {{ d.pendientes_realizar.aspaniasmerc }}</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <p class="text-xs uppercase tracking-wide text-slate-500">PV revisados</p>
+            <p class="mt-2 text-3xl font-light">{{ d.revisados.total }}</p>
+            <p class="mt-1 text-xs text-slate-400">FAB: {{ d.revisados.fab }} · Aspaniasmerc: {{ d.revisados.aspaniasmerc }}</p>
+        </div>
+        <div class="rounded-xl border border-rose-200 bg-rose-50 p-5">
+            <p class="text-xs uppercase tracking-wide text-rose-700">Revisión fuera de plazo</p>
+            <p class="mt-2 text-3xl font-light text-rose-900">{{ d.fuera_plazo.total }}</p>
+            <p class="mt-1 text-xs text-rose-700">FAB: {{ d.fuera_plazo.fab }} · Aspaniasmerc: {{ d.fuera_plazo.aspaniasmerc }}</p>
+        </div>
+    </div>
+
+    <!-- Desglose por centros -->
+    <article class="rounded-xl border border-slate-200 bg-white shadow-sm overflow-x-auto">
+        <h2 class="px-5 py-3 text-sm font-semibold uppercase tracking-wide text-slate-500 border-b border-slate-100">Desglose por centro</h2>
+        <table class="min-w-full divide-y divide-slate-200 text-sm">
+            <thead class="bg-slate-50">
+                <tr class="text-left text-xs font-medium uppercase tracking-wide text-slate-500">
+                    <th class="px-4 py-2">Centro</th>
+                    <th class="px-4 py-2 text-right">Usuarios</th>
+                    <th class="px-4 py-2 text-right">Realizados</th>
+                    <th class="px-4 py-2 text-right">Pendientes</th>
+                    <th class="px-4 py-2 text-right">Revisados</th>
+                    <th class="px-4 py-2 text-right">Fuera de plazo</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                {% for c in d.desglose_centros %}
+                <tr class="hover:bg-slate-50">
+                    <td class="px-4 py-2 font-medium">
+                        <a href="{% url 'planes_vida:control_pv_servicio' c.centro.codigo %}" class="hover:text-emerald-700">{{ c.centro.nombre }}</a>
+                    </td>
+                    <td class="px-4 py-2 text-right">{{ c.personas }}</td>
+                    <td class="px-4 py-2 text-right text-emerald-700">{{ c.realizados }}</td>
+                    <td class="px-4 py-2 text-right text-amber-700">{{ c.pendientes }}</td>
+                    <td class="px-4 py-2 text-right">{{ c.revisados }}</td>
+                    <td class="px-4 py-2 text-right {% if c.fuera_plazo %}text-rose-700 font-medium{% else %}text-slate-400{% endif %}">{{ c.fuera_plazo }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+</section>
+{% endblock %}

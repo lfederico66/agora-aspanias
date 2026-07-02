@@ -1,0 +1,649 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha profesional · López Pérez, Marta — ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="flex min-h-screen" x-data="{ userMenu: false, tab: 'datos', modalAusencia: false, tipoAus: 'vacaciones', toast: false }">
+
+    <!-- SIDEBAR -->
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight"><p class="text-base font-semibold tracking-tight">ÁGORA</p><p class="text-[10px] text-slate-500">Grupo Social Aspanias</p></div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100">
+            <div class="w-full flex items-center gap-2.5 p-2 rounded-lg">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0"><p class="text-sm font-medium truncate">Federico Martínez</p><p class="text-[10px] text-slate-500 truncate">Gerencia</p></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="flex-1 min-w-0">
+
+        <div class="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-slate-200 px-8 py-3">
+            <nav class="text-xs text-slate-500 flex items-center gap-1.5">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a><span>›</span>
+                <a href="profesionales.html" class="hover:text-emerald-700">Equipo</a><span>›</span>
+                <a href="profesionales.html" class="hover:text-emerald-700">Profesionales</a><span>›</span>
+                <span class="text-slate-900 font-medium">López Pérez, Marta</span>
+            </nav>
+        </div>
+
+        <!-- Cabecera ficha profesional -->
+        <header class="px-8 pt-6 pb-5 border-b border-slate-200 bg-white">
+            <div class="flex items-start gap-5">
+                <div class="w-20 h-20 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-2xl font-semibold shrink-0">LP</div>
+                <div class="flex-1">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h1 class="text-2xl font-semibold tracking-tight">López Pérez, Marta</h1>
+                            <p class="text-sm text-slate-500 mt-0.5">Gerocultora · Residencia Fuentecillas · alta 14/03/2018 (8 años en el grupo)</p>
+                            <div class="flex items-center gap-2 mt-2">
+                                <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-medium">⚕ Baja IT desde 28/05/2026</span>
+                                <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 text-xs">Turno rotativo · 40 h/semana</span>
+                                <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-xs">Gestora de caso de 3 personas</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button @click="modalAusencia = true" class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white hover:bg-slate-50">+ Ausencia</button>
+                            <button @click="toast = 'Editar profesional — pendiente sincronización con EQUIPO'; setTimeout(()=>toast=false,2400)" class="px-3 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">✏ Editar</button>
+                        </div>
+                    </div>
+
+                    <!-- Mini-KPIs -->
+                    <div class="mt-4 grid grid-cols-2 md:grid-cols-6 gap-2 text-sm">
+                        <div class="rounded-lg border border-slate-200 px-3 py-2 bg-slate-50/40"><p class="text-[10px] text-slate-500">Vac. disfrutadas</p><p class="font-semibold">17 / 22</p></div>
+                        <div class="rounded-lg border border-slate-200 px-3 py-2 bg-slate-50/40"><p class="text-[10px] text-slate-500">Vac. pendientes</p><p class="font-semibold text-emerald-700">5 días</p></div>
+                        <div class="rounded-lg border border-emerald-200 px-3 py-2 bg-emerald-50/60" title="Saldo horario: horas extras +/-, ajustes por salida anticipada, recuperación horas">
+                            <p class="text-[10px] text-emerald-700">⚖ Saldo horario</p>
+                            <p class="font-semibold text-emerald-800">+4h 30'</p>
+                        </div>
+                        <div class="rounded-lg border border-rose-200 px-3 py-2 bg-rose-50/60" title="Horas de médicos (código 23) — consultas propias o acompañamiento familiar">
+                            <p class="text-[10px] text-rose-700">🩺 Médicos (cód. 23)</p>
+                            <p class="font-semibold text-rose-800">5 / 24 h</p>
+                        </div>
+                        <div class="rounded-lg border border-blue-200 px-3 py-2 bg-blue-50/60" title="Permutas de turno con otros profesionales (cuenta saldo en compensación)">
+                            <p class="text-[10px] text-blue-700">🔄 Permutas</p>
+                            <p class="font-semibold text-blue-800">2 dadas · 1 recibida</p>
+                        </div>
+                        <div class="rounded-lg border border-slate-200 px-3 py-2 bg-slate-50/40"><p class="text-[10px] text-slate-500">Formación</p><p class="font-semibold">14 / 25 h</p></div>
+                    </div>
+                    <div class="mt-2 grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
+                        <div class="rounded-lg border border-amber-200 px-3 py-2 bg-amber-50/60"><p class="text-[10px] text-amber-700">IT en curso</p><p class="font-semibold text-amber-800">9 días</p></div>
+                        <div class="rounded-lg border border-purple-200 px-3 py-2 bg-purple-50/60" title="Crédito sindical 20h/mes para representantes">
+                            <p class="text-[10px] text-purple-700">🤝 Crédito sindical</p>
+                            <p class="font-semibold text-purple-800">No representante</p>
+                        </div>
+                        <div class="rounded-lg border border-slate-200 px-3 py-2 bg-slate-50/40"><p class="text-[10px] text-slate-500">Otras ausencias retribuidas</p><p class="font-semibold">0 días</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <nav class="mt-5 flex gap-1 -mb-px">
+                <button @click="tab = 'datos'" :class="tab === 'datos' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300'" class="px-4 py-2.5 text-sm font-medium border-b-2">📋 Datos</button>
+                <button @click="tab = 'vacaciones'" :class="tab === 'vacaciones' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300'" class="px-4 py-2.5 text-sm font-medium border-b-2">🏖 Vacaciones y ausencias</button>
+                <button @click="tab = 'turnos'" :class="tab === 'turnos' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300'" class="px-4 py-2.5 text-sm font-medium border-b-2">🕒 Turnos</button>
+                <button @click="tab = 'personas'" :class="tab === 'personas' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300'" class="px-4 py-2.5 text-sm font-medium border-b-2">👥 Personas asignadas <span class="ml-1 text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">3</span></button>
+                <button @click="tab = 'formacion'" :class="tab === 'formacion' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300'" class="px-4 py-2.5 text-sm font-medium border-b-2">🎓 Formación</button>
+                <button @click="tab = 'documentos'" :class="tab === 'documentos' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300'" class="px-4 py-2.5 text-sm font-medium border-b-2">📁 Documentos</button>
+                <button @click="tab = 'calendario'" :class="tab === 'calendario' ? 'border-emerald-700 text-emerald-700' : 'border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300'" class="px-4 py-2.5 text-sm font-medium border-b-2">📆 Calendario anual</button>
+            </nav>
+        </header>
+
+        <!-- ===== TAB DATOS ===== -->
+        <section x-show="tab === 'datos'" class="px-8 py-6 space-y-5">
+            <div class="grid md:grid-cols-2 gap-5">
+                <div class="bg-white rounded-xl border border-slate-200 p-5">
+                    <h3 class="text-sm font-semibold mb-3">📋 Datos personales</h3>
+                    <dl class="space-y-2 text-sm">
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><dt class="text-slate-500">Nombre completo</dt><dd class="font-medium">Marta López Pérez</dd></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><dt class="text-slate-500">DNI</dt><dd class="font-mono text-xs text-slate-600">•••••432-K</dd></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><dt class="text-slate-500">Fecha nacimiento</dt><dd>14/03/1988 (38 años)</dd></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><dt class="text-slate-500">Email corporativo</dt><dd class="text-emerald-700">marta.lopez@aspanias.org</dd></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><dt class="text-slate-500">Teléfono interno</dt><dd>ext. 521</dd></div>
+                        <div class="flex justify-between"><dt class="text-slate-500">Teléfono personal</dt><dd class="text-slate-400">— solo emergencias —</dd></div>
+                    </dl>
+                </div>
+
+                <div class="bg-white rounded-xl border border-slate-200 p-5">
+                    <h3 class="text-sm font-semibold mb-3">💼 Datos laborales</h3>
+                    <dl class="space-y-2 text-sm">
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><dt class="text-slate-500">Categoría profesional</dt><dd class="font-medium">Gerocultora</dd></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><dt class="text-slate-500">Centro principal</dt><dd>Residencia Fuentecillas</dd></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><dt class="text-slate-500">Otros centros</dt><dd>—</dd></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><dt class="text-slate-500">Tipo jornada</dt><dd>Completa (40 h/sem)</dd></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><dt class="text-slate-500">Horario</dt><dd>Turnos rotativos (M/T/N)</dd></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><dt class="text-slate-500">Fecha alta</dt><dd>14/03/2018 — 8 años</dd></div>
+                        <div class="flex justify-between"><dt class="text-slate-500">Tipo contrato</dt><dd>Indefinido</dd></div>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Aviso integración EQUIPO -->
+            <div class="rounded-lg border border-sky-200 bg-sky-50 p-4 text-xs text-sky-900">
+                <p class="font-semibold mb-1">🔗 Datos maestros sincronizados con EQUIPO</p>
+                <p>Los datos personales y laborales (contrato, antigüedad, nómina) son fuente de verdad de EQUIPO (suite RRHH del grupo). ÁGORA refleja la información necesaria para la operativa asistencial. Cambios en datos laborales deben hacerse en EQUIPO; aquí solo se actualizan datos asistenciales (centro adscripción, rol asistencial, gestor de caso).</p>
+            </div>
+        </section>
+
+        <!-- ===== TAB VACACIONES ===== -->
+        <section x-show="tab === 'vacaciones'" x-cloak class="px-8 py-6 space-y-5">
+            <!-- Saldo -->
+            <div class="bg-white rounded-xl border border-slate-200 p-5">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-semibold">🏖 Saldo de días — año 2026</h3>
+                    <button @click="modalAusencia = true" class="text-xs text-emerald-700 hover:underline font-medium">+ Nueva solicitud</button>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="rounded-lg border border-emerald-200 bg-emerald-50/60 p-3">
+                        <p class="text-[10px] uppercase tracking-wide text-emerald-700 font-semibold">Vacaciones</p>
+                        <p class="text-2xl font-light mt-1">5 <span class="text-sm text-slate-500">/ 22 días</span></p>
+                        <div class="w-full bg-emerald-200 rounded h-1.5 mt-2"><div class="bg-emerald-600 h-1.5 rounded" style="width:77%"></div></div>
+                        <p class="text-[10px] text-emerald-700 mt-1">17 disfrutados · 5 pendientes</p>
+                    </div>
+                    <div class="rounded-lg border border-emerald-200 bg-emerald-50/60 p-3" title="Saldo horario = horas extras (no complementarias) + ajustes por salir antes/después - horas recuperadas">
+                        <p class="text-[10px] uppercase tracking-wide text-emerald-700 font-semibold">⚖ Saldo horario</p>
+                        <p class="text-2xl font-light mt-1 text-emerald-800">+4h 30'</p>
+                        <div class="w-full bg-emerald-200 rounded h-1.5 mt-2"><div class="bg-emerald-600 h-1.5 rounded" style="width:55%"></div></div>
+                        <p class="text-[10px] text-emerald-700 mt-1">Compensable hasta 31/12</p>
+                    </div>
+                    <div class="rounded-lg border border-sky-200 bg-sky-50/60 p-3">
+                        <p class="text-[10px] uppercase tracking-wide text-sky-700 font-semibold">Formación</p>
+                        <p class="text-2xl font-light mt-1">26 <span class="text-sm text-slate-500">/ 40 h</span></p>
+                        <div class="w-full bg-sky-200 rounded h-1.5 mt-2"><div class="bg-sky-600 h-1.5 rounded" style="width:35%"></div></div>
+                        <p class="text-[10px] text-sky-700 mt-1">14 h consumidas</p>
+                    </div>
+                    <div class="rounded-lg border border-rose-200 bg-rose-50/60 p-3">
+                        <p class="text-[10px] uppercase tracking-wide text-rose-700 font-semibold">IT en curso</p>
+                        <p class="text-2xl font-light mt-1">9 <span class="text-sm text-slate-500">días</span></p>
+                        <div class="w-full bg-rose-200 rounded h-1.5 mt-2"><div class="bg-rose-600 h-1.5 rounded" style="width:60%"></div></div>
+                        <p class="text-[10px] text-rose-700 mt-1">Desde 28/05/2026</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historial -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+                    <h3 class="text-sm font-semibold">📜 Historial de ausencias</h3>
+                    <select class="text-xs px-2 py-1 rounded border border-slate-300">
+                        <option>Año 2026</option>
+                        <option>Año 2025</option>
+                        <option>Todos</option>
+                    </select>
+                </div>
+                <table class="w-full text-sm">
+                    <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                        <tr>
+                            <th class="px-4 py-2 text-left">Tipo</th>
+                            <th class="px-4 py-2 text-left">Desde</th>
+                            <th class="px-4 py-2 text-left">Hasta</th>
+                            <th class="px-4 py-2 text-center">Días</th>
+                            <th class="px-4 py-2 text-left">Estado</th>
+                            <th class="px-4 py-2 text-left">Aprobado por</th>
+                            <th class="px-4 py-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr class="bg-rose-50/30">
+                            <td class="px-4 py-2.5"><span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 text-[11px] font-medium">⚕ IT</span></td>
+                            <td class="px-4 py-2.5">28/05/2026</td>
+                            <td class="px-4 py-2.5">— en curso</td>
+                            <td class="px-4 py-2.5 text-center font-medium">9</td>
+                            <td class="px-4 py-2.5"><span class="text-emerald-700 text-xs">En vigor</span></td>
+                            <td class="px-4 py-2.5 text-slate-500 text-xs">— (parte médico)</td>
+                            <td class="px-4 py-2.5 text-right"><a href="#" class="text-emerald-700 text-xs hover:underline">Ver parte 🔒</a></td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2.5"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-medium">🏖 Vacaciones</span></td>
+                            <td class="px-4 py-2.5">28/03/2026</td>
+                            <td class="px-4 py-2.5">07/04/2026</td>
+                            <td class="px-4 py-2.5 text-center font-medium">10</td>
+                            <td class="px-4 py-2.5"><span class="text-slate-500 text-xs">Disfrutadas</span></td>
+                            <td class="px-4 py-2.5 text-xs">Bárcena, R. (Dir.)</td>
+                            <td class="px-4 py-2.5"></td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2.5"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-medium">🏖 Vacaciones</span></td>
+                            <td class="px-4 py-2.5">04/01/2026</td>
+                            <td class="px-4 py-2.5">10/01/2026</td>
+                            <td class="px-4 py-2.5 text-center font-medium">7</td>
+                            <td class="px-4 py-2.5"><span class="text-slate-500 text-xs">Disfrutadas</span></td>
+                            <td class="px-4 py-2.5 text-xs">Bárcena, R. (Dir.)</td>
+                            <td class="px-4 py-2.5"></td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2.5"><span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 text-[11px] font-medium">🩺 Horas médicas (cód. 23)</span></td>
+                            <td class="px-4 py-2.5">15/02/2026 09:00</td>
+                            <td class="px-4 py-2.5">15/02/2026 13:00</td>
+                            <td class="px-4 py-2.5 text-center font-medium">4h</td>
+                            <td class="px-4 py-2.5"><span class="text-slate-500 text-xs">Disfrutada · justificada</span></td>
+                            <td class="px-4 py-2.5 text-xs">Bárcena, R. (Dir.)</td>
+                            <td class="px-4 py-2.5 text-right"><a href="#" class="text-emerald-700 text-xs hover:underline">Ver justificante 🔒</a></td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2.5"><span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-medium">🔄 Permuta de turno</span></td>
+                            <td class="px-4 py-2.5">07/03/2026 (M)</td>
+                            <td class="px-4 py-2.5">→ 14/03/2026 (M)</td>
+                            <td class="px-4 py-2.5 text-center font-medium">1 día</td>
+                            <td class="px-4 py-2.5"><span class="text-emerald-700 text-xs">Aceptada</span></td>
+                            <td class="px-4 py-2.5 text-xs">Castro N., Elena (compañera) · Bárcena (visto bueno)</td>
+                            <td class="px-4 py-2.5 text-right"><a href="#" class="text-emerald-700 text-xs hover:underline">Ver acuerdo</a></td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2.5"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-medium">⚖ Saldo horario · ajuste</span></td>
+                            <td class="px-4 py-2.5">22/05/2026</td>
+                            <td class="px-4 py-2.5">22/05/2026</td>
+                            <td class="px-4 py-2.5 text-center font-medium">−2h</td>
+                            <td class="px-4 py-2.5"><span class="text-slate-500 text-xs">Salida anticipada</span></td>
+                            <td class="px-4 py-2.5 text-xs">Bárcena, R. (Dir.) · motivo: familiar</td>
+                            <td class="px-4 py-2.5"></td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2.5"><span class="px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 text-[11px] font-medium">🎓 Formación</span></td>
+                            <td class="px-4 py-2.5">22/04/2026</td>
+                            <td class="px-4 py-2.5">23/04/2026</td>
+                            <td class="px-4 py-2.5 text-center font-medium">2</td>
+                            <td class="px-4 py-2.5"><span class="text-slate-500 text-xs">Realizada</span></td>
+                            <td class="px-4 py-2.5 text-xs">Ureta, S. (RRHH)</td>
+                            <td class="px-4 py-2.5 text-right"><a href="#" class="text-emerald-700 text-xs hover:underline">Certificado</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ===== TAB TURNOS ===== -->
+        <section x-show="tab === 'turnos'" x-cloak class="px-8 py-6 space-y-5">
+            <div class="bg-white rounded-xl border border-slate-200 p-5">
+                <h3 class="text-sm font-semibold mb-3">🕒 Turnos próxima semana (15 – 21 jun 2026)</h3>
+                <div class="rounded-lg border border-amber-200 bg-amber-50 p-3 mb-4 text-xs text-amber-900">
+                    ⚕ Marta está de baja IT hasta el 15/07. Los turnos abajo son los <strong>planificados</strong>; se cubrirán con refuerzo de bolsa.
+                </div>
+                <div class="grid grid-cols-7 gap-2 text-xs">
+                    <div class="text-center">
+                        <p class="text-[10px] text-slate-500 mb-1">Lun 15</p>
+                        <div class="rounded p-2 bg-rose-100 border border-rose-200 text-rose-700">⚕ IT</div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[10px] text-slate-500 mb-1">Mar 16</p>
+                        <div class="rounded p-2 bg-rose-100 border border-rose-200 text-rose-700">⚕ IT</div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[10px] text-slate-500 mb-1">Mié 17</p>
+                        <div class="rounded p-2 bg-amber-200 border border-amber-300 text-amber-900 line-through opacity-60">🌅 Mañana</div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[10px] text-slate-500 mb-1">Jue 18</p>
+                        <div class="rounded p-2 bg-amber-200 border border-amber-300 text-amber-900 line-through opacity-60">🌅 Mañana</div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[10px] text-slate-500 mb-1">Vie 19</p>
+                        <div class="rounded p-2 bg-slate-100 border border-slate-200 text-slate-500">Libre</div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[10px] text-slate-500 mb-1">Sáb 20</p>
+                        <div class="rounded p-2 bg-sky-200 border border-sky-300 text-sky-900 line-through opacity-60">🌇 Tarde</div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[10px] text-slate-500 mb-1">Dom 21</p>
+                        <div class="rounded p-2 bg-sky-200 border border-sky-300 text-sky-900 line-through opacity-60">🌇 Tarde</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-5">
+                <h3 class="text-sm font-semibold mb-3">📊 Horas trabajadas — últimos 6 meses</h3>
+                <div class="space-y-2 text-xs">
+                    <div class="flex items-center gap-3">
+                        <span class="w-16 text-slate-600">Ene 26</span>
+                        <div class="flex-1 bg-slate-100 rounded h-3"><div class="bg-emerald-500 h-3 rounded" style="width:95%"></div></div>
+                        <span class="w-12 text-right font-medium">152 h</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="w-16 text-slate-600">Feb 26</span>
+                        <div class="flex-1 bg-slate-100 rounded h-3"><div class="bg-emerald-500 h-3 rounded" style="width:90%"></div></div>
+                        <span class="w-12 text-right font-medium">144 h</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="w-16 text-slate-600">Mar 26</span>
+                        <div class="flex-1 bg-slate-100 rounded h-3"><div class="bg-emerald-500 h-3 rounded" style="width:75%"></div></div>
+                        <span class="w-12 text-right font-medium">120 h</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="w-16 text-slate-600">Abr 26</span>
+                        <div class="flex-1 bg-slate-100 rounded h-3"><div class="bg-emerald-500 h-3 rounded" style="width:100%"></div></div>
+                        <span class="w-12 text-right font-medium">160 h</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="w-16 text-slate-600">May 26</span>
+                        <div class="flex-1 bg-slate-100 rounded h-3"><div class="bg-emerald-500 h-3 rounded" style="width:85%"></div></div>
+                        <span class="w-12 text-right font-medium">136 h</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="w-16 text-slate-600">Jun 26</span>
+                        <div class="flex-1 bg-slate-100 rounded h-3"><div class="bg-rose-400 h-3 rounded" style="width:18%"></div></div>
+                        <span class="w-12 text-right font-medium text-rose-700">28 h</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TAB PERSONAS ASIGNADAS ===== -->
+        <section x-show="tab === 'personas'" x-cloak class="px-8 py-6">
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                <div class="px-5 py-4 border-b border-slate-200">
+                    <h3 class="text-sm font-semibold">👥 Personas atendidas — gestora de caso</h3>
+                    <p class="text-xs text-slate-500 mt-0.5">Marta es referente de 3 personas en Residencia Fuentecillas.</p>
+                </div>
+                <div class="divide-y divide-slate-100">
+                    <a href="persona-detalle.html" class="flex items-center gap-3 px-5 py-3 hover:bg-emerald-50/30">
+                        <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-semibold">RJ</div>
+                        <div class="flex-1"><p class="text-sm font-medium">Ruiz Jiménez, Asunción</p><p class="text-[11px] text-slate-500">Residencia Fuentecillas · Hab. 12-2</p></div>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">PV vigente</span>
+                    </a>
+                    <a href="persona-detalle.html" class="flex items-center gap-3 px-5 py-3 hover:bg-emerald-50/30">
+                        <div class="w-9 h-9 rounded-full bg-sky-100 text-sky-800 flex items-center justify-center text-xs font-semibold">FM</div>
+                        <div class="flex-1"><p class="text-sm font-medium">Fernández Martín, Pedro</p><p class="text-[11px] text-slate-500">Residencia Fuentecillas · Hab. 8-1</p></div>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">PV revisión jul</span>
+                    </a>
+                    <a href="persona-detalle.html" class="flex items-center gap-3 px-5 py-3 hover:bg-emerald-50/30">
+                        <div class="w-9 h-9 rounded-full bg-purple-100 text-purple-800 flex items-center justify-center text-xs font-semibold">PG</div>
+                        <div class="flex-1"><p class="text-sm font-medium">Pérez González, María</p><p class="text-[11px] text-slate-500">Residencia Fuentecillas · Hab. 15-1</p></div>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">PV vigente</span>
+                    </a>
+                </div>
+                <div class="px-5 py-3 bg-amber-50 border-t border-amber-200 text-xs text-amber-900">
+                    ⚕ Durante la IT de Marta, las personas asignadas tienen como referente provisional a <strong>Bárcena Sanz, R.</strong> (Dirección de centro).
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TAB FORMACIÓN ===== -->
+        <section x-show="tab === 'formacion'" x-cloak class="px-8 py-6">
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between">
+                    <h3 class="text-sm font-semibold">🎓 Formación realizada</h3>
+                    <button class="text-xs text-emerald-700 hover:underline">+ Apuntar a curso</button>
+                </div>
+                <table class="w-full text-sm">
+                    <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                        <tr><th class="px-4 py-2 text-left">Curso</th><th class="px-4 py-2 text-left">Fecha</th><th class="px-4 py-2 text-center">Horas</th><th class="px-4 py-2 text-left">Estado</th><th class="px-4 py-2"></th></tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr><td class="px-4 py-2.5"><p class="font-medium">Atención Centrada en la Persona — nivel avanzado</p><p class="text-[11px] text-slate-500">Fundación Aspanias Burgos</p></td><td class="px-4 py-2.5 text-slate-600">22-23/04/2026</td><td class="px-4 py-2.5 text-center">14 h</td><td class="px-4 py-2.5"><span class="text-emerald-700 text-xs">Completado</span></td><td class="px-4 py-2.5 text-right"><a href="#" class="text-emerald-700 text-xs hover:underline">Certificado</a></td></tr>
+                        <tr><td class="px-4 py-2.5"><p class="font-medium">Manejo de personas con conducta agitada</p><p class="text-[11px] text-slate-500">Plena Inclusión</p></td><td class="px-4 py-2.5 text-slate-600">15/03/2025</td><td class="px-4 py-2.5 text-center">8 h</td><td class="px-4 py-2.5"><span class="text-emerald-700 text-xs">Completado</span></td><td class="px-4 py-2.5 text-right"><a href="#" class="text-emerald-700 text-xs hover:underline">Certificado</a></td></tr>
+                        <tr><td class="px-4 py-2.5"><p class="font-medium">Soporte Vital Básico + DEA</p><p class="text-[11px] text-slate-500">Cruz Roja Burgos</p></td><td class="px-4 py-2.5 text-slate-600">10/10/2024</td><td class="px-4 py-2.5 text-center">8 h</td><td class="px-4 py-2.5"><span class="text-emerald-700 text-xs">Completado</span></td><td class="px-4 py-2.5 text-right"><a href="#" class="text-emerald-700 text-xs hover:underline">Certificado</a></td></tr>
+                        <tr><td class="px-4 py-2.5"><p class="font-medium">RGPD aplicado a centros sociosanitarios</p><p class="text-[11px] text-slate-500">Lex Digital</p></td><td class="px-4 py-2.5 text-slate-600">Sep 2026 (programado)</td><td class="px-4 py-2.5 text-center">12 h</td><td class="px-4 py-2.5"><span class="text-amber-700 text-xs">Inscrita</span></td><td class="px-4 py-2.5"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ===== TAB DOCUMENTOS ===== -->
+        <section x-show="tab === 'documentos'" x-cloak class="px-8 py-6">
+            <div class="bg-white rounded-xl border border-slate-200 p-5">
+                <h3 class="text-sm font-semibold mb-3">📁 Documentación laboral</h3>
+                <p class="text-xs text-slate-500 mb-4">⚠ El acceso queda registrado en bitácora (RGPD). Los partes médicos son <strong>categoría especial art. 9 RGPD</strong>, accesibles solo a RRHH, Dirección y la persona afectada.</p>
+                <div class="grid md:grid-cols-2 gap-3">
+                    <div class="rounded-lg border border-slate-200 p-3 hover:bg-slate-50">
+                        <p class="text-xs font-medium">📄 Contrato indefinido (14/03/2018)</p>
+                        <p class="text-[10px] text-slate-500">PDF · 2,1 MB · sincronizado desde EQUIPO</p>
+                    </div>
+                    <div class="rounded-lg border border-rose-200 p-3 bg-rose-50/50">
+                        <p class="text-xs font-medium text-rose-900">🔒 Parte médico IT (28/05/2026)</p>
+                        <p class="text-[10px] text-rose-700">Categoría especial · acceso restringido · solicitar a RRHH</p>
+                    </div>
+                    <div class="rounded-lg border border-slate-200 p-3 hover:bg-slate-50">
+                        <p class="text-xs font-medium">🎓 Título de gerocultora</p>
+                        <p class="text-[10px] text-slate-500">PDF · 850 KB</p>
+                    </div>
+                    <div class="rounded-lg border border-slate-200 p-3 hover:bg-slate-50">
+                        <p class="text-xs font-medium">📝 Declaración protección menores</p>
+                        <p class="text-[10px] text-slate-500">PDF · firmado 03/01/2026</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TAB CALENDARIO ANUAL ===== -->
+        <section x-show="tab === 'calendario'" x-cloak class="px-8 py-6 space-y-5">
+
+            <!-- Cabecera del calendario individual -->
+            <div class="bg-white rounded-xl border border-slate-200 p-5">
+                <div class="flex items-start justify-between mb-4 flex-wrap gap-3">
+                    <div>
+                        <h3 class="text-base font-semibold flex items-center gap-2">
+                            📆 Calendario laboral 2026
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">v3.0 · Aprobado</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 font-medium">📜 Firmado RLT 02/12/2025</span>
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Generado automáticamente con el patrón <strong>Rotativo 7 días residencial</strong> + vacaciones aprobadas + festivos del centro</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button @click="toast = 'Recalculando con el calendario aprobado v3.0'; setTimeout(()=>toast=false,2200)" class="px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">🔄 Recalcular</button>
+                        <a href="calendario-individual-pdf.html" class="px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">👁 Vista previa</a>
+                        <a href="calendario-individual-pdf.html" class="px-4 py-2 text-xs rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">📄 Generar PDF para firma</a>
+                    </div>
+                </div>
+
+                <!-- Resumen del patrón -->
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-3 pt-3 border-t border-slate-100">
+                    <div><p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Patrón aplicado</p><p class="text-sm font-semibold mt-0.5">Rotativo 7 días</p><a href="patrones-turno.html" class="text-[10px] text-emerald-700 hover:underline">Ver patrón →</a></div>
+                    <div><p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Convenio</p><p class="text-sm font-semibold mt-0.5 text-sky-800">VII Residencias</p><p class="text-[10px] text-slate-500">1 770 h/año</p></div>
+                    <div><p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Horas planificadas</p><p class="text-sm font-semibold mt-0.5 text-emerald-700">1 770 h ✓</p><p class="text-[10px] text-slate-500">cuadrada</p></div>
+                    <div><p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Días turno</p><p class="text-sm font-semibold mt-0.5">278 días</p><p class="text-[10px] text-slate-500">M 96 · T 94 · N 88</p></div>
+                    <div><p class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Vacaciones</p><p class="text-sm font-semibold mt-0.5 text-emerald-700">7-28 sept</p><p class="text-[10px] text-slate-500">22 días</p></div>
+                </div>
+            </div>
+
+            <!-- Leyenda -->
+            <div class="bg-slate-50 rounded-lg border border-slate-200 px-4 py-2.5 flex items-center gap-3 text-[11px] flex-wrap">
+                <span class="font-semibold text-slate-600 uppercase tracking-wide">Códigos:</span>
+                <span class="flex items-center gap-1"><span class="inline-flex w-5 h-5 rounded text-[10px] font-semibold items-center justify-center bg-amber-200 text-amber-900">M</span> Mañana</span>
+                <span class="flex items-center gap-1"><span class="inline-flex w-5 h-5 rounded text-[10px] font-semibold items-center justify-center bg-sky-200 text-sky-900">T</span> Tarde</span>
+                <span class="flex items-center gap-1"><span class="inline-flex w-5 h-5 rounded text-[10px] font-semibold items-center justify-center bg-indigo-200 text-indigo-900">N</span> Noche</span>
+                <span class="flex items-center gap-1"><span class="inline-flex w-5 h-5 rounded text-[10px] font-semibold items-center justify-center bg-slate-100 text-slate-500 border border-slate-200">·</span> Descanso</span>
+                <span class="flex items-center gap-1"><span class="inline-flex w-5 h-5 rounded text-[10px] font-semibold items-center justify-center bg-emerald-200 text-emerald-900">V</span> Vacaciones</span>
+                <span class="flex items-center gap-1"><span class="inline-flex w-5 h-5 rounded text-[10px] font-semibold items-center justify-center bg-rose-200 text-rose-900">F</span> Festivo</span>
+                <span class="flex items-center gap-1"><span class="inline-flex w-5 h-5 rounded text-[10px] font-semibold items-center justify-center bg-purple-200 text-purple-900">C</span> Formación</span>
+                <span class="flex items-center gap-1"><span class="inline-flex w-5 h-5 rounded text-[10px] font-semibold items-center justify-center bg-rose-100 text-rose-700 border border-rose-300">23</span> Horas médicas</span>
+                <span class="flex items-center gap-1"><span class="inline-flex w-5 h-5 rounded text-[10px] font-semibold items-center justify-center bg-blue-100 text-blue-700 border border-blue-300">P</span> Permutas</span>
+                <span class="flex items-center gap-1"><span class="inline-flex w-5 h-5 rounded text-[10px] font-semibold items-center justify-center bg-emerald-100 text-emerald-700 border border-emerald-300">⚖</span> Saldo horario</span>
+            </div>
+
+            <!-- Tabla resumen mensual -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                <div class="px-5 py-3 border-b border-slate-200">
+                    <h3 class="text-sm font-semibold">📊 Distribución mensual de horas</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs">
+                        <thead class="bg-slate-50 text-[10px] uppercase tracking-wide text-slate-500">
+                            <tr>
+                                <th class="px-3 py-2 text-left">Mes</th>
+                                <th class="px-2 py-2 text-center">M</th>
+                                <th class="px-2 py-2 text-center">T</th>
+                                <th class="px-2 py-2 text-center">N</th>
+                                <th class="px-2 py-2 text-center">D</th>
+                                <th class="px-2 py-2 text-center">V</th>
+                                <th class="px-2 py-2 text-center">F</th>
+                                <th class="px-2 py-2 text-right">H. asignadas</th>
+                                <th class="px-2 py-2 text-right">H. objetivo</th>
+                                <th class="px-2 py-2 text-right">Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr><td class="px-3 py-1.5 font-medium">Enero</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">5</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-center">2</td><td class="px-2 py-1.5 text-right font-medium">152 h</td><td class="px-2 py-1.5 text-right text-slate-500">152 h</td><td class="px-2 py-1.5 text-right text-emerald-700">0</td></tr>
+                            <tr><td class="px-3 py-1.5 font-medium">Febrero</td><td class="px-2 py-1.5 text-center">7</td><td class="px-2 py-1.5 text-center">7</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">5</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-right font-medium">144 h</td><td class="px-2 py-1.5 text-right text-slate-500">144 h</td><td class="px-2 py-1.5 text-right text-emerald-700">0</td></tr>
+                            <tr><td class="px-3 py-1.5 font-medium">Marzo</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">5</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-right font-medium">160 h</td><td class="px-2 py-1.5 text-right text-slate-500">160 h</td><td class="px-2 py-1.5 text-right text-emerald-700">0</td></tr>
+                            <tr><td class="px-3 py-1.5 font-medium">Abril</td><td class="px-2 py-1.5 text-center">7</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">7</td><td class="px-2 py-1.5 text-center">4</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-center">2</td><td class="px-2 py-1.5 text-right font-medium">136 h</td><td class="px-2 py-1.5 text-right text-slate-500">144 h</td><td class="px-2 py-1.5 text-right text-amber-700">−8</td></tr>
+                            <tr><td class="px-3 py-1.5 font-medium">Mayo</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">7</td><td class="px-2 py-1.5 text-center">5</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-center">1</td><td class="px-2 py-1.5 text-right font-medium">144 h</td><td class="px-2 py-1.5 text-right text-slate-500">144 h</td><td class="px-2 py-1.5 text-right text-emerald-700">0</td></tr>
+                            <tr class="bg-emerald-50/40"><td class="px-3 py-1.5 font-medium text-emerald-800">Junio (actual)</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">7</td><td class="px-2 py-1.5 text-center">4</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-center">1</td><td class="px-2 py-1.5 text-right font-medium">152 h</td><td class="px-2 py-1.5 text-right text-slate-500">152 h</td><td class="px-2 py-1.5 text-right text-emerald-700">0</td></tr>
+                            <tr><td class="px-3 py-1.5 font-medium">Julio</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">5</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-right font-medium">168 h</td><td class="px-2 py-1.5 text-right text-slate-500">168 h</td><td class="px-2 py-1.5 text-right text-emerald-700">0</td></tr>
+                            <tr><td class="px-3 py-1.5 font-medium">Agosto</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">7</td><td class="px-2 py-1.5 text-center">5</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-center">1</td><td class="px-2 py-1.5 text-right font-medium">152 h</td><td class="px-2 py-1.5 text-right text-slate-500">152 h</td><td class="px-2 py-1.5 text-right text-emerald-700">0</td></tr>
+                            <tr class="bg-emerald-50/30"><td class="px-3 py-1.5 font-medium">Septiembre</td><td class="px-2 py-1.5 text-center">2</td><td class="px-2 py-1.5 text-center">1</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-center">3</td><td class="px-2 py-1.5 text-center text-emerald-700 font-bold">22</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-right font-medium">32 h</td><td class="px-2 py-1.5 text-right text-slate-500">32 h</td><td class="px-2 py-1.5 text-right text-emerald-700">0</td></tr>
+                            <tr><td class="px-3 py-1.5 font-medium">Octubre</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">7</td><td class="px-2 py-1.5 text-center">5</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-center">1</td><td class="px-2 py-1.5 text-right font-medium">160 h</td><td class="px-2 py-1.5 text-right text-slate-500">160 h</td><td class="px-2 py-1.5 text-right text-emerald-700">0</td></tr>
+                            <tr><td class="px-3 py-1.5 font-medium">Noviembre <span class="text-[10px] text-purple-700">+ 2 días formación</span></td><td class="px-2 py-1.5 text-center">7</td><td class="px-2 py-1.5 text-center">7</td><td class="px-2 py-1.5 text-center">8</td><td class="px-2 py-1.5 text-center">4</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-center">1</td><td class="px-2 py-1.5 text-right font-medium">144 h <span class="text-purple-700">+14</span></td><td class="px-2 py-1.5 text-right text-slate-500">144 h</td><td class="px-2 py-1.5 text-right text-emerald-700">0</td></tr>
+                            <tr><td class="px-3 py-1.5 font-medium">Diciembre</td><td class="px-2 py-1.5 text-center">7</td><td class="px-2 py-1.5 text-center">7</td><td class="px-2 py-1.5 text-center">5</td><td class="px-2 py-1.5 text-center">7</td><td class="px-2 py-1.5 text-center">—</td><td class="px-2 py-1.5 text-center">3</td><td class="px-2 py-1.5 text-right font-medium">136 h</td><td class="px-2 py-1.5 text-right text-slate-500">136 h</td><td class="px-2 py-1.5 text-right text-emerald-700">0</td></tr>
+                            <tr class="bg-slate-100 font-bold border-t-2 border-slate-300"><td class="px-3 py-2">TOTAL</td><td class="px-2 py-2 text-center">96</td><td class="px-2 py-2 text-center">94</td><td class="px-2 py-2 text-center">88</td><td class="px-2 py-2 text-center">76</td><td class="px-2 py-2 text-center">22</td><td class="px-2 py-2 text-center">14</td><td class="px-2 py-2 text-right text-emerald-700">1 770 h</td><td class="px-2 py-2 text-right">1 770 h</td><td class="px-2 py-2 text-right text-emerald-700">✓ cuadra</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Validaciones legales + pluses -->
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-xl border border-slate-200 p-5">
+                    <h3 class="text-sm font-semibold mb-3">⚖ Validaciones legales</h3>
+                    <ul class="space-y-2 text-xs">
+                        <li class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] flex items-center justify-center shrink-0 mt-0.5">✓</span><div><strong>Jornada anual</strong>: 1 770 h cumplidas (art. 18 conv. residencias).</div></li>
+                        <li class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] flex items-center justify-center shrink-0 mt-0.5">✓</span><div><strong>Descanso entre jornadas</strong>: ≥ 12 h en todos los cambios de turno (art. 34.3 ET).</div></li>
+                        <li class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] flex items-center justify-center shrink-0 mt-0.5">✓</span><div><strong>Descanso semanal</strong>: 1,5 días acumulables en 14 días (art. 37.1 ET).</div></li>
+                        <li class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] flex items-center justify-center shrink-0 mt-0.5">✓</span><div><strong>Máximo 9 h efectivas/día</strong>: respetado en todas las jornadas.</div></li>
+                        <li class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] flex items-center justify-center shrink-0 mt-0.5">✓</span><div><strong>Horas extra</strong>: 0 h planificadas (límite 80 h/año art. 35.2 ET).</div></li>
+                        <li class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-amber-500 text-white text-[9px] flex items-center justify-center shrink-0 mt-0.5">!</span><div><strong>Trabajo nocturno</strong>: 88 N (792 h). <em>Requiere revisión médica anual</em> (art. 36.4 ET). <span class="text-amber-700">Última: pendiente programar.</span></div></li>
+                        <li class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] flex items-center justify-center shrink-0 mt-0.5">✓</span><div><strong>Domingos trabajados</strong>: 24 (límite convenio 28).</div></li>
+                        <li class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] flex items-center justify-center shrink-0 mt-0.5">✓</span><div><strong>Festivos trabajados</strong>: 8 de 14 (límite 10 + plus festivo art. 47).</div></li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl border border-slate-200 p-5">
+                    <h3 class="text-sm font-semibold mb-3">💰 Pluses estimados anuales</h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><span>Plus nocturnidad (88 N × 22 €)</span><span class="font-semibold">1 936 €</span></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><span>Plus festivos trabajados (8 × 60 €)</span><span class="font-semibold">480 €</span></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><span>Plus domingos (24 × 35 €)</span><span class="font-semibold">840 €</span></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5"><span>Plus antigüedad (8 años)</span><span class="font-semibold">320 €</span></div>
+                        <div class="flex justify-between border-b border-slate-100 pb-1.5 text-slate-400"><span class="italic">Posibles refuerzos (no incluido)</span><span class="italic">—</span></div>
+                        <div class="flex justify-between pt-2 border-t-2 border-slate-300 font-bold"><span>TOTAL pluses estimados</span><span class="text-emerald-700">3 576 €/año</span></div>
+                    </div>
+                    <p class="text-[10px] text-slate-500 mt-3">Cálculo orientativo según tablas salariales VII Convenio Residencias 2026. Importes definitivos en nómina (EQUIPO).</p>
+                </div>
+            </div>
+
+            <!-- Aviso integración -->
+            <div class="rounded-lg border border-sky-200 bg-sky-50 p-4 text-xs text-sky-900">
+                <p class="font-semibold mb-1">🔗 Cómo se genera este calendario</p>
+                <p>Calendario laboral del centro (festivos + jornada) + patrón <strong>Rotativo 7 días residencial</strong> aplicado desde 14/03/2018 + vacaciones aprobadas (sept) + formación programada (nov) + asuntos propios solicitados (feb, dic). Se entrega a la trabajadora antes del 1 de enero firmado por Dirección y RLT (art. 34.6 ET). Cualquier variación se notifica por escrito.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal nueva ausencia -->
+    <div x-show="modalAusencia" x-cloak x-transition.opacity class="fixed inset-0 z-50 bg-slate-900/40 flex items-start justify-center pt-20 px-4" @click.self="modalAusencia = false">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md">
+            <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+                <h3 class="text-lg font-semibold">Solicitar ausencia para Marta López</h3>
+                <button @click="modalAusencia = false" class="text-slate-400 hover:text-slate-600 text-xl leading-none">×</button>
+            </div>
+            <div class="px-6 py-5 space-y-3">
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">Tipo</label>
+                    <select x-model="tipoAus" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300">
+                        <option value="vacaciones">🏖 Vacaciones</option>
+                        <option value="medicas">🩺 Horas médicas (cód. 23)</option>
+                        <option value="permuta">🔄 Permuta de turno con compañero/a</option>
+                        <option value="saldo">⚖ Ajuste saldo horario (salir antes / horas extras)</option>
+                        <option value="sindical">🤝 Crédito sindical (representantes)</option>
+                        <option value="formacion">🎓 Formación</option>
+                        <option value="it">⚕ IT (prolongación)</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">Desde</label><input type="date" value="2026-07-16" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></div>
+                    <div><label class="block text-xs font-medium text-slate-700 mb-1">Hasta</label><input type="date" value="2026-07-31" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></div>
+                </div>
+                <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-900">Saldo disponible tras alta IT: <strong>5 días</strong> vacaciones.</div>
+            </div>
+            <div class="px-6 py-3 border-t border-slate-200 flex justify-end gap-2">
+                <button @click="modalAusencia = false" class="px-3 py-2 text-sm rounded-lg border border-slate-300 hover:bg-slate-50">Cancelar</button>
+                <button @click="modalAusencia = false; toast = 'Solicitud creada · pendiente aprobación de Dirección'; setTimeout(()=>toast=false,2600)" class="px-4 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <div x-show="toast" x-cloak x-transition.opacity class="fixed bottom-6 right-6 z-50 rounded-lg bg-slate-900 text-white px-4 py-3 shadow-xl text-sm" x-text="toast"></div>
+</div>
+
+</body>
+</html>

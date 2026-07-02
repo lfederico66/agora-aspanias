@@ -1,0 +1,374 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Vida · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · todos los datos son ficticios</div>
+
+<div class="flex min-h-screen" x-data="{ userMenu: false }">
+
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100 relative">
+            <button @click="userMenu = !userMenu" class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">Federico Martínez</p>
+                    <p class="text-[10px] text-slate-500 truncate">Gerencia</p>
+                </div>
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div x-show="userMenu" x-cloak @click.outside="userMenu = false" class="absolute bottom-full left-3 right-3 mb-1 rounded-lg border border-slate-200 bg-white shadow-lg py-1 z-20">
+                <a href="personas-lista.html?mio=1" class="block px-3 py-1.5 text-sm text-emerald-700 hover:bg-emerald-50 font-medium">⭐ Mis personas</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Mi perfil</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Preferencias</a>
+                <div class="border-t border-slate-100 my-1"></div>
+                <a href="#" class="block px-3 py-1.5 text-sm text-rose-700 hover:bg-rose-50">Cerrar sesión</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate"><a href="index.html" class="hover:text-emerald-700">Inicio</a> <span class="mx-1">›</span> <a href="centros.html" class="hover:text-emerald-700">Centros</a> <span class="mx-1">›</span> <a href="centro-detalle.html" class="hover:text-emerald-700">Fuentecillas</a> <span class="mx-1">›</span> <a href="persona-detalle.html" class="hover:text-emerald-700">González Pérez, Marta</a> <span class="mx-1">›</span> <span class="text-slate-700">Plan de Vida</span></nav>
+            <div class="flex items-center gap-2 shrink-0"></div>
+        </div>
+        <div class="px-8 py-6 max-w-7xl">
+
+
+            <div>
+                <a href="persona-detalle.html" class="text-sm text-slate-500 hover:text-emerald-700">← Volver a la ficha</a>
+            </div>
+
+            <!-- Banner Plan de Vida -->
+            <section class="rounded-2xl bg-white border border-slate-200 shadow-sm p-6">
+                <div class="flex items-center justify-between flex-wrap gap-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-14 h-14 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl">📔</div>
+                        <div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <h1 class="text-2xl font-semibold tracking-tight">Plan de Vida · Marta González Pérez</h1>
+                                <span class="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800">● Vigente</span>
+                                <span class="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-700">Anualidad 2026</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mt-1">Atención Centrada en la Persona · Última revisión 15/01/2026 · Próxima revisión 15/01/2027</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progreso de documentos -->
+                <div class="mt-5">
+                    <div class="flex items-center justify-between text-sm mb-2">
+                        <span class="font-medium">Documentos del plan</span>
+                        <span class="text-emerald-700 font-semibold">4 / 5 completados</span>
+                    </div>
+                    <div class="w-full bg-slate-100 rounded-full h-2.5">
+                        <div class="bg-emerald-600 h-2.5 rounded-full" style="width: 80%"></div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="rounded-xl bg-emerald-50 border border-emerald-200 px-4 py-3 text-sm text-emerald-900">
+                <strong>Protocolo Fundación Aspanias.</strong> Elaborado, seguido y revisado conforme al "Protocolo de elaboración, seguimiento y revisión de Planes de Vida". La persona usuaria es protagonista del proceso.
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-3">
+                <div class="md:col-span-2 space-y-4">
+
+                    <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-3">Documentación del Plan de Vida</h2>
+                        <p class="text-xs text-slate-500 mb-3">Los 5 documentos del protocolo. Pincha para abrir su vista imprimible.</p>
+                        <div class="space-y-2">
+                            <a href="documento-historia-vida.html" class="group flex items-center justify-between rounded-lg border border-emerald-200 bg-emerald-50/40 hover:border-emerald-400 hover:bg-white p-3 transition">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold">1</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Historia de Vida</p>
+                                        <p class="text-xs text-slate-500">Guion oficial · 21 pistas + claves metodológicas</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800">✓ Funcional</span>
+                                    <span class="text-emerald-700 group-hover:translate-x-0.5 transition">→</span>
+                                </div>
+                            </a>
+                            <a href="documento-algo-sobre-mi.html" class="group flex items-center justify-between rounded-lg border border-emerald-200 bg-emerald-50/40 hover:border-emerald-400 hover:bg-white p-3 transition">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold">2</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Algo sobre mí</p>
+                                        <p class="text-xs text-slate-500">11 secciones temáticas oficiales</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800">✓ Funcional</span>
+                                    <span class="text-emerald-700 group-hover:translate-x-0.5 transition">→</span>
+                                </div>
+                            </a>
+                            <a href="documento-revision-objetivos.html" class="group flex items-center justify-between rounded-lg border border-emerald-200 bg-emerald-50/40 hover:border-emerald-400 hover:bg-white p-3 transition">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold">3</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Revisión de objetivos</p>
+                                        <p class="text-xs text-slate-500">4 columnas · seguimiento por objetivo</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800">✓ Funcional</span>
+                                    <span class="text-emerald-700 group-hover:translate-x-0.5 transition">→</span>
+                                </div>
+                            </a>
+                            <a href="documento-plan-apoyo.html" class="group flex items-center justify-between rounded-lg border border-emerald-200 bg-emerald-50/40 hover:border-emerald-400 hover:bg-white p-3 transition">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold">4</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Plan de apoyo al proyecto de vida</p>
+                                        <p class="text-xs text-slate-500">ANEXO 4 · 9 columnas · 8 dimensiones Schalock</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800">✓ Funcional</span>
+                                    <span class="text-emerald-700 group-hover:translate-x-0.5 transition">→</span>
+                                </div>
+                            </a>
+                            <a href="documento-proyecto-vida.html" class="group flex items-center justify-between rounded-lg border border-emerald-200 bg-emerald-50/40 hover:border-emerald-400 hover:bg-white p-3 transition">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold">5</div>
+                                    <div>
+                                        <p class="font-medium text-sm">Proyecto de vida</p>
+                                        <p class="text-xs text-slate-500">Sueños, Valores, Red de apoyos, Hitos · publicable en REPRISS</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800">✓ Funcional</span>
+                                    <span class="text-emerald-700 group-hover:translate-x-0.5 transition">→</span>
+                                </div>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-3">Objetivos del Plan</h2>
+
+                        <details open class="border-b border-slate-100 py-3">
+                            <summary class="cursor-pointer flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="inline-flex items-center rounded bg-rose-50 px-2 py-0.5 text-xs font-medium text-rose-700">Salud</span>
+                                    <span class="font-medium text-sm">2 objetivos · 1 logrado</span>
+                                </div>
+                            </summary>
+                            <div class="mt-3 space-y-3">
+                                <div class="rounded border border-slate-100 bg-slate-50 p-3">
+                                    <div class="flex items-center justify-between gap-2 flex-wrap">
+                                        <p class="font-medium text-sm">"Quiero acordarme yo sola de tomar mis pastillas de la mañana"</p>
+                                        <div class="flex items-center gap-2">
+                                            <span class="inline-flex items-center rounded-full bg-purple-100 px-2 py-0.5 text-xs font-medium text-purple-800">👁 En panel</span>
+                                            <span class="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800">✓ Logrado</span>
+                                        </div>
+                                    </div>
+                                    <dl class="mt-2 grid grid-cols-2 gap-2 text-xs text-slate-600">
+                                        <div><dt class="font-medium text-slate-500">Indicador</dt><dd>3 semanas seguidas sin recordatorio</dd></div>
+                                        <div><dt class="font-medium text-slate-500">Apoyos</dt><dd>Pastillero con dibujos · alarma móvil</dd></div>
+                                    </dl>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details open class="border-b border-slate-100 py-3">
+                            <summary class="cursor-pointer flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="inline-flex items-center rounded bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">Autonomía</span>
+                                    <span class="font-medium text-sm">1 objetivo · en curso</span>
+                                </div>
+                            </summary>
+                            <div class="mt-3 space-y-3">
+                                <div class="rounded border border-slate-100 bg-slate-50 p-3">
+                                    <div class="flex items-center justify-between gap-2 flex-wrap">
+                                        <p class="font-medium text-sm">"Hacerme el desayuno yo sola los días de diario"</p>
+                                        <span class="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800">En curso</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="border-b border-slate-100 py-3">
+                            <summary class="cursor-pointer flex items-center gap-2">
+                                <span class="inline-flex items-center rounded bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700">Ocio y tiempo libre</span>
+                                <span class="font-medium text-sm">1 objetivo · activo</span>
+                            </summary>
+                        </details>
+
+                        <details class="py-3">
+                            <summary class="cursor-pointer flex items-center gap-2">
+                                <span class="inline-flex items-center rounded bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700">Formación / Empleo</span>
+                                <span class="font-medium text-sm">2 objetivos · activos</span>
+                            </summary>
+                        </details>
+                    </article>
+
+                    <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-3">Cambios significativos detectados</h2>
+                        <p class="text-xs text-slate-500 mb-3">Protocolo §5: ámbitos a vigilar entre revisiones anuales.</p>
+                        <ul class="space-y-2 text-sm">
+                            <li class="rounded border border-slate-100 bg-slate-50 p-3">
+                                <div class="flex items-center justify-between flex-wrap gap-2">
+                                    <span class="inline-flex items-center rounded bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">Rutinas</span>
+                                    <span class="text-xs text-slate-500">08/05/2026 · L. Martínez (referencia)</span>
+                                </div>
+                                <p class="mt-1 text-slate-700">Modificación de la rutina de mañanas tras superar el objetivo de medicación. Marta solicita elegir su ropa.</p>
+                                <p class="mt-1 text-xs text-amber-700">⚠ Pendiente de actualizar el Plan</p>
+                            </li>
+                            <li class="rounded border border-slate-100 bg-slate-50 p-3">
+                                <div class="flex items-center justify-between flex-wrap gap-2">
+                                    <span class="inline-flex items-center rounded bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">Relaciones</span>
+                                    <span class="text-xs text-slate-500">22/04/2026 · L. Martínez</span>
+                                </div>
+                                <p class="mt-1 text-slate-700">Reincorporación al club social después de tres meses de retirada.</p>
+                                <p class="mt-1 text-xs text-emerald-700">✓ Procesado en Plan de Vida</p>
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+
+                <aside class="space-y-4">
+                    <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Figuras profesionales</h2>
+                        <dl class="mt-3 space-y-3 text-sm">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-semibold flex-shrink-0">MR</div>
+                                <div>
+                                    <dt class="text-[10px] uppercase tracking-wide text-slate-500">Gestor/a de caso</dt>
+                                    <dd class="font-medium">María Ruiz Pérez (TS)</dd>
+                                    <dd class="text-xs text-slate-500">27 / 30 casos</dd>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-9 h-9 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-xs font-semibold flex-shrink-0">LM</div>
+                                <div>
+                                    <dt class="text-[10px] uppercase tracking-wide text-slate-500">Persona de referencia</dt>
+                                    <dd class="font-medium">Lucía Martínez (TO)</dd>
+                                    <dd class="text-xs text-slate-500">Desde 2018</dd>
+                                </div>
+                            </div>
+                        </dl>
+                    </article>
+
+                    <article class="rounded-xl border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-emerald-800">Firmas del Plan</h2>
+                        <ul class="mt-2 space-y-1.5 text-sm text-emerald-900">
+                            <li class="flex items-center gap-2"><span class="text-emerald-700">✓</span> Marta González — 15/01/2026</li>
+                            <li class="flex items-center gap-2"><span class="text-emerald-700">✓</span> Carmen González (apoyo) — 15/01/2026</li>
+                            <li class="flex items-center gap-2"><span class="text-emerald-700">✓</span> María Ruiz (gestora) — 14/01/2026</li>
+                        </ul>
+                    </article>
+
+                    <article class="rounded-xl border border-amber-200 bg-amber-50 p-5 shadow-sm">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-amber-800">Próxima revisión anual</h2>
+                        <p class="mt-2 font-medium text-amber-900">15 de enero de 2027</p>
+                        <p class="mt-1 text-xs text-amber-700">Revisión anual de los 5 documentos.</p>
+                    </article>
+
+                    <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Histórico</h2>
+                        <ul class="mt-2 space-y-1 text-sm text-slate-600">
+                            <li>Plan 2025 · <span class="text-xs text-slate-400">Archivado</span></li>
+                            <li>Plan 2024 · <span class="text-xs text-slate-400">Archivado</span></li>
+                            <li>Plan 2023 · <span class="text-xs text-slate-400">Archivado</span></li>
+                        </ul>
+                    </article>
+                </aside>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, cita..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

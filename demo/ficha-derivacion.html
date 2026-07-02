@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!-- @rol: gerencia, direccion_centro, gestor_caso -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ficha de derivación · Comunicación de Nuevo Ingreso · ÁGORA</title>
+<link rel="stylesheet" href="_assets/tailwind.css">
+<link rel="stylesheet" href="_assets/print-valoracion.css" media="print">
+<script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · datos sintéticos</div>
+
+<div class="flex min-h-screen" x-data="ficha()">
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100"><a href="index.html" class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm"><svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg></div><div class="leading-tight"><p class="text-base font-semibold tracking-tight">ÁGORA</p><p class="text-[10px] text-slate-500">Grupo Social Aspanias</p></div></a></div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+    </aside>
+
+<main class="flex-1 min-w-0 p-6" x-cloak>
+    <nav class="text-xs text-slate-500 mb-3"><a href="personas-lista.html" class="hover:underline">Personas</a> · <a href="persona-detalle.html" class="hover:underline">Ficha persona</a> · <span class="text-slate-700">Ficha de derivación</span></nav>
+
+    <div class="mb-6 flex items-start justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-800">Ficha de derivación · Comunicación de Nuevo Ingreso</h1>
+            <p class="text-sm text-slate-600 mt-1">Departamento de Trabajo Social · documento generado al alta del/la usuario/a</p>
+        </div>
+        <div class="flex gap-2">
+            <button @click="window.print()" class="px-3 py-2 text-sm rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50">🖨️ Imprimir PDF</button>
+            <button @click="guardar()" class="px-3 py-2 text-sm rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">💾 Guardar</button>
+            <button @click="firmar()" class="px-3 py-2 text-sm rounded-lg bg-slate-800 text-white hover:bg-slate-900">✍️ Firmar y enviar</button>
+        </div>
+    </div>
+
+    <div class="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-900">
+        <strong>⚠️ Categoría especial art. 9 RGPD</strong> — Toda lectura/edición queda registrada en bitácora · ámbito: equipos asistenciales y dirección de centro.
+    </div>
+
+    <form class="bg-white rounded-xl border border-slate-200 p-6 space-y-6 max-w-5xl">
+        <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2">Persona con Discapacidad</h2>
+        <div class="grid grid-cols-3 gap-4 text-sm">
+            <div class="col-span-2"><label class="block text-xs text-slate-600 mb-1">Nombre y apellidos</label><input type="text" x-model="d.nombre" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+            <div><label class="block text-xs text-slate-600 mb-1">Fecha de nacimiento</label><input type="date" x-model="d.fecha_nacimiento" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+            <div><label class="block text-xs text-slate-600 mb-1">DNI / NIE</label><input type="text" x-model="d.dni" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="00000000A"></div>
+            <div><label class="block text-xs text-slate-600 mb-1">Tipo de discapacidad</label><select x-model="d.tipo_disc" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Intelectual</option><option>Física</option><option>Sensorial auditiva</option><option>Sensorial visual</option><option>Pluridiscapacidad</option><option>Mental</option></select></div>
+            <div><label class="block text-xs text-slate-600 mb-1">% de discapacidad</label><input type="number" x-model.number="d.pct_disc" class="w-full px-3 py-2 border border-slate-300 rounded-lg" min="33" max="100"></div>
+            <div><label class="block text-xs text-slate-600 mb-1">Grado de dependencia</label><select x-model="d.dependencia" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Sin grado reconocido</option><option>Grado I — moderada</option><option>Grado II — severa</option><option>Grado III — gran dependencia</option></select></div>
+            <div><label class="block text-xs text-slate-600 mb-1">Valoración dependencia (BVD)</label><input type="text" x-model="d.bvd" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="Puntuación BVD"></div>
+        </div>
+
+        <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2">Centro y módulo de atención</h2>
+        <div class="grid grid-cols-3 gap-4 text-sm">
+            <div class="col-span-2"><label class="block text-xs text-slate-600 mb-1">Centro de ingreso</label><select x-model="d.centro" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Residencia Fuentecillas</option><option>Centro Cardenal Cisneros</option><option>Centro Federico Olmeda</option><option>Centro Salas de los Infantes</option><option>Centro Villadiego</option><option>Vida Independiente</option><option>A Gusto en Casa</option></select></div>
+            <div><label class="block text-xs text-slate-600 mb-1">Fecha de ingreso</label><input type="date" x-model="d.fecha_ingreso" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+            <div class="col-span-2"><label class="block text-xs text-slate-600 mb-1">Módulo / unidad de convivencia</label><input type="text" x-model="d.modulo" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="Módulo A · UC 2 · etc."></div>
+            <div><label class="block text-xs text-slate-600 mb-1">Tipo de plaza</label><select x-model="d.tipo_plaza" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Concierto público</option><option>Plaza privada</option><option>Mixta</option></select></div>
+        </div>
+
+        <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2">Apoyos legales y familia</h2>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+            <div><label class="block text-xs text-slate-600 mb-1">Padres / Tutor / Curador</label><input type="text" x-model="d.padres_tutor" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="Nombre + relación"></div>
+            <div><label class="block text-xs text-slate-600 mb-1">Medidas de apoyo (Ley 8/2021)</label><select x-model="d.medidas_apoyo" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Sin medida judicial</option><option>Curatela representativa</option><option>Curatela asistencial</option><option>Guarda de hecho</option><option>Tutela (anteriores reforma)</option></select></div>
+            <div class="col-span-2"><label class="block text-xs text-slate-600 mb-1">Domicilio familiar</label><input type="text" x-model="d.domicilio" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="Calle, nº, piso · CP · Localidad"></div>
+            <div><label class="block text-xs text-slate-600 mb-1">Teléfonos de contacto</label><input type="text" x-model="d.telefonos" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="Principal · alternativo"></div>
+            <div><label class="block text-xs text-slate-600 mb-1">Correo electrónico</label><input type="email" x-model="d.email" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+        </div>
+
+        <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2">Aspectos administrativos</h2>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+            <div><label class="block text-xs text-slate-600 mb-1">¿La familia es socia de Aspanias?</label><select x-model="d.es_socio" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Sí · activa</option><option>Sí · pendiente alta</option><option>No</option><option>En valoración</option></select></div>
+            <div><label class="block text-xs text-slate-600 mb-1">Cargo de recibos en cuenta bancaria</label><select x-model="d.cargo_bancario" class="w-full px-3 py-2 border border-slate-300 rounded-lg"><option value="">—</option><option>Sí · firmada SEPA</option><option>Pendiente firma SEPA</option><option>Pago manual</option><option>No procede</option></select></div>
+        </div>
+
+        <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2">Observaciones</h2>
+        <textarea x-model="d.observaciones" rows="4" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Aspectos relevantes del ingreso · información sociofamiliar previa · contactos institucionales..."></textarea>
+
+        <h2 class="text-lg font-semibold text-emerald-800 border-b border-slate-200 pb-2">Firma profesional</h2>
+        <div class="grid grid-cols-3 gap-4 text-sm">
+            <div><label class="block text-xs text-slate-600 mb-1">Fecha</label><input type="date" x-model="d.fecha" class="w-full px-3 py-2 border border-slate-300 rounded-lg"></div>
+            <div><label class="block text-xs text-slate-600 mb-1">Trabajador/a Social</label><input type="text" x-model="d.profesional" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="Nombre y apellidos"></div>
+            <div><label class="block text-xs text-slate-600 mb-1">Nº colegiación</label><input type="text" x-model="d.colegiado" class="w-full px-3 py-2 border border-slate-300 rounded-lg" placeholder="Colegio · número"></div>
+        </div>
+
+        <div class="flex items-center justify-between gap-3 pt-4 border-t border-slate-200">
+            <a href="peticiones-trabajo-social.html" class="text-sm text-slate-600 hover:underline">← Volver al backlog</a>
+            <div class="flex gap-2 text-xs text-slate-500"><span>Estado: <strong x-text="estado"></strong></span>·<span>Último guardado: <span x-text="ultimoGuardado || '—'"></span></span></div>
+        </div>
+    </form>
+</main>
+</div>
+
+<script>
+function ficha() {
+    return {
+        estado: 'Borrador',
+        ultimoGuardado: '',
+        d: {
+            nombre: 'Ruiz Jiménez, Ana',
+            fecha_nacimiento: '1985-03-12',
+            dni: '12345678A',
+            tipo_disc: 'Intelectual',
+            pct_disc: 76,
+            dependencia: 'Grado II — severa',
+            bvd: '54 puntos · BVD 2024',
+            centro: 'Residencia Fuentecillas',
+            fecha_ingreso: '2026-06-15',
+            modulo: 'Módulo A · UC 2',
+            tipo_plaza: 'Concierto público',
+            padres_tutor: 'Ruiz Pérez, Manuel (padre · curador asistencial)',
+            medidas_apoyo: 'Curatela asistencial',
+            domicilio: 'C/ Vitoria, 45, 3º A · 09001 · Burgos',
+            telefonos: '947 123 456 / 600 111 222',
+            email: 'familia.ruiz@ejemplo.es',
+            es_socio: 'Sí · activa',
+            cargo_bancario: 'Sí · firmada SEPA',
+            observaciones: 'Persona con discapacidad intelectual moderada. Familia muy implicada. Ingreso por necesidad de apoyos en autonomía personal y ocio terapéutico tras fallecimiento de la madre.',
+            fecha: new Date().toISOString().slice(0, 10),
+            profesional: 'García López, María',
+            colegiado: 'COTSB · 2487',
+        },
+        guardar() { this.estado = 'Borrador guardado'; this.ultimoGuardado = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'}); },
+        firmar() { if (confirm('¿Firmar la ficha de derivación y notificar al equipo del centro?')) { this.estado = 'Firmada · enviada'; this.ultimoGuardado = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'}); } },
+    };
+}
+</script>
+</body>
+</html>

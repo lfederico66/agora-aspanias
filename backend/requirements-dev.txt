@@ -1,0 +1,7 @@
+# Dependencias solo para desarrollo y CI
+pytest==8.2.2
+pytest-django==4.8.0
+ruff==0.5.0
+
+# Para tests rápidos sin Postgres real
+# (en CI usamos sqlite in-memory; en local Postgres vía docker-compose)

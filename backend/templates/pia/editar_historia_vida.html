@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Editar Historia de Vida · {{ persona }} · ÁGORA{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+    <div>
+        <a href="{% url 'planes_vida:historia_vida' persona.id plan.anualidad %}" class="text-sm text-slate-500 hover:text-slate-700">← Volver al documento</a>
+        <h1 class="mt-2 text-2xl font-semibold tracking-tight">Editar Historia de Vida · {{ persona.apellido_1 }}, {{ persona.nombre }}</h1>
+        <p class="text-sm text-slate-500">Anualidad {{ plan.anualidad }} · Guion oficial · 21 preguntas + redacción final</p>
+    </div>
+
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Cabecera</legend>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Fecha de recogida</label>
+                    {{ form.fecha_recogida|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium mb-1">Facilitador/a</label>
+                    {{ form.facilitador|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Guion para facilitar la Historia de Vida (21 preguntas)</legend>
+            <p class="text-xs italic text-slate-500">No es un cuestionario rígido. Rellena las que tengan sentido para esta conversación.</p>
+
+            {{ formset.management_form }}
+            <div class="space-y-5">
+                {% for f in formset %}
+                    <div class="border-l-4 border-amber-200 pl-4 py-1">
+                        {{ f.id }}
+                        {{ f.orden }}
+                        <p class="font-medium text-slate-800 text-sm">{{ forloop.counter }}. {{ f.instance.pregunta_texto }}</p>
+                        {{ f.pregunta_texto.as_hidden }}
+                        {{ f.respuesta_texto|add_class:"mt-2 w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+                    </div>
+                {% endfor %}
+            </div>
+        </fieldset>
+
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-2">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Historia de Vida (redacción final)</legend>
+            <p class="text-xs text-slate-500">Narrativa final tras la conversación con la persona.</p>
+            {{ form.texto_narrativo_final|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+        </fieldset>
+
+        <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-2">
+            <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-slate-500">Notas del profesional</legend>
+            {{ form.notas_generales|add_class:"w-full rounded border border-slate-300 px-3 py-2 text-sm" }}
+        </fieldset>
+
+        <div class="flex items-center justify-end gap-2 sticky bottom-4 bg-slate-50/80 backdrop-blur p-3 rounded-lg border border-slate-200">
+            <a href="{% url 'planes_vida:historia_vida' persona.id plan.anualidad %}" class="rounded border border-slate-300 bg-white px-4 py-2 text-sm hover:border-slate-400">Cancelar</a>
+            <button type="submit" class="rounded bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700">Guardar Historia de Vida</button>
+        </div>
+    </form>
+</section>
+{% endblock %}

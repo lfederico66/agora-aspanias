@@ -1,0 +1,516 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipo · Turnos — ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="flex min-h-screen" x-data="{
+    userMenu: false,
+    centroSel: 'Residencia Fuentecillas',
+    vista: 'semana',
+    semanaActual: 'Lun 08 jun – Dom 14 jun 2026',
+    modalAsignar: false,
+    toast: false
+}">
+
+    <!-- =========================================================== -->
+    <!-- SIDEBAR                                                     -->
+    <!-- =========================================================== -->
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100">
+            <div class="w-full flex items-center gap-2.5 p-2 rounded-lg">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0"><p class="text-sm font-medium truncate">Federico Martínez</p><p class="text-[10px] text-slate-500 truncate">Gerencia</p></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- =========================================================== -->
+    <!-- MAIN                                                        -->
+    <!-- =========================================================== -->
+    <main class="flex-1 min-w-0">
+
+        <!-- Breadcrumb -->
+        <div class="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-slate-200 px-8 py-3">
+            <nav class="text-xs text-slate-500 flex items-center gap-1.5">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a>
+                <span>›</span>
+                <a href="profesionales.html" class="hover:text-emerald-700">Equipo</a>
+                <span>›</span>
+                <span class="text-slate-900 font-medium">Turnos</span>
+            </nav>
+        </div>
+
+        <!-- Cabecera + tabs -->
+        <header class="px-8 pt-6 pb-2 border-b border-slate-200 bg-white">
+            <div class="flex items-start justify-between mb-4">
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">Turnos</h1>
+                    <p class="text-sm text-slate-500 mt-1">Planificación semanal · cobertura por franja · <strong x-text="centroSel"></strong></p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button @click="toast = 'Plantilla semanal aplicada a la próxima semana'; setTimeout(()=>toast=false, 2600)" class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white hover:bg-slate-50">📋 Aplicar plantilla</button>
+                    <button @click="modalAsignar = true" class="px-4 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">+ Asignar turno</button>
+                </div>
+            </div>
+
+            <nav class="flex gap-1 -mb-px">
+                <a href="profesionales.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">👤 Profesionales</a>
+                <a href="vacaciones.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">🏖 Vacaciones y ausencias</a>
+                <a href="turnos.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-emerald-700 text-emerald-700">🕒 Turnos</a>
+                <a href="calendario-laboral.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">📆 Calendario laboral</a>
+                <a href="patrones-turno.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">🔁 Patrones de turno</a>
+            </nav>
+        </header>
+
+        <!-- Selector centro + semana -->
+        <section class="px-8 py-4 bg-white border-b border-slate-200">
+            <div class="flex items-center gap-3 flex-wrap">
+                <select x-model="centroSel" class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white font-medium">
+                    <option>Residencia Fuentecillas</option>
+                    <option>Residencia Quintanadueñas</option>
+                    <option>Residencia Páramo</option>
+                    <option>Residencia Castilla</option>
+                    <option>CO Fuentecillas</option>
+                    <option>CO Plata</option>
+                    <option>Vida Independiente</option>
+                    <option>A Gusto en Casa</option>
+                    <option>Intecum</option>
+                </select>
+                <div class="flex items-center gap-1 ml-4">
+                    <button class="px-2 py-1.5 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">‹ Semana anterior</button>
+                    <span class="text-sm font-medium px-3" x-text="semanaActual"></span>
+                    <button class="px-2 py-1.5 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">Semana siguiente ›</button>
+                    <button class="ml-2 px-2 py-1.5 text-xs rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 font-medium">Hoy</button>
+                </div>
+                <div class="ml-auto flex items-center gap-1">
+                    <button @click="vista = 'dia'" :class="vista === 'dia' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-300'" class="px-3 py-1.5 text-xs rounded-lg font-medium">Día</button>
+                    <button @click="vista = 'semana'" :class="vista === 'semana' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-300'" class="px-3 py-1.5 text-xs rounded-lg font-medium">Semana</button>
+                    <button @click="vista = 'mes'" :class="vista === 'mes' ? 'bg-emerald-700 text-white' : 'bg-white text-slate-700 border border-slate-300'" class="px-3 py-1.5 text-xs rounded-lg font-medium">Mes</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- KPIs cobertura semana -->
+        <section class="px-8 py-5 bg-white border-b border-slate-200">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">Total horas planificadas</p>
+                    <p class="mt-1 text-2xl font-light">1 470 h</p>
+                    <p class="text-[10px] text-slate-500">Semana 24</p>
+                </div>
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">Cobertura</p>
+                    <p class="mt-1 text-2xl font-light text-emerald-700">98 %</p>
+                    <p class="text-[10px] text-slate-500">2 huecos · noche viernes</p>
+                </div>
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">Profesionales activos</p>
+                    <p class="mt-1 text-2xl font-light">38</p>
+                    <p class="text-[10px] text-slate-500">42 plantilla · 4 vac/IT</p>
+                </div>
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">Horas extra</p>
+                    <p class="mt-1 text-2xl font-light text-amber-700">24 h</p>
+                    <p class="text-[10px] text-slate-500">3 personas</p>
+                </div>
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">Ratio enf/residente</p>
+                    <p class="mt-1 text-2xl font-light text-emerald-700">1 : 12</p>
+                    <p class="text-[10px] text-slate-500">turno mañana</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leyenda -->
+        <section class="px-8 py-3 bg-slate-50 border-b border-slate-200">
+            <div class="flex items-center gap-4 text-[11px] flex-wrap">
+                <span class="font-semibold text-slate-600 uppercase tracking-wide">Leyenda franjas:</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-amber-200 border border-amber-400"></span> Mañana (07:00 – 15:00)</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-sky-200 border border-sky-400"></span> Tarde (15:00 – 22:00)</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-indigo-200 border border-indigo-500"></span> Noche (22:00 – 07:00)</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-emerald-200 border border-emerald-400"></span> Cubierto</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-rose-100 border border-rose-300"></span> Hueco / sin asignar</span>
+            </div>
+        </section>
+
+        <!-- Parrilla semanal de turnos -->
+        <section class="px-8 py-6">
+            <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto">
+                <table class="w-full text-sm min-w-[1000px]">
+                    <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500 border-b border-slate-200">
+                        <tr>
+                            <th class="px-3 py-3 text-left w-32">Franja / día</th>
+                            <th class="px-3 py-3 text-center">Lun 08</th>
+                            <th class="px-3 py-3 text-center">Mar 09</th>
+                            <th class="px-3 py-3 text-center">Mié 10</th>
+                            <th class="px-3 py-3 text-center bg-emerald-50">Jue 11 (hoy)</th>
+                            <th class="px-3 py-3 text-center">Vie 12</th>
+                            <th class="px-3 py-3 text-center">Sáb 13</th>
+                            <th class="px-3 py-3 text-center">Dom 14</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <!-- TURNO MAÑANA -->
+                        <tr class="bg-amber-50/30">
+                            <td class="px-3 py-3 align-top">
+                                <p class="font-semibold text-amber-900">🌅 Mañana</p>
+                                <p class="text-[10px] text-amber-700">07:00 – 15:00</p>
+                                <p class="text-[10px] text-slate-500 mt-1">Mín: 6 gerocultoras + 1 enf + 1 dir.</p>
+                            </td>
+                            <!-- Lun -->
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-200 text-amber-900">López P., M.</div>
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-200 text-amber-900">Ruiz S., A.</div>
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-200 text-amber-900">García L., I.</div>
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-200 text-amber-900">+ 4 más</div>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-200 text-amber-900">Cano M., R.</div>
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-200 text-amber-900">García L., I.</div>
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-200 text-amber-900">+ 5 más</div>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-200 text-amber-900">López P., M.</div>
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-200 text-amber-900">+ 6 más</div>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top bg-emerald-50/40">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-300 text-amber-900 ring-1 ring-amber-500">López P., M.</div>
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-300 text-amber-900 ring-1 ring-amber-500">Cano M., R.</div>
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-300 text-amber-900 ring-1 ring-amber-500">+ 5 más</div>
+                                    <p class="text-[9px] text-emerald-700 mt-1 font-medium">✓ Cubierto</p>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-200 text-amber-900">Ruiz S., A.</div>
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-200 text-amber-900">+ 6 más</div>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-200 text-amber-900">+ 5 personas</div>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-amber-200 text-amber-900">+ 5 personas</div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- TURNO TARDE -->
+                        <tr class="bg-sky-50/30">
+                            <td class="px-3 py-3 align-top">
+                                <p class="font-semibold text-sky-900">🌇 Tarde</p>
+                                <p class="text-[10px] text-sky-700">15:00 – 22:00</p>
+                                <p class="text-[10px] text-slate-500 mt-1">Mín: 5 gerocultoras + 1 enf.</p>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-sky-200 text-sky-900">Pérez C., A.</div>
+                                    <div class="text-[10px] px-2 py-1 rounded bg-sky-200 text-sky-900">+ 5 más</div>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-sky-200 text-sky-900">+ 6 personas</div>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-sky-200 text-sky-900">+ 6 personas</div>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top bg-emerald-50/40">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-sky-300 text-sky-900 ring-1 ring-sky-500">+ 6 personas</div>
+                                    <p class="text-[9px] text-emerald-700 mt-1 font-medium">✓ Cubierto</p>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-sky-200 text-sky-900">+ 6 personas</div>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-sky-200 text-sky-900">+ 4 personas</div>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-sky-200 text-sky-900">+ 4 personas</div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- TURNO NOCHE -->
+                        <tr class="bg-indigo-50/30">
+                            <td class="px-3 py-3 align-top">
+                                <p class="font-semibold text-indigo-900">🌙 Noche</p>
+                                <p class="text-[10px] text-indigo-700">22:00 – 07:00</p>
+                                <p class="text-[10px] text-slate-500 mt-1">Mín: 3 gerocultoras + 1 enf.</p>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-indigo-200 text-indigo-900">+ 4 personas</div>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-indigo-200 text-indigo-900">+ 4 personas</div>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-indigo-200 text-indigo-900">+ 4 personas</div>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top bg-emerald-50/40">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-indigo-300 text-indigo-900 ring-1 ring-indigo-500">+ 4 personas</div>
+                                    <p class="text-[9px] text-emerald-700 mt-1 font-medium">✓ Cubierto</p>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-indigo-200 text-indigo-900">+ 3 personas</div>
+                                    <div class="text-[10px] px-2 py-1 rounded bg-rose-100 text-rose-700 border border-rose-200 border-dashed">⚠ 1 hueco enf.</div>
+                                    <p class="text-[9px] text-rose-700 font-medium">Sin enfermería</p>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-indigo-200 text-indigo-900">+ 4 personas</div>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 align-top">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] px-2 py-1 rounded bg-indigo-200 text-indigo-900">+ 4 personas</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Plantillas reutilizables + avisos -->
+            <div class="grid md:grid-cols-3 gap-4 mt-6">
+                <div class="bg-white rounded-xl border border-slate-200 p-5">
+                    <h3 class="text-sm font-semibold mb-3">📋 Plantillas de turno</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between p-2 rounded border border-slate-200 hover:bg-slate-50">
+                            <div>
+                                <p class="text-xs font-medium">Estándar residencial</p>
+                                <p class="text-[10px] text-slate-500">3 franjas · 14 personas/día</p>
+                            </div>
+                            <button class="text-xs text-emerald-700 hover:underline">Aplicar</button>
+                        </div>
+                        <div class="flex items-center justify-between p-2 rounded border border-slate-200 hover:bg-slate-50">
+                            <div>
+                                <p class="text-xs font-medium">Fin de semana reducido</p>
+                                <p class="text-[10px] text-slate-500">Sáb-Dom · 10 personas</p>
+                            </div>
+                            <button class="text-xs text-emerald-700 hover:underline">Aplicar</button>
+                        </div>
+                        <div class="flex items-center justify-between p-2 rounded border border-slate-200 hover:bg-slate-50">
+                            <div>
+                                <p class="text-xs font-medium">Centro de día (L-V)</p>
+                                <p class="text-[10px] text-slate-500">Solo mañana · 5 personas</p>
+                            </div>
+                            <button class="text-xs text-emerald-700 hover:underline">Aplicar</button>
+                        </div>
+                        <div class="flex items-center justify-between p-2 rounded border border-slate-200 hover:bg-slate-50">
+                            <div>
+                                <p class="text-xs font-medium">Vivienda tutelada</p>
+                                <p class="text-[10px] text-slate-500">1 monitor 24 h · rotativo</p>
+                            </div>
+                            <button class="text-xs text-emerald-700 hover:underline">Aplicar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl border border-slate-200 p-5">
+                    <h3 class="text-sm font-semibold mb-3">⚠ Avisos de cobertura</h3>
+                    <div class="space-y-2">
+                        <div class="p-2 rounded border border-rose-200 bg-rose-50">
+                            <p class="text-xs font-medium text-rose-900">Vie 12 · turno noche</p>
+                            <p class="text-[11px] text-rose-700">Falta 1 enfermera. Llamar a refuerzo de la bolsa.</p>
+                        </div>
+                        <div class="p-2 rounded border border-amber-200 bg-amber-50">
+                            <p class="text-xs font-medium text-amber-900">Lun 15 · turno mañana</p>
+                            <p class="text-[11px] text-amber-700">López P. inicia vacaciones — sustitución pendiente.</p>
+                        </div>
+                        <div class="p-2 rounded border border-amber-200 bg-amber-50">
+                            <p class="text-xs font-medium text-amber-900">Plantilla sub-óptima</p>
+                            <p class="text-[11px] text-amber-700">Ratio mañana lunes 1:13 (límite recomendado 1:12).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl border border-slate-200 p-5">
+                    <h3 class="text-sm font-semibold mb-3">📊 Horas por profesional (semana)</h3>
+                    <div class="space-y-2 text-xs">
+                        <div>
+                            <div class="flex justify-between"><span>López Pérez, M.</span><span class="font-medium">38 h</span></div>
+                            <div class="w-full bg-slate-100 rounded h-1.5 mt-1"><div class="bg-emerald-500 h-1.5 rounded" style="width:95%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between"><span>Ruiz Sánchez, A.</span><span class="font-medium">40 h</span></div>
+                            <div class="w-full bg-slate-100 rounded h-1.5 mt-1"><div class="bg-emerald-500 h-1.5 rounded" style="width:100%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between"><span>Cano Martín, R.</span><span class="font-medium text-amber-700">44 h</span></div>
+                            <div class="w-full bg-slate-100 rounded h-1.5 mt-1"><div class="bg-amber-500 h-1.5 rounded" style="width:100%"></div></div>
+                            <p class="text-[10px] text-amber-700">⚠ +4 h extra</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between"><span>García López, I.</span><span class="font-medium">36 h</span></div>
+                            <div class="w-full bg-slate-100 rounded h-1.5 mt-1"><div class="bg-emerald-500 h-1.5 rounded" style="width:90%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between"><span>Pérez Calderón, A.</span><span class="font-medium">35 h</span></div>
+                            <div class="w-full bg-slate-100 rounded h-1.5 mt-1"><div class="bg-emerald-500 h-1.5 rounded" style="width:88%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Asignar -->
+    <div x-show="modalAsignar" x-cloak x-transition.opacity class="fixed inset-0 z-50 bg-slate-900/40 flex items-start justify-center pt-20 px-4" @click.self="modalAsignar = false">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md">
+            <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+                <h3 class="text-lg font-semibold">Asignar turno</h3>
+                <button @click="modalAsignar = false" class="text-slate-400 hover:text-slate-600 text-xl leading-none">×</button>
+            </div>
+            <div class="px-6 py-5 space-y-3">
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">Profesional</label>
+                    <select class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300">
+                        <option>López Pérez, Marta</option>
+                        <option>Ruiz Sánchez, Ana</option>
+                        <option>Cano Martín, Rosa</option>
+                        <option>García López, Inés</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Fecha</label>
+                        <input type="date" value="2026-06-12" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Franja</label>
+                        <select class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300">
+                            <option>🌅 Mañana (07-15)</option>
+                            <option>🌇 Tarde (15-22)</option>
+                            <option selected>🌙 Noche (22-07)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-900">
+                    Asignar a la franja <strong>noche del viernes 12 junio</strong> en <strong x-text="centroSel"></strong>. Esto cubrirá el hueco de enfermería detectado.
+                </div>
+            </div>
+            <div class="px-6 py-3 border-t border-slate-200 flex justify-end gap-2">
+                <button @click="modalAsignar = false" class="px-3 py-2 text-sm rounded-lg border border-slate-300 hover:bg-slate-50">Cancelar</button>
+                <button @click="modalAsignar = false; toast = 'Turno asignado — profesional notificado'; setTimeout(()=>toast=false, 2600)" class="px-4 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">Asignar</button>
+            </div>
+        </div>
+    </div>
+
+    <div x-show="toast" x-cloak x-transition.opacity class="fixed bottom-6 right-6 z-50 rounded-lg bg-slate-900 text-white px-4 py-3 shadow-xl text-sm" x-text="toast"></div>
+</div>
+
+</body>
+</html>

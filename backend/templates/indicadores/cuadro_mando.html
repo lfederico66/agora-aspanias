@@ -1,0 +1,318 @@
+{% extends "base.html" %}
+
+{% block title %}Indicadores · ÁGORA{% endblock %}
+
+{% block content %}
+<div x-data="{ tab: '{{ tab_inicial }}' }">
+
+    <div class="flex items-end justify-between flex-wrap gap-3">
+        <div>
+            <h1 class="text-2xl font-semibold tracking-tight">Cuadro de mando</h1>
+            <p class="text-sm text-slate-500">Grupo Social Aspanias · Cálculo en vivo · Última actualización {{ ahora|date:"d/m/Y" }}</p>
+        </div>
+        <div class="flex items-center gap-2">
+            <button class="rounded bg-emerald-700 text-white px-3 py-1.5 text-sm font-medium hover:bg-emerald-800">Generar memoria PDF</button>
+        </div>
+    </div>
+
+    {# Pestañas #}
+    <div class="mt-6 border-b border-slate-200">
+        <nav class="-mb-px flex gap-6 text-sm overflow-x-auto">
+            <button @click="tab='general'" :class="tab==='general' ? 'border-emerald-700 text-emerald-700 font-medium' : 'border-transparent text-slate-500 hover:text-emerald-700'" class="border-b-2 pb-2 whitespace-nowrap">Cuadro general</button>
+            <button @click="tab='pv'" :class="tab==='pv' ? 'border-emerald-700 text-emerald-700 font-medium' : 'border-transparent text-slate-500 hover:text-emerald-700'" class="border-b-2 pb-2 whitespace-nowrap">Datos Grupo Aspanias · Planes de Vida</button>
+            <button @click="tab='gestores'" :class="tab==='gestores' ? 'border-emerald-700 text-emerald-700 font-medium' : 'border-transparent text-slate-500 hover:text-emerald-700'" class="border-b-2 pb-2 whitespace-nowrap">Gestores de caso</button>
+            <button @click="tab='hist'" :class="tab==='hist' ? 'border-emerald-700 text-emerald-700 font-medium' : 'border-transparent text-slate-500 hover:text-emerald-700'" class="border-b-2 pb-2 whitespace-nowrap">Histórico</button>
+        </nav>
+    </div>
+
+    {# ===== TAB CUADRO GENERAL ===== #}
+    <section x-show="tab==='general'" x-cloak class="mt-6 space-y-8">
+
+        <div class="grid gap-4 md:grid-cols-4">
+            <article class="rounded-xl border border-slate-200 bg-white p-5">
+                <p class="text-xs uppercase tracking-wide text-slate-500">Personas atendidas</p>
+                <p class="mt-2 text-3xl font-light">{{ panel.total }}</p>
+            </article>
+            <article class="rounded-xl border border-slate-200 bg-white p-5">
+                <p class="text-xs uppercase tracking-wide text-slate-500">Centros y servicios</p>
+                <p class="mt-2 text-3xl font-light">{{ panel.centros|length }}</p>
+                <p class="text-xs text-slate-500 mt-1">FAB · Aspaniasmerc</p>
+            </article>
+            <article class="rounded-xl border border-slate-200 bg-white p-5">
+                <p class="text-xs uppercase tracking-wide text-slate-500">Medidas Ley 8/2021</p>
+                <p class="mt-2 text-3xl font-light">
+                    {% with sin_medida=panel.por_medida.sin_medida|default:0 %}
+                        {% with total_medidas=panel.total %}
+                            {{ total_medidas|add:"-"|add:sin_medida }}
+                        {% endwith %}
+                    {% endwith %}
+                </p>
+                <p class="text-xs text-slate-500 mt-1">Con figura de apoyo registrada</p>
+            </article>
+            <article class="rounded-xl border border-amber-200 bg-amber-50 p-5">
+                <p class="text-xs uppercase tracking-wide text-amber-700">Gestores sobre ratio</p>
+                <p class="mt-2 text-3xl font-light text-amber-900">{{ gestores_resumen.sobre_ratio }}</p>
+                <p class="text-xs text-amber-700 mt-1">de {{ gestores_resumen.total }} profesionales · <button @click="tab='gestores'" class="underline">ver detalle</button></p>
+            </article>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+            <article class="rounded-xl border border-slate-200 bg-white p-5">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Distribución por colectivo</h2>
+                <div class="mt-4 space-y-3">
+                    {% with total=panel.total %}
+                        <div>
+                            <div class="flex items-center justify-between text-sm mb-1">
+                                <span>Discapacidad intelectual</span>
+                                <span class="font-medium">{{ panel.por_colectivo.di }}{% if total %} · {% widthratio panel.por_colectivo.di total 100 %}%{% endif %}</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded h-3"><div class="bg-emerald-600 h-3 rounded" style="width: {% if total %}{% widthratio panel.por_colectivo.di total 100 %}{% else %}0{% endif %}%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between text-sm mb-1">
+                                <span>Mayores dependientes</span>
+                                <span class="font-medium">{{ panel.por_colectivo.mayor }}{% if total %} · {% widthratio panel.por_colectivo.mayor total 100 %}%{% endif %}</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded h-3"><div class="bg-blue-500 h-3 rounded" style="width: {% if total %}{% widthratio panel.por_colectivo.mayor total 100 %}{% else %}0{% endif %}%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between text-sm mb-1">
+                                <span>Inserción laboral</span>
+                                <span class="font-medium">{{ panel.por_colectivo.insercion }}{% if total %} · {% widthratio panel.por_colectivo.insercion total 100 %}%{% endif %}</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded h-3"><div class="bg-purple-500 h-3 rounded" style="width: {% if total %}{% widthratio panel.por_colectivo.insercion total 100 %}{% else %}0{% endif %}%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between text-sm mb-1">
+                                <span>Otros / familias</span>
+                                <span class="font-medium">{{ panel.por_colectivo.otros }}{% if total %} · {% widthratio panel.por_colectivo.otros total 100 %}%{% endif %}</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded h-3"><div class="bg-rose-400 h-3 rounded" style="width: {% if total %}{% widthratio panel.por_colectivo.otros total 100 %}{% else %}0{% endif %}%"></div></div>
+                        </div>
+                    {% endwith %}
+                </div>
+            </article>
+
+            <article class="rounded-xl border border-slate-200 bg-white p-5">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Top centros por nº de personas</h2>
+                <ul class="mt-4 space-y-2 text-sm">
+                    {% for c in panel.centros|slice:":6" %}
+                        <li class="flex justify-between">
+                            <span>{{ c.nombre }}</span>
+                            <span class="font-medium">{{ c.personas }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <p class="mt-3 text-xs text-slate-500">
+                    <a href="{% url 'planes_vida:control_pv_centros' %}" class="underline hover:text-emerald-700">Ver tablero Control PV →</a>
+                </p>
+            </article>
+        </div>
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Ley 8/2021 — distribución por tipo de medida</h2>
+            <ul class="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                <li class="rounded-lg bg-slate-50 p-3"><p class="text-xs text-slate-500">Apoyo judicial</p><p class="text-xl font-light">{{ panel.por_medida.apoyo_judicial|default:0 }}</p></li>
+                <li class="rounded-lg bg-slate-50 p-3"><p class="text-xs text-slate-500">Apoyo voluntario</p><p class="text-xl font-light">{{ panel.por_medida.apoyo_voluntario|default:0 }}</p></li>
+                <li class="rounded-lg bg-slate-50 p-3"><p class="text-xs text-slate-500">Apoyo de hecho</p><p class="text-xl font-light">{{ panel.por_medida.apoyo_hecho|default:0 }}</p></li>
+                <li class="rounded-lg bg-slate-50 p-3"><p class="text-xs text-slate-500">Sin medida</p><p class="text-xl font-light">{{ panel.por_medida.sin_medida|default:0 }}</p></li>
+            </ul>
+        </article>
+    </section>
+
+    {# ===== TAB DATOS PV ===== #}
+    <section x-show="tab==='pv'" x-cloak class="mt-6 space-y-6">
+
+        <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Plan de Vida — Datos Grupo Aspanias</h2>
+            <p class="text-xs text-slate-500 mt-1">Reproduce la hoja «Datos Grupo Aspanias» del Excel «Registro PV por servicios».</p>
+            <div class="mt-5 grid gap-4 md:grid-cols-5">
+                <div class="rounded-lg border border-slate-200 p-4">
+                    <p class="text-xs uppercase tracking-wide text-slate-500">Personas</p>
+                    <p class="mt-1 text-3xl font-light">{{ kpis_pv.total_usuarios }}</p>
+                </div>
+                <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-emerald-700">Realizados</p>
+                    <p class="mt-1 text-3xl font-light text-emerald-800">{{ kpis_pv.realizados.total }}</p>
+                </div>
+                <div class="rounded-lg border border-amber-200 bg-amber-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-amber-700">Pendientes</p>
+                    <p class="mt-1 text-3xl font-light text-amber-800">{{ kpis_pv.pendientes_realizar.total }}</p>
+                </div>
+                <div class="rounded-lg border border-blue-200 bg-blue-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-blue-700">Revisados</p>
+                    <p class="mt-1 text-3xl font-light text-blue-800">{{ kpis_pv.revisados.total }}</p>
+                </div>
+                <div class="rounded-lg border border-rose-200 bg-rose-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-rose-700">Fuera de plazo</p>
+                    <p class="mt-1 text-3xl font-light text-rose-800">{{ kpis_pv.fuera_plazo.total }}</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+            <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Desglose por centro</h2>
+                <a href="{% url 'planes_vida:control_pv_centros' %}" class="text-xs text-emerald-700 hover:underline">Ver tablero Control PV →</a>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
+                        <tr>
+                            <th class="text-left px-4 py-2">Centro</th>
+                            <th class="text-right px-4 py-2">Personas</th>
+                            <th class="text-right px-4 py-2">PV realizados</th>
+                            <th class="text-right px-4 py-2">Pendientes</th>
+                            <th class="text-right px-4 py-2">Revisados</th>
+                            <th class="text-right px-4 py-2">Fuera plazo</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        {% for fila in kpis_pv.desglose_centros %}
+                        <tr>
+                            <td class="px-4 py-2 font-medium">{{ fila.centro.nombre }}</td>
+                            <td class="px-4 py-2 text-right">{{ fila.personas }}</td>
+                            <td class="px-4 py-2 text-right text-emerald-700">{{ fila.realizados }}</td>
+                            <td class="px-4 py-2 text-right text-amber-700">{{ fila.pendientes }}</td>
+                            <td class="px-4 py-2 text-right text-blue-700">{{ fila.revisados }}</td>
+                            <td class="px-4 py-2 text-right {% if fila.fuera_plazo %}text-rose-700 font-medium{% else %}text-slate-400{% endif %}">{{ fila.fuera_plazo }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="6" class="px-4 py-8 text-center text-slate-500">Sin datos de Planes de Vida todavía.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot class="bg-slate-50 font-semibold">
+                        <tr>
+                            <td class="px-4 py-2">Total Grupo</td>
+                            <td class="px-4 py-2 text-right">{{ kpis_pv.total_usuarios }}</td>
+                            <td class="px-4 py-2 text-right text-emerald-700">{{ kpis_pv.realizados.total }}</td>
+                            <td class="px-4 py-2 text-right text-amber-700">{{ kpis_pv.pendientes_realizar.total }}</td>
+                            <td class="px-4 py-2 text-right text-blue-700">{{ kpis_pv.revisados.total }}</td>
+                            <td class="px-4 py-2 text-right text-rose-700">{{ kpis_pv.fuera_plazo.total }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </article>
+    </section>
+
+    {# ===== TAB GESTORES ===== #}
+    <section x-show="tab==='gestores'" x-cloak class="mt-6 space-y-6">
+
+        <div class="grid gap-4 md:grid-cols-3">
+            <article class="rounded-xl border border-emerald-200 bg-emerald-50 p-5">
+                <p class="text-xs uppercase tracking-wide text-emerald-700">Dentro de ratio</p>
+                <p class="mt-1 text-3xl font-light text-emerald-800">{{ gestores_resumen.ok }}</p>
+                <p class="text-xs text-emerald-700">profesionales · ≤ 25 casos</p>
+            </article>
+            <article class="rounded-xl border border-amber-200 bg-amber-50 p-5">
+                <p class="text-xs uppercase tracking-wide text-amber-700">Próximos a ratio</p>
+                <p class="mt-1 text-3xl font-light text-amber-800">{{ gestores_resumen.cerca_ratio }}</p>
+                <p class="text-xs text-amber-700">26-30 casos</p>
+            </article>
+            <article class="rounded-xl border border-rose-200 bg-rose-50 p-5">
+                <p class="text-xs uppercase tracking-wide text-rose-700">Sobrecarga</p>
+                <p class="mt-1 text-3xl font-light text-rose-800">{{ gestores_resumen.sobre_ratio }}</p>
+                <p class="text-xs text-rose-700">&gt; 30 casos · revisar</p>
+            </article>
+        </div>
+
+        <article class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+            <div class="px-5 py-3 border-b border-slate-200">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Carga de gestores de caso</h2>
+                <p class="text-xs text-slate-500 mt-1">Ratio recomendado por Protocolo Aspanias: ≤ 30 casos.</p>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
+                        <tr>
+                            <th class="text-left px-4 py-2">Profesional</th>
+                            <th class="text-left px-4 py-2">Rol</th>
+                            <th class="text-right px-4 py-2">Casos</th>
+                            <th class="text-right px-4 py-2">Máx</th>
+                            <th class="text-left px-4 py-2">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        {% for f in gestores.filas %}
+                        <tr>
+                            <td class="px-4 py-2 font-medium">{{ f.gestor.nombre_completo }}</td>
+                            <td class="px-4 py-2 text-slate-500">{{ f.gestor.rol_principal.nombre|default:"—" }}</td>
+                            <td class="px-4 py-2 text-right font-medium">{{ f.total }}</td>
+                            <td class="px-4 py-2 text-right text-slate-500">{{ f.max }}</td>
+                            <td class="px-4 py-2">
+                                {% if f.sobrepasa %}
+                                    <span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-800">Sobrecarga</span>
+                                {% elif f.total >= f.max|add:"-5" %}
+                                    <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Próximo a ratio</span>
+                                {% else %}
+                                    <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">OK</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="5" class="px-4 py-8 text-center text-slate-500">No hay profesionales habilitados como gestor/a de caso todavía.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </article>
+    </section>
+
+    {# ===== TAB HISTÓRICO ===== #}
+    <section x-show="tab==='hist'" x-cloak class="mt-6">
+        <article class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+            <div class="px-5 py-3 border-b border-slate-200">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Histórico — snapshots mensuales</h2>
+                <p class="text-xs text-slate-500 mt-1">Reproduce la hoja «Histórico» del Excel. Generado el primer día de cada mes.</p>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
+                        <tr>
+                            <th class="text-left px-4 py-2">Mes</th>
+                            <th class="text-right px-4 py-2">Personas</th>
+                            <th class="text-right px-4 py-2">PV realizados</th>
+                            <th class="text-right px-4 py-2">% realizado</th>
+                            <th class="text-right px-4 py-2">Revisados</th>
+                            <th class="text-right px-4 py-2">Fuera de plazo</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        {% for s in historico %}
+                        <tr>
+                            <td class="px-4 py-2 font-medium">{{ s.fecha|date:"F Y" }}</td>
+                            <td class="px-4 py-2 text-right">{{ s.total_personas }}</td>
+                            <td class="px-4 py-2 text-right">{{ s.pv_realizados }}</td>
+                            <td class="px-4 py-2 text-right text-emerald-700">{% if s.total_personas %}{% widthratio s.pv_realizados s.total_personas 100 %}%{% else %}—{% endif %}</td>
+                            <td class="px-4 py-2 text-right">{{ s.pv_revisados }}</td>
+                            <td class="px-4 py-2 text-right {% if s.pv_fuera_plazo %}text-rose-700{% else %}text-slate-400{% endif %}">{{ s.pv_fuera_plazo|default:"0" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="6" class="px-4 py-8 text-center text-slate-500">
+                            No hay snapshots todavía. Genera el primero con
+                            <code class="bg-slate-100 px-1 rounded">python manage.py generar_snapshot</code>.
+                        </td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </article>
+    </section>
+
+    {# Bloque exportes #}
+    <div class="mt-8 rounded-xl border border-blue-200 bg-blue-50 p-5">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-800">Exportes externos pseudonimizados</h2>
+        <p class="mt-2 text-sm text-blue-900">
+            Todos los exportes externos se generan <strong>sin DNI, nombre ni dirección</strong>. Disponibles en Excel y PDF con plantilla institucional Aspanias.
+        </p>
+        <div class="mt-3 flex gap-2 flex-wrap">
+            <button class="rounded bg-white border border-blue-300 text-blue-800 px-3 py-1.5 text-sm hover:bg-blue-100">Memoria anual Fundación Aspanias Burgos</button>
+            <button class="rounded bg-white border border-blue-300 text-blue-800 px-3 py-1.5 text-sm hover:bg-blue-100">Memoria anual Aspaniasmerc</button>
+            <button class="rounded bg-white border border-blue-300 text-blue-800 px-3 py-1.5 text-sm hover:bg-blue-100">Justificación concierto JCyL</button>
+            <button class="rounded bg-white border border-blue-300 text-blue-800 px-3 py-1.5 text-sm hover:bg-blue-100">Informe trimestral a la Junta</button>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

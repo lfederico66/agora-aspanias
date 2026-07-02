@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio · ÁGORA{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+    <div>
+        <h1 class="text-3xl font-semibold tracking-tight">Atención y Gestión Operativa para Residentes y Atendidos</h1>
+        <p class="mt-2 text-slate-600 max-w-3xl">
+            CRM sociosanitario del Grupo Social Aspanias para el seguimiento integral de las personas atendidas
+            por la Fundación Aspanias Burgos y Aspaniasmerc 2016 S.L.U.
+        </p>
+    </div>
+
+    {% if user.is_authenticated %}
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <a href="{% url 'personas:lista' %}" class="block rounded-lg border border-slate-200 bg-white p-5 hover:border-amber-400 hover:shadow-sm transition">
+                <h2 class="text-lg font-semibold">Personas atendidas</h2>
+                <p class="mt-1 text-sm text-slate-500">Ficha única con perfiles por colectivo, medida de apoyo y entorno familiar.</p>
+            </a>
+            <a href="{% url 'agenda:semana' %}" class="block rounded-lg border border-slate-200 bg-white p-5 hover:border-amber-400 hover:shadow-sm transition">
+                <h2 class="text-lg font-semibold">Agenda multiprofesional</h2>
+                <p class="mt-1 text-sm text-slate-500">Vista semanal compartida con notificación a familias vía CERCA.</p>
+            </a>
+            <a href="{% url 'indicadores:cuadro_mando' %}" class="block rounded-lg border border-slate-200 bg-white p-5 hover:border-amber-400 hover:shadow-sm transition">
+                <h2 class="text-lg font-semibold">Indicadores y memoria</h2>
+                <p class="mt-1 text-sm text-slate-500">Cuadro de mando en vivo, alertas y exportes anonimizados.</p>
+            </a>
+            <div class="rounded-lg border border-dashed border-slate-300 bg-white p-5 text-slate-500">
+                <h2 class="text-lg font-semibold">Plan de Vida</h2>
+                <p class="mt-1 text-sm">Accesible desde la ficha de cada persona · 5 documentos del protocolo Aspanias.</p>
+            </div>
+            <div class="rounded-lg border border-dashed border-slate-300 bg-white p-5 text-slate-500">
+                <h2 class="text-lg font-semibold">Intervenciones</h2>
+                <p class="mt-1 text-sm">Accesible desde la ficha de cada persona.</p>
+            </div>
+            <a href="{% url 'personas:avisos_cambio_profesional' %}" class="block rounded-lg border border-slate-200 bg-white p-5 hover:border-amber-400 hover:shadow-sm transition">
+                <h2 class="text-lg font-semibold">Avisos de Dirección</h2>
+                <p class="mt-1 text-sm text-slate-500">Cambios de Gestor/a o Persona de Referencia (Protocolo Planes de Vida §9).</p>
+            </a>
+            <a href="/admin/" class="block rounded-lg border border-slate-200 bg-white p-5 hover:border-amber-400 hover:shadow-sm transition">
+                <h2 class="text-lg font-semibold">Administración</h2>
+                <p class="mt-1 text-sm text-slate-500">Gestión de centros, profesionales, bitácora y configuración.</p>
+            </a>
+        </div>
+    {% else %}
+        <div class="rounded-lg border border-slate-200 bg-white p-6">
+            <p class="text-slate-700">Acceso restringido al personal del grupo. Identifícate con tu cuenta corporativa Microsoft 365.</p>
+            <a href="{% url 'account_login' %}" class="mt-4 inline-block rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800">
+                Iniciar sesión
+            </a>
+        </div>
+    {% endif %}
+
+    <div class="mt-10 rounded-md bg-amber-50 border border-amber-200 p-4 text-sm text-amber-900">
+        <strong>Aviso RGPD.</strong> El acceso a esta plataforma se registra (bitácora art. 32 RGPD).
+        Datos tratados bajo cotitularidad de <em>Fundación Aspanias Burgos</em> y <em>Aspaniasmerc 2016 S.L.U.</em>
+        conforme al art. 26 RGPD.
+    </div>
+</section>
+{% endblock %}

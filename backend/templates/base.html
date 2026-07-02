@@ -1,0 +1,99 @@
+{% load static %}<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ÁGORA · Grupo Social Aspanias{% endblock %}</title>
+    {# Tailwind via CDN en v0.x; reemplazar por build django-tailwind en v1.0 #}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body{font-family:'Inter',-apple-system,system-ui,sans-serif}
+        [x-cloak] { display: none !important; }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col">
+
+    <header class="bg-white border-b border-slate-200 shadow-sm">
+        <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between gap-4 flex-wrap">
+            <a href="{% url 'inicio' %}" class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-label="ÁGORA">
+                        <path d="M 7 35 L 20 7 L 33 35"/>
+                        <path d="M 12 24 L 28 24"/>
+                        <circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/>
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-lg font-semibold text-slate-900 leading-tight">ÁGORA</p>
+                    <p class="text-xs text-slate-500 leading-tight">Grupo Social Aspanias</p>
+                </div>
+            </a>
+            <nav class="flex items-center gap-6 text-sm">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'personas:lista' %}"
+                       class="{% if request.resolver_match.app_name == 'personas' %}text-emerald-700 font-medium{% else %}text-slate-600 hover:text-emerald-700{% endif %}">Personas</a>
+                    <a href="{% url 'agenda:semana' %}"
+                       class="{% if request.resolver_match.app_name == 'agenda' %}text-emerald-700 font-medium{% else %}text-slate-600 hover:text-emerald-700{% endif %}">Agenda</a>
+                    <a href="{% url 'indicadores:cuadro_mando' %}"
+                       class="{% if request.resolver_match.app_name == 'indicadores' %}text-emerald-700 font-medium{% else %}text-slate-600 hover:text-emerald-700{% endif %}">Indicadores</a>
+                    <a href="{% url 'planes_vida:control_pv_centros' %}"
+                       class="{% if 'control_pv' in request.resolver_match.url_name|default:'' %}text-emerald-700 font-medium{% else %}text-slate-600 hover:text-emerald-700{% endif %}">Control PV</a>
+                    <div class="flex items-center gap-2.5 pl-5 border-l border-slate-200">
+                        <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold">
+                            {{ user.get_full_name|default:user.email|slice:":2"|upper }}
+                        </div>
+                        <div class="leading-tight">
+                            <p class="text-sm font-medium text-slate-900">{{ user.get_full_name|default:user.email }}</p>
+                            <form method="post" action="{% url 'account_logout' %}" class="inline">
+                                {% csrf_token %}
+                                <button type="submit" class="text-[11px] text-slate-500 hover:text-emerald-700">Cerrar sesión</button>
+                            </form>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'account_login' %}" class="rounded bg-emerald-700 text-white px-4 py-2 text-sm font-medium hover:bg-emerald-800">Iniciar sesión con Microsoft 365</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-1">
+        <div class="mx-auto max-w-7xl px-6 py-8">
+            {% if messages %}
+                <div class="mb-6 space-y-2">
+                    {% for message in messages %}
+                        <div class="rounded-lg border px-4 py-3 text-sm
+                            {% if message.tags == 'error' %}border-rose-200 bg-rose-50 text-rose-900
+                            {% elif message.tags == 'warning' %}border-amber-200 bg-amber-50 text-amber-900
+                            {% elif message.tags == 'success' %}border-emerald-200 bg-emerald-50 text-emerald-900
+                            {% else %}border-blue-200 bg-blue-50 text-blue-900{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-200 bg-white py-6 mt-auto">
+        <div class="mx-auto max-w-7xl px-6 text-center text-xs text-slate-500">
+            <p class="font-semibold text-slate-700">ÁGORA · Atención y Gestión Operativa para Residentes y Atendidos</p>
+            <p class="mt-1">Grupo Social Aspanias · Fundación Aspanias Burgos + Aspaniasmerc 2016 S.L.U.</p>
+            <p class="mt-2 text-[11px] text-slate-400">
+                Cada acceso a una ficha queda registrado · Doble corresponsabilidad RGPD ·
+                <a href="#" class="hover:text-emerald-700">Política de privacidad</a>
+            </p>
+        </div>
+    </footer>
+
+    {% block extra_body %}{% endblock %}
+</body>
+</html>

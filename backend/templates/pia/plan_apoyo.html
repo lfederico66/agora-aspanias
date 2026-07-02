@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Plan de Apoyo · {{ persona }} · ÁGORA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @page { size: A4 landscape; margin: 1cm; }
+        @media print { .no-print { display: none !important; } body { background: white !important; } .pagina { box-shadow: none !important; margin: 0 !important; padding: 0 !important; } }
+        body { font-family: -apple-system, system-ui, Segoe UI, sans-serif; }
+        .col-encabezado { background: #1e6b4b; color: white; }
+    </style>
+</head>
+<body class="bg-slate-100">
+    <div class="no-print bg-slate-900 text-white text-sm">
+        <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+            <a href="{% url 'planes_vida:detalle' persona.id %}" class="hover:text-amber-300">← Volver al Plan de Vida</a>
+            <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-300">ANEXO 4</span>
+                <a href="{% url 'planes_vida:editar_plan_apoyo' persona.id plan.anualidad %}" class="rounded border border-slate-600 px-3 py-1 hover:bg-slate-700">✎ Editar</a>
+                <button onclick="window.print()" class="rounded bg-amber-400 text-slate-900 px-4 py-1 font-semibold hover:bg-amber-300">🖨 Imprimir</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="pagina mx-auto max-w-[1280px] bg-white shadow my-6 p-8 print:my-0 print:shadow-none">
+        <header class="mb-6">
+            <p class="text-xs uppercase tracking-widest text-slate-500">ANEXO 4</p>
+            <h1 class="text-xl font-bold text-slate-900 uppercase">Plan de Apoyo al Proyecto de Vida</h1>
+            <div class="mt-4 grid grid-cols-3 gap-3 text-sm">
+                <div><strong>Nombre:</strong> {{ persona.nombre }}</div>
+                <div><strong>Apellidos:</strong> {{ persona.apellido_1 }} {{ persona.apellido_2 }}</div>
+                <div><strong>Edad:</strong> {{ persona.fecha_nacimiento|timesince:"now"|default:"—"|truncatewords:1 }}</div>
+                <div><strong>Profesional de referencia:</strong> {{ plan.persona_referencia|default:"—" }}</div>
+                <div><strong>Gestor/a de caso:</strong> {{ plan.gestor_caso|default:"—" }}</div>
+                <div><strong>Fecha de realización:</strong> {{ plan_apoyo.fecha_realizacion|date:"d/m/Y"|default:"—" }}</div>
+            </div>
+        </header>
+
+        {% if not plan_apoyo %}
+            <div class="rounded border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-sm text-slate-500">
+                Aún no se ha registrado Plan de Apoyo para esta anualidad.
+            </div>
+        {% else %}
+            <table class="w-full border-collapse text-xs">
+                <thead>
+                    <tr>
+                        <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">OBJETIVOS</th>
+                        <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">ACTIVIDADES</th>
+                        <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">DIMENSIONES CdV</th>
+                        <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">QUÉ (Apoyo)</th>
+                        <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">QUIÉN (Me apoya)</th>
+                        <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">CUÁNDO (Me apoyan)</th>
+                        <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">OBSERVACIONES</th>
+                        <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">SEG. CUANTITATIVO</th>
+                        <th class="col-encabezado border border-slate-300 px-2 py-2 text-left">SEG. DESCRIPTIVO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in entradas %}
+                    <tr class="align-top">
+                        <td class="border border-slate-300 px-2 py-2 font-medium">{{ e.titulo_objetivo }}</td>
+                        <td class="border border-slate-300 px-2 py-2 whitespace-pre-line">{{ e.actividades }}</td>
+                        <td class="border border-slate-300 px-2 py-2">
+                            {% for d in e.dimensiones_cdv.all %}
+                                <span class="inline-block rounded bg-emerald-50 px-1.5 py-0.5 text-emerald-800 mb-1">{{ d.nombre }}</span>
+                            {% endfor %}
+                        </td>
+                        <td class="border border-slate-300 px-2 py-2 whitespace-pre-line">{{ e.apoyo_que }}</td>
+                        <td class="border border-slate-300 px-2 py-2 whitespace-pre-line">{{ e.apoyo_quien }}</td>
+                        <td class="border border-slate-300 px-2 py-2 whitespace-pre-line">{{ e.apoyo_cuando }}</td>
+                        <td class="border border-slate-300 px-2 py-2 whitespace-pre-line">{{ e.observaciones }}</td>
+                        <td class="border border-slate-300 px-2 py-2 whitespace-pre-line">{{ e.seguimiento_cuantitativo }}</td>
+                        <td class="border border-slate-300 px-2 py-2 whitespace-pre-line">{{ e.seguimiento_descriptivo }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="9" class="border border-slate-300 px-2 py-6 text-center text-slate-500">Sin entradas registradas.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        <footer class="mt-6 text-xs text-slate-400 flex items-center justify-between">
+            <span>8 Dimensiones de Calidad de Vida (Schalock & Verdugo)</span>
+            <span>ÁGORA · {{ persona.centro_referencia.nombre }}</span>
+        </footer>
+    </main>
+</body>
+</html>

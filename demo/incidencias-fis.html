@@ -1,0 +1,300 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incidencias · FIS · Residencia Fuentecillas · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · todos los datos son ficticios</div>
+
+<div class="flex min-h-screen" x-data="{ userMenu: false, filtroEstado: 'todas' }">
+
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight"><p class="text-base font-semibold tracking-tight">ÁGORA</p><p class="text-[10px] text-slate-500">Grupo Social Aspanias</p></div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100 relative">
+            <button @click="userMenu = !userMenu" class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0"><p class="text-sm font-medium truncate">Federico Martínez</p><p class="text-[10px] text-slate-500 truncate">Gerencia</p></div>
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div x-show="userMenu" x-cloak @click.outside="userMenu = false" class="absolute bottom-full left-3 right-3 mb-1 rounded-lg border border-slate-200 bg-white shadow-lg py-1 z-20">
+                <a href="personas-lista.html?mio=1" class="block px-3 py-1.5 text-sm text-emerald-700 hover:bg-emerald-50 font-medium">⭐ Mis personas</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Mi perfil</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Preferencias</a>
+                <div class="border-t border-slate-100 my-1"></div>
+                <a href="#" class="block px-3 py-1.5 text-sm text-rose-700 hover:bg-rose-50">Cerrar sesión</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a>
+                <span class="mx-1">›</span>
+                <a href="centros.html" class="hover:text-emerald-700">Centros</a>
+                <span class="mx-1">›</span>
+                <a href="centro-detalle.html" class="hover:text-emerald-700">Residencia Fuentecillas</a>
+                <span class="mx-1">›</span>
+                <span class="text-slate-700">Incidencias · FIS</span>
+            </nav>
+            <div class="flex items-center gap-2 shrink-0">
+                <button class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-emerald-400">⤓ Exportar</button>
+                <a href="nueva-ficha-fis.html" class="rounded-lg bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">+ Nueva ficha FIS</a>
+            </div>
+        </div>
+
+        <div class="px-8 py-6 max-w-7xl space-y-5">
+
+            <!-- Cabecera -->
+            <header>
+                <p class="text-xs uppercase tracking-widest text-emerald-700 font-semibold">🟩 Variante residencia · Residencia Fuentecillas</p>
+                <h1 class="mt-1 text-2xl font-semibold tracking-tight">Bandeja de incidencias · FIS</h1>
+                <p class="mt-1 text-sm text-slate-500">Fichas de Intervención y Seguimiento del centro · 47 este mes · trazabilidad RGPD activa</p>
+            </header>
+
+            <!-- KPIs por estado -->
+            <section class="grid gap-3 md:grid-cols-5">
+                <button @click="filtroEstado = 'todas'" :class="filtroEstado === 'todas' ? 'border-slate-900 ring-2 ring-slate-200' : 'border-slate-200'" class="text-left rounded-xl border bg-white p-4 hover:border-emerald-400">
+                    <p class="text-xs text-slate-500">Total mes</p>
+                    <p class="mt-0.5 text-2xl font-light">47</p>
+                </button>
+                <button @click="filtroEstado = 'abiertas'" :class="filtroEstado === 'abiertas' ? 'border-rose-500 ring-2 ring-rose-100' : 'border-rose-200'" class="text-left rounded-xl border bg-rose-50 p-4 hover:border-rose-400">
+                    <p class="text-xs text-rose-700 font-medium">🔴 Abiertas</p>
+                    <p class="mt-0.5 text-2xl font-light text-rose-800">3</p>
+                </button>
+                <button @click="filtroEstado = 'curso'" :class="filtroEstado === 'curso' ? 'border-amber-500 ring-2 ring-amber-100' : 'border-amber-200'" class="text-left rounded-xl border bg-amber-50 p-4 hover:border-amber-400">
+                    <p class="text-xs text-amber-700 font-medium">🟡 En curso</p>
+                    <p class="mt-0.5 text-2xl font-light text-amber-800">5</p>
+                </button>
+                <button @click="filtroEstado = 'cerradas'" :class="filtroEstado === 'cerradas' ? 'border-emerald-500 ring-2 ring-emerald-100' : 'border-emerald-200'" class="text-left rounded-xl border bg-emerald-50 p-4 hover:border-emerald-400">
+                    <p class="text-xs text-emerald-700 font-medium">🟢 Cerradas</p>
+                    <p class="mt-0.5 text-2xl font-light text-emerald-800">39</p>
+                </button>
+                <button @click="filtroEstado = 'salud'" :class="filtroEstado === 'salud' ? 'border-rose-600 ring-2 ring-rose-100' : 'border-slate-200'" class="text-left rounded-xl border bg-white p-4 hover:border-rose-400">
+                    <p class="text-xs text-rose-700 font-medium">⚠ Salud (mes)</p>
+                    <p class="mt-0.5 text-2xl font-light text-rose-800">12</p>
+                    <p class="text-[10px] text-slate-500">Detección · Incidente · Accidente</p>
+                </button>
+            </section>
+
+            <!-- Filtros avanzados -->
+            <section class="rounded-xl border border-slate-200 bg-white p-4 flex items-center gap-2 flex-wrap">
+                <span class="text-xs text-slate-500 mr-1">Filtros:</span>
+                <select class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                    <option>Cualquier ámbito</option>
+                    <option>Salud · Detección, Incidente, Accidente</option>
+                    <option>Salud · Curas y Tratamientos Médicos</option>
+                    <option>Salud · Medicación · Preparación</option>
+                    <option>Taller de Cocina / Lavadora / Planchado</option>
+                    <option>Traslados y Movilidad</option>
+                    <option>Visita al mercadillo · Seguimiento salud</option>
+                </select>
+                <select class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                    <option>Cualquier turno</option>
+                    <option>Mañana</option><option>Tarde</option><option>Noche</option><option>Día</option>
+                </select>
+                <select class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                    <option>Cualquier usuario</option>
+                    <option>González Pérez, Marta</option>
+                    <option>Sanz Ibáñez, José Luis</option>
+                    <option>Sáez de Antón, Inés</option>
+                </select>
+                <select class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                    <option>Junio 2026</option>
+                    <option>Mayo 2026</option>
+                    <option>Personalizado…</option>
+                </select>
+                <div class="relative flex-1 min-w-[200px]">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">🔎</span>
+                    <input type="search" placeholder="Buscar en detección o intervención…" class="w-full pl-10 pr-3 py-1.5 rounded-lg border border-slate-300 bg-white outline-none text-sm focus:border-emerald-500">
+                </div>
+            </section>
+
+            <!-- Tabla bandeja -->
+            <section class="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-medium">#</th>
+                                <th class="px-4 py-2 text-left font-medium">Fecha / hora</th>
+                                <th class="px-4 py-2 text-left font-medium">Ámbito / actividad</th>
+                                <th class="px-4 py-2 text-left font-medium">Usuario</th>
+                                <th class="px-4 py-2 text-left font-medium">Turno</th>
+                                <th class="px-4 py-2 text-left font-medium">Detección (extracto)</th>
+                                <th class="px-4 py-2 text-left font-medium">Autor</th>
+                                <th class="px-4 py-2 text-center font-medium">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-rose-50/40 cursor-pointer">
+                                <td class="px-4 py-2.5 font-mono text-xs text-slate-500">FIS-2026-00047</td>
+                                <td class="px-4 py-2.5 text-slate-700">Hoy · 09:32</td>
+                                <td class="px-4 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-800">Salud · Detección, Incidente</span></td>
+                                <td class="px-4 py-2.5 font-medium">González Pérez, Marta</td>
+                                <td class="px-4 py-2.5 text-slate-600">Mañana</td>
+                                <td class="px-4 py-2.5 text-slate-600">Caída leve en zona de comedor durante desayuno. Sin lesiones aparentes…</td>
+                                <td class="px-4 py-2.5 text-xs text-slate-500">M.J. Castro (DUE)</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 font-medium">🔴 Abierta</span></td>
+                            </tr>
+                            <tr class="hover:bg-amber-50/40 cursor-pointer">
+                                <td class="px-4 py-2.5 font-mono text-xs text-slate-500">FIS-2026-00046</td>
+                                <td class="px-4 py-2.5 text-slate-700">Ayer · 18:10</td>
+                                <td class="px-4 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-800">Salud · Detección, Incidente</span></td>
+                                <td class="px-4 py-2.5 font-medium">Sanz Ibáñez, José Luis</td>
+                                <td class="px-4 py-2.5 text-slate-600">Tarde</td>
+                                <td class="px-4 py-2.5 text-slate-600">Caída en comedor — seguimiento. Hematoma en codo izquierdo, fría aplicada.</td>
+                                <td class="px-4 py-2.5 text-xs text-slate-500">Daniel Alonso</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-medium">🟡 En curso</span></td>
+                            </tr>
+                            <tr class="hover:bg-amber-50/40 cursor-pointer">
+                                <td class="px-4 py-2.5 font-mono text-xs text-slate-500">FIS-2026-00045</td>
+                                <td class="px-4 py-2.5 text-slate-700">Ayer · 12:25</td>
+                                <td class="px-4 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Taller de Cocina</span></td>
+                                <td class="px-4 py-2.5 font-medium">Moreno Pascual, Ana</td>
+                                <td class="px-4 py-2.5 text-slate-600">Mañana</td>
+                                <td class="px-4 py-2.5 text-slate-600">Quemadura superficial dedo índice manipulando sartén. Lavado con agua fría.</td>
+                                <td class="px-4 py-2.5 text-xs text-slate-500">Pilar Renedo (TO)</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-medium">🟡 En curso</span></td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/30 cursor-pointer">
+                                <td class="px-4 py-2.5 font-mono text-xs text-slate-500">FIS-2026-00044</td>
+                                <td class="px-4 py-2.5 text-slate-700">01/06 · 15:40</td>
+                                <td class="px-4 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-orange-100 text-orange-800">Incidencias catering</span></td>
+                                <td class="px-4 py-2.5 text-slate-500">— (grupal)</td>
+                                <td class="px-4 py-2.5 text-slate-600">Día</td>
+                                <td class="px-4 py-2.5 text-slate-600">Devolución bandeja por error en menú (alergia gluten no declarada).</td>
+                                <td class="px-4 py-2.5 text-xs text-slate-500">Lucía Martínez (TS)</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">🟢 Cerrada</span></td>
+                            </tr>
+                            <tr class="hover:bg-rose-50/40 cursor-pointer">
+                                <td class="px-4 py-2.5 font-mono text-xs text-slate-500">FIS-2026-00043</td>
+                                <td class="px-4 py-2.5 text-slate-700">31/05 · 22:50</td>
+                                <td class="px-4 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-800">Salud · Medicación</span></td>
+                                <td class="px-4 py-2.5 font-medium">Sáez de Antón, Inés</td>
+                                <td class="px-4 py-2.5 text-slate-600">Noche</td>
+                                <td class="px-4 py-2.5 text-slate-600">Dosis Escitalopram no tomada por rechazo. Repuesta a la mañana siguiente.</td>
+                                <td class="px-4 py-2.5 text-xs text-slate-500">M.J. Castro (DUE)</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 font-medium">🔴 Abierta</span></td>
+                            </tr>
+                            <tr class="hover:bg-emerald-50/30 cursor-pointer">
+                                <td class="px-4 py-2.5 font-mono text-xs text-slate-500">FIS-2026-00042</td>
+                                <td class="px-4 py-2.5 text-slate-700">30/05 · 17:15</td>
+                                <td class="px-4 py-2.5"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Salud · Pesos y Talla</span></td>
+                                <td class="px-4 py-2.5 font-medium">Arnaiz Tudanca, Fernando</td>
+                                <td class="px-4 py-2.5 text-slate-600">Tarde</td>
+                                <td class="px-4 py-2.5 text-slate-600">Pesaje mensual programado. Sin variación significativa.</td>
+                                <td class="px-4 py-2.5 text-xs text-slate-500">M.J. Castro (DUE)</td>
+                                <td class="px-4 py-2.5 text-center"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">🟢 Cerrada</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="px-5 py-3 border-t border-slate-200 flex items-center justify-between flex-wrap gap-2 text-xs">
+                    <p class="text-slate-600"><strong>Mostrando 1 – 6</strong> de <strong>47 fichas FIS</strong> · junio 2026</p>
+                    <div class="flex items-center gap-1">
+                        <button class="px-2 py-1 rounded border border-slate-300 text-slate-400" disabled>‹</button>
+                        <button class="px-2 py-1 rounded bg-emerald-700 text-white w-7">1</button>
+                        <button class="px-2 py-1 rounded border border-slate-300 hover:border-emerald-400 w-7">2</button>
+                        <button class="px-2 py-1 rounded border border-slate-300 hover:border-emerald-400">…</button>
+                        <button class="px-2 py-1 rounded border border-slate-300 hover:border-emerald-400 w-7">8</button>
+                        <button class="px-2 py-1 rounded border border-slate-300 hover:border-emerald-400">›</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RGPD -->
+            <section class="rounded-xl bg-slate-50 border border-slate-200 p-3 text-xs text-slate-600">
+                <p>🔐 <strong>Acceso restringido</strong>: profesionales del centro, coordinación y Administración. Las fichas FIS contienen <em>datos de salud · categoría especial (art. 9 RGPD)</em>. Cada acceso queda en bitácora. Las incidencias de tipo <strong>Salud · Detección, Incidente, Accidente</strong> notifican automáticamente al responsable del centro (RF-09).</p>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, incidencia..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Agenda · ÁGORA{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+    <div class="flex items-end justify-between flex-wrap gap-3">
+        <div>
+            <h1 class="text-2xl font-semibold tracking-tight">Agenda multiprofesional</h1>
+            <p class="text-sm text-slate-500">Semana del {{ inicio_semana|date:"d \d\e F" }} al {{ fin_semana|date:"d \d\e F \d\e Y" }}</p>
+        </div>
+        {% with vista_activa="semana" anterior=semana_anterior siguiente=semana_siguiente %}
+            {% include "agenda/_switcher.html" %}
+        {% endwith %}
+    </div>
+
+    <div class="flex flex-wrap gap-3 text-xs">
+        <span class="inline-flex items-center gap-1"><span class="w-3 h-3 rounded bg-blue-400"></span> Individual</span>
+        <span class="inline-flex items-center gap-1"><span class="w-3 h-3 rounded bg-emerald-400"></span> Familiar</span>
+        <span class="inline-flex items-center gap-1"><span class="w-3 h-3 rounded bg-amber-400"></span> Multiprofesional</span>
+        <span class="inline-flex items-center gap-1"><span class="w-3 h-3 rounded bg-slate-400"></span> Externa</span>
+    </div>
+
+    <div class="grid gap-3 grid-cols-1 md:grid-cols-5">
+        {% for dia in dias %}
+            <div class="rounded-lg border border-slate-200 bg-white {% if dia.es_hoy %}border-amber-300 ring-2 ring-amber-100{% endif %}">
+                <div class="border-b border-slate-100 px-3 py-2 {% if dia.es_hoy %}bg-amber-50{% else %}bg-slate-50{% endif %}">
+                    <p class="text-xs uppercase tracking-wide text-slate-500">{{ dia.fecha|date:"l"|capfirst }}</p>
+                    <p class="font-medium">{{ dia.fecha|date:"d/m" }}{% if dia.es_hoy %} · hoy{% endif %}</p>
+                </div>
+                <div class="p-2 space-y-2 min-h-32">
+                    {% for cita in dia.citas %}
+                        <div class="rounded bg-{{ cita.color_tailwind }}-100 border-l-4 border-{{ cita.color_tailwind }}-400 p-2 text-xs">
+                            <p class="font-medium text-{{ cita.color_tailwind }}-900">{{ cita.inicio|date:"H:i" }}–{{ cita.fin|date:"H:i" }} · {{ cita.get_tipo_display }}</p>
+                            <p class="text-{{ cita.color_tailwind }}-800">{{ cita.persona.apellido_1 }}, {{ cita.persona.nombre }}</p>
+                            {% if cita.profesionales.all %}
+                                <p class="text-{{ cita.color_tailwind }}-700">
+                                    {% for p in cita.profesionales.all %}{{ p.nombre_completo }}{% if not forloop.last %} · {% endif %}{% endfor %}
+                                </p>
+                            {% endif %}
+                            {% if cita.notificada_a_familia %}<p class="text-{{ cita.color_tailwind }}-600 text-[10px] mt-1">✓ Notificada a familia</p>{% endif %}
+                        </div>
+                    {% empty %}
+                        <p class="text-xs text-slate-400 text-center mt-4">Sin citas</p>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

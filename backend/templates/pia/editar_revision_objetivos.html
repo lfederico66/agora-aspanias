@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Editar Revisión de Objetivos · {{ persona }} · ÁGORA{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+    <div>
+        <a href="{% url 'planes_vida:revision_objetivos' persona.id anualidad %}" class="text-sm text-slate-500 hover:text-slate-700">← Volver al documento</a>
+        <h1 class="mt-2 text-2xl font-semibold tracking-tight">Revisión de Objetivos {{ anualidad }} · {{ persona.apellido_1 }}, {{ persona.nombre }}</h1>
+        <p class="text-sm text-slate-500">Un seguimiento por cada objetivo del Plan de Vida.</p>
+    </div>
+
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        {% for f in formularios %}
+            <fieldset class="rounded-lg border border-slate-200 bg-white p-5 space-y-3">
+                <legend class="px-2 text-sm font-semibold uppercase tracking-wide text-amber-700">{{ f.objetivo.get_ambito_display }} · {{ f.objetivo.descripcion|truncatechars:100 }}</legend>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                    <div>
+                        <label class="block font-medium mb-1">Anualidad</label>
+                        {{ f.form.anualidad|add_class:"w-full rounded border border-slate-300 px-3 py-2" }}
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Fecha de revisión</label>
+                        {{ f.form.fecha_revision|add_class:"w-full rounded border border-slate-300 px-3 py-2" }}
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Realizada por</label>
+                        {{ f.form.realizada_por|add_class:"w-full rounded border border-slate-300 px-3 py-2" }}
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                    <div>
+                        <label class="block font-medium mb-1">¿Qué ha logrado hasta la fecha?</label>
+                        {{ f.form.que_ha_logrado|add_class:"w-full rounded border border-slate-300 px-3 py-2" }}
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">No lo ha conseguido ¿Cuál puede ser el motivo?</label>
+                        {{ f.form.motivo_no_consecucion|add_class:"w-full rounded border border-slate-300 px-3 py-2" }}
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">¿Cómo podemos ayudarle? Propuestas de apoyo</label>
+                        {{ f.form.propuesta_apoyos|add_class:"w-full rounded border border-slate-300 px-3 py-2" }}
+                    </div>
+                </div>
+            </fieldset>
+        {% empty %}
+            <div class="rounded-lg border border-dashed border-slate-300 bg-white p-6 text-center text-sm text-slate-500">
+                Este Plan de Vida no tiene objetivos registrados todavía.
+            </div>
+        {% endfor %}
+
+        {% if formularios %}
+            <div class="flex items-center justify-end gap-2 sticky bottom-4 bg-slate-50/80 backdrop-blur p-3 rounded-lg border border-slate-200">
+                <a href="{% url 'planes_vida:revision_objetivos' persona.id anualidad %}" class="rounded border border-slate-300 bg-white px-4 py-2 text-sm hover:border-slate-400">Cancelar</a>
+                <button type="submit" class="rounded bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700">Guardar revisiones</button>
+            </div>
+        {% endif %}
+    </form>
+</section>
+{% endblock %}

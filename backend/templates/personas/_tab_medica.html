@@ -1,0 +1,156 @@
+{# Tab: Información médica — datos de categoría especial RGPD art. 9. #}
+<div class="space-y-6">
+
+    {% if info_medica %}
+    <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Datos clínicos básicos</h2>
+        <dl class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div><dt class="text-slate-500">Grupo sanguíneo</dt><dd>{{ info_medica.get_grupo_sanguineo_display }}</dd></div>
+            <div><dt class="text-slate-500">Vacunación permitida</dt><dd>{% if info_medica.vacunacion_permitida %}Sí{% else %}<span class="text-rose-700">No — {{ info_medica.motivo_no_vacunacion }}</span>{% endif %}</dd></div>
+            <div class="md:col-span-3"><dt class="text-slate-500">Contacto médico de referencia</dt><dd>{{ info_medica.contacto_medico_referencia|default:"—" }}</dd></div>
+            {% if info_medica.antecedentes_familiares %}
+                <div class="md:col-span-3 border-t border-slate-100 pt-3"><dt class="text-slate-500">Antecedentes familiares</dt><dd>{{ info_medica.antecedentes_familiares }}</dd></div>
+            {% endif %}
+        </dl>
+    </article>
+    {% endif %}
+
+    <div class="grid gap-6 md:grid-cols-2">
+        {% if persona.alergias.all %}
+        <article class="rounded-xl border border-rose-200 bg-white p-5 shadow-sm">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-rose-700">⚠️ Alergias e intolerancias</h2>
+            <p class="text-xs text-rose-600 mt-1">Visibles siempre al abrir la ficha</p>
+            <ul class="mt-3 space-y-2 text-sm">
+                {% for a in persona.alergias.all %}
+                <li class="flex items-start gap-2">
+                    <span class="px-2 py-0.5 rounded {% if a.gravedad == 'anafilactica' %}bg-rose-200 text-rose-900{% elif a.gravedad == 'grave' %}bg-rose-100 text-rose-800{% else %}bg-amber-100 text-amber-800{% endif %} text-xs font-medium">{{ a.get_gravedad_display }}</span>
+                    <div>
+                        <p class="font-medium">{{ a.sustancia }}</p>
+                        <p class="text-xs text-slate-500">{{ a.get_tipo_display }}{% if a.reaccion %} · {{ a.reaccion }}{% endif %}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </article>
+        {% endif %}
+
+        {% if persona.enfermedades_cronicas.all %}
+        <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Enfermedades crónicas</h2>
+            <ul class="mt-3 space-y-1.5 text-sm list-disc list-inside">
+                {% for e in persona.enfermedades_cronicas.all %}
+                    <li>{{ e.nombre }}{% if e.especialista_referente %} <span class="text-xs text-slate-500">({{ e.especialista_referente }})</span>{% endif %}</li>
+                {% endfor %}
+            </ul>
+        </article>
+        {% endif %}
+    </div>
+
+    {% if persona.medidas_antropometricas.all %}
+    <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Medidas antropométricas (últimas 6)</h2>
+        <div class="overflow-x-auto mt-3">
+            <table class="w-full text-sm">
+                <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
+                    <tr>
+                        <th class="text-left px-3 py-2">Fecha</th>
+                        <th class="text-right px-3 py-2">Peso (kg)</th>
+                        <th class="text-right px-3 py-2">Talla (cm)</th>
+                        <th class="text-right px-3 py-2">IMC</th>
+                        <th class="text-right px-3 py-2">TA</th>
+                        <th class="text-right px-3 py-2">Pulso</th>
+                        <th class="text-right px-3 py-2">Tª</th>
+                        <th class="text-left px-3 py-2">Registrado por</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {% for m in persona.medidas_antropometricas.all %}
+                    <tr {% if forloop.first %}class="bg-emerald-50"{% endif %}>
+                        <td class="px-3 py-2 {% if forloop.first %}font-medium{% endif %}">{{ m.fecha|date:"d/m/Y" }}</td>
+                        <td class="px-3 py-2 text-right">{{ m.peso_kg|default:"—" }}</td>
+                        <td class="px-3 py-2 text-right">{{ m.talla_cm|default:"—" }}</td>
+                        <td class="px-3 py-2 text-right">{{ m.imc|default:"—" }}</td>
+                        <td class="px-3 py-2 text-right">{% if m.tension_sistolica %}{{ m.tension_sistolica }}/{{ m.tension_diastolica }}{% else %}—{% endif %}</td>
+                        <td class="px-3 py-2 text-right">{{ m.pulso|default:"—" }}</td>
+                        <td class="px-3 py-2 text-right">{{ m.temperatura|default:"—" }}</td>
+                        <td class="px-3 py-2 text-slate-500">{{ m.registrado_por|default:"—" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+    {% endif %}
+
+    {% if persona.vacunas.all %}
+    <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Vacunación</h2>
+        <ul class="mt-3 space-y-1.5 text-sm">
+            {% for v in persona.vacunas.all %}
+                <li class="flex justify-between">
+                    <span>{{ v.vacuna }}{% if v.dosis %} · {{ v.dosis }}{% endif %}</span>
+                    <span class="text-xs text-slate-500">{{ v.fecha|date:"d/m/Y" }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </article>
+    {% endif %}
+
+    {% if cuidados %}
+    <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Cuidados de enfermería</h2>
+        <p class="text-xs text-slate-500 mt-1">Plan de cuidados estructurado por dimensiones</p>
+        <dl class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 text-sm">
+            {% if cuidados.respiracion %}<div><dt class="font-medium text-slate-700">Respiración</dt><dd class="text-slate-600">{{ cuidados.respiracion }}</dd></div>{% endif %}
+            {% if cuidados.audicion %}<div><dt class="font-medium text-slate-700">Audición</dt><dd class="text-slate-600">{{ cuidados.audicion }}</dd></div>{% endif %}
+            {% if cuidados.vision %}<div><dt class="font-medium text-slate-700">Visión</dt><dd class="text-slate-600">{{ cuidados.vision }}</dd></div>{% endif %}
+            {% if cuidados.alimentacion %}<div><dt class="font-medium text-slate-700">Alimentación</dt><dd class="text-slate-600">{{ cuidados.alimentacion }}</dd></div>{% endif %}
+            {% if cuidados.sueno_descanso %}<div><dt class="font-medium text-slate-700">Sueño y descanso</dt><dd class="text-slate-600">{{ cuidados.sueno_descanso }}</dd></div>{% endif %}
+            {% if cuidados.eliminacion %}<div><dt class="font-medium text-slate-700">Eliminación</dt><dd class="text-slate-600">{{ cuidados.eliminacion }}</dd></div>{% endif %}
+            {% if cuidados.movilidad %}<div><dt class="font-medium text-slate-700">Movilidad</dt><dd class="text-slate-600">{{ cuidados.movilidad }}</dd></div>{% endif %}
+            {% if cuidados.autonomia_abvd %}<div><dt class="font-medium text-slate-700">Autonomía ABVD</dt><dd class="text-slate-600">{{ cuidados.autonomia_abvd }}</dd></div>{% endif %}
+            {% if cuidados.conducta %}<div><dt class="font-medium text-slate-700">Conducta</dt><dd class="text-slate-600">{{ cuidados.conducta }}</dd></div>{% endif %}
+            {% if cuidados.cuidados_piel %}<div><dt class="font-medium text-slate-700">Cuidados de la piel</dt><dd class="text-slate-600">{{ cuidados.cuidados_piel }}</dd></div>{% endif %}
+        </dl>
+    </article>
+    {% endif %}
+
+    {% if persona.problemas_salud.all %}
+    <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Problemas de salud en curso</h2>
+        <div class="overflow-x-auto mt-3">
+            <table class="w-full text-sm">
+                <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
+                    <tr>
+                        <th class="text-left px-3 py-2">Fecha</th>
+                        <th class="text-left px-3 py-2">Problema</th>
+                        <th class="text-left px-3 py-2">Tipo</th>
+                        <th class="text-left px-3 py-2">Especialista</th>
+                        <th class="text-left px-3 py-2">Responsable</th>
+                        <th class="text-left px-3 py-2">Estado</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {% for p in persona.problemas_salud.all %}
+                    <tr>
+                        <td class="px-3 py-2">{{ p.fecha_apertura|date:"d/m/Y" }}</td>
+                        <td class="px-3 py-2 font-medium">{{ p.descripcion }}</td>
+                        <td class="px-3 py-2 text-slate-500">{{ p.tipo|default:"—" }}</td>
+                        <td class="px-3 py-2 text-slate-500">{{ p.especialista|default:"—" }}</td>
+                        <td class="px-3 py-2 text-slate-500">{{ p.responsable_interno|default:"—" }}</td>
+                        <td class="px-3 py-2"><span class="text-xs px-2 py-0.5 rounded-full {% if p.estado == 'abierto' %}bg-rose-100 text-rose-800{% elif p.estado == 'en_seguimiento' %}bg-amber-100 text-amber-800{% else %}bg-slate-100 text-slate-700{% endif %}">{{ p.get_estado_display }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+    {% endif %}
+
+    {% if not info_medica and not persona.alergias.all and not persona.enfermedades_cronicas.all %}
+    <article class="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">
+        Esta persona aún no tiene información médica registrada en ÁGORA.
+        <a href="{% url 'admin:personas_informacionmedica_add' %}?persona={{ persona.id }}" class="block mt-2 text-emerald-700 hover:underline">Crear información médica →</a>
+    </article>
+    {% endif %}
+</div>

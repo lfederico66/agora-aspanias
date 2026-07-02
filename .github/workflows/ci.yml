@@ -1,0 +1,145 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: "3.11"
+  DJANGO_SECRET_KEY: ci-only-not-secret
+  DATABASE_URL: sqlite:///:memory:
+
+jobs:
+
+  # ──────────────────────────────────────────────────────────────────
+  # 1. Lint + tests backend Django
+  # ──────────────────────────────────────────────────────────────────
+  backend:
+    name: Backend · lint + tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: Lint con ruff
+        run: ruff check . --output-format=github
+
+      - name: Tests con pytest
+        env:
+          DJANGO_SETTINGS_MODULE: agora.settings.dev
+        run: pytest -ra --tb=short
+
+  # ──────────────────────────────────────────────────────────────────
+  # 2. Build demo (sidebar canónico + ZIP)
+  # ──────────────────────────────────────────────────────────────────
+  demo:
+    name: Demo · build + verificación coherencia
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Linter de gobernanza UX (3 reglas)
+        run: python scripts/utilidades/check_gobernanza.py
+
+      - name: Setup Node.js 20 (para Tailwind build)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Build Tailwind CSS minificado
+        run: |
+          npm ci
+          npm run build:css
+          ls -la demo/_assets/tailwind.css
+
+      - name: Build demo (inyecta sidebar canónico + tokens datos.json)
+        run: python scripts/utilidades/build_demo.py
+
+      - name: Verificar que no hay diferencias tras el build
+        run: |
+          if [ -n "$(git status --porcelain demo/)" ]; then
+            echo "::error::El build de la demo ha generado cambios. El sidebar no está sincronizado en el repo."
+            git diff --stat demo/
+            exit 1
+          fi
+
+      - name: Generar ZIP
+        run: |
+          mkdir -p dist/actual
+          cd demo
+          zip -9 ../dist/actual/AGORA-demo-para-netlify.zip *.html
+          cd ..
+          ls -la dist/actual/
+
+      - name: Subir ZIP como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: AGORA-demo
+          path: dist/actual/AGORA-demo-para-netlify.zip
+          retention-days: 30
+
+  # ──────────────────────────────────────────────────────────────────
+  # 3. Release automática (solo push a main)
+  # ──────────────────────────────────────────────────────────────────
+  release:
+    name: Release · adjuntar ZIP a tag de fecha
+    runs-on: ubuntu-latest
+    needs: [backend, demo]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Bajar ZIP del job demo
+        uses: actions/download-artifact@v4
+        with:
+          name: AGORA-demo
+          path: dist/actual
+
+      - name: Generar tag de fecha
+        id: tag
+        run: echo "tag=demo-$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_OUTPUT
+
+      - name: Crear release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: "Demo ${{ steps.tag.outputs.tag }}"
+          body: |
+            Build automático generado por CI.
+
+            **Contenido**: `AGORA-demo-para-netlify.zip` con la demo HTML estática (46 páginas).
+            **Tests**: ${{ needs.backend.result }} · **Demo**: ${{ needs.demo.result }}
+
+            Subir directamente a Netlify desde el ZIP adjunto.
+          files: dist/actual/AGORA-demo-para-netlify.zip
+          fail_on_unmatched_files: true

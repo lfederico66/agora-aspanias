@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Historia de Vida · {{ persona }} · ÁGORA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @page { size: A4 portrait; margin: 1.5cm; }
+        @media print { .no-print { display: none !important; } body { background: white !important; } }
+        body { font-family: -apple-system, system-ui, Segoe UI, sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100">
+    <div class="no-print bg-slate-900 text-white text-sm">
+        <div class="mx-auto max-w-4xl px-4 py-3 flex items-center justify-between">
+            <a href="{% url 'planes_vida:detalle' persona.id %}" class="hover:text-amber-300">← Volver al Plan de Vida</a>
+            <div class="flex items-center gap-2">
+                <a href="{% url 'planes_vida:editar_historia_vida' persona.id plan.anualidad %}" class="rounded border border-slate-600 px-3 py-1 hover:bg-slate-700">✎ Editar</a>
+                <button onclick="window.print()" class="rounded bg-amber-400 text-slate-900 px-4 py-1 font-semibold hover:bg-amber-300">🖨 Imprimir</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="mx-auto max-w-4xl bg-white shadow my-6 p-10 print:my-0 print:shadow-none">
+        <header class="border-b-4 border-amber-400 pb-4 mb-6">
+            <p class="text-xs uppercase tracking-widest text-slate-500">Documento 1 del Plan de Vida · Plantilla oficial</p>
+            <h1 class="mt-1 text-3xl font-bold">Historia de Vida</h1>
+            <div class="mt-3 grid grid-cols-2 gap-3 text-sm">
+                <div><strong>Nombre y apellidos:</strong> {{ persona.apellido_1 }} {{ persona.apellido_2 }}, {{ persona.nombre }}</div>
+                <div><strong>Anualidad:</strong> {{ plan.anualidad }}</div>
+                <div><strong>Persona de referencia:</strong> {{ plan.persona_referencia|default:"—" }}</div>
+                <div><strong>Gestor/a de caso:</strong> {{ plan.gestor_caso|default:"—" }}</div>
+                {% if historia %}
+                    <div><strong>Fecha de recogida:</strong> {{ historia.fecha_recogida|date:"d/m/Y"|default:"—" }}</div>
+                    <div><strong>Facilitador/a:</strong> {{ historia.facilitador|default:"—" }}</div>
+                {% endif %}
+            </div>
+        </header>
+
+        <section class="mb-6 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
+            <p class="italic">La historia de vida es un documento donde se recogen experiencias que la persona considera significativas y que construyen su identidad. Este guion pretende orientar al profesional de apoyo para generar diálogos enriquecedores basados en lo importante para la persona. <strong>No pretende ser un cuestionario ni entrevista</strong>, sino unas claves que el profesional tendrá en cuenta a la hora de orientar la conversación.</p>
+        </section>
+
+        {% if claves_metodologicas %}
+        <section class="mb-8">
+            <h2 class="text-sm uppercase tracking-wide text-amber-700 font-semibold border-b border-amber-200 pb-1">Sobre la relación entre la persona y el profesional de referencia</h2>
+            <ul class="mt-3 space-y-1 text-sm text-slate-700 list-disc list-inside">
+                {% for clave in claves_metodologicas %}
+                    <li>{{ clave }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+        {% if not historia %}
+            <div class="rounded border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-sm text-slate-500">
+                Aún no se ha registrado la Historia de Vida para esta anualidad.
+            </div>
+        {% else %}
+            <section class="mb-8">
+                <h2 class="text-sm uppercase tracking-wide text-amber-700 font-semibold border-b border-amber-200 pb-1">Guion para facilitar la Historia de Vida</h2>
+                <p class="mt-2 text-xs italic text-slate-500">Sugerimos una serie de preguntas/pistas que no tienen que aplicarse en su totalidad ni a todas las personas de manera uniforme.</p>
+
+                {% if respuestas %}
+                    <ol class="mt-4 space-y-5">
+                        {% for r in respuestas %}
+                            <li>
+                                <p class="font-semibold text-slate-800">{{ forloop.counter }}. {{ r.pregunta_texto }}</p>
+                                <p class="mt-2 whitespace-pre-line text-slate-700 border-l-4 border-amber-200 pl-4 py-1">{{ r.respuesta_texto|default:"(sin respuesta registrada)" }}</p>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                {% else %}
+                    <div class="mt-3 rounded border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-sm text-slate-500">
+                        Aún no se han registrado respuestas a las preguntas del guion.
+                    </div>
+                {% endif %}
+            </section>
+
+            <section class="mb-6">
+                <h2 class="text-sm uppercase tracking-wide text-amber-700 font-semibold border-b border-amber-200 pb-1">Historia de Vida (redacción final)</h2>
+                <p class="mt-2 whitespace-pre-line text-slate-700 border-l-4 border-slate-200 pl-3">{{ historia.texto_narrativo_final|default:"(pendiente de redactar)" }}</p>
+            </section>
+
+            {% if historia.notas_generales %}
+                <section class="mt-8 border-t border-slate-200 pt-4">
+                    <h2 class="text-sm uppercase tracking-wide text-slate-500">Notas generales del profesional</h2>
+                    <p class="mt-2 whitespace-pre-line text-slate-700">{{ historia.notas_generales }}</p>
+                </section>
+            {% endif %}
+        {% endif %}
+
+        <footer class="mt-10 pt-4 border-t border-slate-200 text-xs text-slate-400">
+            Documento "Historia de Vida" · Protocolo Planes de Vida Fundación Aspanias · Guion oficial v2025
+        </footer>
+    </main>
+</body>
+</html>

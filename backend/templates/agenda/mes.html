@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Agenda · Mes · ÁGORA{% endblock %}
+
+{% block content %}
+<section class="space-y-6">
+
+    <div class="flex items-end justify-between flex-wrap gap-3">
+        <div>
+            <h1 class="text-2xl font-semibold tracking-tight">Agenda multiprofesional</h1>
+            <p class="text-sm text-slate-500">{{ primer_dia|date:"F \d\e Y"|capfirst }} · {{ total_mes }} cita{{ total_mes|pluralize:"s" }} este mes</p>
+        </div>
+        {% with vista_activa="mes" %}
+            {% include "agenda/_switcher.html" %}
+        {% endwith %}
+    </div>
+
+    {# Cuadrícula tipo calendario #}
+    <div class="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+        {# Cabecera días #}
+        <div class="grid grid-cols-7 border-b border-slate-200 bg-slate-50">
+            <div class="px-2 py-2 text-xs uppercase tracking-wide text-slate-500 text-center">Lun</div>
+            <div class="px-2 py-2 text-xs uppercase tracking-wide text-slate-500 text-center">Mar</div>
+            <div class="px-2 py-2 text-xs uppercase tracking-wide text-slate-500 text-center">Mié</div>
+            <div class="px-2 py-2 text-xs uppercase tracking-wide text-slate-500 text-center">Jue</div>
+            <div class="px-2 py-2 text-xs uppercase tracking-wide text-slate-500 text-center">Vie</div>
+            <div class="px-2 py-2 text-xs uppercase tracking-wide text-slate-400 text-center">Sáb</div>
+            <div class="px-2 py-2 text-xs uppercase tracking-wide text-slate-400 text-center">Dom</div>
+        </div>
+
+        {% for semana in semanas %}
+        <div class="grid grid-cols-7 divide-x divide-slate-100 border-b border-slate-100">
+            {% for dia in semana %}
+                {% if not dia.es_finde %}
+                    <a href="{% url 'agenda:hoy' %}?fecha={{ dia.fecha|date:'Y-m-d' }}"
+                       class="block min-h-[90px] p-2 hover:bg-slate-50
+                              {% if not dia.del_mes %}bg-slate-50/50{% endif %}
+                              {% if dia.es_hoy %}bg-amber-50 ring-2 ring-amber-300 relative{% endif %}">
+                        <p class="text-xs {% if dia.es_hoy %}font-bold text-amber-800{% elif not dia.del_mes %}text-slate-400{% endif %}">
+                            {{ dia.fecha.day }}{% if dia.es_hoy %} · hoy{% endif %}
+                        </p>
+                        <div class="mt-1 space-y-0.5">
+                            {% for c in dia.citas|slice:":3" %}
+                                <p class="text-[10px] truncate rounded px-1
+                                    {% if c.tipo == 'individual' %}bg-blue-100 text-blue-900
+                                    {% elif c.tipo == 'familiar' %}bg-emerald-100 text-emerald-900
+                                    {% elif c.tipo == 'multipro' %}bg-amber-100 text-amber-900
+                                    {% else %}bg-slate-100 text-slate-700{% endif %}">
+                                    {{ c.inicio|date:"H:i" }} {{ c.persona.apellido_1 }}
+                                </p>
+                            {% endfor %}
+                            {% if dia.citas|length > 3 %}
+                                <p class="text-[10px] text-slate-500 px-1">+{{ dia.citas|length|add:"-3" }} más</p>
+                            {% endif %}
+                        </div>
+                    </a>
+                {% else %}
+                    <div class="min-h-[90px] p-2 bg-slate-50/50">
+                        <p class="text-xs {% if not dia.del_mes %}text-slate-300{% else %}text-slate-400{% endif %}">{{ dia.fecha.day }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+    {# Leyenda #}
+    <div class="flex items-center gap-4 text-xs flex-wrap">
+        <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-400"></span> Individual</span>
+        <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Familiar</span>
+        <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Multipro</span>
+        <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-slate-400"></span> Externa</span>
+        <span class="text-slate-400">Click en un día para ver el detalle hora a hora</span>
+    </div>
+</section>
+{% endblock %}

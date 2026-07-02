@@ -1,0 +1,301 @@
+<!-- @rol: gerencia, direccion_centro, gestor_caso, profesional -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valoraciones psicológicas · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="flex min-h-screen" x-data="{ filtroCategoria: 'todas', soloDisponibles: false, toast: false }">
+
+    <!-- SIDEBAR (canónico — se inyecta vía build_demo.py) -->
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight"><p class="text-base font-semibold tracking-tight">ÁGORA</p><p class="text-[10px] text-slate-500">Grupo Social Aspanias</p></div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100">
+            <div class="w-full flex items-center gap-2.5 p-2 rounded-lg">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0"><p class="text-sm font-medium truncate">Federico Martínez</p><p class="text-[10px] text-slate-500 truncate">Gerencia</p></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="flex-1 min-w-0">
+
+        <div class="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-slate-200 px-8 py-3">
+            <nav class="text-xs text-slate-500 flex items-center gap-1.5">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a><span>›</span>
+                <a href="personas-lista.html" class="hover:text-emerald-700">Personas atendidas</a><span>›</span>
+                <a href="persona-detalle.html" class="hover:text-emerald-700">Ruiz Jiménez, A.</a><span>›</span>
+                <span class="text-slate-900 font-medium">Valoraciones psicológicas</span>
+            </nav>
+        </div>
+
+        <header class="px-8 pt-6 pb-4 border-b border-slate-200 bg-white">
+            <div class="flex items-start justify-between flex-wrap gap-3">
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">🧠 Valoraciones psicológicas</h1>
+                    <p class="text-sm text-slate-500 mt-1">Catálogo de escalas, pruebas e informes del área de Psicología · categorización aprobada jun 2026</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <a href="informe-psicologico-inicial.html" class="px-3 py-2 text-sm rounded-lg border border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 font-medium">📝 Nuevo informe inicial</a>
+                    <a href="informe-psicologico-evolutivo.html" class="px-3 py-2 text-sm rounded-lg border border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 font-medium">🔄 Nuevo informe evolutivo</a>
+                </div>
+            </div>
+            <!-- Filtros -->
+            <div class="mt-4 flex items-center gap-2 flex-wrap">
+                <button @click="filtroCategoria = 'todas'" :class="filtroCategoria === 'todas' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 text-xs rounded-lg font-medium">Todas</button>
+                <button @click="filtroCategoria = 'adaptativa'" :class="filtroCategoria === 'adaptativa' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 text-xs rounded-lg font-medium">🧠 Adaptativas</button>
+                <button @click="filtroCategoria = 'calidad_vida'" :class="filtroCategoria === 'calidad_vida' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 text-xs rounded-lg font-medium">🌟 Calidad de vida</button>
+                <button @click="filtroCategoria = 'pruebas'" :class="filtroCategoria === 'pruebas' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 text-xs rounded-lg font-medium">🔬 Pruebas valoración</button>
+                <button @click="filtroCategoria = 'screening'" :class="filtroCategoria === 'screening' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 text-xs rounded-lg font-medium">🧪 Screening TM</button>
+                <button @click="filtroCategoria = 'informes'" :class="filtroCategoria === 'informes' ? 'bg-emerald-700 text-white' : 'bg-white border border-slate-300 text-slate-700'" class="px-3 py-1.5 text-xs rounded-lg font-medium">📝 Informes</button>
+                <label class="ml-auto flex items-center gap-2 text-xs text-slate-600">
+                    <input type="checkbox" x-model="soloDisponibles" class="rounded">
+                    Solo disponibles ahora
+                </label>
+            </div>
+        </header>
+
+        <section class="px-8 py-6 space-y-8">
+
+            <!-- Banner decisión del equipo de psicología -->
+            <div class="rounded-xl border-2 border-amber-300 bg-amber-50 p-4 flex items-start gap-3">
+                <span class="text-2xl shrink-0">★</span>
+                <div class="text-sm text-amber-900">
+                    <p class="font-semibold">Decisión del equipo de psicología · 23/06/2026</p>
+                    <p class="mt-0.5">Por el momento se aplican de forma rutinaria solo estas <strong>4 pruebas</strong>: <strong>ICAP</strong>, <strong>FUMAT</strong>, <strong>San Martín</strong> y <strong>Calidad de vida (INICO-FEAPS)</strong>. El resto del catálogo permanece disponible para casos concretos que requieran una valoración específica, con visto bueno de la coordinación del área.</p>
+                </div>
+            </div>
+
+            <!-- 1. ESCALAS ADAPTATIVAS -->
+            <div x-show="filtroCategoria === 'todas' || filtroCategoria === 'adaptativa'">
+                <h2 class="text-sm font-semibold mb-3 text-emerald-800 uppercase tracking-wide">🧠 Escalas Adaptativas</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <a href="valoracion-icap.html" class="group p-4 rounded-xl border-2 border-amber-300 bg-amber-50/40 hover:border-amber-500 hover:shadow-md transition">
+                        <div class="flex items-start justify-between mb-2">
+                            <div>
+                                <p class="font-semibold text-base group-hover:text-emerald-700">★ ICAP</p>
+                                <p class="text-xs text-slate-500">Conducta adaptativa + problemas conducta</p>
+                            </div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-200 text-amber-900 font-semibold">★ Rutinaria · equipo 23/06</span>
+                        </div>
+                        <p class="text-xs text-slate-600">77 ítems Conducta Adaptativa (0-3) + 8 categorías Problemas + Secciones A-I · Bruininks et al. · ICE Deusto.</p>
+                        <p class="text-[10px] text-slate-400 mt-2">Cálculo PD por sección · 4 Índices Problemas · Nivel de Servicio 1-9</p>
+                    </a>
+                    <a href="valoracion-abs-rc2.html" class="group p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-sm transition opacity-80">
+                        <div class="flex items-start justify-between mb-2">
+                            <div>
+                                <p class="font-semibold text-base group-hover:text-emerald-700">ABS-RC:2</p>
+                                <p class="text-xs text-slate-500">Conducta Adaptativa Residencial</p>
+                            </div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-medium">Disponible · caso puntual</span>
+                        </div>
+                        <p class="text-xs text-slate-600">18 dominios (10 adaptativa + 8 desadaptada) · 91 ítems · Lambert, Nihira y Leland · UBU.</p>
+                        <p class="text-[10px] text-slate-400 mt-2">Hoja de captura PD por dominio · cálculo automático totales</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 2. CALIDAD DE VIDA -->
+            <div x-show="filtroCategoria === 'todas' || filtroCategoria === 'calidad_vida'">
+                <h2 class="text-sm font-semibold mb-3 text-emerald-800 uppercase tracking-wide">🌟 Escalas de Calidad de Vida</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <a href="valoracion-san-martin.html" class="group p-4 rounded-xl border-2 border-amber-300 bg-amber-50/40 hover:border-amber-500 hover:shadow-md transition">
+                        <div class="flex items-start justify-between mb-2">
+                            <div><p class="font-semibold text-base group-hover:text-emerald-700">★ San Martín</p><p class="text-xs text-slate-500">CdV apoyos extensos/generalizados</p></div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-200 text-amber-900 font-semibold">★ Rutinaria · equipo 23/06</span>
+                        </div>
+                        <p class="text-xs text-slate-600">8 dimensiones · 95 ítems Likert 1-4. Verdugo et al. (2014) · INICO.</p>
+                        <p class="text-[10px] text-slate-400 mt-2">Cumplimentación online · cálculo automático percentil + Índice CdV</p>
+                    </a>
+                    <a href="valoracion-fumat.html" class="group p-4 rounded-xl border-2 border-amber-300 bg-amber-50/40 hover:border-amber-500 hover:shadow-md transition">
+                        <div class="flex items-start justify-between mb-2">
+                            <div><p class="font-semibold text-base group-hover:text-emerald-700">★ FUMAT</p><p class="text-xs text-slate-500">CdV personas mayores con DI</p></div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-200 text-amber-900 font-semibold">★ Rutinaria · equipo 23/06</span>
+                        </div>
+                        <p class="text-xs text-slate-600">8 dimensiones · 57 ítems Likert 1-4. Verdugo, Gómez y Arias (2009) · INICO.</p>
+                        <p class="text-[10px] text-slate-400 mt-2">Cumplimentación online · cálculo automático percentil + Índice CdV</p>
+                    </a>
+                    <a href="valoracion-inico-feaps.html" class="group p-4 rounded-xl border-2 border-amber-300 bg-amber-50/40 hover:border-amber-500 hover:shadow-md transition">
+                        <div class="flex items-start justify-between mb-2">
+                            <div><p class="font-semibold text-base group-hover:text-emerald-700">★ Calidad de vida</p><p class="text-xs text-slate-500">INICO-FEAPS · apoyos limitados/intermitentes</p></div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-200 text-amber-900 font-semibold">★ Rutinaria · equipo 23/06</span>
+                        </div>
+                        <p class="text-xs text-slate-600">8 dimensiones · 72 ítems Likert 1-4 · 2 versiones (heteroinforme + autoinforme) · Verdugo et al. (2013).</p>
+                        <p class="text-[10px] text-slate-400 mt-2">Selector de versión integrado · cálculo automático con baremos diferenciados</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 3. PRUEBAS DE VALORACIÓN Y EVALUACIÓN -->
+            <div x-show="filtroCategoria === 'todas' || filtroCategoria === 'pruebas'">
+                <h2 class="text-sm font-semibold mb-3 text-emerald-800 uppercase tracking-wide">🔬 Pruebas de Valoración y Evaluación</h2>
+
+                <h3 class="text-xs font-medium text-slate-500 mb-2 mt-3 uppercase tracking-wider">Conductas</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3 mb-4" x-show="!soloDisponibles">
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/40 opacity-75">
+                        <div class="flex items-start justify-between mb-2">
+                            <div><p class="font-semibold text-base">BBTA</p><p class="text-xs text-slate-500">Trastornos del espectro autista</p></div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 text-slate-600 font-medium">📂 Sin material</span>
+                        </div>
+                        <p class="text-xs text-slate-600">Esqueleto en UI. Material pendiente de aportar.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-xs font-medium text-slate-500 mb-2 mt-3 uppercase tracking-wider">Inteligencia</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3 mb-4" x-show="!soloDisponibles">
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/40 opacity-75">
+                        <p class="font-semibold text-base">K-BIT</p><p class="text-xs text-slate-500 mb-2">Test breve inteligencia</p>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 text-slate-600 font-medium">📂 Sin material</span>
+                    </div>
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/40 opacity-75">
+                        <p class="font-semibold text-base">Raven</p><p class="text-xs text-slate-500 mb-2">Matrices Progresivas</p>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 text-slate-600 font-medium">📂 Sin material</span>
+                    </div>
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/40 opacity-75">
+                        <p class="font-semibold text-base">WISC-4</p><p class="text-xs text-slate-500 mb-2">Inteligencia infantil</p>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 text-slate-600 font-medium">📂 Sin material</span>
+                    </div>
+                </div>
+
+                <h3 class="text-xs font-medium text-slate-500 mb-2 mt-3 uppercase tracking-wider">Personalidad</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3 mb-4" x-show="!soloDisponibles">
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/40 opacity-75">
+                        <p class="font-semibold text-base">DSAH II</p><p class="text-xs text-slate-500 mb-2">Diagnóstico salud mental</p>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 text-slate-600 font-medium">📂 Sin material</span>
+                    </div>
+                </div>
+
+                <h3 class="text-xs font-medium text-slate-500 mb-2 mt-3 uppercase tracking-wider">Deterioro cognitivo</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3" x-show="!soloDisponibles">
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/40 opacity-75">
+                        <p class="font-semibold text-base">Camdex DS</p><p class="text-xs text-slate-500 mb-2">Demencia en DI</p>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 text-slate-600 font-medium">📂 Sin material</span>
+                    </div>
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/40 opacity-75">
+                        <p class="font-semibold text-base">MEC</p><p class="text-xs text-slate-500 mb-2">Mini-Examen Cognoscitivo</p>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 text-slate-600 font-medium">📂 Sin material</span>
+                    </div>
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/40 opacity-75">
+                        <p class="font-semibold text-base">Test Barcelona</p><p class="text-xs text-slate-500 mb-2">Exploración neuropsicológica</p>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 text-slate-600 font-medium">📂 Sin material</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. SCREENING TRASTORNOS MENTALES -->
+            <div x-show="filtroCategoria === 'todas' || filtroCategoria === 'screening'">
+                <h2 class="text-sm font-semibold mb-3 text-emerald-800 uppercase tracking-wide">🧪 Screening Trastornos Mentales</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3" x-show="!soloDisponibles">
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/40 opacity-75">
+                        <p class="font-semibold text-base">DSAH II</p><p class="text-xs text-slate-500 mb-2">Detección salud mental en DI</p>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 text-slate-600 font-medium">📂 Sin material</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. INFORMES PSICOLÓGICOS -->
+            <div x-show="filtroCategoria === 'todas' || filtroCategoria === 'informes'">
+                <h2 class="text-sm font-semibold mb-3 text-emerald-800 uppercase tracking-wide">📝 Informes Psicológicos</h2>
+                <div class="grid md:grid-cols-2 gap-3">
+                    <a href="informe-psicologico-inicial.html" class="group p-4 rounded-xl border-2 border-emerald-200 bg-white hover:border-emerald-400 hover:shadow-md transition">
+                        <div class="flex items-start justify-between mb-2">
+                            <div><p class="font-semibold text-base group-hover:text-emerald-700">Informe Inicial</p><p class="text-xs text-slate-500">Protocolo clínico de admisión</p></div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Disponible</span>
+                        </div>
+                        <p class="text-xs text-slate-600">~50 secciones: antecedentes, autonomía, conducta, caracterología, exploración psicopatológica, ubicación.</p>
+                        <p class="text-[10px] text-slate-400 mt-2">Formulario completo + PDF firmable</p>
+                    </a>
+                    <a href="informe-psicologico-evolutivo.html" class="group p-4 rounded-xl border-2 border-emerald-200 bg-white hover:border-emerald-400 hover:shadow-md transition">
+                        <div class="flex items-start justify-between mb-2">
+                            <div><p class="font-semibold text-base group-hover:text-emerald-700">Informe Evolutivo</p><p class="text-xs text-slate-500">Seguimiento periódico</p></div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">✓ Disponible</span>
+                        </div>
+                        <p class="text-xs text-slate-600">Funciones cognitivas, praxias y gnosias, conducta, dependencia, ICAP. Comparativa con valoración anterior.</p>
+                        <p class="text-[10px] text-slate-400 mt-2">Formulario completo + PDF firmable</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Aviso RGPD -->
+            <div class="rounded-lg border border-rose-200 bg-rose-50 p-4 text-xs text-rose-900 mt-6">
+                <p class="font-semibold mb-1">🔒 Categoría especial art. 9 RGPD</p>
+                <p>Las valoraciones psicológicas son <strong>datos de salud</strong>. El acceso está restringido a profesionales con rol clínico, queda registrado en bitácora y la información está cifrada en reposo. Retención mínima: 5 años post-baja (Ley 41/2002).</p>
+            </div>
+        </section>
+    </main>
+</div>
+
+</body>
+</html>

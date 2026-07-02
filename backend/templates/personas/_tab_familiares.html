@@ -1,0 +1,69 @@
+{# Tab: Familiares — entorno cercano y figuras de apoyo. #}
+<div class="space-y-6">
+    <div class="flex items-center justify-between flex-wrap gap-3">
+        <div>
+            <h2 class="text-lg font-semibold tracking-tight">Familiares y personas de contacto</h2>
+            <p class="text-sm text-slate-500">{{ persona.vinculos_contacto.all|length }} vínculo{{ persona.vinculos_contacto.all|length|pluralize:"s" }} registrado{{ persona.vinculos_contacto.all|length|pluralize:"s" }}</p>
+        </div>
+        <a href="{% url 'admin:personas_vinculopersonacontacto_add' %}?persona={{ persona.id }}" class="rounded bg-emerald-700 text-white px-3 py-1.5 text-sm font-medium hover:bg-emerald-800">+ Añadir familiar</a>
+    </div>
+
+    {% if persona.vinculos_contacto.all %}
+    <div class="grid gap-4 md:grid-cols-2">
+        {% for v in persona.vinculos_contacto.all %}
+        <article class="rounded-xl border {% if v.es_referencia_principal %}border-2 border-amber-300{% else %}border-slate-200{% endif %} bg-white p-5 shadow-sm">
+            <div class="flex items-start justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-lg font-semibold">
+                        {{ v.contacto.nombre|slice:":1" }}{{ v.contacto.apellido_1|slice:":1" }}
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">{{ v.contacto.apellido_1 }} {{ v.contacto.apellido_2 }}, {{ v.contacto.nombre }}</h3>
+                        <p class="text-xs text-slate-500">{{ v.get_relacion_display }}</p>
+                    </div>
+                </div>
+                {% if v.es_referencia_principal %}
+                    <span class="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">Ref. principal</span>
+                {% endif %}
+            </div>
+            <dl class="mt-4 space-y-2 text-sm">
+                {% if v.contacto.movil %}
+                    <div class="flex justify-between"><dt class="text-slate-500">Móvil</dt><dd>{{ v.contacto.movil }}</dd></div>
+                {% endif %}
+                {% if v.contacto.telefono_fijo %}
+                    <div class="flex justify-between"><dt class="text-slate-500">Teléfono</dt><dd>{{ v.contacto.telefono_fijo }}</dd></div>
+                {% endif %}
+                {% if v.contacto.email %}
+                    <div class="flex justify-between"><dt class="text-slate-500">Email</dt><dd class="text-xs">{{ v.contacto.email }}</dd></div>
+                {% endif %}
+                {% if v.contacto.direccion_municipio %}
+                    <div class="flex justify-between"><dt class="text-slate-500">Ciudad</dt><dd>{{ v.contacto.direccion_municipio }}</dd></div>
+                {% endif %}
+            </dl>
+            <div class="mt-3 border-t border-slate-100 pt-3 flex flex-wrap gap-1.5">
+                {% if v.notificable_cerca %}
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">📱 Notificable CERCA</span>
+                {% endif %}
+                {% if v.es_emergencia %}
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">⚠️ Emergencia{% if v.orden_emergencia %} (orden {{ v.orden_emergencia }}){% endif %}</span>
+                {% endif %}
+            </div>
+            {% if v.notas %}
+                <div class="mt-3 text-xs text-slate-500">
+                    <strong>Nota:</strong> {{ v.notas }}
+                </div>
+            {% endif %}
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+        <article class="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">
+            Esta persona aún no tiene familiares ni contactos registrados.
+        </article>
+    {% endif %}
+
+    <div class="rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900">
+        <p class="text-xs uppercase tracking-wide text-blue-700 font-semibold">Notificaciones a familias</p>
+        <p class="mt-1">Las personas marcadas como <strong>Notificable CERCA</strong> reciben automáticamente los avisos de citas, intervenciones notificables y cambios relevantes. Pueden darse de baja en cualquier momento (RGPD art. 13).</p>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+{# Tarjeta individual de un AvisoCambioProfesional.
+   Pintada con outerHTML cuando se actualiza vía HTMX desde resolver_aviso.
+#}
+<article id="aviso-{{ a.id }}"
+         class="rounded-xl border {% if a.estado == 'pendiente' %}border-amber-300 bg-white{% elif a.estado == 'en_tratamiento' %}border-blue-300 bg-white{% elif a.estado == 'resuelto' %}border-slate-200 bg-white opacity-90{% else %}border-slate-200 bg-white opacity-75{% endif %} shadow-sm">
+    <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between flex-wrap gap-2">
+        <div class="flex items-center gap-3">
+            {% if a.estado == 'pendiente' %}
+                <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-medium">PENDIENTE</span>
+            {% elif a.estado == 'en_tratamiento' %}
+                <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 font-medium">EN TRATAMIENTO</span>
+            {% elif a.estado == 'resuelto' %}
+                <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">RESUELTO</span>
+            {% else %}
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">DESCARTADO</span>
+            {% endif %}
+            <span class="text-xs text-slate-500">AV-{{ a.id|stringformat:"s"|slice:":8"|upper }} · detectado {{ a.detectado_at|date:"d/m/Y H:i" }}</span>
+        </div>
+        {% if a.resuelto_at %}
+            <span class="text-xs text-slate-500">Resuelto {{ a.resuelto_at|date:"d/m/Y" }} por {{ a.resuelto_por.get_full_name|default:a.resuelto_por.username|default:"—" }}</span>
+        {% endif %}
+    </div>
+    <div class="p-5 space-y-3">
+        <p class="text-sm">
+            <span class="font-semibold">{{ a.get_tipo_display }}</span> —
+            <a href="{% url 'personas:detalle' a.persona.id %}" class="text-emerald-700 hover:underline">{{ a.persona.apellido_1 }} {{ a.persona.apellido_2 }}, {{ a.persona.nombre }}</a>
+            <span class="text-slate-500">· {{ a.persona.centro_referencia.nombre }}</span>
+        </p>
+
+        <div class="rounded-lg bg-slate-50 border border-slate-200 p-3 text-sm grid md:grid-cols-2 gap-3">
+            <div>
+                <p class="text-xs uppercase tracking-wide text-slate-500">Anterior</p>
+                {% if a.profesional_anterior %}
+                    <p class="font-medium">{{ a.profesional_anterior.nombre_completo }}{% if a.profesional_anterior.rol_principal %} <span class="text-slate-500 font-normal">({{ a.profesional_anterior.rol_principal.nombre }})</span>{% endif %}</p>
+                {% else %}
+                    <p class="text-slate-500 italic">Sin profesional anterior</p>
+                {% endif %}
+            </div>
+            <div>
+                <p class="text-xs uppercase tracking-wide text-slate-500">Propuesto / Nuevo</p>
+                {% if a.profesional_nuevo %}
+                    <p class="font-medium">{{ a.profesional_nuevo.nombre_completo }}{% if a.profesional_nuevo.rol_principal %} <span class="text-slate-500 font-normal">({{ a.profesional_nuevo.rol_principal.nombre }})</span>{% endif %}</p>
+                    {% if a.profesional_nuevo.sobrepasa_ratio %}
+                        <p class="text-xs text-rose-700 mt-1">⚠️ Carga actual: {{ a.profesional_nuevo.casos_actuales_gestor }} casos · sobre ratio</p>
+                    {% endif %}
+                {% else %}
+                    <p class="text-slate-500 italic">Sin reemplazo asignado</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if a.notas_resolucion %}
+            <div>
+                <p class="text-xs uppercase tracking-wide text-slate-500">Notas de resolución</p>
+                <p class="text-sm text-slate-700">{{ a.notas_resolucion }}</p>
+            </div>
+        {% endif %}
+
+        {% if a.estado == 'pendiente' or a.estado == 'en_tratamiento' %}
+            <div x-data="{ accion: null, notas: '' }" class="pt-2 border-t border-slate-100">
+                {# Botonera inicial #}
+                <div x-show="accion === null" class="flex items-center gap-2">
+                    <button @click="accion = 'resuelto'" class="rounded bg-emerald-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-800">Aprobar y resolver</button>
+                    {% if a.estado == 'pendiente' %}
+                        <button @click="accion = 'en_tratamiento'" class="rounded border border-blue-300 bg-blue-50 px-3 py-1.5 text-xs text-blue-700 hover:bg-blue-100">Poner en tratamiento</button>
+                    {% endif %}
+                    <button @click="accion = 'descartado'" class="rounded border border-rose-300 bg-white px-3 py-1.5 text-xs text-rose-700 hover:bg-rose-50">Descartar</button>
+                </div>
+                {# Formulario con notas opcionales #}
+                <form x-show="accion !== null" x-cloak
+                      hx-post="{% url 'personas:resolver_aviso' a.id %}"
+                      hx-target="#aviso-{{ a.id }}"
+                      hx-swap="outerHTML"
+                      class="space-y-2">
+                    {% csrf_token %}
+                    <input type="hidden" name="accion" :value="accion">
+                    <textarea name="notas" rows="2" placeholder="Notas (opcional)…"
+                              x-model="notas"
+                              class="w-full rounded border border-slate-300 px-3 py-2 text-sm"></textarea>
+                    <div class="flex items-center gap-2">
+                        <button type="submit"
+                                :class="accion === 'descartado' ? 'bg-rose-700 hover:bg-rose-800' : (accion === 'en_tratamiento' ? 'bg-blue-700 hover:bg-blue-800' : 'bg-emerald-700 hover:bg-emerald-800')"
+                                class="rounded text-white px-3 py-1.5 text-xs font-medium">
+                            Confirmar <span x-text="accion === 'descartado' ? 'descarte' : (accion === 'en_tratamiento' ? 'tratamiento' : 'aprobación')"></span>
+                        </button>
+                        <button type="button" @click="accion = null; notas = ''" class="text-xs text-slate-500 hover:text-slate-700">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</article>

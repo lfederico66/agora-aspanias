@@ -1,0 +1,558 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de ocupación · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · todos los datos son ficticios</div>
+
+<div class="flex min-h-screen" x-data="{ userMenu: false }">
+
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100 relative">
+            <button @click="userMenu = !userMenu" class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">Federico Martínez</p>
+                    <p class="text-[10px] text-slate-500 truncate">Gerencia</p>
+                </div>
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div x-show="userMenu" x-cloak @click.outside="userMenu = false" class="absolute bottom-full left-3 right-3 mb-1 rounded-lg border border-slate-200 bg-white shadow-lg py-1 z-20">
+                <a href="personas-lista.html?mio=1" class="block px-3 py-1.5 text-sm text-emerald-700 hover:bg-emerald-50 font-medium">⭐ Mis personas</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Mi perfil</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Preferencias</a>
+                <div class="border-t border-slate-100 my-1"></div>
+                <a href="#" class="block px-3 py-1.5 text-sm text-rose-700 hover:bg-rose-50">Cerrar sesión</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate"><a href="index.html" class="hover:text-emerald-700">Inicio</a> <span class="mx-1">›</span> <a href="centros.html" class="hover:text-emerald-700">Centros</a> <span class="mx-1">›</span> <a href="centro-detalle.html" class="hover:text-emerald-700">Fuentecillas</a> <span class="mx-1">›</span> <span class="text-slate-700">Mapa de ocupación</span></nav>
+            <div class="flex items-center gap-2 shrink-0"></div>
+        </div>
+        <div class="px-8 py-6 max-w-7xl">
+
+
+            <div class="no-print">
+                <a href="control-pv.html" class="text-sm text-slate-500 hover:text-emerald-700">← Volver al tablero Control PV</a>
+            </div>
+
+            <!-- Cabecera -->
+            <div class="flex items-end justify-between flex-wrap gap-3">
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">🛏 Mapa de ocupación</h1>
+                    <p class="text-sm text-slate-500">Residencia Fuentecillas · Fundación Aspanias Burgos · Actualizado 19/05/2026 09:14</p>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap no-print">
+                    <select class="rounded border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                        <option>Residencia Fuentecillas</option>
+                        <option>Áreas de Vivienda</option>
+                        <option>Residencia Salas de los Infantes</option>
+                        <option>Residencia Santa María</option>
+                        <option>Residencia Quintanadueñas</option>
+                    </select>
+                    <span class="mx-1 text-slate-300">|</span>
+                    <button onclick="window.print()" class="rounded border border-slate-300 bg-white px-3 py-1.5 text-sm hover:border-emerald-400">🖨 Imprimir</button>
+                    <button class="rounded border border-slate-300 bg-white px-3 py-1.5 text-sm hover:border-emerald-400">Exportar XLSX</button>
+                </div>
+            </div>
+
+            <!-- KPIs -->
+            <div class="grid gap-3 md:grid-cols-5">
+                <div class="rounded-xl border border-slate-200 bg-white p-4">
+                    <p class="text-xs uppercase tracking-wide text-slate-500">Plazas totales</p>
+                    <p class="mt-1 text-3xl font-light">64</p>
+                </div>
+                <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-emerald-700">Ocupadas</p>
+                    <p class="mt-1 text-3xl font-light text-emerald-800">62</p>
+                    <p class="text-xs text-emerald-700">96,9 %</p>
+                </div>
+                <div class="rounded-xl border border-blue-200 bg-blue-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-blue-700">Libres</p>
+                    <p class="mt-1 text-3xl font-light text-blue-800">2</p>
+                    <p class="text-xs text-blue-700">3,1 %</p>
+                </div>
+                <div class="rounded-xl border border-rose-200 bg-rose-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-rose-700">Fuera servicio</p>
+                    <p class="mt-1 text-3xl font-light text-rose-800">0</p>
+                </div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4">
+                    <p class="text-xs uppercase tracking-wide text-slate-500">Hab. adaptadas PMR</p>
+                    <p class="mt-1 text-3xl font-light">8 <span class="text-base text-slate-500">/ 32</span></p>
+                </div>
+            </div>
+
+            <!-- Leyenda y filtros -->
+            <div class="rounded-xl border border-slate-200 bg-white p-4 flex items-center justify-between flex-wrap gap-3 no-print">
+                <div class="flex items-center gap-4 text-xs flex-wrap">
+                    <span class="font-semibold text-slate-500 uppercase tracking-wide">Leyenda:</span>
+                    <span class="inline-flex items-center gap-1.5"><span class="w-5 h-5 rounded bg-emerald-200 border border-emerald-400"></span> Ocupada</span>
+                    <span class="inline-flex items-center gap-1.5"><span class="w-5 h-5 rounded bg-blue-100 border border-blue-300 border-dashed"></span> Libre</span>
+                    <span class="inline-flex items-center gap-1.5"><span class="w-5 h-5 rounded bg-rose-100 border border-rose-300"></span> Fuera de servicio</span>
+                    <span class="inline-flex items-center gap-1.5"><span class="w-5 h-5 rounded bg-emerald-200 border-2 border-purple-500"></span> Adaptada PMR</span>
+                    <span class="inline-flex items-center gap-1.5"><span class="w-5 h-5 rounded bg-amber-100 border border-amber-400"></span> Llegada reciente (&lt; 7 días)</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs">
+                    <select class="rounded border border-slate-300 bg-white px-2 py-1 text-xs">
+                        <option>Todos los módulos</option>
+                        <option>Módulo Norte</option>
+                        <option>Módulo Sur</option>
+                        <option>Módulo Oeste</option>
+                    </select>
+                    <select class="rounded border border-slate-300 bg-white px-2 py-1 text-xs">
+                        <option>Todas las habitaciones</option>
+                        <option>Solo individuales</option>
+                        <option>Solo dobles</option>
+                        <option>Solo con baño propio</option>
+                        <option>Solo PMR</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-3">
+
+                <!-- ===== Mapa de camas ===== -->
+                <div class="md:col-span-2 space-y-6">
+
+                    <!-- Módulo Norte -->
+                    <article class="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+                        <div class="px-5 py-3 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+                            <div>
+                                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Módulo Norte</h2>
+                                <p class="text-xs text-slate-500">Planta 1 · Unidad de convivencia · 8 habitaciones · 16 camas</p>
+                            </div>
+                            <span class="text-xs text-emerald-700 font-medium">15 / 16 ocupadas</span>
+                        </div>
+                        <div class="p-5">
+                            <!-- Grid de habitaciones -->
+                            <div class="grid grid-cols-4 gap-3">
+
+                                <!-- Hab 21 (doble) -->
+                                <div class="rounded-lg border border-slate-200 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 21</p>
+                                    <p class="text-[10px] text-slate-500">Doble</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div @click="detalle({hab:'21', cama:'A', persona:'Romero Sanz, Antonio', tipo:'ocupada'})"
+                                             class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900" title="Romero Sanz, Antonio">A</div>
+                                        <div @click="detalle({hab:'21', cama:'B', persona:'Lara Pinto, Manuel', tipo:'ocupada'})"
+                                             class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900" title="Lara Pinto, Manuel">B</div>
+                                    </div>
+                                </div>
+
+                                <!-- Hab 22 (individual, PMR) -->
+                                <div class="rounded-lg border border-purple-300 ring-1 ring-purple-100 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 22 ♿</p>
+                                    <p class="text-[10px] text-slate-500">Indiv · PMR</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div @click="detalle({hab:'22', cama:'A', persona:'Vega Cabero, Isabel', tipo:'ocupada', pmr: true})"
+                                             class="cama flex-1 rounded bg-emerald-200 border-2 border-purple-500 px-1 py-1 text-[10px] text-center font-medium text-emerald-900" title="Vega Cabero, Isabel (PMR)">A</div>
+                                    </div>
+                                </div>
+
+                                <!-- Hab 23 (doble) -->
+                                <div class="rounded-lg border border-slate-200 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 23</p>
+                                    <p class="text-[10px] text-slate-500">Doble · WC propio</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div @click="detalle({hab:'23', cama:'A', persona:'Núñez Hidalgo, Pablo', tipo:'ocupada', llegada_reciente: true})"
+                                             class="cama flex-1 rounded bg-amber-100 border border-amber-400 px-1 py-1 text-[10px] text-center font-medium text-amber-900" title="Núñez Hidalgo, Pablo · llegada 15/05">A</div>
+                                        <div @click="detalle({hab:'23', cama:'B', persona:'Lozano del Río, Esther', tipo:'ocupada'})"
+                                             class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900" title="Lozano del Río, Esther">B</div>
+                                    </div>
+                                </div>
+
+                                <!-- Hab 24 (doble, PMR) — donde está Marta -->
+                                <div class="rounded-lg border border-purple-300 ring-1 ring-purple-100 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 24 ♿</p>
+                                    <p class="text-[10px] text-slate-500">Doble · PMR</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div @click="detalle({hab:'24', cama:'A', persona:'Martín Olalla, Carmen', tipo:'ocupada', pmr: true})"
+                                             class="cama flex-1 rounded bg-emerald-200 border-2 border-purple-500 px-1 py-1 text-[10px] text-center font-medium text-emerald-900" title="Martín Olalla, Carmen (PMR)">A</div>
+                                        <div @click="detalle({hab:'24', cama:'B', persona:'González Pérez, Marta', tipo:'ocupada', pmr: true, demo_persona: true})"
+                                             class="cama flex-1 rounded bg-emerald-200 border-2 border-purple-500 px-1 py-1 text-[10px] text-center font-medium text-emerald-900" title="González Pérez, Marta (PMR)">B</div>
+                                    </div>
+                                </div>
+
+                                <!-- Hab 25 (doble) -->
+                                <div class="rounded-lg border border-slate-200 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 25</p>
+                                    <p class="text-[10px] text-slate-500">Doble</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div @click="detalle({hab:'25', cama:'A', persona:'Calleja Mediavilla, Tomás', tipo:'ocupada'})"
+                                             class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900" title="Calleja Mediavilla, Tomás">A</div>
+                                        <div @click="detalle({hab:'25', cama:'B', tipo:'libre'})"
+                                             class="cama flex-1 rounded bg-blue-100 border border-blue-300 border-dashed px-1 py-1 text-[10px] text-center text-blue-700" title="Libre">B</div>
+                                    </div>
+                                </div>
+
+                                <!-- Hab 26 (individual) -->
+                                <div class="rounded-lg border border-slate-200 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 26</p>
+                                    <p class="text-[10px] text-slate-500">Individual</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div @click="detalle({hab:'26', cama:'A', persona:'Ortega Vela, Daniel', tipo:'ocupada'})"
+                                             class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900" title="Ortega Vela, Daniel">A</div>
+                                    </div>
+                                </div>
+
+                                <!-- Hab 27 (doble) -->
+                                <div class="rounded-lg border border-slate-200 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 27</p>
+                                    <p class="text-[10px] text-slate-500">Doble</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div @click="detalle({hab:'27', cama:'A', persona:'Sáez Domínguez, Esperanza', tipo:'ocupada'})"
+                                             class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">A</div>
+                                        <div @click="detalle({hab:'27', cama:'B', persona:'Fernández Cano, Joaquín', tipo:'ocupada'})"
+                                             class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">B</div>
+                                    </div>
+                                </div>
+
+                                <!-- Hab 28 (doble, PMR) -->
+                                <div class="rounded-lg border border-purple-300 ring-1 ring-purple-100 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 28 ♿</p>
+                                    <p class="text-[10px] text-slate-500">Doble · PMR</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div @click="detalle({hab:'28', cama:'A', persona:'López Hidalgo, Pilar', tipo:'ocupada', pmr: true})"
+                                             class="cama flex-1 rounded bg-emerald-200 border-2 border-purple-500 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">A</div>
+                                        <div @click="detalle({hab:'28', cama:'B', persona:'Bahillo Pérez, Encarna', tipo:'ocupada', pmr: true})"
+                                             class="cama flex-1 rounded bg-emerald-200 border-2 border-purple-500 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">B</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Módulo Sur -->
+                    <article class="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+                        <div class="px-5 py-3 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+                            <div>
+                                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Módulo Sur</h2>
+                                <p class="text-xs text-slate-500">Planta 1 · 8 habitaciones · 16 camas</p>
+                            </div>
+                            <span class="text-xs text-emerald-700 font-medium">15 / 16 ocupadas</span>
+                        </div>
+                        <div class="p-5">
+                            <div class="grid grid-cols-4 gap-3">
+                                <!-- Habitaciones 11-18 -->
+                                <div class="rounded-lg border border-slate-200 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 11</p>
+                                    <p class="text-[10px] text-slate-500">Doble</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900" title="Ocupada">A</div>
+                                        <div class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900" title="Ocupada">B</div>
+                                    </div>
+                                </div>
+                                <div class="rounded-lg border border-slate-200 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 12</p>
+                                    <p class="text-[10px] text-slate-500">Indiv</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">A</div>
+                                    </div>
+                                </div>
+                                <div class="rounded-lg border border-slate-200 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 13</p>
+                                    <p class="text-[10px] text-slate-500">Doble</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">A</div>
+                                        <div class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">B</div>
+                                    </div>
+                                </div>
+                                <div class="rounded-lg border border-purple-300 ring-1 ring-purple-100 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 14 ♿</p>
+                                    <p class="text-[10px] text-slate-500">Doble · PMR</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div class="cama flex-1 rounded bg-emerald-200 border-2 border-purple-500 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">A</div>
+                                        <div class="cama flex-1 rounded bg-emerald-200 border-2 border-purple-500 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">B</div>
+                                    </div>
+                                </div>
+                                <div class="rounded-lg border border-slate-200 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 15</p>
+                                    <p class="text-[10px] text-slate-500">Doble</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">A</div>
+                                        <div class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">B</div>
+                                    </div>
+                                </div>
+                                <div class="rounded-lg border border-slate-200 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 16</p>
+                                    <p class="text-[10px] text-slate-500">Doble</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">A</div>
+                                        <div @click="detalle({hab:'16', cama:'B', tipo:'libre'})"
+                                             class="cama flex-1 rounded bg-blue-100 border border-blue-300 border-dashed px-1 py-1 text-[10px] text-center text-blue-700" title="Libre">B</div>
+                                    </div>
+                                </div>
+                                <div class="rounded-lg border border-slate-200 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 17</p>
+                                    <p class="text-[10px] text-slate-500">Indiv</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div class="cama flex-1 rounded bg-emerald-200 border border-emerald-400 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">A</div>
+                                    </div>
+                                </div>
+                                <div class="rounded-lg border border-purple-300 ring-1 ring-purple-100 p-2">
+                                    <p class="text-xs font-semibold text-slate-700">Hab. 18 ♿</p>
+                                    <p class="text-[10px] text-slate-500">Doble · PMR</p>
+                                    <div class="mt-2 flex gap-1">
+                                        <div class="cama flex-1 rounded bg-emerald-200 border-2 border-purple-500 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">A</div>
+                                        <div class="cama flex-1 rounded bg-emerald-200 border-2 border-purple-500 px-1 py-1 text-[10px] text-center font-medium text-emerald-900">B</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Módulo Oeste -->
+                    <article class="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+                        <div class="px-5 py-3 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+                            <div>
+                                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Módulo Oeste</h2>
+                                <p class="text-xs text-slate-500">Planta 2 · 16 habitaciones · 32 camas</p>
+                            </div>
+                            <span class="text-xs text-emerald-700 font-medium">32 / 32 ocupadas</span>
+                        </div>
+                        <div class="p-5">
+                            <div class="grid grid-cols-4 gap-3">
+                                <!-- 16 habitaciones (todas ocupadas) — versión resumida -->
+                                <template x-for="n in 16">
+                                    <div class="rounded-lg border border-slate-200 p-2">
+                                        <p class="text-xs font-semibold text-slate-700">Hab. <span x-text="n + 30"></span></p>
+                                        <p class="text-[10px] text-slate-500" x-text="n % 4 === 0 ? 'Doble · PMR' : (n % 3 === 0 ? 'Indiv' : 'Doble')"></p>
+                                        <div class="mt-2 flex gap-1">
+                                            <div class="cama flex-1 rounded px-1 py-1 text-[10px] text-center font-medium text-emerald-900"
+                                                 :class="n % 4 === 0 ? 'bg-emerald-200 border-2 border-purple-500' : 'bg-emerald-200 border border-emerald-400'">A</div>
+                                            <template x-if="n % 3 !== 0">
+                                                <div class="cama flex-1 rounded px-1 py-1 text-[10px] text-center font-medium text-emerald-900"
+                                                     :class="n % 4 === 0 ? 'bg-emerald-200 border-2 border-purple-500' : 'bg-emerald-200 border border-emerald-400'">B</div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- ===== Sidebar ===== -->
+                <aside class="space-y-4">
+
+                    <!-- Detalle de cama seleccionada -->
+                    <article x-show="!seleccionada" x-cloak class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm text-center text-sm text-slate-500">
+                        👆 Pulsa sobre una cama del mapa para ver su detalle.
+                    </article>
+
+                    <article x-show="seleccionada && seleccionada.tipo === 'ocupada'" x-cloak class="rounded-xl border-2 border-emerald-300 bg-white p-5 shadow-md">
+                        <div class="flex items-center justify-between mb-3">
+                            <h2 class="text-sm font-semibold uppercase tracking-wide text-emerald-800">Cama ocupada</h2>
+                            <button @click="seleccionada = null" class="text-slate-400 hover:text-slate-700">×</button>
+                        </div>
+                        <p class="text-xs text-slate-500">Habitación <span x-text="seleccionada?.hab"></span> · Cama <span x-text="seleccionada?.cama"></span></p>
+                        <p class="mt-1 font-semibold text-lg" x-text="seleccionada?.persona"></p>
+
+                        <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                            <div class="rounded bg-slate-50 p-2">
+                                <p class="text-slate-500">Antigüedad en cama</p>
+                                <p class="font-medium" x-text="seleccionada?.llegada_reciente ? '4 días' : '1 año, 1 mes'"></p>
+                            </div>
+                            <div class="rounded bg-slate-50 p-2">
+                                <p class="text-slate-500">Antigüedad en centro</p>
+                                <p class="font-medium" x-text="seleccionada?.llegada_reciente ? '4 días' : '7 años, 2 meses'"></p>
+                            </div>
+                        </div>
+
+                        <div x-show="seleccionada?.pmr" class="mt-3 rounded bg-purple-50 border border-purple-200 p-2 text-xs text-purple-900">
+                            ♿ Habitación adaptada a movilidad reducida
+                        </div>
+
+                        <div x-show="seleccionada?.llegada_reciente" class="mt-3 rounded bg-amber-50 border border-amber-200 p-2 text-xs text-amber-900">
+                            📅 Llegada reciente — revisar Plan de Vida y notificación a familia
+                        </div>
+
+                        <div class="mt-4 flex gap-2 flex-wrap">
+                            <a href="persona-detalle.html" class="rounded bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">Ver ficha →</a>
+                            <button class="rounded border border-slate-300 bg-white px-3 py-1.5 text-xs hover:border-slate-400">Mover de cama</button>
+                            <button class="rounded border border-rose-300 bg-white px-3 py-1.5 text-xs text-rose-700 hover:bg-rose-50">Registrar salida</button>
+                        </div>
+                    </article>
+
+                    <article x-show="seleccionada && seleccionada.tipo === 'libre'" x-cloak class="rounded-xl border-2 border-blue-300 bg-white p-5 shadow-md">
+                        <div class="flex items-center justify-between mb-3">
+                            <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-800">Cama libre</h2>
+                            <button @click="seleccionada = null" class="text-slate-400 hover:text-slate-700">×</button>
+                        </div>
+                        <p class="text-xs text-slate-500">Habitación <span x-text="seleccionada?.hab"></span> · Cama <span x-text="seleccionada?.cama"></span></p>
+                        <p class="mt-2 text-sm text-slate-600">Disponible para alta nueva o traslado interno.</p>
+                        <div class="mt-4 flex gap-2 flex-wrap">
+                            <button class="rounded bg-emerald-700 text-white px-3 py-1.5 text-xs font-medium hover:bg-emerald-800">+ Asignar persona</button>
+                            <button class="rounded border border-slate-300 bg-white px-3 py-1.5 text-xs hover:border-slate-400">Marcar fuera servicio</button>
+                        </div>
+                    </article>
+
+                    <!-- Lista de camas libres -->
+                    <article class="rounded-xl border border-blue-200 bg-blue-50 p-5 shadow-sm">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-800">Camas libres ahora</h2>
+                        <ul class="mt-3 space-y-1.5 text-sm">
+                            <li class="flex items-center justify-between">
+                                <span>Módulo Norte · Hab. 25 · Cama B</span>
+                                <button class="text-xs text-blue-700 hover:underline">Asignar</button>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>Módulo Sur · Hab. 16 · Cama B</span>
+                                <button class="text-xs text-blue-700 hover:underline">Asignar</button>
+                            </li>
+                        </ul>
+                        <p class="mt-3 text-xs text-blue-700">2 camas libres · 3,1 % del centro</p>
+                    </article>
+
+                    <!-- Movimientos recientes -->
+                    <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Movimientos recientes</h2>
+                        <ul class="mt-3 space-y-2.5 text-xs">
+                            <li class="flex items-start gap-2">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
+                                <div>
+                                    <p class="font-medium">Núñez Hidalgo, Pablo</p>
+                                    <p class="text-slate-500">15/05 · Alta inicial → Mód. Norte · Hab. 23 · A</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="w-2 h-2 rounded-full bg-blue-500 mt-1.5 flex-shrink-0"></span>
+                                <div>
+                                    <p class="font-medium">Salvador López, Begoña</p>
+                                    <p class="text-slate-500">12/05 · Traslado interno → Mód. Sur · Hab. 15 · A</p>
+                                    <p class="text-[10px] text-slate-400">Motivo: cambio por convivencia</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="w-2 h-2 rounded-full bg-rose-500 mt-1.5 flex-shrink-0"></span>
+                                <div>
+                                    <p class="font-medium">García Mata, Eulogio</p>
+                                    <p class="text-slate-500">08/05 · Salida del centro</p>
+                                    <p class="text-[10px] text-slate-400">Motivo: fallecimiento</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>
+                                <div>
+                                    <p class="font-medium">Ruiz Polanco, Adelina</p>
+                                    <p class="text-slate-500">04/05 → 09/05 · Hospitalización · vuelta a Mód. Oeste · Hab. 38 · A</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <a href="#" class="mt-3 inline-block text-xs text-emerald-700 hover:underline">Ver histórico completo →</a>
+                    </article>
+
+                    <!-- Alertas operativas -->
+                    <article class="rounded-xl border border-amber-200 bg-amber-50 p-5 shadow-sm">
+                        <h2 class="text-sm font-semibold uppercase tracking-wide text-amber-800">Alertas</h2>
+                        <ul class="mt-2 space-y-1.5 text-xs text-amber-900">
+                            <li>· Núñez Hidalgo, Pablo — Plan de Vida sin iniciar (alta hace 4 días)</li>
+                            <li>· Hab. 25 B libre desde 28/04 — sin candidata asignada</li>
+                            <li>· Solo 2 plazas libres · contacto con servicios sociales JCyL para nuevas valoraciones</li>
+                        </ul>
+                    </article>
+                </aside>
+            </div>
+
+            <!-- Información operativa para inspecciones -->
+            <div class="rounded-xl border border-blue-200 bg-blue-50 p-5 text-sm text-blue-900 no-print">
+                <p class="text-xs uppercase tracking-wide text-blue-700 font-semibold">Datos relevantes para Ley 3/2024 CyL</p>
+                <p class="mt-2">El módulo de unidad de convivencia se ajusta al modelo de la Ley 3/2024 (máx. 12-15 personas por unidad). Plazo de adecuación 2029. El mapa permite verificar cumplimiento de ratios habitación/cama y proporción de plazas adaptadas (PMR) en cada inspección.</p>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, cita..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

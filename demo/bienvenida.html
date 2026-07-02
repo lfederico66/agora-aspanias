@@ -1,0 +1,391 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body{font-family:'Inter',-apple-system,system-ui,sans-serif}
+        .paso { scroll-margin-top: 80px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col">
+
+    <div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-xs py-1.5">
+        🎯 <span class="font-medium">Demo de presentación</span> — todos los datos son ficticios
+    </div>
+
+    <header class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-10">
+        <div class="mx-auto max-w-5xl px-6 py-3 flex items-center justify-between gap-4 flex-wrap">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-label="ÁGORA">
+                        <path d="M 7 35 L 20 7 L 33 35"/>
+                        <path d="M 12 24 L 28 24"/>
+                        <circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/>
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-base font-semibold text-slate-900 leading-tight">ÁGORA</p>
+                    <p class="text-[11px] text-slate-500 leading-tight">Grupo Social Aspanias</p>
+                </div>
+            </a>
+            <a href="index.html" class="rounded-lg bg-emerald-700 text-white px-4 py-2 text-sm font-medium hover:bg-emerald-800">Saltar el tour · Entrar a la demo →</a>
+        </div>
+    </header>
+
+    <main class="flex-1">
+
+        <!-- HERO -->
+        <section class="px-6 py-20 bg-gradient-to-br from-emerald-700 via-emerald-800 to-emerald-900 text-white">
+            <div class="mx-auto max-w-4xl text-center">
+                <p class="text-sm uppercase tracking-widest text-emerald-200 font-medium">Tras la presentación al Patronato · jun 2026</p>
+                <h1 class="mt-3 text-4xl md:text-5xl font-semibold tracking-tight">Cuidar mejor, sabiendo cada paso.</h1>
+                <p class="mt-6 text-lg md:text-xl text-emerald-100 max-w-3xl mx-auto leading-relaxed">
+                    ÁGORA es el sistema con el que el Grupo Social Aspanias hará el seguimiento integral
+                    de las personas que atendemos: dónde viven, cómo están, qué necesitan y quién les acompaña.
+                </p>
+                <div class="mt-10 flex items-center justify-center gap-3 flex-wrap">
+                    <a href="#paso-1" class="rounded-lg bg-white text-emerald-800 px-6 py-3 text-base font-semibold hover:bg-emerald-50">Comenzar tour →</a>
+                    <a href="index.html" class="rounded-lg border-2 border-white/40 text-white px-6 py-3 text-base font-medium hover:bg-white/10">Ir directo a la demo</a>
+                </div>
+                <p class="mt-8 text-xs text-emerald-200">Tour guiado · 5 pasos · 2 minutos de lectura</p>
+            </div>
+        </section>
+
+        <!-- PASO 1: Qué es ÁGORA -->
+        <section id="paso-1" class="paso px-6 py-20">
+            <div class="mx-auto max-w-4xl">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">1</span>
+                    <p class="text-xs uppercase tracking-widest text-emerald-700 font-medium">El sistema</p>
+                </div>
+                <h2 class="text-3xl font-semibold tracking-tight">Una sola ficha por persona, accesible para todo el equipo.</h2>
+                <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+                    Hoy la información de cada persona atendida está repartida en Excel, papel y
+                    sistemas distintos. Es difícil hacer seguimiento, es difícil compartir entre profesionales,
+                    y es difícil rendir cuentas al Patronato o a la Junta.
+                </p>
+                <p class="mt-4 text-lg text-slate-600 leading-relaxed">
+                    ÁGORA reúne <strong class="text-slate-900">en un único lugar</strong> los datos personales, médicos,
+                    familiares, de medicación, de alojamiento y de seguimiento de cada una de las
+                    <strong class="text-slate-900">{{personas_atendidas}} personas</strong> que atendemos en los {{centros}} centros y servicios del grupo.
+                </p>
+
+                <div class="mt-8 grid gap-4 md:grid-cols-3">
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <p class="text-3xl font-light text-emerald-700">{{personas_atendidas}}</p>
+                        <p class="mt-1 text-sm text-slate-600">personas atendidas</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <p class="text-3xl font-light text-emerald-700">13</p>
+                        <p class="mt-1 text-sm text-slate-600">centros y servicios</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <p class="text-3xl font-light text-emerald-700">~150</p>
+                        <p class="mt-1 text-sm text-slate-600">profesionales que la usarán</p>
+                    </div>
+                </div>
+
+                <div class="mt-10 text-center">
+                    <a href="#paso-2" class="text-emerald-700 font-medium hover:underline">Siguiente: cómo es la ficha de una persona ↓</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASO 2: La ficha de una persona -->
+        <section id="paso-2" class="paso px-6 py-20 bg-white">
+            <div class="mx-auto max-w-4xl">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-lg">2</span>
+                    <p class="text-xs uppercase tracking-widest text-blue-700 font-medium">La persona en el centro</p>
+                </div>
+                <h2 class="text-3xl font-semibold tracking-tight">Toda su vida en cinco pestañas.</h2>
+                <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+                    Cada persona atendida tiene su ficha, con la información organizada igual que pensamos
+                    en su día a día. Nada de pantallas técnicas: lenguaje humano.
+                </p>
+
+                <ul class="mt-8 space-y-4">
+                    <li class="flex gap-4 items-start">
+                        <span class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5"><use href="icons.svg#clipboard-list"/></svg>
+                        </span>
+                        <div>
+                            <p class="font-semibold">Resumen</p>
+                            <p class="text-slate-600">Lo esencial de un vistazo: edad, dónde duerme, quién la cuida, sus próximas citas.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <span class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5"><use href="icons.svg#user"/></svg>
+                        </span>
+                        <div>
+                            <p class="font-semibold">Datos personales y discapacidad</p>
+                            <p class="text-slate-600">Datos administrativos, grado de discapacidad, dependencia y medidas de apoyo (Ley 8/2021).</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <span class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5"><use href="icons.svg#stethoscope"/></svg>
+                        </span>
+                        <div>
+                            <p class="font-semibold">Información médica</p>
+                            <p class="text-slate-600">Datos clínicos, alergias, vacunas, peso y cuidados de enfermería. Visible solo para el personal sanitario.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <span class="w-10 h-10 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5"><use href="icons.svg#heart-handshake"/></svg>
+                        </span>
+                        <div>
+                            <p class="font-semibold">Familiares</p>
+                            <p class="text-slate-600">Quiénes son su entorno, cómo contactarles, quién recibe avisos por la app de familias.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <span class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5"><use href="icons.svg#pill"/></svg>
+                        </span>
+                        <div>
+                            <p class="font-semibold">Medicación</p>
+                            <p class="text-slate-600">Pautas activas y el histórico — qué toma, cuándo y por qué.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="mt-10 rounded-xl bg-emerald-50 border border-emerald-200 p-5">
+                    <p class="text-sm text-emerald-900">
+                        <strong>Verás un ejemplo:</strong> en la demo encontrarás la ficha de
+                        <em>Marta González Pérez</em>, una persona ficticia que vive en la
+                        Residencia Fuentecillas. Sus datos son inventados pero su historia es realista.
+                    </p>
+                </div>
+
+                <div class="mt-10 text-center">
+                    <a href="#paso-3" class="text-emerald-700 font-medium hover:underline">Siguiente: el Plan de Vida ↓</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASO 3: Plan de Vida -->
+        <section id="paso-3" class="paso px-6 py-20">
+            <div class="mx-auto max-w-4xl">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-10 h-10 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-lg">3</span>
+                    <p class="text-xs uppercase tracking-widest text-amber-700 font-medium">Nuestra metodología</p>
+                </div>
+                <h2 class="text-3xl font-semibold tracking-tight">El Plan de Vida, en el corazón.</h2>
+                <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+                    Aspanias trabaja con un protocolo propio: cada persona tiene su <strong class="text-slate-900">Plan de Vida</strong>,
+                    formado por 5 documentos vivos que escriben juntos la persona, su familia y el equipo
+                    profesional. Es el centro de nuestra atención y ÁGORA lo guarda, lo edita y lo imprime.
+                </p>
+
+                <!-- Diagrama Plan de Vida — los 5 documentos en pentágono con la persona en el centro -->
+                <div class="mt-10 flex justify-center">
+                    <svg viewBox="0 0 500 500" class="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Líneas radiales (5) -->
+                        <g stroke="#d1fae5" stroke-width="2" stroke-dasharray="4 4">
+                            <line x1="250" y1="250" x2="250" y2="85"/>
+                            <line x1="250" y1="250" x2="407" y2="178"/>
+                            <line x1="250" y1="250" x2="347" y2="420"/>
+                            <line x1="250" y1="250" x2="153" y2="420"/>
+                            <line x1="250" y1="250" x2="93" y2="178"/>
+                        </g>
+
+                        <!-- Persona en el centro -->
+                        <circle cx="250" cy="250" r="58" fill="#047857"/>
+                        <circle cx="250" cy="250" r="58" fill="none" stroke="#a7f3d0" stroke-width="4" opacity="0.5"/>
+                        <text x="250" y="244" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="14" font-weight="600">La persona</text>
+                        <text x="250" y="262" text-anchor="middle" fill="#a7f3d0" font-family="Inter, sans-serif" font-size="11">en el centro</text>
+
+                        <!-- Vertice 1 (arriba) — Historia de Vida -->
+                        <circle cx="250" cy="65" r="42" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+                        <svg x="232" y="46" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 7v14"/>
+                            <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>
+                        </svg>
+                        <text x="250" y="135" text-anchor="middle" fill="#0f172a" font-family="Inter, sans-serif" font-size="13" font-weight="600">Historia de Vida</text>
+
+                        <!-- Vertice 2 (arriba dcha) — Algo sobre mí -->
+                        <circle cx="427" cy="178" r="42" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <svg x="409" y="160" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        </svg>
+                        <text x="427" y="245" text-anchor="middle" fill="#0f172a" font-family="Inter, sans-serif" font-size="13" font-weight="600">Algo sobre mí</text>
+
+                        <!-- Vertice 3 (abajo dcha) — Plan de Apoyo -->
+                        <circle cx="367" cy="420" r="42" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+                        <svg x="349" y="402" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#7e22ce" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m11 17 2 2a1 1 0 1 0 3-3"/>
+                            <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/>
+                            <path d="m21 3 1 11h-2"/>
+                            <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/>
+                            <path d="M3 4h8"/>
+                        </svg>
+                        <text x="367" y="485" text-anchor="middle" fill="#0f172a" font-family="Inter, sans-serif" font-size="13" font-weight="600">Plan de Apoyo</text>
+
+                        <!-- Vertice 4 (abajo izda) — Revisión de objetivos -->
+                        <circle cx="133" cy="420" r="42" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                        <svg x="115" y="402" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="6"/>
+                            <circle cx="12" cy="12" r="2"/>
+                        </svg>
+                        <text x="133" y="485" text-anchor="middle" fill="#0f172a" font-family="Inter, sans-serif" font-size="13" font-weight="600">Revisión objetivos</text>
+
+                        <!-- Vertice 5 (arriba izda) — Proyecto de Vida -->
+                        <circle cx="73" cy="178" r="42" fill="#fce7f3" stroke="#db2777" stroke-width="2"/>
+                        <svg x="55" y="160" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#be185d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+                        </svg>
+                        <text x="73" y="245" text-anchor="middle" fill="#0f172a" font-family="Inter, sans-serif" font-size="13" font-weight="600">Proyecto de Vida</text>
+                    </svg>
+                </div>
+
+                <p class="mt-8 text-lg text-slate-600 leading-relaxed">
+                    Cada Plan de Vida tiene una <strong class="text-slate-900">persona gestora del caso</strong>
+                    (la que coordina) y una <strong class="text-slate-900">persona de referencia</strong>
+                    (la que mejor conoce su día a día). El protocolo limita a 30 casos por gestora —
+                    ÁGORA avisa si alguien se acerca a ese límite.
+                </p>
+
+                <div class="mt-10 text-center">
+                    <a href="#paso-4" class="text-emerald-700 font-medium hover:underline">Siguiente: la agenda del equipo ↓</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASO 4: Agenda -->
+        <section id="paso-4" class="paso px-6 py-20 bg-white">
+            <div class="mx-auto max-w-4xl">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-10 h-10 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg">4</span>
+                    <p class="text-xs uppercase tracking-widest text-purple-700 font-medium">El día a día</p>
+                </div>
+                <h2 class="text-3xl font-semibold tracking-tight">Lo que pasa hoy, esta semana y este mes.</h2>
+                <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+                    Una agenda multiprofesional compartida: las citas individuales, las reuniones de equipo,
+                    las visitas al hospital. Quién va, dónde, a qué hora, y si la familia ya está avisada.
+                </p>
+
+                <div class="mt-8 grid gap-4 md:grid-cols-3">
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center mb-3">
+                            <svg class="w-5 h-5"><use href="icons.svg#clock"/></svg>
+                        </div>
+                        <p class="font-semibold">Vista Hoy</p>
+                        <p class="text-sm text-slate-600 mt-1">Línea temporal por horas. La cita en curso destacada.</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center mb-3">
+                            <svg class="w-5 h-5"><use href="icons.svg#calendar"/></svg>
+                        </div>
+                        <p class="font-semibold">Vista Semana</p>
+                        <p class="text-sm text-slate-600 mt-1">Lo que viene de lunes a viernes en un golpe de vista.</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-5">
+                        <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center mb-3">
+                            <svg class="w-5 h-5"><use href="icons.svg#calendar"/></svg>
+                        </div>
+                        <p class="font-semibold">Vista Mes</p>
+                        <p class="text-sm text-slate-600 mt-1">Calendario tradicional para planificar a medio plazo.</p>
+                    </div>
+                </div>
+
+                <p class="mt-8 text-lg text-slate-600 leading-relaxed">
+                    Con un clic puedes imprimir el reparto semanal del equipo, la lista de citas del día
+                    para colgar en el office, o la convocatoria que acompaña a una persona al hospital
+                    con sus alergias y medicación crítica resaltadas.
+                </p>
+
+                <div class="mt-10 text-center">
+                    <a href="#paso-5" class="text-emerald-700 font-medium hover:underline">Siguiente: los datos están protegidos ↓</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASO 5: Datos seguros -->
+        <section id="paso-5" class="paso px-6 py-20">
+            <div class="mx-auto max-w-4xl">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-10 h-10 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-lg">5</span>
+                    <p class="text-xs uppercase tracking-widest text-slate-700 font-medium">La parte invisible</p>
+                </div>
+                <h2 class="text-3xl font-semibold tracking-tight">Cada acceso queda registrado.</h2>
+                <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+                    Los datos de las personas atendidas son extraordinariamente sensibles. ÁGORA aplica
+                    desde el primer día tres principios:
+                </p>
+
+                <ul class="mt-8 space-y-5">
+                    <li class="flex gap-4 items-start">
+                        <span class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5"><use href="icons.svg#lock"/></svg>
+                        </span>
+                        <div>
+                            <p class="font-semibold">Quien accede, queda registrado.</p>
+                            <p class="text-slate-600">Cada lectura de una ficha apunta usuario, fecha, hora y motivo. Si surge una reclamación, hay rastro.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <span class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5"><use href="icons.svg#shield-check"/></svg>
+                        </span>
+                        <div>
+                            <p class="font-semibold">Cada profesional ve solo lo que necesita.</p>
+                            <p class="text-slate-600">El personal sanitario ve datos médicos. Quien no lo es, no. La capacidad legal de la persona (Ley 8/2021) se respeta también dentro de la app.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <span class="w-10 h-10 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5"><use href="icons.svg#handshake"/></svg>
+                        </span>
+                        <div>
+                            <p class="font-semibold">Doble corresponsabilidad de las dos entidades.</p>
+                            <p class="text-slate-600">Fundación Aspanias Burgos y Aspaniasmerc 2016 comparten la responsabilidad del tratamiento, con un acuerdo formal entre ambas.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <p class="mt-10 text-lg text-slate-600 leading-relaxed">
+                    Lex Digital, nuestros asesores en protección de datos, validan el sistema desde la
+                    primera fase. La evaluación de impacto es un documento vivo que se actualiza con cada
+                    cambio significativo.
+                </p>
+            </div>
+        </section>
+
+        <!-- CTA final -->
+        <section class="px-6 py-20 bg-gradient-to-br from-emerald-700 to-emerald-900 text-white">
+            <div class="mx-auto max-w-3xl text-center">
+                <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">¿Quieres ver cómo funciona?</h2>
+                <p class="mt-5 text-lg text-emerald-100 max-w-2xl mx-auto">
+                    Te recomendamos empezar por la ficha de Marta. Desde ahí podrás explorar libremente:
+                    su Plan de Vida, su medicación, dónde duerme, sus próximas citas.
+                </p>
+                <div class="mt-10 flex items-center justify-center gap-3 flex-wrap">
+                    <a href="persona-detalle.html" class="rounded-lg bg-white text-emerald-800 px-6 py-3 text-base font-semibold hover:bg-emerald-50">Empezar por Marta González →</a>
+                    <a href="index.html" class="rounded-lg border-2 border-white/40 text-white px-6 py-3 text-base font-medium hover:bg-white/10">Ver todos los módulos</a>
+                </div>
+                <p class="mt-8 text-xs text-emerald-200">
+                    Esta es una demostración con datos ficticios. El sistema real entrará en piloto en el Centro Fuentecillas en 2027.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-200 bg-white py-6">
+        <div class="mx-auto max-w-5xl px-6 text-center text-xs text-slate-500">
+            <p class="font-semibold text-slate-700">ÁGORA · Grupo Social Aspanias</p>
+            <p class="mt-1">Fundación Aspanias Burgos + Aspaniasmerc 2016 S.L.U. · C/ Europa 12, 09001 Burgos</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablero · Control PV · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · todos los datos son ficticios</div>
+
+<div class="flex min-h-screen" x-data="{ userMenu: false }">
+
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100 relative">
+            <button @click="userMenu = !userMenu" class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">Federico Martínez</p>
+                    <p class="text-[10px] text-slate-500 truncate">Gerencia</p>
+                </div>
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div x-show="userMenu" x-cloak @click.outside="userMenu = false" class="absolute bottom-full left-3 right-3 mb-1 rounded-lg border border-slate-200 bg-white shadow-lg py-1 z-20">
+                <a href="personas-lista.html?mio=1" class="block px-3 py-1.5 text-sm text-emerald-700 hover:bg-emerald-50 font-medium">⭐ Mis personas</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Mi perfil</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Preferencias</a>
+                <div class="border-t border-slate-100 my-1"></div>
+                <a href="#" class="block px-3 py-1.5 text-sm text-rose-700 hover:bg-rose-50">Cerrar sesión</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate"><a href="index.html" class="hover:text-emerald-700">Inicio</a> <span class="mx-1">›</span> <a href="indicadores.html" class="hover:text-emerald-700">Tablero</a> <span class="mx-1">›</span> <span class="text-slate-700">Control PV</span></nav>
+            <div class="flex items-center gap-2 shrink-0"></div>
+        </div>
+        <div class="px-8 py-6 max-w-7xl">
+
+
+            <div class="flex items-end justify-between flex-wrap gap-3">
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">Control de Planes de Vida por servicio</h1>
+                    <p class="text-sm text-slate-500">18 centros y servicios · 417 personas atendidas · Fundación Aspanias Burgos + Aspaniasmerc 2016 S.L.U.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <select class="rounded border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                        <option>Todos los corresponsables</option>
+                        <option>Fundación Aspanias Burgos</option>
+                        <option>Aspaniasmerc 2016 S.L.U.</option>
+                    </select>
+                    <button class="rounded border border-slate-300 bg-white px-3 py-1.5 text-sm hover:border-slate-400">Exportar XLSX</button>
+                    <a href="indicadores.html" class="rounded bg-emerald-700 text-white px-3 py-1.5 text-sm font-medium hover:bg-emerald-800">Cuadro de mando →</a>
+                </div>
+            </div>
+
+            <!-- KPIs grupo -->
+            <div class="mt-6 grid gap-4 md:grid-cols-5">
+                <div class="rounded-xl border border-slate-200 bg-white p-4">
+                    <p class="text-xs uppercase tracking-wide text-slate-500">Personas</p>
+                    <p class="mt-1 text-3xl font-light">383</p>
+                </div>
+                <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-emerald-700">PV realizados</p>
+                    <p class="mt-1 text-3xl font-light text-emerald-800">347 <span class="text-base">· 91%</span></p>
+                </div>
+                <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-amber-700">Pendientes</p>
+                    <p class="mt-1 text-3xl font-light text-amber-800">36 <span class="text-base">· 9%</span></p>
+                </div>
+                <div class="rounded-xl border border-blue-200 bg-blue-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-blue-700">Revisados &lt; 12 m</p>
+                    <p class="mt-1 text-3xl font-light text-blue-800">261 <span class="text-base">· 68%</span></p>
+                </div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4">
+                    <p class="text-xs uppercase tracking-wide text-slate-500">Compartidos R/V</p>
+                    <p class="mt-1 text-3xl font-light">198</p>
+                </div>
+            </div>
+
+            <!-- Tablero centros -->
+            <div class="mt-6 rounded-xl border border-slate-200 bg-white overflow-hidden">
+                <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+                    <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Tablero por centro</h2>
+                    <p class="text-xs text-slate-500">Click en un centro para ver el detalle de personas</p>
+                </div>
+                <div class="overflow-x-auto">
+                    <div class="px-1 py-2 mb-2 flex items-center justify-between flex-wrap gap-2 text-xs" x-data="{ orden: 'pv_asc' }">
+                    <p class="text-slate-600"><strong class="text-slate-900">18 servicios</strong> · 417 personas en seguimiento · <span class="text-slate-500">% PV grupo: 87 %</span></p>
+                    <div class="flex items-center gap-2">
+                        <span class="text-slate-500">Ordenar por:</span>
+                        <select x-model="orden" class="rounded border border-slate-300 bg-white px-2 py-1">
+                            <option value="pv_asc">% PV ascendente (críticos primero)</option>
+                            <option value="pv_desc">% PV descendente</option>
+                            <option value="centro_az">Centro A → Z</option>
+                            <option value="centro_za">Centro Z → A</option>
+                            <option value="personas_desc">Personas (mayor primero)</option>
+                        </select>
+                    </div>
+                </div>
+                <table class="w-full text-sm">
+                        <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
+                            <tr>
+                                <th class="text-left px-4 py-2">Centro / Servicio</th>
+                                <th class="text-left px-4 py-2">Corresponsable</th>
+                                <th class="text-left px-4 py-2">Coordinación</th>
+                                <th class="text-right px-4 py-2">Personas</th>
+                                <th class="text-right px-4 py-2">Realizados</th>
+                                <th class="text-right px-4 py-2">Pendientes</th>
+                                <th class="text-right px-4 py-2">Revisados</th>
+                                <th class="text-right px-4 py-2">% real.</th>
+                                <th class="text-left px-4 py-2">Estado</th>
+                                <th class="text-left px-4 py-2"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 font-medium">Residencia Fuentecillas</td>
+                                <td class="px-4 py-2 text-slate-500">FAB</td>
+                                <td class="px-4 py-2 text-slate-500">Lucía Martínez</td>
+                                <td class="px-4 py-2 text-right">62</td>
+                                <td class="px-4 py-2 text-right">60</td>
+                                <td class="px-4 py-2 text-right">2</td>
+                                <td class="px-4 py-2 text-right">48</td>
+                                <td class="px-4 py-2 text-right font-medium text-emerald-700">97%</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-4 py-2 text-right"><a href="control-pv-salas.html" class="text-emerald-700 text-xs hover:underline">Ver →</a></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 font-medium">Áreas de Vivienda</td>
+                                <td class="px-4 py-2 text-slate-500">FAB</td>
+                                <td class="px-4 py-2 text-slate-500">Sara Domínguez</td>
+                                <td class="px-4 py-2 text-right">48</td>
+                                <td class="px-4 py-2 text-right">46</td>
+                                <td class="px-4 py-2 text-right">2</td>
+                                <td class="px-4 py-2 text-right">39</td>
+                                <td class="px-4 py-2 text-right font-medium text-emerald-700">96%</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-4 py-2 text-right"><a href="control-pv-salas.html" class="text-emerald-700 text-xs hover:underline">Ver →</a></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 font-medium">Centro de Día Río Arlanza</td>
+                                <td class="px-4 py-2 text-slate-500">Aspaniasmerc</td>
+                                <td class="px-4 py-2 text-slate-500">Daniel Alonso</td>
+                                <td class="px-4 py-2 text-right">44</td>
+                                <td class="px-4 py-2 text-right">36</td>
+                                <td class="px-4 py-2 text-right">8</td>
+                                <td class="px-4 py-2 text-right">22</td>
+                                <td class="px-4 py-2 text-right font-medium text-amber-700">82%</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Atrasado</span></td>
+                                <td class="px-4 py-2 text-right"><a href="control-pv-salas.html" class="text-emerald-700 text-xs hover:underline">Ver →</a></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 font-medium">C. Multiactividad V. Aleixandre</td>
+                                <td class="px-4 py-2 text-slate-500">FAB</td>
+                                <td class="px-4 py-2 text-slate-500">Carlos García López</td>
+                                <td class="px-4 py-2 text-right">41</td>
+                                <td class="px-4 py-2 text-right">39</td>
+                                <td class="px-4 py-2 text-right">2</td>
+                                <td class="px-4 py-2 text-right">30</td>
+                                <td class="px-4 py-2 text-right font-medium text-emerald-700">95%</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-4 py-2 text-right"><a href="control-pv-salas.html" class="text-emerald-700 text-xs hover:underline">Ver →</a></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 font-medium">Residencia Salas de los Infantes</td>
+                                <td class="px-4 py-2 text-slate-500">FAB</td>
+                                <td class="px-4 py-2 text-slate-500">Beatriz Hernando</td>
+                                <td class="px-4 py-2 text-right">36</td>
+                                <td class="px-4 py-2 text-right">33</td>
+                                <td class="px-4 py-2 text-right">3</td>
+                                <td class="px-4 py-2 text-right">25</td>
+                                <td class="px-4 py-2 text-right font-medium text-emerald-700">92%</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-4 py-2 text-right"><a href="control-pv-salas.html" class="text-emerald-700 text-xs hover:underline">Ver →</a></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 font-medium">Residencia Santa María</td>
+                                <td class="px-4 py-2 text-slate-500">FAB</td>
+                                <td class="px-4 py-2 text-slate-500">Andrés Diez</td>
+                                <td class="px-4 py-2 text-right">29</td>
+                                <td class="px-4 py-2 text-right">28</td>
+                                <td class="px-4 py-2 text-right">1</td>
+                                <td class="px-4 py-2 text-right">21</td>
+                                <td class="px-4 py-2 text-right font-medium text-emerald-700">97%</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-4 py-2 text-right"><a href="control-pv-salas.html" class="text-emerald-700 text-xs hover:underline">Ver →</a></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 font-medium">CD Puentesaúco</td>
+                                <td class="px-4 py-2 text-slate-500">FAB</td>
+                                <td class="px-4 py-2 text-slate-400 italic">Pendiente Federico</td>
+                                <td class="px-4 py-2 text-right">26</td>
+                                <td class="px-4 py-2 text-right">24</td>
+                                <td class="px-4 py-2 text-right">2</td>
+                                <td class="px-4 py-2 text-right">17</td>
+                                <td class="px-4 py-2 text-right font-medium text-emerald-700">92%</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-4 py-2 text-right"><a href="control-pv-salas.html" class="text-emerald-700 text-xs hover:underline">Ver →</a></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 font-medium">Servicio Puentes</td>
+                                <td class="px-4 py-2 text-slate-500">Aspaniasmerc</td>
+                                <td class="px-4 py-2 text-slate-500">Tomás Cifuentes</td>
+                                <td class="px-4 py-2 text-right">22</td>
+                                <td class="px-4 py-2 text-right">18</td>
+                                <td class="px-4 py-2 text-right">4</td>
+                                <td class="px-4 py-2 text-right">12</td>
+                                <td class="px-4 py-2 text-right font-medium text-amber-700">82%</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Atrasado</span></td>
+                                <td class="px-4 py-2 text-right"><a href="control-pv-salas.html" class="text-emerald-700 text-xs hover:underline">Ver →</a></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 font-medium">CD Salas</td>
+                                <td class="px-4 py-2 text-slate-500">FAB</td>
+                                <td class="px-4 py-2 text-slate-500">Pablo Manzanas</td>
+                                <td class="px-4 py-2 text-right">20</td>
+                                <td class="px-4 py-2 text-right">19</td>
+                                <td class="px-4 py-2 text-right">1</td>
+                                <td class="px-4 py-2 text-right">14</td>
+                                <td class="px-4 py-2 text-right font-medium text-emerald-700">95%</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-4 py-2 text-right"><a href="control-pv-salas.html" class="text-emerald-700 text-xs hover:underline">Ver →</a></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 font-medium">CD Asistencial Quintanadueñas</td>
+                                <td class="px-4 py-2 text-slate-500">FAB</td>
+                                <td class="px-4 py-2 text-slate-400 italic">Pendiente Federico</td>
+                                <td class="px-4 py-2 text-right">20</td>
+                                <td class="px-4 py-2 text-right">18</td>
+                                <td class="px-4 py-2 text-right">2</td>
+                                <td class="px-4 py-2 text-right">13</td>
+                                <td class="px-4 py-2 text-right font-medium text-emerald-700">90%</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Al día</span></td>
+                                <td class="px-4 py-2 text-right"><a href="control-pv-salas.html" class="text-emerald-700 text-xs hover:underline">Ver →</a></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 font-medium">Residencia Quintanadueñas</td>
+                                <td class="px-4 py-2 text-slate-500">FAB</td>
+                                <td class="px-4 py-2 text-slate-500">Elena Bahillo</td>
+                                <td class="px-4 py-2 text-right">15</td>
+                                <td class="px-4 py-2 text-right">12</td>
+                                <td class="px-4 py-2 text-right">3</td>
+                                <td class="px-4 py-2 text-right">8</td>
+                                <td class="px-4 py-2 text-right font-medium text-amber-700">80%</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Atrasado</span></td>
+                                <td class="px-4 py-2 text-right"><a href="control-pv-salas.html" class="text-emerald-700 text-xs hover:underline">Ver →</a></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 font-medium">Colegio EE Puentesaúco</td>
+                                <td class="px-4 py-2 text-slate-500">FAB</td>
+                                <td class="px-4 py-2 text-slate-500">Cristina Sáez</td>
+                                <td class="px-4 py-2 text-right">12</td>
+                                <td class="px-4 py-2 text-right">9</td>
+                                <td class="px-4 py-2 text-right">3</td>
+                                <td class="px-4 py-2 text-right">6</td>
+                                <td class="px-4 py-2 text-right font-medium text-amber-700">75%</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Atrasado</span></td>
+                                <td class="px-4 py-2 text-right"><a href="control-pv-salas.html" class="text-emerald-700 text-xs hover:underline">Ver →</a></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-2 font-medium">CD Asistencial Salas</td>
+                                <td class="px-4 py-2 text-slate-500">Aspaniasmerc</td>
+                                <td class="px-4 py-2 text-slate-400 italic">Pendiente Federico</td>
+                                <td class="px-4 py-2 text-right">8</td>
+                                <td class="px-4 py-2 text-right">5</td>
+                                <td class="px-4 py-2 text-right">3</td>
+                                <td class="px-4 py-2 text-right">6</td>
+                                <td class="px-4 py-2 text-right font-medium text-rose-700">63%</td>
+                                <td class="px-4 py-2"><span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-800">Crítico</span></td>
+                                <td class="px-4 py-2 text-right"><a href="control-pv-salas.html" class="text-emerald-700 text-xs hover:underline">Ver →</a></td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="bg-slate-50 font-semibold">
+                            <tr>
+                                <td class="px-4 py-2">Total Grupo</td>
+                                <td class="px-4 py-2 text-slate-500">FAB · Aspaniasmerc</td>
+                                <td class="px-4 py-2 text-slate-500">18 centros y servicios</td>
+                                <td class="px-4 py-2 text-right">383</td>
+                                <td class="px-4 py-2 text-right">347</td>
+                                <td class="px-4 py-2 text-right">36</td>
+                                <td class="px-4 py-2 text-right">261</td>
+                                <td class="px-4 py-2 text-right text-emerald-700">91%</td>
+                                <td class="px-4 py-2"></td>
+                                <td class="px-4 py-2"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mt-6 grid gap-4 md:grid-cols-2">
+                <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-sm text-emerald-900">
+                    <p class="font-semibold uppercase tracking-wide text-xs text-emerald-700">Migración del Excel</p>
+                    <p class="mt-2">El módulo Control PV de ÁGORA sustituye en su totalidad al archivo <code class="bg-white px-1 rounded text-xs">Registro PV por servicios. Global Grupo Aspanias.xlsx</code>. Los datos se actualizan automáticamente al editar el Plan de Vida de cada persona.</p>
+                </div>
+                <div class="rounded-xl border border-blue-200 bg-blue-50 p-5 text-sm text-blue-900">
+                    <p class="font-semibold uppercase tracking-wide text-xs text-blue-700">Compartido con Residencia/Vivienda</p>
+                    <p class="mt-2">198 Planes de Vida están compartidos con el centro de Residencia/Vivienda correspondiente. La cotitularidad RGPD art. 26 permite el acceso entre centros del Grupo bajo bitácora compartida.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, cita..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

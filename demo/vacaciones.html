@@ -1,0 +1,635 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipo · Vacaciones y ausencias — ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        [x-cloak] { display: none !important; }
+        .calendar-day { width: 14px; height: 14px; border-radius: 2px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="flex min-h-screen" x-data="{
+    userMenu: false,
+    año: 2026,
+    centroSel: 'todos',
+    rolSel: 'todos',
+    modalSolicitar: false,
+    nuevoTipo: 'vacaciones',
+    nuevoInicio: '2026-08-01',
+    nuevoFin: '2026-08-15',
+    toast: false,
+    abrirAprobacion(id) { this.toast = 'Solicitud ' + id + ' aprobada y sincronizada con SIGPER'; setTimeout(()=>this.toast=false, 2400) },
+    rechazar(id) { this.toast = 'Solicitud ' + id + ' rechazada — notificación enviada al profesional'; setTimeout(()=>this.toast=false, 2400) }
+}">
+
+    <!-- =========================================================== -->
+    <!-- SIDEBAR                                                     -->
+    <!-- =========================================================== -->
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100">
+            <div class="w-full flex items-center gap-2.5 p-2 rounded-lg">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0"><p class="text-sm font-medium truncate">Federico Martínez</p><p class="text-[10px] text-slate-500 truncate">Gerencia</p></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- =========================================================== -->
+    <!-- MAIN                                                        -->
+    <!-- =========================================================== -->
+    <main class="flex-1 min-w-0">
+
+        <!-- Breadcrumb sticky -->
+        <div class="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-slate-200 px-8 py-3">
+            <nav class="text-xs text-slate-500 flex items-center gap-1.5">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a>
+                <span>›</span>
+                <a href="profesionales.html" class="hover:text-emerald-700">Equipo</a>
+                <span>›</span>
+                <span class="text-slate-900 font-medium">Vacaciones y ausencias</span>
+            </nav>
+        </div>
+
+        <!-- Cabecera -->
+        <header class="px-8 pt-6 pb-2 border-b border-slate-200 bg-white">
+            <div class="flex items-start justify-between mb-4">
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">Vacaciones y ausencias</h1>
+                    <p class="text-sm text-slate-500 mt-1">Año <strong x-text="año"></strong> · 187 profesionales · 18 centros y servicios</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button @click="año = año - 1" class="px-2 py-1.5 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">‹</button>
+                    <span class="text-sm font-semibold px-2" x-text="año"></span>
+                    <button @click="año = año + 1" class="px-2 py-1.5 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">›</button>
+                    <button @click="modalSolicitar = true" class="ml-3 px-4 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">+ Solicitar ausencia</button>
+                </div>
+            </div>
+
+            <!-- Tabs principales del módulo Equipo -->
+            <nav class="flex gap-1 -mb-px">
+                <a href="profesionales.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">👤 Profesionales</a>
+                <a href="vacaciones.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-emerald-700 text-emerald-700">🏖 Vacaciones y ausencias</a>
+                <a href="turnos.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">🕒 Turnos</a>
+                <a href="calendario-laboral.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">📆 Calendario laboral</a>
+                <a href="patrones-turno.html" class="px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-emerald-700 hover:border-emerald-300">🔁 Patrones de turno</a>
+            </nav>
+        </header>
+
+        <!-- KPIs saldo año -->
+        <section class="px-8 py-5 bg-white border-b border-slate-200">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">Solicitudes pendientes</p>
+                    <p class="mt-1 text-2xl font-light text-amber-700">12</p>
+                    <p class="text-[10px] text-amber-700">↑ requiere aprobación</p>
+                </div>
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">Aprobadas año</p>
+                    <p class="mt-1 text-2xl font-light text-emerald-700">142</p>
+                    <p class="text-[10px] text-slate-500">de 187 profesionales</p>
+                </div>
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">Saldo total grupo</p>
+                    <p class="mt-1 text-2xl font-light">2 184</p>
+                    <p class="text-[10px] text-slate-500">días pendientes</p>
+                </div>
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">Bajas IT activas</p>
+                    <p class="mt-1 text-2xl font-light text-rose-700">8</p>
+                    <p class="text-[10px] text-slate-500">3 prolongadas</p>
+                </div>
+                <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+                    <p class="text-xs text-slate-500">Cobertura mín. centros</p>
+                    <p class="mt-1 text-2xl font-light text-emerald-700">94 %</p>
+                    <p class="text-[10px] text-slate-500">2 centros bajo umbral</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filtros + leyenda -->
+        <section class="px-8 py-4 bg-white border-b border-slate-200">
+            <div class="flex items-center gap-3 flex-wrap">
+                <select x-model="centroSel" class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white">
+                    <option value="todos">Todos los centros</option>
+                    <option>Residencia Fuentecillas</option>
+                    <option>Residencia Quintanadueñas</option>
+                    <option>CO Fuentecillas</option>
+                    <option>Servicio Puentes</option>
+                    <option>Vida Independiente</option>
+                    <option>A Gusto en Casa</option>
+                    <option>Intecum</option>
+                </select>
+                <select x-model="rolSel" class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white">
+                    <option value="todos">Todos los roles</option>
+                    <option>Gerocultor/a</option>
+                    <option>Enfermería</option>
+                    <option>Psicología</option>
+                    <option>Trabajo Social</option>
+                    <option>Dirección</option>
+                </select>
+                <button class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white hover:bg-slate-50">📥 Exportar Excel</button>
+                <button class="px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white hover:bg-slate-50">🖨 Imprimir calendario</button>
+                <!-- Leyenda colores -->
+                <div class="ml-auto flex items-center gap-3 text-[11px] text-slate-600 flex-wrap">
+                    <span class="flex items-center gap-1"><span class="calendar-day bg-emerald-500"></span> Vacaciones</span>
+                    <span class="flex items-center gap-1"><span class="calendar-day bg-rose-500"></span> Horas médicas (cód. 23)</span>
+                    <span class="flex items-center gap-1"><span class="calendar-day bg-blue-500"></span> 🔄 Permutas</span>
+                    <span class="flex items-center gap-1"><span class="calendar-day bg-emerald-300"></span> ⚖ Saldo horario</span>
+                    <span class="flex items-center gap-1"><span class="calendar-day bg-purple-400"></span> 🤝 Crédito sindical</span>
+                    <span class="flex items-center gap-1"><span class="calendar-day bg-sky-500"></span> Formación</span>
+                    <span class="flex items-center gap-1"><span class="calendar-day bg-rose-700"></span> IT (baja)</span>
+                    <span class="flex items-center gap-1"><span class="calendar-day bg-purple-700"></span> Maternidad / lactancia</span>
+                    <span class="flex items-center gap-1"><span class="calendar-day bg-slate-300"></span> Pendiente</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calendario anual estilo Bizneo: filas profesionales × 365 días -->
+        <section class="px-8 py-6">
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-base font-semibold">📅 Calendario anual del equipo</h2>
+                        <p class="text-xs text-slate-500">Vista por profesional · 1 fila = 1 persona · 365 días en horizontal</p>
+                    </div>
+                    <div class="flex items-center gap-1 text-xs">
+                        <button class="px-2 py-1 rounded border border-slate-200 bg-emerald-50 text-emerald-800 font-medium">Equipo (8)</button>
+                        <button class="px-2 py-1 rounded border border-slate-200 bg-white hover:bg-slate-50">Centro</button>
+                        <button class="px-2 py-1 rounded border border-slate-200 bg-white hover:bg-slate-50">Grupo (187)</button>
+                    </div>
+                </div>
+
+                <!-- Encabezado meses -->
+                <div class="overflow-x-auto">
+                    <div class="min-w-[1100px]">
+                        <div class="flex border-b border-slate-100 bg-slate-50/60 text-[10px] text-slate-500 font-semibold uppercase">
+                            <div class="w-48 shrink-0 px-3 py-2 border-r border-slate-100">Profesional</div>
+                            <div class="flex flex-1 text-center">
+                                <div class="flex-1 py-2 border-r border-slate-100">Ene</div>
+                                <div class="flex-1 py-2 border-r border-slate-100">Feb</div>
+                                <div class="flex-1 py-2 border-r border-slate-100">Mar</div>
+                                <div class="flex-1 py-2 border-r border-slate-100">Abr</div>
+                                <div class="flex-1 py-2 border-r border-slate-100">May</div>
+                                <div class="flex-1 py-2 border-r border-slate-100 bg-emerald-50/50">Jun</div>
+                                <div class="flex-1 py-2 border-r border-slate-100">Jul</div>
+                                <div class="flex-1 py-2 border-r border-slate-100">Ago</div>
+                                <div class="flex-1 py-2 border-r border-slate-100">Sep</div>
+                                <div class="flex-1 py-2 border-r border-slate-100">Oct</div>
+                                <div class="flex-1 py-2 border-r border-slate-100">Nov</div>
+                                <div class="flex-1 py-2">Dic</div>
+                            </div>
+                        </div>
+
+                        <!-- Fila profesional 1: Mercedes A. -->
+                        <div class="flex items-center hover:bg-emerald-50/30 border-b border-slate-100">
+                            <div class="w-48 shrink-0 px-3 py-2.5 border-r border-slate-100">
+                                <p class="text-xs font-medium text-slate-900">Antolín Robles, M.</p>
+                                <p class="text-[10px] text-slate-500">A Gusto en Casa · Coord.</p>
+                            </div>
+                            <div class="flex flex-1 h-9 relative">
+                                <!-- 12 meses como bg -->
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-2 right-2 bg-rose-500 rounded" title="Horas médicas (cód. 23) · 4h"></div></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 bg-emerald-50/50"></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-1 right-0 bg-emerald-500 rounded-l" title="Vacaciones"></div></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-0 right-3 bg-emerald-500 rounded-r" title="Vacaciones · 15 días"></div></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 relative"><div class="absolute inset-y-1 left-3 right-2 bg-blue-500 rounded" title="🔄 Permuta · 14 dic (M) con Castro Núñez, Elena · da su turno T del 21 dic · visto bueno Bárcena"></div></div>
+                            </div>
+                        </div>
+
+                        <!-- Fila 2: Camarero D. -->
+                        <div class="flex items-center hover:bg-emerald-50/30 border-b border-slate-100">
+                            <div class="w-48 shrink-0 px-3 py-2.5 border-r border-slate-100">
+                                <p class="text-xs font-medium text-slate-900">Camarero Díaz, D.</p>
+                                <p class="text-[10px] text-slate-500">Puentes · Dirección</p>
+                            </div>
+                            <div class="flex flex-1 h-9 relative">
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-3 right-1 bg-sky-500 rounded" title="Formación 3 días"></div></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-1 right-0 bg-emerald-500 rounded-l" title="Vacaciones 7 días"></div></div>
+                                <div class="flex-1 border-r border-slate-100 bg-emerald-50/50 relative"><div class="absolute inset-y-1 left-0 right-2 bg-emerald-500 rounded-r"></div></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-2 right-2 bg-amber-400 rounded"></div></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 relative"><div class="absolute inset-y-1 left-1 right-1 bg-emerald-500 rounded" title="Vacaciones Navidad"></div></div>
+                            </div>
+                        </div>
+
+                        <!-- Fila 3: Domínguez Vélez S. -->
+                        <div class="flex items-center hover:bg-emerald-50/30 border-b border-slate-100">
+                            <div class="w-48 shrink-0 px-3 py-2.5 border-r border-slate-100">
+                                <p class="text-xs font-medium text-slate-900">Domínguez Vélez, S.</p>
+                                <p class="text-[10px] text-slate-500">Vida Indep. · TS</p>
+                            </div>
+                            <div class="flex flex-1 h-9 relative">
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 bg-emerald-50/50 relative"><div class="absolute inset-y-1 left-2 right-0 bg-emerald-500 rounded-l ring-2 ring-emerald-600" title="EN CURSO: Vacaciones 02-15 jun"></div></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-0 right-3 bg-emerald-500 rounded-r ring-2 ring-emerald-600"></div></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1"></div>
+                            </div>
+                        </div>
+
+                        <!-- Fila 4: Gil Tobar E. -->
+                        <div class="flex items-center hover:bg-emerald-50/30 border-b border-slate-100">
+                            <div class="w-48 shrink-0 px-3 py-2.5 border-r border-slate-100">
+                                <p class="text-xs font-medium text-slate-900">Gil Tobar, E.</p>
+                                <p class="text-[10px] text-slate-500">Intecum · Enfermería</p>
+                            </div>
+                            <div class="flex flex-1 h-9 relative">
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 bg-emerald-50/50"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-2 right-2 bg-emerald-500 rounded" title="Vacaciones agosto 14 días"></div></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-2 right-1 bg-purple-500 rounded" title="Maternidad"></div></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-x-0 inset-y-1 bg-purple-500"></div></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-x-0 inset-y-1 bg-purple-500"></div></div>
+                                <div class="flex-1 relative"><div class="absolute inset-y-1 left-0 right-1 bg-purple-500 rounded-r" title="Maternidad sep-dic"></div></div>
+                            </div>
+                        </div>
+
+                        <!-- Fila 5: López Pérez M. (IT) -->
+                        <div class="flex items-center hover:bg-emerald-50/30 border-b border-slate-100">
+                            <div class="w-48 shrink-0 px-3 py-2.5 border-r border-slate-100">
+                                <p class="text-xs font-medium text-slate-900">López Pérez, M.</p>
+                                <p class="text-[10px] text-slate-500">Fuentecillas · Gerocultora</p>
+                            </div>
+                            <div class="flex flex-1 h-9 relative">
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-3 right-0 bg-rose-500 rounded-l" title="IT iniciada 28 may"></div></div>
+                                <div class="flex-1 border-r border-slate-100 bg-emerald-50/50 relative"><div class="absolute inset-y-1 left-0 right-0 bg-rose-500 ring-2 ring-rose-600" title="EN CURSO: IT 28 may → 15 jul"></div></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-0 right-3 bg-rose-500 rounded-r"></div></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1"></div>
+                            </div>
+                        </div>
+
+                        <!-- Fila 6: Martín Sancho L. -->
+                        <div class="flex items-center hover:bg-emerald-50/30 border-b border-slate-100">
+                            <div class="w-48 shrink-0 px-3 py-2.5 border-r border-slate-100">
+                                <p class="text-xs font-medium text-slate-900">Martín Sancho, L.</p>
+                                <p class="text-[10px] text-slate-500">Fuentecillas · Psicología</p>
+                            </div>
+                            <div class="flex flex-1 h-9 relative">
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-1 right-1 bg-sky-500 rounded" title="Formación 5 días"></div></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 bg-emerald-50/50"></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-2 right-0 bg-emerald-500 rounded-l"></div></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-0 right-2 bg-emerald-500 rounded-r" title="Vacaciones 11 días"></div></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-3 right-2 bg-amber-400 rounded"></div></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1"></div>
+                            </div>
+                        </div>
+
+                        <!-- Fila 7: Ureta Ramos S. -->
+                        <div class="flex items-center hover:bg-emerald-50/30 border-b border-slate-100">
+                            <div class="w-48 shrink-0 px-3 py-2.5 border-r border-slate-100">
+                                <p class="text-xs font-medium text-slate-900">Ureta Ramos, S.</p>
+                                <p class="text-[10px] text-slate-500">Sede · Dir. Admin.</p>
+                            </div>
+                            <div class="flex flex-1 h-9 relative">
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-1 right-1 bg-emerald-500 rounded" title="Semana Santa 4 días"></div></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 bg-emerald-50/50"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-0 right-0 bg-slate-300 rounded" title="PENDIENTE de aprobación · 15 días"></div></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 relative"><div class="absolute inset-y-1 left-1 right-1 bg-emerald-500 rounded"></div></div>
+                            </div>
+                        </div>
+
+                        <!-- Fila 8: González Ruiz D. -->
+                        <div class="flex items-center hover:bg-emerald-50/30">
+                            <div class="w-48 shrink-0 px-3 py-2.5 border-r border-slate-100">
+                                <p class="text-xs font-medium text-slate-900">González Ruiz, D.</p>
+                                <p class="text-[10px] text-slate-500">Sede · Administración</p>
+                            </div>
+                            <div class="flex flex-1 h-9 relative">
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100 bg-emerald-50/50"></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-2 right-0 bg-emerald-500 rounded-l"></div></div>
+                                <div class="flex-1 border-r border-slate-100 relative"><div class="absolute inset-y-1 left-0 right-3 bg-emerald-500 rounded-r" title="Vacaciones 10 días"></div></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1 border-r border-slate-100"></div>
+                                <div class="flex-1"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solicitudes pendientes de aprobación -->
+        <section class="px-8 pb-8">
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-base font-semibold">⏳ Solicitudes pendientes de aprobación</h2>
+                        <p class="text-xs text-slate-500">12 pendientes · requieren visto bueno de Dirección de centro o de RRHH</p>
+                    </div>
+                    <button class="text-xs text-emerald-700 hover:underline">Ver todas →</button>
+                </div>
+                <table class="w-full text-sm">
+                    <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                        <tr>
+                            <th class="px-4 py-2 text-left">Solicitante</th>
+                            <th class="px-4 py-2 text-left">Tipo</th>
+                            <th class="px-4 py-2 text-left">Fechas</th>
+                            <th class="px-4 py-2 text-center">Días</th>
+                            <th class="px-4 py-2 text-left">Centro</th>
+                            <th class="px-4 py-2 text-left">Cobertura</th>
+                            <th class="px-4 py-2 text-right">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr>
+                            <td class="px-4 py-3"><p class="font-medium">Ureta Ramos, S.</p><p class="text-[11px] text-slate-500">Solicitada hoy · 09:14</p></td>
+                            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-medium">🏖 Vacaciones</span></td>
+                            <td class="px-4 py-3">15 ago → 29 ago</td>
+                            <td class="px-4 py-3 text-center font-medium">15</td>
+                            <td class="px-4 py-3 text-slate-700">Sede central</td>
+                            <td class="px-4 py-3"><span class="text-[11px] text-emerald-700">✓ Cubierta</span></td>
+                            <td class="px-4 py-3 text-right">
+                                <button @click="abrirAprobacion('SOL-2026-0142')" class="px-2 py-1 text-xs rounded bg-emerald-700 text-white hover:bg-emerald-800">Aprobar</button>
+                                <button @click="rechazar('SOL-2026-0142')" class="px-2 py-1 text-xs rounded border border-rose-300 text-rose-700 hover:bg-rose-50 ml-1">Rechazar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3"><p class="font-medium">Sanz Herrero, P.</p><p class="text-[11px] text-slate-500">Solicitada 03/06</p></td>
+                            <td class="px-4 py-3">
+                                <div class="flex flex-col gap-0.5">
+                                    <span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-medium w-fit">🔄 Permuta de turno</span>
+                                    <span class="text-[10px] text-slate-600">con <strong class="text-blue-800">Castro Núñez, Elena</strong></span>
+                                    <span class="text-[10px] text-slate-500">cede T 12 jun · recibe M 19 jun</span>
+                                </div>
+                            </td>
+                            <td class="px-4 py-3">12 jun ⇄ 19 jun</td>
+                            <td class="px-4 py-3 text-center font-medium">1</td>
+                            <td class="px-4 py-3 text-slate-700">Residencia Fuentecillas</td>
+                            <td class="px-4 py-3">
+                                <span class="text-[11px] text-emerald-700">✓ Compañera ha aceptado</span>
+                                <p class="text-[10px] text-slate-500">Falta visto bueno Dirección</p>
+                            </td>
+                            <td class="px-4 py-3 text-right">
+                                <button @click="abrirAprobacion('SOL-2026-0143')" class="px-2 py-1 text-xs rounded bg-emerald-700 text-white hover:bg-emerald-800">Aprobar</button>
+                                <button @click="rechazar('SOL-2026-0143')" class="px-2 py-1 text-xs rounded border border-rose-300 text-rose-700 hover:bg-rose-50 ml-1">Rechazar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3"><p class="font-medium">Iglesias Manzano, R.</p><p class="text-[11px] text-slate-500">Solicitada 02/06</p></td>
+                            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 text-[11px] font-medium">🎓 Formación</span></td>
+                            <td class="px-4 py-3">18 jun → 19 jun</td>
+                            <td class="px-4 py-3 text-center font-medium">2</td>
+                            <td class="px-4 py-3 text-slate-700">CO Fuentecillas</td>
+                            <td class="px-4 py-3"><span class="text-[11px] text-emerald-700">✓ Cubierta</span></td>
+                            <td class="px-4 py-3 text-right">
+                                <button @click="abrirAprobacion('SOL-2026-0144')" class="px-2 py-1 text-xs rounded bg-emerald-700 text-white hover:bg-emerald-800">Aprobar</button>
+                                <button @click="rechazar('SOL-2026-0144')" class="px-2 py-1 text-xs rounded border border-rose-300 text-rose-700 hover:bg-rose-50 ml-1">Rechazar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3"><p class="font-medium">Pérez Calderón, A.</p><p class="text-[11px] text-slate-500">Solicitada 01/06</p></td>
+                            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-medium">🏖 Vacaciones</span></td>
+                            <td class="px-4 py-3">5 jul → 26 jul</td>
+                            <td class="px-4 py-3 text-center font-medium">22</td>
+                            <td class="px-4 py-3 text-slate-700">Residencia Quintanadueñas</td>
+                            <td class="px-4 py-3"><span class="text-[11px] text-rose-700 font-medium">⛔ Solapa con baja IT</span></td>
+                            <td class="px-4 py-3 text-right">
+                                <button @click="abrirAprobacion('SOL-2026-0145')" class="px-2 py-1 text-xs rounded bg-emerald-700 text-white hover:bg-emerald-800">Aprobar</button>
+                                <button @click="rechazar('SOL-2026-0145')" class="px-2 py-1 text-xs rounded border border-rose-300 text-rose-700 hover:bg-rose-50 ml-1">Rechazar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Aviso integración SIGPER -->
+            <div class="mt-5 rounded-lg border border-sky-200 bg-sky-50 p-4 text-xs text-sky-900">
+                <p class="font-semibold mb-1">🔗 Sincronización con SIGPER</p>
+                <p>Cuando SIGPER entre en producción, las solicitudes se gestionarán allí (flujo formal de RRHH) y ÁGORA las recibirá vía API para bloquear turnos y avisar de cobertura. Hasta entonces, las decisiones de Dirección de centro tomadas aquí quedan registradas en la bitácora y se sincronizarán en la primera carga.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- =========================================================== -->
+    <!-- MODAL Nueva solicitud                                       -->
+    <!-- =========================================================== -->
+    <div x-show="modalSolicitar" x-cloak x-transition.opacity class="fixed inset-0 z-50 bg-slate-900/40 flex items-start justify-center pt-20 px-4" @click.self="modalSolicitar = false">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[80vh] overflow-y-auto">
+            <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+                <h3 class="text-lg font-semibold">Solicitar ausencia</h3>
+                <button @click="modalSolicitar = false" class="text-slate-400 hover:text-slate-600 text-xl leading-none">×</button>
+            </div>
+            <div class="px-6 py-5 space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">Profesional</label>
+                    <select class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white">
+                        <option>Federico Martínez (yo)</option>
+                        <option>Antolín Robles, Mercedes</option>
+                        <option>Camarero Díaz, Diego</option>
+                        <option>Gil Tobar, Esther</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">Tipo de ausencia</label>
+                    <select x-model="nuevoTipo" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white">
+                        <option value="vacaciones">🏖 Vacaciones</option>
+                        <option value="medicas">🩺 Horas médicas (cód. 23)</option>
+                        <option value="permuta">🔄 Permuta de turno con compañero/a</option>
+                        <option value="saldo">⚖ Ajuste saldo horario (salir antes / horas extras)</option>
+                        <option value="sindical">🤝 Crédito sindical (representantes)</option>
+                        <option value="formacion">🎓 Formación</option>
+                        <option value="permiso">📄 Permiso retribuido</option>
+                        <option value="it">⚕ Incapacidad temporal (IT)</option>
+                        <option value="lactancia">🍼 Lactancia / maternidad</option>
+                    </select>
+                </div>
+                <!-- Bloque permuta: visible solo cuando es permuta -->
+                <div x-show="nuevoTipo === 'permuta'" class="rounded-lg border-2 border-blue-200 bg-blue-50 p-3 space-y-3">
+                    <p class="text-xs font-semibold text-blue-900">🔄 Detalle de la permuta</p>
+                    <div>
+                        <label class="block text-xs font-medium text-blue-900 mb-1">Compañero/a con quien se permuta · mismo centro y categoría</label>
+                        <select class="w-full px-3 py-2 text-sm rounded-lg border border-blue-300 bg-white">
+                            <option value="">— Selecciona —</option>
+                            <option>Castro Núñez, Elena · gerocultora · Fuentecillas</option>
+                            <option>Hernández Vega, Patricia · gerocultora · Fuentecillas</option>
+                            <option>Romero Iglesias, Sofía · gerocultora · Fuentecillas</option>
+                            <option>Martín Rodríguez, Ana · gerocultora · Fuentecillas</option>
+                            <option>Vargas Molina, Cristina · DUE · Fuentecillas</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-medium text-blue-900 mb-1">Día y turno que cedo</label>
+                            <div class="flex gap-2">
+                                <input type="date" class="flex-1 px-3 py-2 text-sm rounded-lg border border-blue-300">
+                                <select class="w-20 px-2 py-2 text-sm rounded-lg border border-blue-300"><option>M</option><option>T</option><option>N</option></select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-blue-900 mb-1">Día y turno que recibo a cambio</label>
+                            <div class="flex gap-2">
+                                <input type="date" class="flex-1 px-3 py-2 text-sm rounded-lg border border-blue-300">
+                                <select class="w-20 px-2 py-2 text-sm rounded-lg border border-blue-300"><option>M</option><option>T</option><option>N</option></select>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-blue-800 italic">Tras enviar, la solicitud espera <strong>aceptación del compañero/a</strong> y luego <strong>visto bueno Dirección de centro</strong>. El motor cuadrantes verifica que no se rompe cobertura M/T/N.</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3" x-show="nuevoTipo !== 'permuta'">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Desde</label>
+                        <input type="date" x-model="nuevoInicio" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Hasta</label>
+                        <input type="date" x-model="nuevoFin" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">Motivo (opcional)</label>
+                    <textarea rows="2" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300" placeholder="Solo para horas médicas, formación, permutas o permisos especiales (cita médica, gestión administrativa, intercambio con compañero/a...)."></textarea>
+                </div>
+                <div x-show="nuevoTipo === 'it'" class="rounded-lg border border-rose-200 bg-rose-50 p-3 text-xs text-rose-900">
+                    <p class="font-semibold">⚕ Categoría especial (art. 9 RGPD)</p>
+                    <p class="mt-1">El parte médico de IT contiene datos de salud. Se cifrará en reposo y solo será accesible a RRHH, Dirección de centro y la persona afectada. Se podrá adjuntar PDF/imagen tras crear la solicitud.</p>
+                </div>
+                <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-900">
+                    <p><strong>Previsualización:</strong> ausencia tipo <strong x-text="nuevoTipo"></strong> del <strong x-text="nuevoInicio"></strong> al <strong x-text="nuevoFin"></strong>. Quedará pendiente de aprobación por Dirección del centro.</p>
+                </div>
+            </div>
+            <div class="px-6 py-3 border-t border-slate-200 flex justify-end gap-2">
+                <button @click="modalSolicitar = false" class="px-3 py-2 text-sm rounded-lg border border-slate-300 hover:bg-slate-50">Cancelar</button>
+                <button @click="modalSolicitar = false; toast = 'Solicitud creada — pendiente de aprobación'; setTimeout(()=>toast=false, 2600)" class="px-4 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">Enviar solicitud</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div x-show="toast" x-cloak x-transition.opacity class="fixed bottom-6 right-6 z-50 rounded-lg bg-slate-900 text-white px-4 py-3 shadow-xl text-sm" x-text="toast"></div>
+</div>
+
+</body>
+</html>

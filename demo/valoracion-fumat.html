@@ -1,0 +1,432 @@
+<!-- @rol: profesional, gestor_caso, direccion_centro -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUMAT · Valoración · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <link rel="stylesheet" href="_assets/print-valoracion.css" media="print">
+    <script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div class="flex min-h-screen" x-data="{
+    seccionActiva: 'identificacion',
+    estado: 'borrador',
+    autoguardado: 'Sin cambios',
+    toast: false,
+
+    /* ── 57 ítems literales del cuadernillo FUMAT (Verdugo, Gómez, Arias 2009) ── */
+    items: {
+        /* Bienestar Emocional */
+        1: { dim: 'BE', inv: false, texto: 'En general, se muestra satisfecho con su vida presente' },
+        2: { dim: 'BE', inv: true,  texto: 'Manifiesta sentirse inútil' },
+        3: { dim: 'BE', inv: true,  texto: 'Se muestra intranquilo o nervioso' },
+        4: { dim: 'BE', inv: false, texto: 'Se muestra satisfecho consigo mismo' },
+        5: { dim: 'BE', inv: true,  texto: 'Tiene problemas de comportamiento' },
+        6: { dim: 'BE', inv: false, texto: 'Se muestra satisfecho con los servicios y los apoyos que recibe' },
+        7: { dim: 'BE', inv: true,  texto: 'Manifiesta sentirse triste o deprimido' },
+        8: { dim: 'BE', inv: true,  texto: 'Muestra sentimientos de incapacidad e inseguridad' },
+        /* Relaciones Interpersonales */
+        9:  { dim: 'RI', inv: false, texto: 'Realiza actividades que le gustan con otras personas' },
+        10: { dim: 'RI', inv: false, texto: 'Mantiene una buena relación con los profesionales del servicio al que acude' },
+        11: { dim: 'RI', inv: false, texto: 'Mantiene una buena relación con sus compañeros del servicio al que acude' },
+        12: { dim: 'RI', inv: true,  texto: 'Carece de familiares cercanos' },
+        13: { dim: 'RI', inv: true,  texto: 'Valora negativamente sus relaciones de amistad' },
+        14: { dim: 'RI', inv: false, texto: 'Manifiesta sentirse querido por las personas importantes para él' },
+        /* Bienestar Material */
+        15: { dim: 'BM', inv: false, texto: 'El lugar donde vive es confortable' },
+        16: { dim: 'BM', inv: true,  texto: 'Manifiesta no estar satisfecho con su jubilación (o situación laboral actual)' },
+        17: { dim: 'BM', inv: true,  texto: 'Se queja de su salario (o pensión)' },
+        18: { dim: 'BM', inv: true,  texto: 'El lugar donde vive tiene barreras arquitectónicas que impiden o dificultan alguna de sus actividades' },
+        19: { dim: 'BM', inv: true,  texto: 'El servicio al que acude tiene barreras arquitectónicas que impiden o dificultan alguna de sus actividades' },
+        20: { dim: 'BM', inv: false, texto: 'Dispone de las cosas materiales que necesita' },
+        21: { dim: 'BM', inv: true,  texto: 'El lugar donde vive necesita reformas para adaptarse a sus necesidades' },
+        /* Desarrollo Personal */
+        22: { dim: 'DP', inv: false, texto: 'Puede leer información básica para la vida cotidiana (carteles, periódico, etc.)' },
+        23: { dim: 'DP', inv: true,  texto: 'Muestra dificultad para resolver con eficacia los problemas que se le plantean' },
+        24: { dim: 'DP', inv: true,  texto: 'Tiene dificultades para expresar información' },
+        25: { dim: 'DP', inv: false, texto: 'En el servicio al que acude le proporcionan información sobre cuestiones que le interesan' },
+        26: { dim: 'DP', inv: true,  texto: 'Muestra dificultades para manejar conceptos matemáticos básicos, útiles para la vida cotidiana (sumar, restar, etc.)' },
+        27: { dim: 'DP', inv: true,  texto: 'Tiene dificultades para comprender la información que recibe' },
+        28: { dim: 'DP', inv: false, texto: 'Es responsable de la toma de su medicación' },
+        29: { dim: 'DP', inv: true,  texto: 'Muestra escasa flexibilidad mental' },
+        /* Bienestar Físico */
+        30: { dim: 'BF', inv: true,  texto: 'Tiene problemas de movilidad' },
+        31: { dim: 'BF', inv: true,  texto: 'Tiene problemas de continencia' },
+        32: { dim: 'BF', inv: true,  texto: 'Tiene dificultad para seguir una conversación porque oye mal' },
+        33: { dim: 'BF', inv: false, texto: 'Su estado de salud le permite salir a la calle' },
+        34: { dim: 'BF', inv: true,  texto: 'Tiene problemas para recordar información importante para la vida cotidiana (caras familiares, nombres, etc.)' },
+        35: { dim: 'BF', inv: true,  texto: 'Tiene dificultades de visión que le impiden realizar sus tareas habituales' },
+        /* Autodeterminación */
+        36: { dim: 'AU', inv: false, texto: 'Hace planes sobre su futuro' },
+        37: { dim: 'AU', inv: true,  texto: 'Muestra dificultades para manejar el dinero de forma autónoma (cheques, alquiler, facturas, ir al banco, etc.)' },
+        38: { dim: 'AU', inv: true,  texto: 'Otras personas organizan su vida' },
+        39: { dim: 'AU', inv: false, texto: 'Elige cómo pasar su tiempo libre' },
+        40: { dim: 'AU', inv: false, texto: 'Ha elegido el lugar donde vive actualmente' },
+        41: { dim: 'AU', inv: false, texto: 'Su familia respeta sus decisiones' },
+        42: { dim: 'AU', inv: false, texto: 'Toma decisiones sobre cuestiones cotidianas' },
+        43: { dim: 'AU', inv: true,  texto: 'Otras personas toman las decisiones que son importantes para su vida' },
+        /* Inclusión Social */
+        44: { dim: 'IS', inv: false, texto: 'Participa en diversas actividades de ocio que le interesan' },
+        45: { dim: 'IS', inv: true,  texto: 'Está excluido en su comunidad' },
+        46: { dim: 'IS', inv: true,  texto: 'En el servicio al que acude, tiene dificultad para encontrar apoyos cuando los necesita' },
+        47: { dim: 'IS', inv: false, texto: 'Tiene amigos que le apoyan cuando lo necesita' },
+        48: { dim: 'IS', inv: true,  texto: 'Tiene dificultades para relacionarse con otras personas del centro al que acude' },
+        49: { dim: 'IS', inv: false, texto: 'Está integrado con los compañeros del servicio al que acude' },
+        50: { dim: 'IS', inv: false, texto: 'Participa de forma voluntaria en algún programa o actividad del servicio al que acude' },
+        51: { dim: 'IS', inv: true,  texto: 'Su red de apoyos no satisface sus necesidades' },
+        52: { dim: 'IS', inv: true,  texto: 'Tiene dificultades para participar en su comunidad' },
+        /* Derechos */
+        53: { dim: 'DE', inv: false, texto: 'En el servicio al que acude se respetan y defienden sus derechos' },
+        54: { dim: 'DE', inv: false, texto: 'Recibe información adecuada y suficiente sobre los tratamientos e intervenciones que recibe' },
+        55: { dim: 'DE', inv: true,  texto: 'Muestra dificultad para defender sus derechos cuando no son respetados' },
+        56: { dim: 'DE', inv: false, texto: 'Cuenta con asistencia legal y/o acceso a servicios de asesoría legal' },
+        57: { dim: 'DE', inv: false, texto: 'Disfruta de todos sus derechos legales (ciudadanía, voto, procesos legales, etc.)' },
+    },
+
+    /* Respuestas del informante: 1=Nunca, 2=Algunas veces, 3=Frecuentemente, 4=Siempre */
+    respuestas: {},
+
+    /* Dimensiones del FUMAT */
+    dimensiones: [
+        { key: 'BE', label: 'Bienestar Emocional',      color: 'rose',    items: [1,2,3,4,5,6,7,8] },
+        { key: 'RI', label: 'Relaciones Interpersonales', color: 'sky',   items: [9,10,11,12,13,14] },
+        { key: 'BM', label: 'Bienestar Material',        color: 'amber',  items: [15,16,17,18,19,20,21] },
+        { key: 'DP', label: 'Desarrollo Personal',       color: 'purple', items: [22,23,24,25,26,27,28,29] },
+        { key: 'BF', label: 'Bienestar Físico',          color: 'emerald',items: [30,31,32,33,34,35] },
+        { key: 'AU', label: 'Autodeterminación',         color: 'indigo', items: [36,37,38,39,40,41,42,43] },
+        { key: 'IS', label: 'Inclusión Social',          color: 'teal',   items: [44,45,46,47,48,49,50,51,52] },
+        { key: 'DE', label: 'Derechos',                  color: 'slate',  items: [53,54,55,56,57] },
+    ],
+
+    /* Cálculo de puntuación directa por ítem (aplicando inversión si procede) */
+    puntoItem(n) {
+        const v = this.respuestas[n];
+        if (!v) return 0;
+        return this.items[n].inv ? v : (5 - v); /* convención cuadernillo: positivos 4-3-2-1, invertidos 1-2-3-4 */
+    },
+
+    /* Puntuación directa por dimensión = suma de puntos de sus ítems */
+    puntuacionDirecta(dim) {
+        return dim.items.reduce((s, n) => s + this.puntoItem(n), 0);
+    },
+
+    /* Aproximación a la puntuación estándar (baremos del manual). Tabla simplificada. */
+    puntuacionEstandar(pd, dimKey) {
+        /* Tabla resumida del apéndice 2 — aproximación lineal cuando pd cae entre puntos */
+        const tabla = {
+            BE: [[7,1],[10,4],[13,6],[16,7],[19,8],[21,9],[23,10],[25,11],[27,12],[29,13],[31,14],[32,15],[33,16]],
+            RI: [[6,1],[8,4],[11,6],[13,7],[14,8],[16,9],[18,10],[20,11],[21,12],[22,13],[24,14],[31,15]],
+            BM: [[15,1],[18,4],[21,6],[22,7],[23,8],[24,9],[25,10],[27,11],[28,12],[30,14],[31,15],[36,16]],
+            DP: [[6,3],[8,4],[10,6],[12,7],[15,8],[17,9],[20,10],[22,11],[25,12],[26,13],[27,14],[28,15],[29,16]],
+            BF: [[8,4],[10,6],[12,7],[15,8],[16,9],[18,10],[19,11],[20,12],[21,13],[23,14],[24,15],[25,16]],
+            AU: [[5,4],[8,6],[10,7],[13,8],[16,9],[18,10],[21,11],[23,12],[26,13],[28,14],[31,15],[32,16]],
+            IS: [[13,4],[14,6],[17,7],[19,8],[22,9],[24,10],[26,11],[29,12],[31,13],[33,14],[34,15],[36,16]],
+            DE: [[5,2],[7,4],[9,5],[10,6],[12,7],[14,8],[15,9],[16,10],[17,11],[19,12],[20,14],[32,16]],
+        };
+        const arr = tabla[dimKey] || [];
+        for (const [umbral, est] of arr) {
+            if (pd <= umbral) return est;
+        }
+        return 20;
+    },
+
+    /* Conversión PE → percentil (aproximación) */
+    percentilEstandar(pe) {
+        if (pe >= 16) return 99;
+        if (pe >= 15) return 95;
+        if (pe >= 14) return 90;
+        if (pe >= 13) return 85;
+        if (pe >= 12) return 75;
+        if (pe >= 11) return 65;
+        if (pe >= 10) return 50;
+        if (pe >= 9)  return 35;
+        if (pe >= 8)  return 25;
+        if (pe >= 7)  return 15;
+        if (pe >= 6)  return 10;
+        if (pe >= 5)  return 5;
+        return 1;
+    },
+
+    /* Índice de Calidad de Vida = suma de PE de las 8 dimensiones, convertida a índice 50-130 */
+    indiceCV() {
+        const suma = this.dimensiones.reduce((s, d) => s + this.puntuacionEstandar(this.puntuacionDirecta(d), d.key), 0);
+        /* Apéndice 3: 109→123, 80→100, 50→76 (aproximación lineal segmentada) */
+        if (suma >= 109) return 123;
+        if (suma >= 80) return Math.round(100 + (suma - 80) * 23/29);
+        if (suma >= 50) return Math.round(76 + (suma - 50) * 24/30);
+        return Math.max(50, Math.round(50 + suma * 26/50));
+    },
+
+    percentilICV() {
+        const i = this.indiceCV();
+        if (i >= 122) return 95;
+        if (i >= 118) return 90;
+        if (i >= 115) return 85;
+        if (i >= 110) return 75;
+        if (i >= 105) return 65;
+        if (i >= 99) return 50;
+        if (i >= 94) return 35;
+        if (i >= 90) return 25;
+        if (i >= 83) return 15;
+        if (i >= 78) return 10;
+        if (i >= 71) return 5;
+        return 1;
+    },
+
+    /* Conteo de ítems contestados */
+    itemsContestados() { return Object.keys(this.respuestas).filter(k => this.respuestas[k]).length; },
+
+    secciones: ['identificacion','BE','RI','BM','DP','BF','AU','IS','DE','resultado']
+}">
+
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight"><p class="text-base font-semibold tracking-tight">ÁGORA</p><p class="text-[10px] text-slate-500">Grupo Social Aspanias</p></div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-emerald-700 font-semibold">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium">
+                <option value="profesional" selected>🩺 Profesional</option>
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100">
+            <div class="w-full flex items-center gap-2.5 p-2 rounded-lg">
+                <div class="w-9 h-9 rounded-full bg-teal-100 text-teal-800 flex items-center justify-center text-sm font-semibold shrink-0">DA</div>
+                <div class="leading-tight text-left flex-1 min-w-0"><p class="text-sm font-medium truncate">Daniel Alonso</p><p class="text-[10px] text-slate-500 truncate">Psicólogo · Col. CL-1234</p></div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+
+        <div class="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-slate-200 px-8 py-3">
+            <nav class="text-xs text-slate-500 flex items-center gap-1.5">
+                <a href="index.html" class="hover:text-emerald-700">Inicio</a><span>›</span>
+                <a href="valoraciones-listado.html" class="hover:text-emerald-700">Valoraciones</a><span>›</span>
+                <span class="text-slate-900 font-medium">FUMAT · Ruiz Jiménez, A.</span>
+            </nav>
+        </div>
+
+        <header class="px-8 pt-6 pb-4 border-b border-slate-200 bg-white">
+            <div class="flex items-start justify-between flex-wrap gap-3">
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">🌟 FUMAT — Calidad de Vida en personas mayores</h1>
+                    <p class="text-sm text-slate-500 mt-1">Ruiz Jiménez, Asunción · 78 años · Verdugo, Gómez y Arias (2009) · INICO Salamanca</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-[11px] text-slate-500" x-text="autoguardado"></span>
+                    <span class="px-2 py-1 text-[11px] rounded-full bg-amber-100 text-amber-800 font-medium" x-show="estado === 'borrador'">🟡 Borrador · <span x-text="itemsContestados() + '/57 ítems'"></span></span>
+                    <span class="px-2 py-1 text-[11px] rounded-full bg-emerald-100 text-emerald-800 font-medium" x-show="estado === 'firmado'">✅ Firmado</span>
+                    <button @click="autoguardado = 'Guardando…'; setTimeout(() => autoguardado = 'Guardado hace un instante', 800)" class="px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">💾 Guardar</button>
+                    <a href="informe-psicologico-pdf.html" class="px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">👁 PDF</a>
+                    <button @click="estado = 'firmado'; toast = 'FUMAT firmado'; setTimeout(() => toast = false, 2200)" class="px-4 py-2 text-xs rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">✍ Firmar</button>
+                </div>
+            </div>
+            <div class="mt-4">
+                <div class="flex items-center justify-between text-[10px] text-slate-500 mb-1"><span>Progreso de cumplimentación</span><span x-text="Math.round(itemsContestados()/57*100) + ' %'"></span></div>
+                <div class="w-full bg-slate-200 rounded-full h-2"><div class="bg-emerald-600 h-2 rounded-full transition-all" :style="'width: ' + (itemsContestados()/57*100) + '%'"></div></div>
+            </div>
+        </header>
+
+        <div class="flex">
+            <aside class="w-56 shrink-0 bg-slate-50 border-r border-slate-200 sticky top-[57px] h-[calc(100vh-57px)] overflow-y-auto px-3 py-4">
+                <p class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold mb-2">Bloques (10)</p>
+                <nav class="space-y-0.5 text-xs">
+                    <button @click="seccionActiva = 'identificacion'" :class="seccionActiva === 'identificacion' ? 'bg-emerald-100 text-emerald-800 font-medium' : 'text-slate-700 hover:bg-slate-100'" class="w-full text-left px-2 py-1.5 rounded">1. Identificación</button>
+                    <template x-for="(d, i) in dimensiones" :key="d.key">
+                        <button @click="seccionActiva = d.key" :class="seccionActiva === d.key ? 'bg-emerald-100 text-emerald-800 font-medium' : 'text-slate-700 hover:bg-slate-100'" class="w-full text-left px-2 py-1.5 rounded">
+                            <div x-text="(i+2) + '. ' + d.label"></div>
+                            <div class="text-[10px] text-slate-400" x-text="d.items.filter(n => respuestas[n]).length + '/' + d.items.length + ' ítems · PD ' + puntuacionDirecta(d)"></div>
+                        </button>
+                    </template>
+                    <button @click="seccionActiva = 'resultado'" :class="seccionActiva === 'resultado' ? 'bg-emerald-100 text-emerald-800 font-medium' : 'text-slate-700 hover:bg-slate-100'" class="w-full text-left px-2 py-1.5 rounded">10. Resultado y perfil</button>
+                </nav>
+            </aside>
+
+            <section class="flex-1 px-8 py-6 max-w-3xl">
+
+                <!-- 1. IDENTIFICACIÓN -->
+                <div x-show="seccionActiva === 'identificacion'" class="space-y-4">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">1. Identificación</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Persona evaluada</label><input value="Ruiz Jiménez, Asunción" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-slate-50" readonly></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Fecha de aplicación</label><input type="date" value="2026-06-16" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Edad cronológica</label><input value="78 años" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-slate-50" readonly></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Sexo</label><input value="Mujer" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-slate-50" readonly></div>
+                        <div class="md:col-span-2"><label class="block text-xs font-medium text-slate-700 mb-1">Informante (quien completa el cuestionario)</label><input value="Daniel Alonso · Psicólogo · Col. CL-1234" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-slate-50" readonly></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Relación con la persona</label><select class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"><option>Profesional del centro</option><option>Familiar</option><option>Persona atendida (auto-informe)</option></select></div>
+                        <div><label class="block text-xs font-medium text-slate-700 mb-1">Lengua hablada en casa</label><select class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300"><option>Castellano</option><option>Otra</option></select></div>
+                    </div>
+                    <div class="rounded-lg border border-sky-200 bg-sky-50 p-3 text-xs text-sky-900">
+                        <p class="font-semibold mb-1">📌 Instrucciones</p>
+                        <p>A continuación se presentan 57 afirmaciones relativas a la calidad de vida de la persona evaluada. Marque la opción que mejor describa a dicha persona. <strong>No deje ninguna cuestión en blanco</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- DIMENSIONES (8 secciones generadas dinámicamente) -->
+                <template x-for="d in dimensiones" :key="d.key">
+                    <div x-show="seccionActiva === d.key" x-cloak class="space-y-3">
+                        <div class="flex items-baseline justify-between border-b border-slate-200 pb-2">
+                            <h2 class="text-lg font-semibold" x-text="d.label"></h2>
+                            <span class="text-xs text-slate-500" x-text="'PD ' + puntuacionDirecta(d) + ' · PE ' + puntuacionEstandar(puntuacionDirecta(d), d.key) + ' · Pc ' + percentilEstandar(puntuacionEstandar(puntuacionDirecta(d), d.key))"></span>
+                        </div>
+                        <p class="text-xs text-slate-500">Marca la respuesta que mejor describa a la persona evaluada en cada ítem.</p>
+
+                        <template x-for="n in d.items" :key="n">
+                            <div class="rounded-lg border border-slate-200 p-3 hover:border-emerald-300 transition">
+                                <p class="text-sm mb-2"><strong class="text-emerald-700" x-text="n + '.'"></strong> <span x-text="items[n].texto"></span></p>
+                                <div class="grid grid-cols-4 gap-2">
+                                    <template x-for="opt in [
+                                        {v: 1, txt: 'Nunca o casi nunca'},
+                                        {v: 2, txt: 'Algunas veces'},
+                                        {v: 3, txt: 'Frecuentemente'},
+                                        {v: 4, txt: 'Siempre o casi siempre'}
+                                    ]" :key="opt.v">
+                                        <label class="flex items-center gap-2 p-2 rounded text-xs hover:bg-emerald-50 cursor-pointer border" :class="respuestas[n] === opt.v ? 'border-emerald-400 bg-emerald-50' : 'border-slate-200'">
+                                            <input type="radio" :name="'item-' + n" :value="opt.v" x-model.number="respuestas[n]">
+                                            <span x-text="opt.v + ' · ' + opt.txt"></span>
+                                        </label>
+                                    </template>
+                                </div>
+                                <p x-show="items[n].inv" class="text-[10px] text-amber-700 mt-1">⚠ Ítem invertido — puntúa en sentido contrario</p>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+
+                <!-- RESULTADO -->
+                <div x-show="seccionActiva === 'resultado'" x-cloak class="space-y-5">
+                    <h2 class="text-lg font-semibold border-b border-slate-200 pb-2">10. Resultado y Perfil de Calidad de Vida</h2>
+
+                    <!-- Resumen por dimensión -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs">
+                            <thead class="bg-slate-50 text-slate-500 uppercase tracking-wide text-[10px]">
+                                <tr>
+                                    <th class="px-3 py-2 text-left">Dimensión</th>
+                                    <th class="px-2 py-2 text-right">Ítems</th>
+                                    <th class="px-2 py-2 text-right">PD</th>
+                                    <th class="px-2 py-2 text-right">PE</th>
+                                    <th class="px-2 py-2 text-right">Percentil</th>
+                                    <th class="px-3 py-2">Perfil</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <template x-for="d in dimensiones" :key="d.key">
+                                    <tr>
+                                        <td class="px-3 py-2 font-medium" x-text="d.label"></td>
+                                        <td class="px-2 py-2 text-right" x-text="d.items.filter(n => respuestas[n]).length + '/' + d.items.length"></td>
+                                        <td class="px-2 py-2 text-right" x-text="puntuacionDirecta(d)"></td>
+                                        <td class="px-2 py-2 text-right font-semibold" x-text="puntuacionEstandar(puntuacionDirecta(d), d.key)"></td>
+                                        <td class="px-2 py-2 text-right" x-text="percentilEstandar(puntuacionEstandar(puntuacionDirecta(d), d.key))"></td>
+                                        <td class="px-3 py-2">
+                                            <div class="w-full bg-slate-100 rounded h-2">
+                                                <div class="h-2 rounded transition-all bg-emerald-500" :style="'width: ' + (puntuacionEstandar(puntuacionDirecta(d), d.key) * 5) + '%'"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Índice de Calidad de Vida -->
+                    <div class="rounded-xl border-2 border-emerald-300 bg-emerald-50 p-5 grid md:grid-cols-3 gap-4">
+                        <div>
+                            <p class="text-[10px] uppercase tracking-wide text-emerald-700 font-semibold mb-1">Suma de PE</p>
+                            <p class="text-3xl font-light" x-text="dimensiones.reduce((s, d) => s + puntuacionEstandar(puntuacionDirecta(d), d.key), 0)"></p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-wide text-emerald-700 font-semibold mb-1">Índice de Calidad de Vida</p>
+                            <p class="text-3xl font-light text-emerald-700" x-text="indiceCV()"></p>
+                            <p class="text-[10px] text-emerald-700">media = 100 · DT = 15</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-wide text-emerald-700 font-semibold mb-1">Percentil del Índice</p>
+                            <p class="text-3xl font-light" x-text="percentilICV()"></p>
+                        </div>
+                    </div>
+
+                    <!-- Conclusiones -->
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Interpretación clínica y recomendaciones</label>
+                        <textarea rows="5" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300" placeholder="Comentario sobre las dimensiones más bajas, áreas de intervención propuestas, comparativa con valoraciones anteriores..."></textarea>
+                    </div>
+
+                    <!-- Aviso copyright -->
+                    <div class="rounded-lg border border-slate-200 bg-slate-50 p-3 text-[11px] text-slate-600">
+                        📚 <strong>Escala FUMAT</strong> · Verdugo, Gómez y Arias (2009) · Publicaciones del INICO (Instituto Universitario de Integración en la Comunidad, Universidad de Salamanca) · Distribución gratuita. <em>Ítems literales reproducidos del cuadernillo oficial. Baremos aproximados — para puntuaciones diagnósticas definitivas, consultar tabla original del manual (Apéndice 2).</em>
+                    </div>
+                </div>
+
+                <!-- Navegación -->
+                <div class="flex items-center justify-between mt-8 pt-4 border-t border-slate-200">
+                    <button @click="let i = secciones.indexOf(seccionActiva); if (i > 0) seccionActiva = secciones[i-1]" class="px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white hover:bg-slate-50">‹ Anterior</button>
+                    <span class="text-[11px] text-slate-500" x-text="`Bloque ${secciones.indexOf(seccionActiva) + 1} de ${secciones.length}`"></span>
+                    <button @click="let i = secciones.indexOf(seccionActiva); if (i < secciones.length - 1) seccionActiva = secciones[i+1]" class="px-3 py-2 text-xs rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 font-medium">Siguiente ›</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div x-show="toast" x-cloak x-transition.opacity class="fixed bottom-6 right-6 z-50 rounded-lg bg-slate-900 text-white px-4 py-3 shadow-xl text-sm" x-text="toast"></div>
+</div>
+
+</body>
+</html>

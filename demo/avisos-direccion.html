@@ -1,0 +1,391 @@
+<!-- @rol: gerencia -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avisos a Dirección · ÁGORA</title>
+    <link rel="stylesheet" href="_assets/tailwind.css">
+    <script defer src="alpine.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',-apple-system,system-ui,sans-serif}[x-cloak]{display:none!important}</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-center text-[11px] py-1">🎯 <span class="font-medium">Demo de presentación</span> · todos los datos son ficticios</div>
+
+<div class="flex min-h-screen" x-data="{ userMenu: false }">
+
+    <aside class="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        <div class="px-5 py-5 border-b border-slate-100">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    <svg viewBox="0 0 40 40" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M 7 35 L 20 7 L 33 35"/><path d="M 12 24 L 28 24"/><circle cx="20" cy="5.5" r="1.6" fill="currentColor" stroke="none"/></svg>
+                </div>
+                <div class="leading-tight">
+                    <p class="text-base font-semibold tracking-tight">ÁGORA</p>
+                    <p class="text-[10px] text-slate-500">Grupo Social Aspanias</p>
+                </div>
+            </a>
+        </div>
+        <nav class="flex-1 px-3 py-4 space-y-2 overflow-y-auto">
+            <!-- Trabajo diario -->
+            <div>
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Trabajo diario</p>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-home"/></svg><span class="text-sm">Inicio</span></a>
+                <a href="agenda-hoy.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-calendar"/></svg><span class="text-sm">Agenda</span></a>
+            </div>
+
+            <!-- Atención -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Atención</p>
+                <a href="personas-lista.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-users"/></svg><span class="text-sm">Personas atendidas</span><span class="ml-auto text-[10px] text-slate-400">417</span></a>
+                <a href="valoraciones-listado.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-clipboard-check"/></svg><span class="text-sm">Valoraciones</span><span class="ml-auto text-[10px] text-slate-400">5</span></a>
+                <a href="incidencias-fis.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-alert"/></svg><span class="text-sm">Incidencias FIS</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-rose-200 text-rose-900 font-bold">3</span></a>
+            </div>
+
+            <!-- Operativa -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Operativa</p>
+                <a href="centros.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-building"/></svg><span class="text-sm">Centros</span><span class="ml-auto text-[10px] text-slate-400">18</span></a>
+                <a href="area-empleo.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Área de Empleo</span><span class="ml-auto text-[10px] text-slate-400">142</span></a>
+                <a href="area-ocio.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Ocio, cultura y deporte</span><span class="ml-auto text-[10px] text-slate-400">198</span></a>
+                <a href="profesionales.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-stethoscope"/></svg><span class="text-sm">Equipo</span><span class="ml-auto text-[10px] text-slate-400">187</span></a>
+                <a href="caja-centro.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-cash"/></svg><span class="text-sm">Caja y bolsillos</span></a>
+                <a href="facturacion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-briefcase"/></svg><span class="text-sm">Facturación</span></a>
+            </div>
+
+            <!-- Análisis -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Análisis</p>
+                <a href="indicadores.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-bar"/></svg><span class="text-sm">Tablero</span></a>
+                <a href="aspanias-cifras.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-chart-line"/></svg><span class="text-sm">En cifras</span></a>
+            </div>
+
+            <!-- Sistema -->
+            <div class="pt-3 mt-2 border-t border-slate-100">
+                <p class="px-3 mb-1 text-[10px] uppercase tracking-widest text-slate-400 font-semibold">Sistema</p>
+                <a href="documentos.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Documentos</span></a>
+                <button onclick="document.dispatchEvent(new CustomEvent('agora-search'))" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-search"/></svg><span class="text-sm">Buscar</span><kbd class="ml-auto px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[9px] text-slate-500">Ctrl+K</kbd></button>
+                <a href="avisos-direccion.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 text-emerald-800 font-medium border-l-4 border-emerald-700 -ml-1 pl-2"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-bell"/></svg><span class="text-sm">Avisos</span><span class="ml-auto text-[10px] px-1.5 rounded-full bg-amber-200 text-amber-900 font-bold">3</span></a>
+                <a href="bienvenida.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-graduation"/></svg><span class="text-sm">Tour guiado</span></a>
+                <a href="manual-uso.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-folder"/></svg><span class="text-sm">Manual de uso</span></a>
+                <a href="hoja-ruta.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-emerald-700"><svg class="w-5 h-5 shrink-0" aria-hidden="true"><use href="_assets/icons.svg#icon-map"/></svg><span class="text-sm">Hoja de ruta</span></a>
+            </div>
+        </nav>
+        <!-- Selector de rol (vista demo · Regla 2 gobernanza) -->
+        <div class="px-3 pt-2 pb-1">
+            <label class="block text-[9px] uppercase tracking-widest text-slate-400 font-semibold mb-1 px-1">Viendo como</label>
+            <select onchange="document.cookie='agora_rol='+this.value+';path=/'; location.reload();" class="w-full px-2 py-1.5 text-xs rounded-lg border border-amber-300 bg-amber-50 text-amber-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-200">
+                <option value="gerencia">🎩 Gerencia (Federico)</option>
+                <option value="direccion_centro">🏢 Dirección de centro</option>
+                <option value="gestor_caso">📋 Gestor/a de caso</option>
+                <option value="profesional">🩺 Profesional</option>
+                <option value="rrhh">📑 RRHH</option>
+                <option value="familia">👨‍👩‍👧 Familia (CERCA)</option>
+            </select>
+        </div>
+        <div class="px-3 py-3 border-t border-slate-100 relative">
+            <button @click="userMenu = !userMenu" class="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50">
+                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm font-semibold shrink-0">FM</div>
+                <div class="leading-tight text-left flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">Federico Martínez</p>
+                    <p class="text-[10px] text-slate-500 truncate">Gerencia</p>
+                </div>
+                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div x-show="userMenu" x-cloak @click.outside="userMenu = false" class="absolute bottom-full left-3 right-3 mb-1 rounded-lg border border-slate-200 bg-white shadow-lg py-1 z-20">
+                <a href="personas-lista.html?mio=1" class="block px-3 py-1.5 text-sm text-emerald-700 hover:bg-emerald-50 font-medium">⭐ Mis personas</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Mi perfil</a>
+                <a href="#" class="block px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50">Preferencias</a>
+                <div class="border-t border-slate-100 my-1"></div>
+                <a href="#" class="block px-3 py-1.5 text-sm text-rose-700 hover:bg-rose-50">Cerrar sesión</a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 min-w-0">
+        <div class="bg-white border-b border-slate-200 px-8 py-2.5 sticky top-0 z-10 flex items-center justify-between gap-4">
+            <nav class="text-xs text-slate-500 truncate"><a href="index.html" class="hover:text-emerald-700">Inicio</a> <span class="mx-1">›</span> <span class="text-slate-700">Avisos a Dirección</span></nav>
+            <div class="flex items-center gap-2 shrink-0"></div>
+        </div>
+        <div class="px-8 py-6 max-w-7xl">
+<div class="mx-auto max-w-5xl px-6 py-8">
+            <a href="index.html" class="text-sm text-slate-500 hover:text-emerald-700">← Volver a la portada</a>
+
+            <div class="mt-2 flex items-end justify-between flex-wrap gap-3">
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">Avisos de Dirección</h1>
+                    <p class="text-sm text-slate-500">Cambios de Gestor/a de Caso o Persona de Referencia · Protocolo de Planes de Vida — capítulo de cambios de gestora</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <select class="rounded border border-slate-300 bg-white px-3 py-1.5 text-sm">
+                        <option>Pendientes (3)</option>
+                        <option>Aprobados (12)</option>
+                        <option>Rechazados (1)</option>
+                        <option>Todos</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mt-6 grid gap-3 md:grid-cols-3">
+                <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-amber-700">Pendientes</p>
+                    <p class="mt-1 text-3xl font-light text-amber-800">3</p>
+                </div>
+                <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-emerald-700">Aprobados (último mes)</p>
+                    <p class="mt-1 text-3xl font-light text-emerald-800">4</p>
+                </div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4">
+                    <p class="text-xs uppercase tracking-wide text-slate-500">Total histórico</p>
+                    <p class="mt-1 text-3xl font-light">16</p>
+                </div>
+            </div>
+
+            <!-- Bandeja de avisos -->
+            <div class="mt-6 space-y-4">
+
+                <!-- Aviso 1 -->
+                <article class="rounded-xl border border-amber-300 bg-white shadow-sm">
+                    <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between flex-wrap gap-2">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-medium">PENDIENTE</span>
+                            <span class="text-xs text-slate-500">AV-2026-014 · creado 17/05/2026 11:32</span>
+                        </div>
+                        <span class="text-xs text-slate-500">Vence: 22/05/2026</span>
+                    </div>
+                    <div class="p-5 space-y-3">
+                        <p class="text-sm">
+                            <span class="font-semibold">Cambio de Gestor/a de Caso</span> —
+                            <a href="persona-detalle.html" class="text-emerald-700 hover:underline">González Pérez, Marta</a>
+                            <span class="text-slate-500">· Residencia Fuentecillas</span>
+                        </p>
+                        <div class="rounded-lg bg-slate-50 border border-slate-200 p-3 text-sm grid md:grid-cols-2 gap-3">
+                            <div>
+                                <p class="text-xs uppercase tracking-wide text-slate-500">Anterior</p>
+                                <p class="font-medium">María Ruiz Pérez <span class="text-slate-500 font-normal">(TS)</span></p>
+                                <p class="text-xs text-slate-500">Asignada desde 14/09/2023</p>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-wide text-slate-500">Propuesto</p>
+                                <p class="font-medium">Carlos García López <span class="text-slate-500 font-normal">(Psicólogo)</span></p>
+                                <p class="text-xs text-slate-500">Carga actual: 32 casos · sobre ratio</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-wide text-slate-500">Motivo</p>
+                            <p class="text-sm text-slate-700">Baja por maternidad de María Ruiz Pérez prevista para el 02/06/2026. Reasignación de 4 casos. Marta tiene vínculo terapéutico con Carlos desde 2024.</p>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-wide text-slate-500">Solicitante</p>
+                            <p class="text-sm">Lucía Martínez (Coord. Fuentecillas) · 17/05/2026</p>
+                        </div>
+                        <div x-data="{ accion: null, notas: '' }" class="pt-2 border-t border-slate-100">
+                            <div x-show="accion === null" class="flex items-center gap-2">
+                                <button @click="accion = 'aprobar'" class="rounded bg-emerald-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-800">Aprobar</button>
+                                <button @click="accion = 'devolver'" class="rounded border border-slate-300 bg-white px-3 py-1.5 text-xs hover:border-slate-400">Devolver</button>
+                                <button @click="accion = 'rechazar'" class="rounded border border-rose-300 bg-white px-3 py-1.5 text-xs text-rose-700 hover:bg-rose-50">Rechazar</button>
+                            </div>
+                            <div x-show="accion !== null" x-cloak class="space-y-2">
+                                <p class="text-xs text-slate-500">
+                                    <template x-if="accion === 'aprobar'"><span>Aprobando el cambio. Quedará registrado en la bitácora con tu identidad.</span></template>
+                                    <template x-if="accion === 'devolver'"><span>Devolviendo al solicitante para revisión. Indica el motivo abajo.</span></template>
+                                    <template x-if="accion === 'rechazar'"><span>Rechazando el cambio. Indica el motivo abajo.</span></template>
+                                </p>
+                                <textarea x-model="notas" rows="2" placeholder="Notas (opcional)..." class="w-full rounded border border-slate-300 px-3 py-2 text-xs"></textarea>
+                                <div class="flex items-center gap-2">
+                                    <button @click="alert('Demo: en la app real se guardaría la accion (' + accion + ') con tus notas y se notificaría a las partes implicadas.'); accion = null; notas = ''"
+                                            :class="accion === 'rechazar' ? 'bg-rose-700 hover:bg-rose-800' : (accion === 'devolver' ? 'bg-blue-700 hover:bg-blue-800' : 'bg-emerald-700 hover:bg-emerald-800')"
+                                            class="rounded text-white px-3 py-1.5 text-xs font-medium">
+                                        Confirmar <span x-text="accion"></span>
+                                    </button>
+                                    <button @click="accion = null; notas = ''" class="text-xs text-slate-500 hover:text-slate-700">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Aviso 2 -->
+                <article class="rounded-xl border border-amber-300 bg-white shadow-sm">
+                    <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between flex-wrap gap-2">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-medium">PENDIENTE</span>
+                            <span class="text-xs text-slate-500">AV-2026-013 · creado 15/05/2026 09:48</span>
+                        </div>
+                        <span class="text-xs text-slate-500">Vence: 20/05/2026</span>
+                    </div>
+                    <div class="p-5 space-y-3">
+                        <p class="text-sm">
+                            <span class="font-semibold">Cambio de Persona de Referencia</span> —
+                            <a href="persona-detalle.html" class="text-emerald-700 hover:underline">Romero Sanz, Antonio</a>
+                            <span class="text-slate-500">· Residencia Salas</span>
+                        </p>
+                        <div class="rounded-lg bg-slate-50 border border-slate-200 p-3 text-sm grid md:grid-cols-2 gap-3">
+                            <div>
+                                <p class="text-xs uppercase tracking-wide text-slate-500">Anterior</p>
+                                <p class="font-medium">Inés Rojo <span class="text-slate-500 font-normal">(TO)</span></p>
+                                <p class="text-xs text-slate-500">Asignada desde 11/01/2025</p>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-wide text-slate-500">Propuesto</p>
+                                <p class="font-medium">Andrés Diez <span class="text-slate-500 font-normal">(Educador)</span></p>
+                                <p class="text-xs text-slate-500">Carga actual: 24 casos</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-wide text-slate-500">Motivo</p>
+                            <p class="text-sm text-slate-700">Solicitud expresa de la persona y de su figura de apoyo (hermana, apoyo voluntario). Mejor vínculo con Andrés tras 6 meses de seguimiento conjunto.</p>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-wide text-slate-500">Solicitante</p>
+                            <p class="text-sm">Beatriz Hernando (Coord. Salas) · 15/05/2026</p>
+                        </div>
+                        <div x-data="{ accion: null, notas: '' }" class="pt-2 border-t border-slate-100">
+                            <div x-show="accion === null" class="flex items-center gap-2">
+                                <button @click="accion = 'aprobar'" class="rounded bg-emerald-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-800">Aprobar</button>
+                                <button @click="accion = 'devolver'" class="rounded border border-slate-300 bg-white px-3 py-1.5 text-xs hover:border-slate-400">Devolver</button>
+                                <button @click="accion = 'rechazar'" class="rounded border border-rose-300 bg-white px-3 py-1.5 text-xs text-rose-700 hover:bg-rose-50">Rechazar</button>
+                            </div>
+                            <div x-show="accion !== null" x-cloak class="space-y-2">
+                                <p class="text-xs text-slate-500">
+                                    <template x-if="accion === 'aprobar'"><span>Aprobando el cambio. Quedará registrado en la bitácora con tu identidad.</span></template>
+                                    <template x-if="accion === 'devolver'"><span>Devolviendo al solicitante para revisión. Indica el motivo abajo.</span></template>
+                                    <template x-if="accion === 'rechazar'"><span>Rechazando el cambio. Indica el motivo abajo.</span></template>
+                                </p>
+                                <textarea x-model="notas" rows="2" placeholder="Notas (opcional)..." class="w-full rounded border border-slate-300 px-3 py-2 text-xs"></textarea>
+                                <div class="flex items-center gap-2">
+                                    <button @click="alert('Demo: en la app real se guardaría la accion (' + accion + ') con tus notas y se notificaría a las partes implicadas.'); accion = null; notas = ''"
+                                            :class="accion === 'rechazar' ? 'bg-rose-700 hover:bg-rose-800' : (accion === 'devolver' ? 'bg-blue-700 hover:bg-blue-800' : 'bg-emerald-700 hover:bg-emerald-800')"
+                                            class="rounded text-white px-3 py-1.5 text-xs font-medium">
+                                        Confirmar <span x-text="accion"></span>
+                                    </button>
+                                    <button @click="accion = null; notas = ''" class="text-xs text-slate-500 hover:text-slate-700">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Aviso 3 -->
+                <article class="rounded-xl border border-amber-300 bg-white shadow-sm">
+                    <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between flex-wrap gap-2">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-medium">PENDIENTE</span>
+                            <span class="text-xs text-slate-500">AV-2026-012 · creado 12/05/2026 16:11</span>
+                        </div>
+                        <span class="text-xs text-slate-500">Vence: 17/05/2026 <span class="text-rose-700 font-medium">· vencido</span></span>
+                    </div>
+                    <div class="p-5 space-y-3">
+                        <p class="text-sm">
+                            <span class="font-semibold">Cambio de Gestor/a de Caso</span> —
+                            <a href="persona-detalle.html" class="text-emerald-700 hover:underline">Martín Olalla, Carmen</a>
+                            <span class="text-slate-500">· Centro de Día Río Arlanza</span>
+                        </p>
+                        <div class="rounded-lg bg-slate-50 border border-slate-200 p-3 text-sm grid md:grid-cols-2 gap-3">
+                            <div>
+                                <p class="text-xs uppercase tracking-wide text-slate-500">Anterior</p>
+                                <p class="font-medium">Daniel Alonso <span class="text-slate-500 font-normal">(Psicólogo)</span></p>
+                                <p class="text-xs text-slate-500">Asignado desde 03/05/2022</p>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-wide text-slate-500">Propuesto</p>
+                                <p class="font-medium">Nuria Calleja <span class="text-slate-500 font-normal">(TS)</span></p>
+                                <p class="text-xs text-slate-500">Carga actual: 26 casos</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-wide text-slate-500">Motivo</p>
+                            <p class="text-sm text-slate-700">Cambio de centro de Carmen (de CD Quintanadueñas a C. Multiactividad V. Aleixandre) por evolución de necesidades de apoyo. Continuidad con Nuria, que ya la atiende en intervenciones grupales.</p>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-wide text-slate-500">Solicitante</p>
+                            <p class="text-sm">Daniel Alonso · 12/05/2026</p>
+                        </div>
+                        <div x-data="{ accion: null, notas: '' }" class="pt-2 border-t border-slate-100">
+                            <div x-show="accion === null" class="flex items-center gap-2">
+                                <button @click="accion = 'aprobar'" class="rounded bg-emerald-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-800">Aprobar</button>
+                                <button @click="accion = 'devolver'" class="rounded border border-slate-300 bg-white px-3 py-1.5 text-xs hover:border-slate-400">Devolver</button>
+                                <button @click="accion = 'rechazar'" class="rounded border border-rose-300 bg-white px-3 py-1.5 text-xs text-rose-700 hover:bg-rose-50">Rechazar</button>
+                            </div>
+                            <div x-show="accion !== null" x-cloak class="space-y-2">
+                                <p class="text-xs text-slate-500">
+                                    <template x-if="accion === 'aprobar'"><span>Aprobando el cambio. Quedará registrado en la bitácora con tu identidad.</span></template>
+                                    <template x-if="accion === 'devolver'"><span>Devolviendo al solicitante para revisión. Indica el motivo abajo.</span></template>
+                                    <template x-if="accion === 'rechazar'"><span>Rechazando el cambio. Indica el motivo abajo.</span></template>
+                                </p>
+                                <textarea x-model="notas" rows="2" placeholder="Notas (opcional)..." class="w-full rounded border border-slate-300 px-3 py-2 text-xs"></textarea>
+                                <div class="flex items-center gap-2">
+                                    <button @click="alert('Demo: en la app real se guardaría la accion (' + accion + ') con tus notas y se notificaría a las partes implicadas.'); accion = null; notas = ''"
+                                            :class="accion === 'rechazar' ? 'bg-rose-700 hover:bg-rose-800' : (accion === 'devolver' ? 'bg-blue-700 hover:bg-blue-800' : 'bg-emerald-700 hover:bg-emerald-800')"
+                                            class="rounded text-white px-3 py-1.5 text-xs font-medium">
+                                        Confirmar <span x-text="accion"></span>
+                                    </button>
+                                    <button @click="accion = null; notas = ''" class="text-xs text-slate-500 hover:text-slate-700">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Aprobados recientes -->
+                <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-500 pt-4">Resueltos recientes</h2>
+
+                <article class="rounded-xl border border-slate-200 bg-white opacity-90">
+                    <div class="p-4 flex items-center justify-between flex-wrap gap-2 text-sm">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">APROBADO</span>
+                            <span class="font-medium">Cambio Gestor/a — Vega Cabero, Isabel</span>
+                            <span class="text-slate-500">· Residencia Salas</span>
+                        </div>
+                        <span class="text-xs text-slate-500">Aprobado 09/05/2026 por F. Martínez</span>
+                    </div>
+                </article>
+
+                <article class="rounded-xl border border-slate-200 bg-white opacity-90">
+                    <div class="p-4 flex items-center justify-between flex-wrap gap-2 text-sm">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">APROBADO</span>
+                            <span class="font-medium">Cambio P. Referencia — Lozano del Río, Esther</span>
+                            <span class="text-slate-500">· Residencia Salas</span>
+                        </div>
+                        <span class="text-xs text-slate-500">Aprobado 02/05/2026 por F. Martínez</span>
+                    </div>
+                </article>
+
+                <article class="rounded-xl border border-slate-200 bg-white opacity-90">
+                    <div class="p-4 flex items-center justify-between flex-wrap gap-2 text-sm">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 font-medium">RECHAZADO</span>
+                            <span class="font-medium">Cambio Gestor/a — Núñez Hidalgo, Pablo</span>
+                            <span class="text-slate-500">· Residencia Salas</span>
+                        </div>
+                        <span class="text-xs text-slate-500">Rechazado 28/04/2026 — sobrecarga del propuesto</span>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="mt-6 rounded-xl border border-blue-200 bg-blue-50 p-5 text-sm text-blue-900">
+                <p class="font-semibold uppercase tracking-wide text-xs text-blue-700">Generación automática</p>
+                <p class="mt-2">ÁGORA genera estos avisos automáticamente cada vez que un Coordinador/a propone un cambio de Gestor/a de Caso o Persona de Referencia, conforme al Protocolo de Planes de Vida — capítulo de cambios de gestora. La decisión y motivo se registran en la bitácora cada acceso queda registrado.</p>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div x-data="{ open: false }" x-cloak @keydown.window.ctrl.k.prevent="open = true" @keydown.window.meta.k.prevent="open = true" @agora-search.window="open = true" @keydown.escape.window="open = false" x-show="open" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-slate-900/40 backdrop-blur-sm" @click.self="open = false">
+    <div class="w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+            <span class="text-xl">🔎</span>
+            <input type="text" autofocus placeholder="Buscar persona, centro, cita..." class="flex-1 outline-none text-base">
+            <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded text-[10px] text-slate-500">esc</kbd>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

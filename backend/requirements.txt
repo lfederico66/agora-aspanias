@@ -1,0 +1,38 @@
+# Django y core
+Django==5.0.6
+psycopg[binary]==3.1.19
+python-dotenv==1.0.1
+django-environ==0.11.2
+
+# SSO Microsoft 365
+django-allauth[socialaccount]==0.63.3
+PyJWT==2.8.0
+cryptography==42.0.7
+requests==2.32.3
+
+# Plantillas y UI
+django-htmx==1.17.3
+django-tailwind==3.8.0
+django-widget-tweaks==1.5.0
+
+# Auditoría y seguridad
+django-axes==6.4.0
+
+# Almacenamiento Azure (para documentos)
+azure-storage-blob==12.20.0
+azure-identity==1.16.0
+
+# Tareas y utilidades
+django-extensions==3.2.3
+python-dateutil==2.9.0
+openpyxl==3.1.5
+
+# Testing
+pytest==8.2.2
+pytest-django==4.8.0
+factory-boy==3.3.0
+faker==25.8.0
+
+# Producción
+gunicorn==22.0.0
+whitenoise==6.6.0
