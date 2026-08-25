@@ -170,3 +170,4 @@ Cualquier duda jurídica → **Lex Digital**.
 
 **Federico Martínez** — Gerencia Grupo Social Aspanias
 gerencia@aspaniasburgos.com · 947 23 85 62
+> Despliegue continuo activo desde 25/08/2026: cada push a `main` publica la demo automáticamente en Netlify (configuración en `netlify.toml`).
