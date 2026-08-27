@@ -75,3 +75,6 @@ _tmp_*
 
 # Cuarentena de reorganización (pendiente de borrado definitivo)
 _PARA_REVISAR/
+
+# Plantillas de captura (sin datos) SI se versionan
+!datos/plantillas/*.xlsx
