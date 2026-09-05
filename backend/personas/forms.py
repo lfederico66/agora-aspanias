@@ -64,3 +64,38 @@ class PersonaAtendidaForm(forms.ModelForm):
         if motivo_baja and not fecha_baja:
             self.add_error("fecha_baja", "Indica la fecha si registras un motivo de baja.")
         return cleaned
+
+
+class CuidadoEnfermeriaForm(forms.ModelForm):
+    """Plan de salud-cuidados (petición Dirección Fuentecillas, jun 2026)."""
+
+    class Meta:
+        from .models import CuidadoEnfermeria
+
+        model = CuidadoEnfermeria
+        fields = [
+            "respiracion", "audicion", "vision", "alimentacion",
+            "sueno_descanso", "eliminacion", "movilidad", "autonomia_abvd",
+            "conducta", "cuidados_piel", "observaciones",
+        ]
+        labels = {
+            "respiracion": "Respiración",
+            "audicion": "Audición",
+            "vision": "Visión",
+            "alimentacion": "Alimentación",
+            "sueno_descanso": "Sueño y descanso",
+            "eliminacion": "Eliminación",
+            "movilidad": "Movilidad",
+            "autonomia_abvd": "Autonomía ABVD",
+            "conducta": "Conducta",
+            "cuidados_piel": "Cuidados de la piel",
+            "observaciones": "Observaciones",
+        }
+        widgets = {
+            campo: forms.Textarea(attrs={
+                "rows": 2,
+                "class": "w-full rounded-lg border border-slate-300 px-3 py-2 text-sm "
+                         "focus:outline-none focus:border-emerald-500",
+            })
+            for campo in fields
+        }

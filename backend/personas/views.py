@@ -427,3 +427,51 @@ def mapa_ocupacion(request, centro_codigo=None):
         "camas_libres": camas_libres,
         "movimientos": movimientos,
     })
+
+
+# ---------------------------------------------------------------------------
+# Cuidados de enfermería — bloque HTMX dentro de la pestaña Información médica
+# (P1 pre-piloto · petición Dirección Fuentecillas). Solo rol clínico.
+# ---------------------------------------------------------------------------
+
+
+@login_required
+@transaction.atomic
+def cuidados_enfermeria(request, persona_id):
+    """GET: fragmento lectura (o formulario con ?modo=editar). POST: guarda.
+
+    La lectura y la escritura quedan en la bitácora vía middleware; el
+    permiso clínico se comprueba aquí porque el fragmento viaja solo.
+    """
+    from django.core.exceptions import PermissionDenied
+
+    from .forms import CuidadoEnfermeriaForm
+    from .models import CuidadoEnfermeria
+
+    if not tiene_acceso_clinico(request.user):
+        raise PermissionDenied("Se requiere rol clínico para los cuidados de enfermería.")
+
+    persona = get_object_or_404(PersonaAtendida, pk=persona_id)
+    cuidados = CuidadoEnfermeria.objects.filter(persona=persona).first()
+
+    if request.method == "POST":
+        form = CuidadoEnfermeriaForm(request.POST, instance=cuidados)
+        if form.is_valid():
+            objeto = form.save(commit=False)
+            objeto.persona = persona
+            objeto.updated_by = request.user
+            objeto.save()
+            return render(request, "personas/_cuidados_enfermeria.html", {
+                "persona": persona, "cuidados": objeto,
+                "puede_ver_clinica": True, "guardado": True,
+            })
+    elif request.GET.get("modo") == "editar":
+        form = CuidadoEnfermeriaForm(instance=cuidados)
+    else:
+        return render(request, "personas/_cuidados_enfermeria.html", {
+            "persona": persona, "cuidados": cuidados, "puede_ver_clinica": True,
+        })
+
+    return render(request, "personas/_cuidados_enfermeria_form.html", {
+        "persona": persona, "form": form,
+    })

@@ -1,0 +1,45 @@
+{# Bloque HTMX — Cuidados de enfermería (lectura). Solo se sirve con rol clínico. #}
+<article id="bloque-cuidados" class="rounded-xl border border-emerald-200 bg-emerald-50/30 p-5 shadow-sm">
+    <div class="flex items-start justify-between gap-3">
+        <div>
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-emerald-800">Cuidados de enfermería · Plan de salud-cuidados</h2>
+            {% if cuidados %}
+                <p class="text-xs text-slate-500 mt-1">
+                    Actualizado {{ cuidados.updated_at|date:"d/m/Y H:i" }}
+                    {% if cuidados.updated_by %} · {{ cuidados.updated_by.get_full_name|default:cuidados.updated_by.username }}{% endif %}
+                </p>
+            {% endif %}
+        </div>
+        <button type="button"
+                hx-get="{% url 'personas:cuidados' persona.id %}?modo=editar"
+                hx-target="#bloque-cuidados" hx-swap="outerHTML"
+                class="shrink-0 rounded-lg border border-emerald-300 bg-white px-3 py-1.5 text-xs font-medium text-emerald-800 hover:bg-emerald-100">
+            ✎ {% if cuidados %}Editar cuidados{% else %}Registrar cuidados{% endif %}
+        </button>
+    </div>
+
+    {% if guardado %}
+    <p class="mt-2 rounded-lg bg-emerald-100 border border-emerald-300 px-3 py-1.5 text-xs text-emerald-900">
+        ✓ Cuidados guardados · registrado en bitácora
+    </p>
+    {% endif %}
+
+    {% if cuidados %}
+    <dl class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 text-sm">
+        {% if cuidados.respiracion %}<div><dt class="font-medium text-slate-700">Respiración</dt><dd class="text-slate-600">{{ cuidados.respiracion }}</dd></div>{% endif %}
+        {% if cuidados.audicion %}<div><dt class="font-medium text-slate-700">Audición</dt><dd class="text-slate-600">{{ cuidados.audicion }}</dd></div>{% endif %}
+        {% if cuidados.vision %}<div><dt class="font-medium text-slate-700">Visión</dt><dd class="text-slate-600">{{ cuidados.vision }}</dd></div>{% endif %}
+        {% if cuidados.alimentacion %}<div><dt class="font-medium text-slate-700">Alimentación</dt><dd class="text-slate-600">{{ cuidados.alimentacion }}</dd></div>{% endif %}
+        {% if cuidados.sueno_descanso %}<div><dt class="font-medium text-slate-700">Sueño y descanso</dt><dd class="text-slate-600">{{ cuidados.sueno_descanso }}</dd></div>{% endif %}
+        {% if cuidados.eliminacion %}<div><dt class="font-medium text-slate-700">Eliminación</dt><dd class="text-slate-600">{{ cuidados.eliminacion }}</dd></div>{% endif %}
+        {% if cuidados.movilidad %}<div><dt class="font-medium text-slate-700">Movilidad</dt><dd class="text-slate-600">{{ cuidados.movilidad }}</dd></div>{% endif %}
+        {% if cuidados.autonomia_abvd %}<div><dt class="font-medium text-slate-700">Autonomía ABVD</dt><dd class="text-slate-600">{{ cuidados.autonomia_abvd }}</dd></div>{% endif %}
+        {% if cuidados.conducta %}<div><dt class="font-medium text-slate-700">Conducta</dt><dd class="text-slate-600">{{ cuidados.conducta }}</dd></div>{% endif %}
+        {% if cuidados.cuidados_piel %}<div><dt class="font-medium text-slate-700">Cuidados de la piel</dt><dd class="text-slate-600">{{ cuidados.cuidados_piel }}</dd></div>{% endif %}
+        {% if cuidados.observaciones %}<div class="md:col-span-2"><dt class="font-medium text-slate-700">Observaciones</dt><dd class="text-slate-600">{{ cuidados.observaciones }}</dd></div>{% endif %}
+    </dl>
+    <p class="mt-3 text-[11px] text-emerald-800">💡 Estos campos alimentan la <strong>Ficha básica de salud</strong> que se entrega en urgencias.</p>
+    {% else %}
+    <p class="mt-3 text-sm text-slate-500 italic">Sin plan de cuidados registrado todavía.</p>
+    {% endif %}
+</article>

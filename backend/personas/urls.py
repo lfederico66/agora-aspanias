@@ -13,4 +13,5 @@ urlpatterns = [
     path("mapa-ocupacion/<str:centro_codigo>/", views.mapa_ocupacion, name="mapa_ocupacion_centro"),
     path("<uuid:persona_id>/", views.detalle_persona, name="detalle"),
     path("<uuid:persona_id>/editar/", views.editar_persona, name="editar"),
+    path("<uuid:persona_id>/cuidados/", views.cuidados_enfermeria, name="cuidados"),
 ]

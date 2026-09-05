@@ -96,24 +96,7 @@
     </article>
     {% endif %}
 
-    {% if cuidados %}
-    <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-500">Cuidados de enfermería</h2>
-        <p class="text-xs text-slate-500 mt-1">Plan de cuidados estructurado por dimensiones</p>
-        <dl class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 text-sm">
-            {% if cuidados.respiracion %}<div><dt class="font-medium text-slate-700">Respiración</dt><dd class="text-slate-600">{{ cuidados.respiracion }}</dd></div>{% endif %}
-            {% if cuidados.audicion %}<div><dt class="font-medium text-slate-700">Audición</dt><dd class="text-slate-600">{{ cuidados.audicion }}</dd></div>{% endif %}
-            {% if cuidados.vision %}<div><dt class="font-medium text-slate-700">Visión</dt><dd class="text-slate-600">{{ cuidados.vision }}</dd></div>{% endif %}
-            {% if cuidados.alimentacion %}<div><dt class="font-medium text-slate-700">Alimentación</dt><dd class="text-slate-600">{{ cuidados.alimentacion }}</dd></div>{% endif %}
-            {% if cuidados.sueno_descanso %}<div><dt class="font-medium text-slate-700">Sueño y descanso</dt><dd class="text-slate-600">{{ cuidados.sueno_descanso }}</dd></div>{% endif %}
-            {% if cuidados.eliminacion %}<div><dt class="font-medium text-slate-700">Eliminación</dt><dd class="text-slate-600">{{ cuidados.eliminacion }}</dd></div>{% endif %}
-            {% if cuidados.movilidad %}<div><dt class="font-medium text-slate-700">Movilidad</dt><dd class="text-slate-600">{{ cuidados.movilidad }}</dd></div>{% endif %}
-            {% if cuidados.autonomia_abvd %}<div><dt class="font-medium text-slate-700">Autonomía ABVD</dt><dd class="text-slate-600">{{ cuidados.autonomia_abvd }}</dd></div>{% endif %}
-            {% if cuidados.conducta %}<div><dt class="font-medium text-slate-700">Conducta</dt><dd class="text-slate-600">{{ cuidados.conducta }}</dd></div>{% endif %}
-            {% if cuidados.cuidados_piel %}<div><dt class="font-medium text-slate-700">Cuidados de la piel</dt><dd class="text-slate-600">{{ cuidados.cuidados_piel }}</dd></div>{% endif %}
-        </dl>
-    </article>
-    {% endif %}
+    {% include "personas/_cuidados_enfermeria.html" %}
 
     {% if persona.problemas_salud.all %}
     <article class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
