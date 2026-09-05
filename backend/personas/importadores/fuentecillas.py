@@ -117,15 +117,17 @@ def separar_apellidos(apellidos: str) -> tuple[str, str]:
 
 
 def normalizar_centro(v: str):
-    """→ ('RESIDENCIA'|'CD', None) o (None, motivo_excepcion)."""
+    """→ (centro, aviso, excepcion). Los casos dudosos entran con centro por
+    defecto y aviso de revisión en lugar de quedarse fuera (decisión 05/09/2026)."""
     t = _sin_tildes(_texto(v).upper())
     if not t:
-        return None, "sin centro asignado"
-    if "PUENTESAUCO" in t:
-        return None, "centro mixto con Puentesaúco — confirmar censo con Dirección"
+        return "RESIDENCIA", "sin centro en origen — asignada a Residencia por defecto, CONFIRMAR", None
+    if "PUENTESAUCO" in t and "FUENTECILLAS" in t:
+        centro = "CD" if "DIA" in t else "RESIDENCIA"
+        return centro, "figura también en Residencia Puentesaúco — CONFIRMAR censo con Dirección", None
     if "FUENTECILLAS" not in t:
-        return None, f"centro no reconocido: {t[:40]}"
-    return ("CD" if "DIA" in t else "RESIDENCIA"), None
+        return None, None, f"centro no reconocido: {t[:40]}"
+    return ("CD" if "DIA" in t else "RESIDENCIA"), None, None
 
 
 def normalizar_grado_dep(v: str) -> str:
@@ -194,9 +196,11 @@ def procesar(ruta: Path):
             avisos.append("fecha de incorporación inválida — se usará 01/01/2000 provisional")
             f_alta = date(2000, 1, 1)
 
-        centro, motivo_centro = normalizar_centro(col("centro"))
+        centro, aviso_centro, motivo_centro = normalizar_centro(col("centro"))
         if motivo_centro:
             problemas_bloqueantes.append(motivo_centro)
+        if aviso_centro:
+            avisos.append(aviso_centro)
 
         dni = _texto(col("dni")).upper().replace(" ", "").replace("-", "")
         if dni and not validar_nif(dni):
@@ -225,6 +229,8 @@ def procesar(ruta: Path):
             notas.append(f"ICAP (migrado): {_texto(col('icap'))}{' · ' + _texto(col('f_icap')) if _texto(col('f_icap')) else ''}")
         if _texto(col("expediente")):
             notas.append(f"REFERENCIA/EXPEDIENTE (origen): {_texto(col('expediente'))}")
+        for aviso in avisos:
+            notas.append(f"⚠ PENDIENTE DE REVISIÓN (migración): {aviso}")
 
         registros.append({
             "fila": n_fila,
