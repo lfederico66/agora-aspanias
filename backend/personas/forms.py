@@ -99,3 +99,38 @@ class CuidadoEnfermeriaForm(forms.ModelForm):
             })
             for campo in fields
         }
+
+
+class DatosBaseForm(forms.ModelForm):
+    """Edición inline de los datos base de la ficha (P1 pre-piloto).
+
+    Subconjunto de PersonaAtendidaForm: identidad, dirección, comunicación
+    y administrativos sanitarios. Centro, gestora y fechas de alta/baja se
+    cambian por sus flujos propios, no inline.
+    """
+
+    class Meta:
+        model = PersonaAtendida
+        fields = [
+            "nombre", "apellido_1", "apellido_2", "dni_nie",
+            "fecha_nacimiento", "sexo", "nacionalidad",
+            "direccion_calle", "direccion_cp",
+            "direccion_municipio", "direccion_provincia",
+            "forma_comunicacion_preferente", "idioma_preferente",
+            "usa_saac", "saac_notas",
+            "numero_seguridad_social", "numero_tarjeta_sanitaria",
+            "tsi_caducidad", "centro_salud",
+        ]
+        widgets = {
+            "fecha_nacimiento": forms.DateInput(attrs={"type": "date"}, format="%Y-%m-%d"),
+            "tsi_caducidad": forms.DateInput(attrs={"type": "date"}, format="%Y-%m-%d"),
+            "saac_notas": forms.TextInput(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        clase = ("w-full rounded-lg border border-slate-300 px-3 py-2 text-sm "
+                 "focus:outline-none focus:border-emerald-500")
+        for nombre, campo in self.fields.items():
+            if not isinstance(campo.widget, forms.CheckboxInput):
+                campo.widget.attrs.setdefault("class", clase)

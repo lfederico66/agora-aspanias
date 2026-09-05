@@ -548,3 +548,31 @@ def ficha_salud(request, persona_id):
         "ahora": _tz_now(),
     }
     return render(request, "personas/ficha_salud.html", contexto)
+
+
+# ---------------------------------------------------------------------------
+# Datos base de la ficha — edición inline por bloque HTMX (P1 pre-piloto)
+# ---------------------------------------------------------------------------
+
+
+@login_required
+@transaction.atomic
+def editar_datos_base(request, persona_id):
+    """GET: bloque lectura (o formulario con ?modo=editar). POST: guarda."""
+    from .forms import DatosBaseForm
+
+    persona = get_object_or_404(PersonaAtendida, pk=persona_id)
+
+    if request.method == "POST":
+        form = DatosBaseForm(request.POST, instance=persona)
+        if form.is_valid():
+            form.save()
+            return render(request, "personas/_datos_base.html",
+                          {"persona": persona, "guardado": True})
+    elif request.GET.get("modo") == "editar":
+        form = DatosBaseForm(instance=persona)
+    else:
+        return render(request, "personas/_datos_base.html", {"persona": persona})
+
+    return render(request, "personas/_datos_base_form.html",
+                  {"persona": persona, "form": form})

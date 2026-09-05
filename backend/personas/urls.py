@@ -13,6 +13,7 @@ urlpatterns = [
     path("mapa-ocupacion/<str:centro_codigo>/", views.mapa_ocupacion, name="mapa_ocupacion_centro"),
     path("<uuid:persona_id>/", views.detalle_persona, name="detalle"),
     path("<uuid:persona_id>/editar/", views.editar_persona, name="editar"),
+    path("<uuid:persona_id>/datos-base/", views.editar_datos_base, name="datos_base"),
     path("<uuid:persona_id>/cuidados/", views.cuidados_enfermeria, name="cuidados"),
     path("<uuid:persona_id>/ficha-salud/", views.ficha_salud, name="ficha_salud"),
 ]
