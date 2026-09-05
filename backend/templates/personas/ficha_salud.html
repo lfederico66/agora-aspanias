@@ -1,0 +1,171 @@
+{# Ficha básica de salud — documento imprimible A4. Autocontenido (sin base.html). #}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha básica de salud · {{ persona.apellido_1 }}, {{ persona.nombre }}</title>
+    <style>
+        @page { size: A4; margin: 14mm 14mm 18mm 14mm; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; color: #111; background: #f3f4f6; margin: 0; }
+        .pagina { background: #fff; max-width: 210mm; margin: 18px auto; padding: 14mm; box-shadow: 0 4px 18px rgba(0,0,0,.08); }
+        h1, h2 { font-family: Georgia, 'Times New Roman', serif; }
+        h1 { font-size: 18pt; margin: 0; color: #047857; }
+        h2 { font-size: 12pt; margin: 14pt 0 6pt; padding-bottom: 3pt; border-bottom: 1.5pt solid #047857; color: #047857; }
+        .meta { font-size: 9pt; color: #555; }
+        .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; }
+        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+        .campo { font-size: 9.5pt; }
+        .campo .et { color: #6b7280; text-transform: uppercase; letter-spacing: .4pt; font-size: 7pt; font-weight: 600; display: block; }
+        .critico { border: 1.5pt solid #be123c; background: #fff1f2; padding: 4mm; border-radius: 4pt; }
+        .alergia { display: inline-block; background: #fee2e2; color: #991b1b; padding: 1pt 5pt; border-radius: 3pt; font-size: 8.5pt; font-weight: 600; margin: 1pt 3pt 1pt 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 9pt; margin-top: 3pt; }
+        th, td { border: .4pt solid #cbd5e1; padding: 3pt 5pt; text-align: left; vertical-align: top; }
+        th { background: #f1f5f9; font-weight: 600; font-size: 8pt; text-transform: uppercase; }
+        .cuidado { background: #ecfdf5; border: .5pt solid #6ee7b7; padding: 2.5mm 3.5mm; border-radius: 3pt; font-size: 9pt; }
+        .cuidado .et { color: #047857; font-weight: 700; font-size: 7.5pt; text-transform: uppercase; display: block; }
+        .pie { font-size: 7.5pt; color: #6b7280; margin-top: 8mm; border-top: .5pt solid #cbd5e1; padding-top: 3mm; line-height: 1.4; }
+        .firma { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; margin-top: 10mm; }
+        .firma div { border-top: .5pt solid #111; padding-top: 1.5mm; font-size: 9pt; min-height: 14mm; }
+        .barra { position: sticky; top: 0; background: #047857; color: #fff; padding: 8px 14px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .barra a, .barra button { background: rgba(255,255,255,.18); color: #fff; padding: 5px 12px; border-radius: 6px; text-decoration: none; font-size: 11px; border: 0; cursor: pointer; }
+        @media print { .barra { display: none !important; } body { background: #fff; } .pagina { box-shadow: none; margin: 0; padding: 0; max-width: none; } }
+    </style>
+</head>
+<body>
+
+<div class="barra">
+    <span>📄 Ficha básica de salud · exportación registrada en bitácora ({{ motivo }})</span>
+    <span>
+        <a href="{% url 'personas:detalle' persona.id %}?tab=medica">← Volver a la ficha</a>
+        <button onclick="window.print()">🖨 Imprimir / Guardar PDF</button>
+    </span>
+</div>
+
+<div class="pagina">
+
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; padding-bottom:6pt; border-bottom:1.5pt solid #047857;">
+        <div>
+            <h1>FICHA BÁSICA DE SALUD</h1>
+            <p class="meta">Grupo Social Aspanias · {{ persona.centro_referencia.nombre }}</p>
+        </div>
+        <div class="meta" style="text-align:right;">
+            <strong>{{ persona.codigo_interno }}</strong><br>
+            Generada: {{ ahora|date:"d/m/Y H:i" }}<br>
+            Por: {{ request.user.get_full_name|default:request.user.username }}
+        </div>
+    </div>
+
+    <h2>1 · Datos personales</h2>
+    <div class="grid3">
+        <div class="campo"><span class="et">Nombre y apellidos</span>{{ persona.apellido_1 }} {{ persona.apellido_2 }}, {{ persona.nombre }}</div>
+        <div class="campo"><span class="et">Fecha nacimiento</span>{{ persona.fecha_nacimiento|date:"d/m/Y" }}</div>
+        <div class="campo"><span class="et">DNI/NIE</span>{{ persona.dni_nie|default:"—" }}</div>
+        <div class="campo"><span class="et">Nº Seguridad Social</span>{{ persona.numero_seguridad_social|default:"—" }}</div>
+        <div class="campo"><span class="et">Tarjeta sanitaria</span>{{ persona.numero_tarjeta_sanitaria|default:"—" }}</div>
+        <div class="campo"><span class="et">Centro de salud</span>{{ persona.centro_salud|default:"—" }}</div>
+        <div class="campo"><span class="et">Centro de referencia</span>{{ persona.centro_referencia.nombre }}</div>
+        <div class="campo"><span class="et">Ubicación</span>{% if ocupacion %}{{ ocupacion.cama.habitacion.modulo.nombre }} · hab. {{ ocupacion.cama.habitacion.numero }}{% else %}—{% endif %}</div>
+        <div class="campo"><span class="et">Perfil</span>{% if perfil_mayor %}Dependencia {{ perfil_mayor.get_grado_dependencia_display }}{% endif %}{% if perfil_di %} · Discapacidad {{ perfil_di.grado_discapacidad_pct|default:"—" }}%{% endif %}</div>
+    </div>
+
+    <h2>2 · Datos críticos para urgencias</h2>
+    <div class="critico">
+        <div class="grid2">
+            <div class="campo"><span class="et">Alergias activas</span>
+                {% for a in persona.alergias.all %}<span class="alergia">{{ a.sustancia }} ({{ a.get_gravedad_display }})</span>{% empty %}Sin alergias registradas{% endfor %}
+            </div>
+            <div class="campo"><span class="et">Grupo sanguíneo</span>{% if info_medica %}{{ info_medica.get_grupo_sanguineo_display }}{% else %}—{% endif %}</div>
+            {% if info_medica and info_medica.tipo_dieta %}
+            <div class="campo"><span class="et">Dieta y texturas</span>{{ info_medica.tipo_dieta }} · alimentos: {{ info_medica.textura_alimentos }} · líquidos: {{ info_medica.textura_liquidos }}</div>
+            {% endif %}
+            {% if info_medica and not info_medica.vacunacion_permitida %}
+            <div class="campo"><span class="et">Vacunación</span>NO permitida — {{ info_medica.motivo_no_vacunacion }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <h2>3 · Enfermedades y diagnósticos</h2>
+    <table>
+        <thead><tr><th style="width:45%">Enfermedad / diagnóstico</th><th>Especialista</th><th style="width:15%">Diagnóstico</th><th style="width:14%">Seguimiento</th></tr></thead>
+        <tbody>
+        {% for e in persona.enfermedades_cronicas.all %}
+            <tr><td>{{ e.nombre }}</td><td>{{ e.especialista_referente|default:"—" }}</td><td>{{ e.fecha_diagnostico|date:"d/m/Y"|default:"—" }}</td><td>{% if e.en_seguimiento %}Sí{% else %}No{% endif %}</td></tr>
+        {% empty %}
+            <tr><td colspan="4">Sin enfermedades crónicas registradas.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>4 · Medicación activa</h2>
+    <table>
+        <thead><tr><th>Medicamento</th><th style="width:10%">Des.</th><th style="width:10%">Com.</th><th style="width:10%">Cena</th><th style="width:10%">Acost.</th><th style="width:16%">Vía</th></tr></thead>
+        <tbody>
+        {% for p in persona.pautas_medicacion.all %}
+            <tr>
+                <td><strong>{{ p.medicamento.nombre_comercial }}</strong> {{ p.medicamento.dosis }}{% if p.pauta_especial %}<br><em>{{ p.pauta_especial }}</em>{% endif %}{% if p.dosis_si_precisa %} · si precisa{% endif %}</td>
+                <td>{{ p.dosis_desayuno|default:"—" }}</td><td>{{ p.dosis_comida|default:"—" }}</td>
+                <td>{{ p.dosis_cena|default:"—" }}</td><td>{{ p.dosis_acostarse|default:"—" }}</td>
+                <td>{{ p.medicamento.get_via_administracion_display }}</td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="6">Sin pautas activas registradas.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>5 · Plan de salud-cuidados (enfermería)</h2>
+    {% if cuidados %}
+    <div class="grid2">
+        {% if cuidados.movilidad %}<div class="cuidado"><span class="et">Movilidad</span>{{ cuidados.movilidad }}</div>{% endif %}
+        {% if cuidados.alimentacion %}<div class="cuidado"><span class="et">Alimentación</span>{{ cuidados.alimentacion }}</div>{% endif %}
+        {% if cuidados.eliminacion %}<div class="cuidado"><span class="et">Eliminación</span>{{ cuidados.eliminacion }}</div>{% endif %}
+        {% if cuidados.respiracion %}<div class="cuidado"><span class="et">Respiración</span>{{ cuidados.respiracion }}</div>{% endif %}
+        {% if cuidados.sueno_descanso %}<div class="cuidado"><span class="et">Sueño</span>{{ cuidados.sueno_descanso }}</div>{% endif %}
+        {% if cuidados.autonomia_abvd %}<div class="cuidado"><span class="et">Autonomía ABVD</span>{{ cuidados.autonomia_abvd }}</div>{% endif %}
+        {% if cuidados.conducta %}<div class="cuidado"><span class="et">Conducta</span>{{ cuidados.conducta }}</div>{% endif %}
+        {% if cuidados.vision %}<div class="cuidado"><span class="et">Visión</span>{{ cuidados.vision }}</div>{% endif %}
+        {% if cuidados.audicion %}<div class="cuidado"><span class="et">Audición</span>{{ cuidados.audicion }}</div>{% endif %}
+        {% if cuidados.cuidados_piel %}<div class="cuidado"><span class="et">Piel</span>{{ cuidados.cuidados_piel }}</div>{% endif %}
+        {% if cuidados.observaciones %}<div class="cuidado" style="grid-column:1/-1;"><span class="et">Observaciones</span>{{ cuidados.observaciones }}</div>{% endif %}
+    </div>
+    {% else %}
+    <p style="font-size:9.5pt; color:#6b7280; font-style:italic;">Sin plan de cuidados registrado.</p>
+    {% endif %}
+
+    <h2>6 · Contactos de emergencia y apoyo</h2>
+    <div class="grid2">
+        <div>
+            {% for v in persona.vinculos_contacto.all %}
+            <div class="campo" style="margin-bottom:3pt;">
+                <span class="et">{{ v.orden_emergencia|default:"" }} · {{ v.get_relacion_display }}{% if v.es_referencia_principal %} · referente principal{% endif %}</span>
+                {{ v.contacto.nombre }} — 📞 {{ v.contacto.movil|default:v.contacto.telefono_fijo|default:"—" }}
+            </div>
+            {% empty %}<p class="campo">Sin contactos de emergencia registrados.</p>{% endfor %}
+            {% if medida_apoyo and medida_apoyo.tipo != "sin_medida" %}
+            <div class="campo"><span class="et">Medida de apoyo (Ley 8/2021)</span>{{ medida_apoyo.get_tipo_display }}{% if medida_apoyo.subtipo_curatela %} {{ medida_apoyo.get_subtipo_curatela_display }}{% endif %}</div>
+            {% endif %}
+        </div>
+        <div>
+            <div class="campo"><span class="et">Gestor/a de caso</span>{{ persona.gestor_caso|default:"—" }}</div>
+            <div class="campo"><span class="et">Persona de referencia</span>{{ persona.persona_referencia|default:"—" }}</div>
+            <div class="campo"><span class="et">Centro · contacto</span>{{ persona.centro_referencia.nombre }} · 947 461 890</div>
+            {% if info_medica and info_medica.contacto_medico_referencia %}
+            <div class="campo"><span class="et">Médico de referencia</span>{{ info_medica.contacto_medico_referencia }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="firma">
+        <div><strong>Firma de Enfermería</strong></div>
+        <div><strong>V.º B.º Dirección de Centro</strong></div>
+    </div>
+
+    <div class="pie">
+        <p>🔒 Documento de categoría especial (art. 9 RGPD). Exportación registrada en bitácora: {{ ahora|date:"d/m/Y H:i" }} · {{ request.user.get_full_name|default:request.user.username }} · motivo: {{ motivo }}. Uso exclusivo para servicios sanitarios. Recoger y destruir el papel según protocolo tras su uso.</p>
+        <p>Fundación Aspanias Burgos · C/ Mariana Pineda 9, 09001 Burgos · www.aspaniasburgos.com</p>
+    </div>
+
+</div>
+
+</body>
+</html>

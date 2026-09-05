@@ -14,4 +14,5 @@ urlpatterns = [
     path("<uuid:persona_id>/", views.detalle_persona, name="detalle"),
     path("<uuid:persona_id>/editar/", views.editar_persona, name="editar"),
     path("<uuid:persona_id>/cuidados/", views.cuidados_enfermeria, name="cuidados"),
+    path("<uuid:persona_id>/ficha-salud/", views.ficha_salud, name="ficha_salud"),
 ]

@@ -475,3 +475,76 @@ def cuidados_enfermeria(request, persona_id):
     return render(request, "personas/_cuidados_enfermeria_form.html", {
         "persona": persona, "form": form,
     })
+
+
+def _tz_now():
+    from django.utils import timezone
+    return timezone.now()
+
+
+# ---------------------------------------------------------------------------
+# Ficha básica de salud — documento imprimible para urgencias/hospital
+# (P1 pre-piloto · petición Dirección Fuentecillas). Solo rol clínico.
+# Exportación con motivo obligatorio registrado en bitácora.
+# ---------------------------------------------------------------------------
+
+
+@login_required
+def ficha_salud(request, persona_id):
+    from django.core.exceptions import PermissionDenied
+
+    from core.models import RegistroAcceso
+
+    if not tiene_acceso_clinico(request.user):
+        raise PermissionDenied("Se requiere rol clínico para la ficha básica de salud.")
+
+    persona = get_object_or_404(
+        PersonaAtendida.objects
+        .select_related("centro_referencia", "gestor_caso", "persona_referencia")
+        .prefetch_related(
+            Prefetch("alergias", queryset=Alergia.objects.filter(activa=True)
+                     .order_by("-gravedad", "sustancia")),
+            "enfermedades_cronicas",
+            Prefetch("pautas_medicacion",
+                     queryset=PautaMedicacion.objects.filter(activa=True)
+                     .select_related("medicamento").order_by("medicamento__nombre_comercial")),
+            Prefetch("vinculos_contacto",
+                     queryset=VinculoPersonaContacto.objects.filter(es_emergencia=True)
+                     .select_related("contacto").order_by("orden_emergencia")),
+            "perfiles_mayor", "perfiles_di", "ocupaciones_cama__cama__habitacion__modulo",
+        ),
+        pk=persona_id,
+    )
+
+    motivo = (request.POST.get("motivo") or "").strip()
+    motivo_otro = (request.POST.get("motivo_otro") or "").strip()
+    if motivo == "Otro" and motivo_otro:
+        motivo = f"Otro: {motivo_otro}"
+
+    if request.method != "POST" or not motivo:
+        return render(request, "personas/ficha_salud_motivo.html", {"persona": persona})
+
+    RegistroAcceso.objects.create(
+        profesional=request.user,
+        persona_consultada_id=persona.id,
+        accion=RegistroAcceso.Accion.EXPORTAR,
+        entidad="FichaBasicaSalud",
+        ruta=request.path,
+        ip=request.META.get("REMOTE_ADDR"),
+        user_agent=request.META.get("HTTP_USER_AGENT", "")[:512],
+        motivo=motivo[:255],
+    )
+
+    ocupacion = next((o for o in persona.ocupaciones_cama.all() if o.fecha_fin is None), None)
+    contexto = {
+        "persona": persona,
+        "info_medica": getattr(persona, "info_medica", None),
+        "cuidados": getattr(persona, "cuidados_enfermeria", None),
+        "medida_apoyo": getattr(persona, "medida_apoyo", None),
+        "perfil_mayor": persona.perfiles_mayor.all().first(),
+        "perfil_di": persona.perfiles_di.all().first(),
+        "ocupacion": ocupacion,
+        "motivo": motivo,
+        "ahora": _tz_now(),
+    }
+    return render(request, "personas/ficha_salud.html", contexto)

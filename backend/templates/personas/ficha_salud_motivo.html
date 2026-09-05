@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-lg mx-auto mt-12 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+    <h1 class="text-lg font-semibold">🖨 Ficha básica de salud</h1>
+    <p class="text-sm text-slate-600 mt-1">{{ persona.apellido_1 }} {{ persona.apellido_2 }}, {{ persona.nombre }}</p>
+
+    <div class="mt-4 rounded-lg bg-amber-50 border border-amber-200 p-3 text-xs text-amber-900">
+        🔒 Vas a exportar datos de <strong>categoría especial (art. 9 RGPD)</strong>.
+        Indica el motivo: quedará registrado en la bitácora junto a tu usuario, fecha e IP.
+    </div>
+
+    <form method="post" class="mt-4 space-y-3">
+        {% csrf_token %}
+        <label class="block text-xs font-semibold text-slate-600">Motivo de la exportación</label>
+        <select name="motivo" required
+                class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-emerald-500"
+                onchange="document.getElementById('motivo-otro').hidden = this.value !== 'Otro'">
+            <option value="">— Selecciona —</option>
+            <option>Atención en urgencias</option>
+            <option>Ingreso hospitalario</option>
+            <option>Consulta externa / especialista</option>
+            <option>Actualización del expediente del centro</option>
+            <option>Otro</option>
+        </select>
+        <input id="motivo-otro" name="motivo_otro" type="text" hidden
+               placeholder="Especifica el motivo"
+               class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-emerald-500">
+        <div class="flex items-center gap-2 pt-2">
+            <button type="submit"
+                    class="rounded-lg bg-emerald-700 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-800">
+                Continuar → generar ficha
+            </button>
+            <a href="{% url 'personas:detalle' persona.id %}?tab=medica"
+               class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm text-slate-700 hover:border-rose-400">
+                Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
